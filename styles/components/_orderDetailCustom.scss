@@ -1,0 +1,129 @@
+
+/* html {
+    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", sans-serif !important;
+} */
+
+/* a {
+  text-decoration: none;
+  color: #000000;
+} */
+
+.bold {
+  font-weight: 600;
+}
+.grey {
+  color: $body-color;
+}
+.green {
+  color: #2ab551;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.data_heading {
+  font-size: 15px;
+}
+
+
+.item_action_link {
+  font-size: 14px;
+  color: $body-color;
+}
+.order_pipe:before {
+  content: "";
+  display: inline-block;
+  margin: 2px 0.67375em 0;
+  width: 1px;
+  background-color: $body-color;
+  line-height: 0;
+  height: 14px;
+  vertical-align: middle;
+}
+
+.order_card, .product_image {
+  border: 1px solid $border-color-light;
+}
+
+.status {
+  font-size: 16px;
+}
+.order_details {
+  color: $primary-color !important;
+  font-size: 14px;
+}
+
+
+.order_details:hover {
+ text-decoration: underline;
+ }
+.text-underline {
+  text-decoration: underline;
+  color: $primary-color;
+}
+
+.order_links {
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid $primary-color;
+  width: 100%;
+  color: $white-color;
+  padding: 4px 10px;
+  border-radius: 0;
+}
+.orderdetail_img {
+ border: 1px solid $border-color-light !important;
+}
+
+.orderdetails_btn {
+  color: $black-color !important;
+}
+.orderdetails_btn:hover {
+  color: $white-color !important;
+}
+.order_links:hover {
+  border: 1px solid $primary-color;
+  background: $primary-color;
+  color: $white-color !important;
+}
+.order_linkshover:hover {
+  color: $white-color !important;
+}
+.order_cartdetails{
+  padding: 0rem 1rem !important;
+}
+
+.btn_close_custom {
+  border: 2px solid;
+  padding: 5px 15px!important;
+}
+
+.form-group .form-label {
+  color: $body-color;
+}
+.myorder_td {
+width: 15%
+}
+.myorder_width {
+  width: 85%
+}
+.myorders{
+line-height: 1.4;
+
+}   
+@media (max-width:768px) {
+  .orderdetail_img {
+    min-width: 100px;
+   }
+   .order_links {
+    width: 100%;
+  }
+  .myorder_td {
+    width: 45%
+    }
+    .myorder_width {
+      width: 65%
+    }
+}

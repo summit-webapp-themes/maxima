@@ -1,0 +1,65 @@
+.registration {
+    max-width:600px ;
+    margin: 0 auto;
+ }
+ 
+ .btn_back {
+    border-color: #ffc700 !important;
+    border-radius: 0;
+    font-size: 14px;
+ }
+
+ .register_inputs {
+   height: calc(2rem + 2px);
+   border-radius: 0 !important;
+ }
+ .btn_back:hover {
+     background-color: #ffc700 !important;
+  }
+ 
+  .registration_label {
+     font-size: 14px;
+     color:#666;
+     font-weight: 500;
+  }
+ 
+  .registration_note {
+     font-size: 12px;
+     color:#666;
+  }
+ 
+  .registration_title {
+     font-weight:bolder;
+     font-size: 19px;
+     color: #000;
+   }
+  .error_message {
+    color: red !important;
+    font-size: 12px !important;
+}
+.registration_form {
+    margin-top: 23px;
+}
+.logo-color {
+   color:rgb(0,113,220);
+}
+
+.linkss {
+   text-decoration: underline;
+   color: #0071dc !important ;
+   font-size: 1.4rem;
+}
+
+.linkss:hover {
+   text-decoration: none;
+   color:  #0071dc !important;
+}
+.account-margin {
+   margin-top: 38px;
+}
+.login-form-wrapper {
+    margin-top: 50px;
+}
+.logo-wrapper {
+   margin-left: -6px
+}

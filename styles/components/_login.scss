@@ -1,0 +1,101 @@
+.btn_white
+{
+    border: 1px solid blue !important;
+    box-shadow: none !important;
+}
+
+.login_heading {
+    font-weight: 800;
+    font-size: 19px;
+    text-transform: uppercase;
+    color:$black-color;
+}
+
+.not_an_account {
+color:$body-color !important;
+font-size: 14px !important; 
+margin-bottom: 0;
+
+}
+.no-hover:hover{
+    color: $primary-color !important;
+}
+
+.get-otp a,.mainFields-wrapper .forgot-pwd a,.text-underline {
+    text-decoration: underline !important;
+}
+
+.google_button {
+  background-color: $white-color !important;
+  width:200px !important;
+  font-size:15px !important;
+  line-height:18px !important;
+  font-weight:500 !important;
+  box-shadow:none !important;
+  border: 1px solid $border-color !important;
+}
+.google_button:focus {
+    outline: none !important;
+}
+.google_button:hover {
+    background-color: $white-color !important;
+    border: 1px solid $border-color !important;
+}
+/* .google_logins {
+    margin-top: 4.8rem;
+} */
+.error_message {
+    color: $error-color;
+}
+.otp_alertbox {
+    padding: 0px 5px;
+    margin-left: 10px;
+    margin-bottom: 4px;
+    width: 54%;
+    font-size: 12px;
+}
+.login_btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.login_submitbtn {
+text-align: center;
+}
+.register_account {
+    text-align: center;
+}
+.login_inputs {
+ height: calc(2.25rem + -2px);
+ border-radius: 0 !important;
+}
+.loginsubmit_btn {
+    border-radius: 0;
+    font-weight: 600;
+    color: $black-color;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.google_btn {
+    margin-top: 4.8rem;
+}
+@media (min-width: 768px) {
+    .login_btn {
+        margin-left: 112px;
+    }
+  }
+  @media (max-width: 767px) {
+    .login_btn {
+        margin-left: -144px;
+    }
+    .login_submitbtn {
+        text-align: left;
+        }
+    .register_account {
+        text-align: left;
+        margin-top: -25px !important;
+    }
+    .google_button {
+        margin-top: -26px !important;
+      }
+  }

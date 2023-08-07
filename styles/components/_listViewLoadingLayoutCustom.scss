@@ -1,0 +1,50 @@
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(0, 0%, 86%);
+    }
+    100% {
+      background-color: hsl(204, 64%, 90%);
+    }
+  }
+  
+  .listing_skeleton-text {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .listing_card__body {
+    height: 245px;
+    width: 100%;
+  }
+  
+  .listing_card__footer {
+    width: 100%;
+  }
+  
+  .listing_skeleton-text__body {
+    width: 95%;
+    height: 85%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    .listing_skeleton-text__body {
+        width: 85% !important;
+        height: 45%;
+      }
+      .listing_card__body {
+        height: 145px !important;
+      }
+  }
+  
+
+  .detail_card__body {
+    height: 400px;
+    width: 100%;
+  }

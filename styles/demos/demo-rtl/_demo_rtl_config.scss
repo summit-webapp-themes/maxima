@@ -1,0 +1,72 @@
+@include set (
+    (
+        base: (
+            title: (
+                margin-bottom: 1rem,
+            )
+        ),
+        header: (
+            top: (
+                icon: (
+                    margin-left:.8rem
+                )
+            ),
+            middle: (
+                border: none
+            ),
+            bottom: (
+                border-top: 1px solid #eee
+            ),
+            compare: (
+                margin-top:-.3rem
+            ),
+            search: (
+                btn: (
+                    width:4.9rem
+                )
+            ),
+            cart: (
+                count: (
+                    left: -9px
+                )
+            )
+        ),
+        product: (
+            body: (
+                padding-top: 1.6rem
+            ),
+            name: (
+                margin-bottom: 0.8rem,
+                font-size: 1.3rem,
+                font-weight: 500,
+            ),
+            rating: (
+                margin-bottom: .3rem
+            ),
+            price: (
+                font-size: 1.6rem,
+                new: (
+                    _space:.6rem
+                )
+            )
+        ),
+        product-single: (
+            ratings: (
+                _star-color: $secondary-color
+            )
+        ),
+        post: (
+            body: (
+                padding-top: 1.6rem
+            ),
+            title: (
+                margin-bottom: 1.3rem,
+                font-size: 1.5rem,
+                letter-spacing: -.025em,
+            ),
+            btn: (
+                font-weight: 400
+            )
+        )
+    )
+)

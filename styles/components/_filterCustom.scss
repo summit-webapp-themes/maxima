@@ -1,0 +1,123 @@
+
+  .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+    transform: scale(0.7) !important;
+    transition: all;
+  }
+  .accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
+  }
+  
+  .accordion_btn_custom {
+    border: none !important;
+    padding: 0 !important;
+  }
+  
+  .custom_collapse_css {
+    border: none !important;
+  }
+  
+  .listing_page .filter_section .filter_block .accordion_custom {
+    --bs-accordion-border-width: 0px;
+  }
+  .accordion_item_custom {
+    border: 0;
+  }
+  .accordion-button {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+  
+  .accordion-button:focus {
+    z-index: 3;
+    border-color: 0;
+    outline: 0;
+    box-shadow: none;
+  }
+  .accordion-button:not(.collapsed) {
+    color: $black-color;
+    background-color: transparent;
+    box-shadow: inset 0 calc(var(--bs-accordion-border-width) * -1) 0
+      var(--bs-accordion-border-color);
+  }
+  
+  .listing_page .filter_section .filter_block .accordion-button {
+    font-size: 8px;
+    padding: 0;
+    font-weight: 600;
+  }
+  
+  .li .form_check_filter {
+    display: flex;
+    align-items: center;
+  }
+  .form_check_filter .accordion-checkbox {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-transform: uppercase;
+  }
+  
+  .clear_filter a {
+    color: $black-color;
+  }
+
+  .clear_filter a:hover {
+    color:$black-color;
+    text-decoration: none;
+  }
+  
+  .filter_heading button {
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 10px;
+  }
+  .filter_section .form_check .form_check_input {
+    box-shadow: none;
+    border-color: $black-color;
+    margin-top: 6px;
+  }
+  
+  .form_check_input:checked {
+    background-color: $black-color;
+    border-color: $black-color;
+    box-shadow: none;
+  }
+
+  
+  .price_range .price_range_label span {
+    border: 1px solid $black-color;
+    padding: 3px 5px;
+    border-radius: 3px;
+  }
+
+  .clear_filter_link {
+    text-decoration: underline;
+  }
+  /* end filter section */
+
+
+  // mobile filter
+
+  .sticky_btn_bar {
+    background-color: $primary-color !important;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 9;
+    padding: 9px;
+  }
+  .sticky_btn_bar a {
+    text-decoration: none;
+  }
+  
+  .sticky_btn_bar .sticky_btn {
+    display: inline-block;
+    text-align: center;
+    font-family: "ubuntumedium";
+    font-size: 13px;
+  }
+
+  .hr_line {
+    margin: 10px 0 !important;
+  }

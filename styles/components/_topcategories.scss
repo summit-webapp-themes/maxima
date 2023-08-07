@@ -1,0 +1,55 @@
+.category_card {
+    background-color:#ffffff;
+    height:180px;
+}
+
+.cat_name {
+    font-size:1.4rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.cat_name .category-name {
+    color: #000000;
+}
+
+.cat_name .category-name:hover{
+    color: #000000;
+    text-decoration: underline;
+}
+.category_color {
+    background-color: #feeeee;
+    padding: 20px 0px;
+    margin-bottom: 40px;
+}
+.product-col {
+    background-color: white;
+    margin: 25px 0px;
+    padding: 15px 0;
+}
+.card_images {
+    height: 225px;
+}
+.sale-on-banner {
+margin: 5rem 0;
+}
+.ctabanner_h4 {
+font-size: 4.8rem;
+}
+.card_imgs {
+    height: 210px;
+}
+.grid-type {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill,calc(100% / 4)) !important;
+}
+.grid-item-single {
+    grid-column-end: span 2 !important;
+    grid-row-end: span 2 !important;
+}
+// .product-widget {
+//     background-color: #feeeee !important;
+// }
+.top_cat {
+    color: #333 !important;
+}

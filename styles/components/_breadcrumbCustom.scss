@@ -1,0 +1,49 @@
+/* BreadCrumbs css */
+
+.breadcrumb_section .breadcrumb {
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  .breadcrumb_section .breadcrumb li i{
+  color: $light-color;
+    /* font-size: 18px; */
+  }
+  
+  .breadcrumb-item+.breadcrumb-item::before {
+    float: left;
+    padding-right:0 !important;
+    color: var(--bs-breadcrumb-divider-color);
+    content: " " !important;
+  }
+  .breadcrumb .breadcrumb-item {
+  padding: 0 !important;
+  }
+  .breadcrumb_section .breadcrumb a{
+  text-decoration: none;
+  color: $light-color;
+  text-transform: uppercase;
+  }
+  
+  .breadcrumb_section .breadcrumb a::after{
+  content: "\f105 ";
+  font-family: "FontAwesome";
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 16px; 
+  color: $light-color;
+  }
+  
+  .breadcrumb_section .breadcrumb li:last-child a::after{
+    display: none;
+  }
+  li.breadcrumb-item.active:last-child {
+    margin-top: 4px !important;
+  }
+  .breadcrumb {
+    font-size: 12px;
+  }
+ 
+  .bredcrumb_home_icon {
+    font-size: 18px !important;
+  }

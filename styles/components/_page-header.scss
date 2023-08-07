@@ -1,0 +1,64 @@
+/*-------------------------
+    Page Header
+        - Page Header
+        - Page Title
+        - Page Subtitle
+--------------------------*/
+
+$page-header-background:$border-color !default;
+
+// Page Header
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 18rem;
+    background-color: $page-header-background;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+// Page Title 
+.page-title {
+    font-size: 3.4rem;
+    font-weight: 700;
+    letter-spacing: -.025em;
+    line-height: 1.1;
+    margin-bottom: 0.2rem;
+}
+
+// Page Subtitle
+.page-subtitle {
+    margin-bottom: 0;
+    font-size: 1.8rem;
+    font-weight: normal;
+    letter-spacing: 0;
+    line-height: 1.6;
+    color: $body-color;
+}
+
+.cart,
+.checkout {
+    .page-header {
+        height: 134px;
+        background: $white-color;
+    }
+}
+.dropdown-icon {
+    padding-top: 2px;
+    background: none;
+    color: $white-color;
+    border: none;
+    box-shadow: none;
+}
+.dropdown-toggle:hover {
+    color: $black-color !important;
+    border-color: #dcdcdc00 !important;
+    background-color: #dcdcdc00 !important;
+}
+.dropdown-toggle:active {
+    color: $white-color !important;
+    border-color: $black-color !important;
+    // background-color: rgba(220, 220, 220, 0) !important;
+}

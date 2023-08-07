@@ -1,0 +1,71 @@
+.bill_checkbox {
+    cursor: pointer;
+}
+
+
+
+.ship_heading {
+    cursor: pointer;
+    /* padding: 0 20px; */
+}
+
+.ship_edit {
+    padding-top: 30px;
+}
+
+.bill_edit {
+    padding-top: 30px;
+}
+
+.bill_heading {
+    cursor: pointer;
+
+}
+
+.button_color {
+    background-color: $themeternary-btncolor !important;
+    // color: $black-color !important;
+    color:$white-color !important;
+    border: none !important;
+}
+
+.address_button {
+    background-color: #33669a !important;
+    color: $white-color !important;
+    border: none !important;
+}
+
+.selected_address_button {
+    background-color: $primary-color !important;
+    color: $white-color !important;
+    border: none !important;
+}
+
+.address_icon {
+    border: none;
+    background: none;
+    /* font-size: 10px; */
+}
+
+.card_p {
+    font-size: 13px;
+    margin-top: -5px;
+}
+
+
+/* order sumamry */
+
+.cart_p {
+    margin: -6px 0px;
+    font-size: 12px;
+}
+
+.summary_p {
+    margin: -6px 0px;
+}
+
+/* visitor checkout */
+
+.order_summary_sec {
+    margin-top: 69px;
+}

@@ -1,0 +1,156 @@
+.dealer_variants_table {
+    margin-top: -10px !important;
+}
+
+.inventory_font {
+    font-size: 15px !important;
+}
+
+
+@media screen and (max-width: 768px) {
+    .inventory {
+      display: flex;
+      padding-right: 0px !important;
+    }
+}
+
+.b2bborder_bottom {
+    border-top: 1px solid #dee2e6;
+    border-bottom: none;
+    padding-bottom: 12px;
+  }
+
+
+  
+@media only screen and (min-width: 1030px) and (max-width: 1366px) {
+    .sku_code {
+      flex: 5;
+    }
+    .variation_code {
+      flex: 8;
+    }
+    .modalvariation_code {
+      flex: 8;
+    }
+    .quantity_avail {
+      flex: 5;
+      margin-left: 23px;
+    }
+    .modalquantity_avail {
+      flex: 5;
+      margin-left: 23px;
+    }
+    .product_quantity {
+      flex: 3;
+    }
+    .sku_code_modal {
+      flex: 5;
+    }
+    .modalproduct_quantity {
+      flex: 3;
+    }
+  }
+  
+  
+@media screen and (max-width: 768px) {
+    .inventory {
+      display: flex;
+      padding-right: 0px !important;
+    }
+    .green_mark {
+      margin-top: 5px;
+    }
+    .product_detail_block {
+      padding-left: 0 !important;
+    }
+    .product_name {
+      font-size: 16px;
+    }
+    .quantity_avail {
+      flex: 4;
+    }
+    .product_quantity {
+      flex: 6;
+    }
+    .sku_code {
+      flex: 6;
+    }
+    .variation_code {
+      flex: 5;
+    }
+    .sku_code_modal {
+      flex: 10;
+    }
+    .modalvariation_code {
+      flex: 6;
+    }
+    .modal_available {
+      display: flex !important;
+      padding-right: 4px !important;
+    }
+    .modal_text {
+      margin-top: -4px;
+    }
+    .modalproduct_quantity {
+      flex: 15;
+    }
+    .modalquantity_avail {
+      flex: 8;
+    }
+  }
+
+  @media only screen and (min-width: 1370px) {
+    .sku_code {
+      flex: 6;
+    }
+    .variation_code {
+      flex: 9;
+    }
+    .modalvariation_code {
+      flex: 9;
+    }
+  
+    .quantity_avail {
+      flex: 7;
+    }
+    .modalquantity_avail {
+      flex: 6;
+      margin-left: 32px;
+    }
+    .product_quantity {
+      flex: 5;
+    }
+    .sku_code_modal {
+      flex: 8;
+    }
+    .modalproduct_quantity {
+      flex: 5;
+    }
+  }
+  
+  .sku_code_qty {
+    font-size: 12px !important;
+  }
+  
+  .varient_input {
+    width: 60px;
+    height: calc(1.9rem + -1px);
+    border-radius: 0;
+  }
+
+  .stock_circle {
+    font-size: 15px;
+  }
+
+  .product_feature_heading {
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #666;
+    padding-top: 7px;
+    margin-right: 10px;
+    margin-top: -16px;
+  }
+
+  .product_feature_heading_span {
+    font-weight: 400;
+  }

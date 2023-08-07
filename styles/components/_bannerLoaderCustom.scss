@@ -1,0 +1,43 @@
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(0, 0%, 86%);
+    }
+    100% {
+      background-color: hsl(204, 64%, 90%);
+    }
+  }
+  
+  .banner_skeleton-text {
+    width: 90%;
+    margin: auto;
+    height: 2.0rem;
+    
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .banner_card__body {
+    padding: 10px 0px;
+    height: 500px;
+    width: 100%;
+  }
+  
+  .banner_card__footer {
+    height: 7.8rem;
+    width: 100%;
+  }
+  
+  .banner_skeleton-text__body {
+    width: 95%;
+    height: 90%;
+  }
+  
+  .banner_skeleton-footer {
+    width: 70%;
+    height: 30%;
+  }

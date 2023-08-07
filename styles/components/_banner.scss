@@ -1,0 +1,356 @@
+/*------------------------------------------------
+    Banner
+        - Default
+        - Video Banner
+        - Newsletter Banner
+            - Simple
+            - With Dark Background
+        - Banner Divider
+------------------------------------------------*/
+// Default - Background Attached
+.banner {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-size: 1rem;
+    overflow: hidden;
+    figure img {
+        display: block;
+        width: 100%;
+    }
+    .banner-content {
+        // top: 2.7rem;
+        // left: 3rem;
+        position: relative;
+        z-index: 1;
+        a:not(.btn) {
+            color: inherit;
+            &:hover,
+            &.active {
+                color: $primary-color;
+            }
+        }
+    }
+    .banner-info {
+        line-height: 1.45;
+        margin-bottom: 1rem;
+    }
+   
+}
+
+
+.banner-fixed {
+    > .container,
+    > .container-fluid,
+    > .banner-content {
+        position: absolute;
+        z-index: 1;
+    }
+
+    > .container,
+    > .container-fluid {
+        #{$left}: 0;
+        #{$right}: 0;
+        bottom: 0;
+        top: 0;
+    }
+
+    &.content-middle .banner-content {
+        transform: translate( if-ltr(-50%,50%), -50% );
+    }
+
+    &.content-center {
+        .banner-text {
+            text-align: center;
+            #{$left}: 50%;
+            transform: translateX(-50%);
+        }
+        &.content-middle .banner-content {
+            transform: translate(if-ltr(-50%,50%), -50% );
+        }
+    }
+}
+
+// Banner with background image
+.banner-background {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.banner-newsletter-2{
+    .banner-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+// With Dark Background
+.banner-newsletter-2 {
+    font-size: 1rem;
+    .banner-content {
+        padding: 0 1.5rem;
+        max-width: 49.8rem;
+        min-width: 30rem;
+    }
+    .banner-title {
+        font-size: 3em;
+        margin-bottom: 0.5rem;
+    }
+    p {
+        font-size: 1.3em;
+        margin-bottom: 3.5rem;
+    }
+    .form-control {
+        font-size: 1.4em;
+        border: 0;
+        border-bottom: 2px solid $body-color;
+        max-width: 37.7rem;
+        margin: side-values(0 auto 2rem auto);
+        text-align: center;
+    }
+    img {
+        min-height: 33rem;
+    }
+    .btn {
+        height: 4.8rem;
+    }
+    .input-wrapper {
+        max-width: 38rem;
+        width: 100%;
+    }
+}
+// With Gradient
+.banner-newsletter-4 {
+    background-color: $border-color;
+    .banner-content {
+        margin: 1rem;
+        padding: 3.5rem 2rem 1rem;
+    }
+    input {
+        border: 2px solid $border-color-light;
+    }
+}
+
+// With Parallax Background
+.banner-newsletter-5 {
+    background-color: $border-color-light;
+    padding: 4rem;
+    .banner-content {
+        max-width: 56rem;
+        padding: 1.5rem 1.5rem 2rem;
+        margin-#{$left}: auto;
+        margin-#{$right}: auto;
+    }
+    .banner-title {
+        margin-bottom: .5rem;
+    }
+    p {
+        font-size: 1.3rem;
+        text-align: center;
+        line-height: 1.8;
+        max-width: 49rem;
+        margin-bottom: 2.5rem;
+    }
+    input.form-control {
+        background-color: $body-color;
+        border-color: transparent;
+    }
+}
+
+// With Gradient Border
+.banner-border-gradient {
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        #{$left}: 0;
+        width: 69%;
+        padding-top: 30%;
+        background: linear-gradient(30deg, #999999 0%, #999999 50%, transparent 50.1%);
+    }
+}
+
+.banner-divider {
+    width: 4rem;
+    height: .4rem;
+    border: 0;
+    margin-#{$left}: 0;
+    margin-bottom: 1.2rem;
+}
+
+// Video Banner
+.banner-video {
+    .btn-play-video {
+        position: absolute;
+        top: 50%;
+        #{$left}: 50%;
+        transform: translate(if-ltr(-50%,50%), -50%);
+        width: 6rem;
+        height: 6rem;
+        background-color: #fff;
+        border-radius: 50%;
+        z-index: 1000;
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        transition: background-color .3s;
+        &:hover {
+            background-color: $dark-color;
+            &::before {
+                color: #fff;
+            }
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            margin-left: .2rem;
+            font-family: 'Font Awesome 5 Free';
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #333;
+            top: 50%;
+            #{$left}: 50%;
+            transform: translate(if-ltr(-50%,50%), -50%);
+            transition: color .3s;
+            z-index: 1;
+        }
+    }
+    video {
+        display: none;
+        position: absolute;
+        top: 50%;
+        #{$left}: 0;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    &.playing, &.paused {
+        .btn-play-video {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility .4s, opacity .4s;
+        }
+        &:hover {
+            .btn-play-video {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+        video {
+            display: block;
+        }
+    }
+    &.playing {
+        .btn-play-video {
+            &::before {
+                content: '\f04c';
+            }
+        }
+    }
+}
+
+@include mq('xl', 'max') {
+    .widget-banner {
+        .banner-title {
+            margin-bottom: 4rem;
+        }
+    }
+}
+
+@include mq('md', 'max') {
+    .banner-newsletter-2 {
+        font-size: .8rem;
+    }
+}
+
+@include mq('xs', 'max') {
+    .banner-newsletter-4,
+    .banner-newsletter-5 {
+        .input-wrapper {
+            display: block;
+            text-align: center;
+            height: auto;
+            .btn {
+                margin: 2rem;
+            }
+        }
+
+    }
+    .banner-newsletter-4 {
+        .input-wrapper-round {
+            .form-control,
+            .btn {
+                border-radius: 3rem;
+            }
+        }
+    }
+}
+.banner_section {
+    background-color: rgba(241, 66, 66, 0.0901960784);
+}
+.category_colors {
+    color: white !important;
+}
+.banner-fashion {
+   background-image: url("../../public/assets/images/ecommerce_theme/home page2_banner.png") !important;
+}
+
+
+.overlay-zoom:hover img {
+    transform:none !important; 
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px){
+.banner figure img {
+    display: none;
+}
+}
+.banner_carousel .carousel_capt .caption_btn {
+    padding: 13px 18px !important;
+    background-color: #ffc107 !important;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  
+  @media (max-width:767px) {
+    .banner_carousel .carousel_capt .caption_btn {
+      font-size: 10px;
+  
+    }
+  }
+  .ternaryTheme-grayimg {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+.ternaryTheme-bannerContent {
+    top: 78% !important;
+    left: 52% !important;
+}
+.ternaryTheme-btn {
+    background-color: $themeternary-btncolor !important;
+    padding: 5px !important;
+    border: none !important;
+    color: white !important;
+    text-align: center;
+    text-decoration: none !important;
+}
+.ternary-theme-brandimg {
+    height: 400px !important;
+}
+
+  // Home page 4 brands
+ .brand-heading{
+    color: $quaternary_color !important
+ }
+
+ .brand-img{
+    border-radius: 0 !important;
+    
+    
+ }

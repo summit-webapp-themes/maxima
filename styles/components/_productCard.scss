@@ -1,0 +1,127 @@
+/* product card */
+.product_card {
+    border: 2px solid $white-color;
+    /* padding: 10px 20px ; */
+    /* padding: 0 8px; */
+    height: 100%;
+    /* margin-right: 8px; */
+    margin: 5px;
+    position: relative;
+  }
+  .product_card .card_inner {
+    padding: 0 8px;
+  }
+  .product_card .product_name p a {
+    text-decoration: none;
+    color: $black-color;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .icon_pointer {
+    cursor: pointer;
+  }
+
+  .product_card_h {
+    height: 200px !important;
+  }
+  
+  .product_card .product_name p {
+    line-height: 0.5;
+  }
+  
+  .display_tag_badge {
+    height: 20px !important;
+  }
+
+  .product-price .price {
+    font-size: 21px;
+    color: $black-color ;
+    font-weight: 500;
+  }
+  .product_card .cart a {
+    text-decoration: none;
+    color: $black-color;
+  }
+  
+  .product_card .outof_stock {
+    position: absolute;
+    left: 0;
+  }
+  .product_card .out_of_stock a {
+    text-decoration: none;
+  }
+  .in_stocks {
+    visibility: hidden;
+  }
+  .product_card .out_of_stock p {
+    color: $secondary-background-color;
+    background-color: $primary-color-light;
+    width: 72px;
+    font-size: 12px;
+    /* padding: 5px; */
+    text-align: center;
+  }
+  .product_card .card_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 20px; */
+    height: 10rem;
+  }
+  
+  .product_card .card_img img {
+    max-height: 100% !important;
+  }
+  .sidebar_texsize {
+    font-size: 1.4rem !important;
+    line-height: 22px !important;
+  }
+  .profile_section {
+    margin-bottom: 60px;
+    margin-top: 60px;
+  }
+  .badge:empty {
+display: flex !important;
+  }
+  /* end produc card */
+
+
+
+  // Home page 4 Display tag master css
+.product-offer-container{
+  // border: 2px solid #ced4da;
+  // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      padding-left: 0px !important; 
+   padding-right: 0px !important
+}
+
+  .product-offer-left-container{
+    background-color: $white-color;
+    padding-top: 10px;
+    color: $black-color
+
+  }
+
+  .product-offer-right-container{
+    padding-left: 0 !important
+  
+  }
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: var(--bs-nav-pills-link-active-color);
+    /* background-color: var(--bs-nav-pills-link-active-bg); */
+    background-color: $dark-color
+}
+a:hover {
+  color: $white-color;
+}
+
+  .nav-item:not(:last-child) {
+     margin-right: 0rem !important
+}
+.home4-displaytag-list{
+  background-color: $white-color
+}
+.home4-product-details{
+  background-color: $white-color
+}

@@ -1,0 +1,44 @@
+
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-color: hsl(200, 20%, 80%);
+    }
+    100% {
+      background-color: hsl(200, 20%, 95%);
+    }
+  }
+  
+  .skeleton-text {
+    width: 90%;
+    margin: auto;
+    height: 2.0rem;
+    
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .card__body {
+    height: 100px;
+  }
+  
+  .card__footer {
+    height: 7.8rem;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .cards-text__body {
+    width: 85%;
+    height: 100%;
+  }
+  
+  .skeleton-footer {
+    width: 85%;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    height: 70%;
+  }

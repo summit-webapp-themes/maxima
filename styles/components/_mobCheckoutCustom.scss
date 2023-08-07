@@ -1,0 +1,36 @@
+.checkout_section {
+    margin-top: 170px!important;
+}
+
+.order_summary_section span {
+    color: $body-color;
+}
+
+
+.address_header .active a {
+    background-color: $error-color!important ;
+    color: green;
+}
+
+.edit_button a {
+    margin-left: 80px;
+}
+
+.edit button input {
+    font-size: 30px;
+}
+
+.address_icon {
+    border: none;
+    background: none;
+    width: 50px;
+}
+
+.coupon_input {
+    margin: -25px 0 0 0 ;
+}
+
+.store_balance {
+    margin: -38px 0 0 0 ;
+    
+}
