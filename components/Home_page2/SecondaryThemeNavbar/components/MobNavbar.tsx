@@ -10,6 +10,8 @@ const MobNavbar = ({
   setSearchValue,
   handleSearch,
   isLoading,
+  multiLanguagesData,
+  handleLanguageChange,
 }: any) => {
   // const setmainLink = () => {
   //   let element: HTMLElement = document.getElementsByClassName(
@@ -52,6 +54,20 @@ const MobNavbar = ({
               </a>
             </Link>
           </div>
+          {/* <div className="mx-3">
+            <select
+              onChange={(e) => handleLanguageChange(e.target.value)}
+              className="ternary-select"
+            >
+              {multiLanguagesData?.length > 0 &&
+                multiLanguagesData !== null &&
+                multiLanguagesData.map((lang: any) => {
+                  return (
+                    <option value={lang.lang_code}>{lang.lang_name}</option>
+                  );
+                })}
+            </select>
+          </div> */}
           <div className="header-search hs-expanded hs-round input-wrapper">
             <input
               type="text"

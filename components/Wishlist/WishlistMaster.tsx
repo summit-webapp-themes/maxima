@@ -405,8 +405,8 @@ const WishlistMaster = () => {
                         )}
                       </div>
                       <div className="col-lg-3 col-md-3 ">
-                        <div className="d-lg-flex justify-content-center text-center">
-                          <button
+                        <div className="">
+                          {/* <button
                             type="button"
                             data-bs-toggle="modal"
                             data-bs-target="#stockModal "
@@ -414,7 +414,8 @@ const WishlistMaster = () => {
                               productCounts[index] < item?.min_order_qty
                                 ? "disabled"
                                 : "enabled"
-                            } wish_stock_btn btn btn-dark px-2 my-0 my-lg-0 my-2`}
+                            } wish_stock_btn btn text-dark px-2 my-0 my-lg-0 my-2`}
+                            style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
                             onClick={(id) =>
                               handleStockModel(
                                 item?.name,
@@ -424,10 +425,11 @@ const WishlistMaster = () => {
                             }
                           >
                             Check Availability
-                          </button>
+                          </button> */}
 
                           <button
-                            className="ml-1   text-white btn btn-dark px-3 mt-lg-0 mt-md-2"
+                            className="ml-1 text-dark btn px-3 mt-lg-0 mt-md-2"
+                            style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
                             onClick={() =>
                               handleAddCart(
                                 item?.name,

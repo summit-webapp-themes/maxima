@@ -17,12 +17,25 @@ import {
   login_state,
 } from "../../store/slices/auth/login_slice";
 import { getAccessToken } from "../../store/slices/auth/token-login-slice";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 
 const Loginpage = () => {
   const dispatch = useDispatch();
   const loginSucess = useSelector(login_state);
   const [newState, setNewState] = useState<any>([]);
+  const [loginStatus, setLoginStatus] = useState("");
   const [newValues, setnewValue] = useState<any>("");
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
   let isLoggedIn: any;
   const router = useRouter();
   let obj = {
@@ -36,13 +49,33 @@ const Loginpage = () => {
 
   const handlesubmit = (values: any) => {
     const val = Object.assign(obj, values);
-    dispatch(fetchLoginUser(val));
-    dispatch(getAccessToken(values))
+    const user_params = {
+      values: values,
+    };
+    // dispatch(fetchLoginUser(val));
+    dispatch(getAccessToken(user_params));
+
+    setTimeout(() => {
+      const loginStatusFromStorage: any = localStorage.getItem("isLoggedIn");
+      setLoginStatus(loginStatusFromStorage);
+    }, 2000);
   };
   useEffect(() => {
-    if (loginSucess.user === "LoggedIn") {
+    if (loginStatus === "true") {
+      // dispatch(successmsg("logged in sucessfully"));
+      // setTimeout(() => {
+      //   dispatch(hideToast());
+      // }, 800);
       router.push("/");
+      localStorage.removeItem("guest");
+      localStorage.removeItem("guestToken");
     }
+    // else if (loginStatus === null) {
+    //   dispatch(failmsg("Invalid Credential"));
+    //   setTimeout(() => {
+    //     dispatch(hideToast());
+    //   }, 800);
+    // }
   }, [handlesubmit]);
   console.log(loginSucess, "loginSucess");
 
@@ -97,14 +130,14 @@ const Loginpage = () => {
                       <div className="row">
                         <div className="col-lg-6 logo-wrapper">
                           <h2 className="login_heading mt-3">
-                            Login
-                            {/* {loginToken} */}
+                            {selectedMultiLangData?.login}
                           </h2>
                           <Form.Group controlId="formName">
                             <div className="row mt-3">
                               <div className="col-md-4">
                                 <Form.Label className="login-label">
-                                  Mobile No / Email ID:
+                                  {selectedMultiLangData?.mobile_number} /{" "}
+                                  {selectedMultiLangData?.email}:
                                 </Form.Label>
                               </div>
 
@@ -128,7 +161,7 @@ const Loginpage = () => {
                                       href="#"
                                       onClick={(e) => otpSubmit(e)}
                                     >
-                                      Get Otp
+                                      {selectedMultiLangData?.get_otp}
                                     </Link>
                                   </div>
                                 </div>
@@ -140,7 +173,7 @@ const Loginpage = () => {
                             <div className="row mt-3">
                               <div className="col-md-4">
                                 <Form.Label className="login-label">
-                                  Password / OTP:
+                                  {selectedMultiLangData?.password_otp}:
                                 </Form.Label>
                               </div>
 
@@ -163,7 +196,7 @@ const Loginpage = () => {
                                       className={`linkss`}
                                       href="/forgot-password"
                                     >
-                                      Forgot Password ?
+                                      {selectedMultiLangData?.forgot_password} ?
                                     </Link>
                                   </div>
                                 </div>
@@ -175,7 +208,7 @@ const Loginpage = () => {
                               type="submit"
                               className={` btn btn-warning button_color`}
                             >
-                              Submit
+                              {selectedMultiLangData?.submit}
                             </button>
                             {/* {isAlertVisible && (
                                     <div
@@ -208,9 +241,9 @@ const Loginpage = () => {
                             >
                               <div className="register ms-2 account-margin">
                                 <span className="not_an_account">
-                                  Not an account?{" "}
+                                  {selectedMultiLangData?.not_an_account}?{" "}
                                   <Link className={`linkss`} href="/register">
-                                    Register
+                                    {selectedMultiLangData?.register}
                                   </Link>
                                 </span>
                               </div>

@@ -13,6 +13,8 @@ import {
 } from "../../services/api/general_apis/customer-form-data-api";
 import VisitorAddressForm from "./AddressForms/VisitorAddressForm";
 import { CONSTANTS } from "../../services/config/app-config";
+import { get_access_token } from "../../store/slices/auth/token-login-slice";
+import { useSelector } from "react-redux";
 
 const WebCheckout = ({
   shippingAddresses,
@@ -49,7 +51,9 @@ const WebCheckout = ({
   couponError,
   setStoreCredit,
   handleStoreCredit,
+  selectedMultiLangData,
 }: CheckoutPageInterface) => {
+  const TokenFromStore: any = useSelector(get_access_token);
   const [visitorState, setVisitorState] = useState<any>(null);
   let [selectedCity, setSelectedCity] = useState("");
   let [state, setState] = useState([]);
@@ -57,20 +61,24 @@ const WebCheckout = ({
   const [err, setErr] = useState(false);
   let [selectedStates, setSelectedStates] = useState("");
   const [shippingCheck, setShippingCheck] = useState(true);
-  const [checkIsDealer, setCheckIsDealer] = useState<any>('');
+  const [checkIsDealer, setCheckIsDealer] = useState<any>("");
 
-  let isDealer:any = useRef('');
+  let isDealer: any = useRef("");
   useEffect(() => {
     if (typeof window !== "undefined") {
       const visitor_login: any = localStorage.getItem("isLoggedIn");
-      setCheckIsDealer(localStorage.getItem("isDealer"));
+      if(localStorage.getItem('isDealer') === 'true')
+      {
+        setCheckIsDealer(true);
+      }
+        
       setVisitorState(visitor_login);
     }
   }, []);
 
   useEffect(() => {
     const getStateData = async () => {
-      const stateData = await FetchStateForAddressForm();
+      const stateData = await FetchStateForAddressForm(TokenFromStore?.token);
       if (stateData?.length > 0) {
         let stateValues = stateData
           .map((item: any) => item?.name)
@@ -85,7 +93,7 @@ const WebCheckout = ({
   const handleSelectedState = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue);
+    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue, TokenFromStore?.token);
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
       let citiesValues = getCitiesFromState
@@ -124,6 +132,7 @@ const WebCheckout = ({
                         setSelectedCity={setSelectedCity}
                         city={city}
                         selectedCity={selectedCity}
+                        selectedMultiLangData={selectedMultiLangData}
                       />
                     </div>
                     <div className="col-lg-6 ">
@@ -146,11 +155,12 @@ const WebCheckout = ({
                         setSelectedStates={setSelectedStates}
                         setSelectedCity={setSelectedCity}
                         city={city}
+                        selectedMultiLangData={selectedMultiLangData}
                       />
                     </div>
                   </div>
-                  {(checkIsDealer === 'true' &&
-                    CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER) && (
+                  {(
+                    CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER )&& (
                       <>
                         <div className="col-lg-7">
                           <ShippingMethod
@@ -165,6 +175,7 @@ const WebCheckout = ({
                             locationState={locationState}
                             textState={textState}
                             transportersCharges={transportersCharges}
+                            selectedMultiLangData={selectedMultiLangData}
                           />
                         </div>
                         <div className="col-lg-10">
@@ -172,6 +183,7 @@ const WebCheckout = ({
                             orderSummary={orderSummary}
                             handlePlaceOrder={handlePlaceOrder}
                             deleteCoupon={deleteCoupon}
+                            selectedMultiLangData={selectedMultiLangData}
                           />
                         </div>
                       </>
@@ -191,6 +203,7 @@ const WebCheckout = ({
                     setStoreCredit={setStoreCredit}
                     handleStoreCredit={handleStoreCredit}
                     handlePlaceOrder={handlePlaceOrder}
+                    selectedMultiLangData={selectedMultiLangData}
                   />
                 </div>
               </div>
@@ -199,11 +212,14 @@ const WebCheckout = ({
             <>
               <div className=" container row mb-4 mx-auto">
                 <div className="col-lg-12 ">
-                  <h4 className="text-uppercase bold mt-3">checkout details</h4>
+                  <h4 className="text-uppercase bold mt-3">
+                    {" "}
+                    {selectedMultiLangData?.checkout_details}
+                  </h4>
                   <div className="d-flex align-items-center">
                     <button className="btn btn-warning btn-sm rounded-0 bold button_color">
                       <Link href={"/login"} legacyBehavior>
-                        LOGIN
+                        <a>{selectedMultiLangData?.login}</a>
                       </Link>
                     </button>
                     <span className="text-muted px-2 fs-4">or</span>
@@ -217,15 +233,21 @@ const WebCheckout = ({
                         className="form-check-label px-2 fs-4 text-muted"
                         htmlFor="flexCheckDefault"
                       >
-                        Login as Guest
+                        {selectedMultiLangData?.login_as_guest}
                       </label>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-lg-8 ">
                       <div className="border rounded-1 mt-2">
-                        <h4 className="px-3 mt-3">Create new address</h4>
-                        <h5 className="bold px-3 mb-0">Shipping</h5>
+                        <h4 className="px-3 mt-3">
+                          {" "}
+                          {selectedMultiLangData?.create_new_address}
+                        </h4>
+                        <h5 className="bold px-3 mb-0">
+                          {" "}
+                          {selectedMultiLangData?.shipping}
+                        </h5>
                         <VisitorAddressForm
                           address_type="Shipping"
                           isSameAsShipping={billingCheckbox}
@@ -233,8 +255,11 @@ const WebCheckout = ({
                           state={state}
                           setSelectedState={setSelectedStates}
                           selectedStates={selectedStates}
+                          selectedMultiLangData={selectedMultiLangData}
                         />
-                        <h6 className="bold px-3 mb-1">Billing</h6>
+                        <h6 className="bold px-3 mb-1">
+                          {selectedMultiLangData?.billing}
+                        </h6>
                         <div className="d-flex align-items-center px-3">
                           <input
                             className="form-check-input fs-4 bill_checkbox mb-2"
@@ -250,7 +275,7 @@ const WebCheckout = ({
                             className="form-check-label px-2 fs-4 pb-2"
                             htmlFor="flexCheckDefault"
                           >
-                            Same as Shipping Address
+                            {selectedMultiLangData?.same_as_shipping_address}
                           </label>
                         </div>
                         {billingCheckbox ? null : (
@@ -260,13 +285,19 @@ const WebCheckout = ({
                             state={state}
                             setSelectedState={setSelectedStates}
                             selectedStates={selectedStates}
+                            selectedMultiLangData={selectedMultiLangData}
                           />
                         )}
                       </div>
                     </div>
                     <div className="col-lg-4 mt-2 border">
-                      <h5 className=" bold text-uppercase">Order Summary</h5>
-                      <OrderSummary orderSummary={orderSummary} />
+                      <h5 className=" bold text-uppercase">
+                        {selectedMultiLangData?.order_summary}
+                      </h5>
+                      <OrderSummary
+                        orderSummary={orderSummary}
+                        selectedMultiLangData={selectedMultiLangData}
+                      />
                     </div>
                   </div>
                 </div>

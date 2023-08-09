@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import IndianNumber from "../components/CheckoutPageComponent/IndianNumber";
 import { CONSTANTS } from "../services/config/app-config";
 
-const MyOrderCard = ({ data }: any) => {
+const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
   const [isDealer, setIsDealer] = useState(false);
   console.log("o-d data", data);
   useEffect(() => {
@@ -19,22 +19,22 @@ const MyOrderCard = ({ data }: any) => {
       <div key={data.id}>
         <div className="card-header">
           <div className="row">
-            <div
-              className="mb-3 mb-sm-0 col-md-2 col-6 order-div"
-            >
-              <p className="text-uppercase gray mb-0 myorder_p">Order Placed</p>
+            <div className="mb-3 mb-sm-0 col-md-2 col-6 order-div">
+              <p className="text-uppercase gray mb-0 myorder_p">
+                {" "}
+                {selectedMultiLangData?.order_placed}
+              </p>
 
               <p className="gray mb-0 myorder_p">{data?.creation}</p>
             </div>
-            <div
-              className="mb-3 col-md-2 col-6 order-div"
-            >
-              <p className="text-uppercase gray mb-0 myorder_p">TOTAL price</p>
+            <div className="mb-3 col-md-2 col-6 order-div">
+              <p className="text-uppercase gray mb-0 myorder_p">
+                {" "}
+                {selectedMultiLangData?.total_price}
+              </p>
               {data?.total === 0 ? (
-                <p
-                  className="border price_request"
-                >
-                  Price on Request
+                <p className="border price_request">
+                  {selectedMultiLangData?.price_on_request}
                 </p>
               ) : (
                 <p className="gray mb-0 myorder_p">
@@ -43,7 +43,9 @@ const MyOrderCard = ({ data }: any) => {
               )}
             </div>
             <div className="col-md-2 col-4 order-cards">
-              <p className="text-uppercase gray mb-0 myorder_p">ship to</p>
+              <p className="text-uppercase gray mb-0 myorder_p">
+                {selectedMultiLangData?.ship_to}
+              </p>
               {data?.addresses?.map((personAddress: any, index: number) => (
                 <div className="dropdown text-dark" key={index}>
                   {personAddress?.name === "Shipping Address"
@@ -77,7 +79,8 @@ const MyOrderCard = ({ data }: any) => {
                             </li>
                             <li className="ps-1 pe-1 mb-0">{addr?.country}</li>
                             <li className="ps-1 pe-1 mb-0">
-                              Phone: {addr?.contact}
+                              {selectedMultiLangData?.mobile_number}:{" "}
+                              {addr?.contact}
                             </li>
                           </ul>
                         </div>
@@ -86,16 +89,16 @@ const MyOrderCard = ({ data }: any) => {
                 </div>
               ))}
             </div>
-            <div
-              className="text-end col-md-6 col-8 order-cards"
-            >
-              <p className="mb-0 myorder_p">Order # {data?.name}</p>
+            <div className="text-end col-md-6 col-8 order-cards">
+              <p className="mb-0 myorder_p">
+                {selectedMultiLangData?.orders} # {data?.name}
+              </p>
 
               <div className="d-flex justify-content-end align-items-center">
                 <div className="flex-fill detail_link text-capitalize">
                   <Link href={`myOrder/${data?.name}`} legacyBehavior>
                     <a href={`myOrder/${data?.name}`} className="order_details">
-                      order details
+                      {selectedMultiLangData?.order_details}
                     </a>
                   </Link>
                 </div>
@@ -110,10 +113,8 @@ const MyOrderCard = ({ data }: any) => {
           >
             <div className="d-flex mb-2">
               <div className="flex-fill">
-                <h6
-                  className="green text-capitalize bold mb-0 mt-2 order-ptag "
-                >
-                  status : {data?.payment_status}
+                <h6 className="green text-capitalize bold mb-0 mt-2 order-ptag ">
+                  {selectedMultiLangData?.status} : {data?.payment_status}
                 </h6>
               </div>
               <div className="justify-content-end d-none d-sm-block align-items-end"></div>
@@ -135,9 +136,7 @@ const MyOrderCard = ({ data }: any) => {
                 <div className="d-flex orderDetail-card">
                   <div className="flex-fill">
                     <Link href="#" legacyBehavior>
-                      <a
-                        className="product_item_name bold"
-                      >
+                      <a className="product_item_name bold">
                         {detail?.item_name}
                       </a>
                     </Link>
@@ -146,7 +145,7 @@ const MyOrderCard = ({ data }: any) => {
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
                             <p className="text-capitalize black mb-0 myorder_p">
-                              Item Code
+                              {selectedMultiLangData?.item_code}
                             </p>
                           </td>
                           <td
@@ -162,7 +161,7 @@ const MyOrderCard = ({ data }: any) => {
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
                             <p className="text-capitalize black mb-0 myorder_p">
-                              Price
+                              {selectedMultiLangData?.price}
                             </p>
                           </td>
                           <td
@@ -177,10 +176,8 @@ const MyOrderCard = ({ data }: any) => {
                                   {detail.prod_info[1]?.value}
                                 </p>
                               ) : (
-                                <p
-                                  className="border price_request"
-                                >
-                                  Price on Request
+                                <p className="border price_request">
+                                  {selectedMultiLangData?.price_on_request}
                                 </p>
                               )}
                             </p>
@@ -190,7 +187,7 @@ const MyOrderCard = ({ data }: any) => {
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
                             <p className="text-capitalize black mb-0 myorder_p">
-                              Quantity
+                              {selectedMultiLangData?.quantity}
                             </p>
                           </td>
                           <td
@@ -209,27 +206,36 @@ const MyOrderCard = ({ data }: any) => {
               </div>
               {isDealer && (
                 <div className="product_item_details col-lg-2 col-md-7 col-8">
-                  <h5 className="data_heading mb-1">Shipping Method</h5>
+                  <h5 className="data_heading mb-1">
+                    {" "}
+                    {selectedMultiLangData?.shipping_method}
+                  </h5>
                   <div>
                     <p className="mb-0">
-                      Transporter : {data?.shipping_method?.transporter}
+                      {selectedMultiLangData?.transporter}:{" "}
+                      {data?.shipping_method?.transporter}
                     </p>
 
                     {data?.shipping_method.door_delivery === 0 &&
                     data?.shipping_method?.godown_delivery === 0 ? (
-                      <p className="mb-0">Door Delivery : Yes</p>
+                      <p className="mb-0">
+                        {selectedMultiLangData?.door_delivery_yes}
+                      </p>
                     ) : (
                       ""
                     )}
                     {data?.shipping_method?.door_delivery === 0 &&
                     data?.shipping_method?.godown_delivery !== 0 ? (
                       <>
-                        <p className="mb-0">Godown Delivery: Yes</p>
+                        <p className="mb-0">
+                          {selectedMultiLangData?.godown_delivery_yes}
+                        </p>
                         {data?.shipping_method?.location === null ? (
                           ""
                         ) : (
                           <p className="mb-0">
-                            Location : {data?.shipping_method?.location}
+                            {selectedMultiLangData?.location} :{" "}
+                            {data?.shipping_method?.location}
                           </p>
                         )}
                       </>
@@ -241,28 +247,40 @@ const MyOrderCard = ({ data }: any) => {
                       ""
                     ) : (
                       <p className="mb-0">
-                        Remark : {data?.shipping_method?.remarks}
+                        {selectedMultiLangData?.remark} :{" "}
+                        {data?.shipping_method?.remarks}
                       </p>
                     )}
                   </div>
                 </div>
               )}
 
-              {isDealer ?  <div className="text-end col-lg-2 col-md-2 col-12">
-                <button className=" order_links mb-2 d-block text-uppercase">
-                  <Link href={detail?.product_url} legacyBehavior>
-                    <a className="orderdetails_btn">View Product</a>
-                  </Link>
-                </button>
-              </div>: <><div className=" col-lg-2"></div><div className="text-end col-lg-2 col-md-2 col-12">
-                <button className=" order_links mb-2 d-block text-uppercase">
-                  <Link href={detail?.product_url} legacyBehavior>
-                    <a className="orderdetails_btn">View Product</a>
-                  </Link>
-                </button>
-              </div></>}
-
-              
+              {isDealer ? (
+                <div className="text-end col-lg-2 col-md-2 col-12">
+                  <button className=" order_links mb-2 d-block text-uppercase">
+                    <Link href={detail?.product_url} legacyBehavior>
+                      <a className="orderdetails_btn">
+                        {" "}
+                        {selectedMultiLangData?.view_product}
+                      </a>
+                    </Link>
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className=" col-lg-2"></div>
+                  <div className="text-end col-lg-2 col-md-2 col-12">
+                    <button className=" order_links mb-2 d-block text-uppercase">
+                      <Link href={detail?.product_url} legacyBehavior>
+                        <a className="orderdetails_btn">
+                          {" "}
+                          {selectedMultiLangData?.view_product}
+                        </a>
+                      </Link>
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
             <div className="row">
               <div className="mt-3 col-sm-12"></div>

@@ -23,6 +23,7 @@ const SecondaryThemeWebNavbar = ({
   handleCurrencyValueChange,
   selectedCurrencyValue,
   handleKeyDown,
+  multiLanguagesData,
 }: any) => {
   const { wishlistCount } = useWishlist();
   console.log("navmenu click", navMenuclick);
@@ -76,9 +77,9 @@ const SecondaryThemeWebNavbar = ({
     };
   };
 
-  const handleToggleSearchBar =() => {
-    setShowSearchbar(!showSearchbar)
-  }
+  const handleToggleSearchBar = () => {
+    setShowSearchbar(!showSearchbar);
+  };
   const handleBeforeUnload = async () => {
     localStorage.clear();
     const logoutAPI = await LogoutList();
@@ -124,9 +125,17 @@ const SecondaryThemeWebNavbar = ({
               </select>
             </div>
             <div className="mx-3">
-              <select onChange={(e) => handleLanguageChange(e.target.value)}  className="secondarytheme-select">
-                <option value="en">English</option>
-                <option value="hi">हिंदी</option>
+              <select
+                onChange={(e) => handleLanguageChange(e.target.value)}
+                className="ternary-select"
+              >
+                {multiLanguagesData?.length > 0 &&
+                  multiLanguagesData !== null &&
+                  multiLanguagesData.map((lang: any) => {
+                    return (
+                      <option value={lang.lang_code}>{lang.lang_name}</option>
+                    );
+                  })}
               </select>
             </div>
             <div className="mx-3">
@@ -152,7 +161,7 @@ const SecondaryThemeWebNavbar = ({
                       id="dropdown-basic"
                       className="dropdown-icon secondarythemedropdown-login"
                     >
-                     Log In
+                      Log In
                     </Dropdown.Toggle>
                   )}
 
@@ -230,7 +239,9 @@ const SecondaryThemeWebNavbar = ({
                           onMouseLeave={(i) => handleLeave(i)}
                           key={i}
                         >
-                          <a className="Secondarytheme-mainMenu-color">{items.name}</a>
+                          <a className="Secondarytheme-mainMenu-color">
+                            {items.name}
+                          </a>
                           <ul className="megamenu">
                             {items.values.map((items_val: any, index: any) => (
                               <li key={index}>
@@ -267,32 +278,43 @@ const SecondaryThemeWebNavbar = ({
                 </nav>
               </div>
               <div className="header-search home-header-search hs-expanded hs-round d-none d-md-flex input-wrapper ">
-              {showSearchbar?<><input
-                  type="text"
-                  className="form-control"
-                  name="search"
-                  id="search"
-                  placeholder="Search in..."
-                  value={searchValue}
-                  onChange={(e: any) => setSearchValue(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  required
-                />
-                <button
-                  className="btn btn-search home-header-btn"
-                  type="submit"
-                  onClick={handleSearch}
-                >
-                  <i className="w-icon-search"></i>
-                </button></>:""}
+                {showSearchbar ? (
+                  <>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="search"
+                      id="search"
+                      placeholder="Search in..."
+                      value={searchValue}
+                      onChange={(e: any) => setSearchValue(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      required
+                    />
+                    <button
+                      className="btn btn-search home-header-btn"
+                      type="submit"
+                      onClick={handleSearch}
+                    >
+                      <i className="w-icon-search"></i>
+                    </button>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
             <div className="mx-2">
               <div className="dropdown cart-dropdown cart-offcanvas text-dark mx-lg-4 ml-3">
                 <Link href="#" legacyBehavior>
-                  <a className="cart-toggle label-down link"  onClick={handleToggleSearchBar}>
-                  <i className="fa fa-search text-dark" aria-hidden="true"></i>
-
+                  <a
+                    className="cart-toggle label-down link"
+                    onClick={handleToggleSearchBar}
+                  >
+                    <i
+                      className="fa fa-search text-dark"
+                      aria-hidden="true"
+                    ></i>
                   </a>
                 </Link>
               </div>
@@ -323,7 +345,6 @@ const SecondaryThemeWebNavbar = ({
                 </Link>
               </div>
             </div>
-       
           </div>
         </div>
       </header>

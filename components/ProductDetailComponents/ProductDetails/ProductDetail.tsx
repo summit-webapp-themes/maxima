@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
-import IndianNumber from "../../CheckoutPageComponent/IndianNumber";
+
 import StarRating from "./StarRating";
 import { useDispatch, useSelector } from "react-redux";
-import * as ga from "../../../lib/ga";
 import { useRouter } from "next/router";
-import AddToCartPostApi from "../../../services/api/cart-page-api/add-to-cart-api";
 import AddToCartApi from "../../../services/api/cart-page-api/add-to-cart-api";
 import VariantsMaster from "../ProductVariants/VariantsMaster";
 import { fetchCartListing } from "../../../store/slices/cart-listing-page-slice/cart-listing-slice";
-import styles from "../../../styles/Product_Detail.module.css";
 import {
   failmsg,
   hideToast,
   successmsg,
 } from "../../../store/slices/general_slices/toast_notification_slice";
 import Link from "next/link";
-import useMultiLingual from "../../../hooks/LanguageHook/multilingual-hook";
 import DealerAddToCartApi from "../../../services/api/cart-page-api/dealer-add-to-cart-api";
 import { CONSTANTS } from "../../../services/config/app-config";
 import { currency_selector_state } from "../../../store/slices/general_slices/multi-currency-slice";
@@ -32,6 +28,7 @@ import {
   TwitterIcon,
   WorkplaceShareButton,
 } from "react-share";
+import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 const ProductDetail = ({
   productDetailData,
   productVariants,
@@ -45,17 +42,14 @@ const ProductDetail = ({
   minQty,
   stockAvailabilityTextChanges,
   handleStockAvail,
-  testBtn,
   doesSelectedVariantDoesNotExists,
   stockDoesNotExistsForSelectedVariants,
-  productDetailLoading,
+  selectedMultiLangData,
 }: any) => {
-  console.log("product detail", productVariants);
   const dispatch = useDispatch();
+  const TokenFromStore: any = useSelector(get_access_token);
   const currency_state_from_redux = useSelector(currency_selector_state);
   const router = useRouter();
-
-  const languageData = useMultiLingual();
 
   const [newobjectState, setnewObjectState] = useState<any>([]);
 
@@ -84,7 +78,7 @@ const ProductDetail = ({
       console.log("dealer api res", dealerApi);
       if (dealerApi.msg === "success") {
         dispatch(successmsg("Item Added to cart"));
-        dispatch(fetchCartListing());
+        dispatch(fetchCartListing(TokenFromStore?.token));
         setTimeout(() => {
           dispatch(hideToast());
         }, 1200);
@@ -94,17 +88,7 @@ const ProductDetail = ({
           dispatch(hideToast());
         }, 1500);
       }
-      // ga.event({
-      //   action: "add_to_cart",
-      //   params: {
-      //     not_set: JSON.stringify(newobjectState),
-      //   },
-      // });
     } else {
-      console.log(
-        "add currency in else",
-        currency_state_from_redux?.selected_currency_value
-      );
       const addCartData = [];
       addCartData.push({
         item_code: productDetailData?.name,
@@ -112,11 +96,12 @@ const ProductDetail = ({
       });
       let AddToCartRes: any = await AddToCartApi(
         addCartData,
-        currency_state_from_redux?.selected_currency_value
+        currency_state_from_redux?.selected_currency_value,
+        TokenFromStore?.token
       );
-      if (AddToCartRes.msg === "success") {
+      if (AddToCartRes?.data?.message.msg === "success") {
         dispatch(successmsg("Item Added to cart"));
-        dispatch(fetchCartListing());
+        dispatch(fetchCartListing(TokenFromStore?.token));
         setTimeout(() => {
           dispatch(hideToast());
         }, 1200);
@@ -138,9 +123,9 @@ const ProductDetail = ({
     }
   }, [router.asPath]);
   console.log("details@@", fullUrl);
-  const handleRedirect = () =>{
-    router.push('/login')
-  }
+  const handleRedirect = () => {
+    router.push("/login");
+  };
   return (
     <div>
       <div className="product-info">
@@ -159,7 +144,7 @@ const ProductDetail = ({
           <StarRating rating={productDetailData?.rating} />
         </div>
         <p className="mt-3 text-dark p-tagfont product_item_name">
-          Item Code: {productDetailData?.name}
+          {selectedMultiLangData?.item_code}: {productDetailData?.name}
         </p>
 
         <h3 className="p_price m-0">
@@ -170,20 +155,8 @@ const ProductDetail = ({
             </>
           ) : (
             <button className="button_color p-2 rounded-3 fs-4 mb-2">
-              Price on Request
+              {selectedMultiLangData?.price_on_request}
             </button>
-            // <p
-            //   className="border text-center"
-            //   style={{
-            //     width: "150px",
-            //     margin: "0",
-            //     background: "#f15622",
-            //     color: "white",
-            //     borderRadius: "5px",
-            //   }}
-            // >
-            //   Price on Request
-            // </p>
           )}
 
           {productDetailData?.mrp_price !== 0 ? (
@@ -203,12 +176,13 @@ const ProductDetail = ({
           <div>
             {productDetailData?.tax_value !== null && (
               <p className="bold text-dark mt-3 text-uppercase taxx_value">
-                &#43; GST &#x40; {productDetailData?.tax_value}% extra
+                &#43; {selectedMultiLangData?.gst} &#x40;{" "}
+                {productDetailData?.tax_value}% {selectedMultiLangData?.extra}
               </p>
             )}
 
             <p className="bold text-dark mt-2 text-uppercase taxx_value">
-              &#43; cost of transportation extra
+              &#43; {selectedMultiLangData?.cost_of_transportation_extra}
             </p>
           </div>
         ) : (
@@ -242,8 +216,7 @@ const ProductDetail = ({
         {productDetailData?.brand !== null &&
         productDetailData?.brand !== "" ? (
           <p className="mt-2 text-uppercase p-tagfont product_brand_name">
-            {languageData?.brand}: {productDetailData?.brand}
-            {/* {multilingualData?.brand}: {productDetailData?.brand} */}
+            {selectedMultiLangData?.brand}: {productDetailData?.brand}
           </p>
         ) : (
           ""
@@ -251,7 +224,7 @@ const ProductDetail = ({
         {productDetailData?.gst_hsn_code !== null &&
         productDetailData?.gst_hsn_code !== "" ? (
           <p className="mt-2 text-uppercase p-tagfont product_brand_name">
-            Hsn code: {productDetailData?.gst_hsn_code}
+            {selectedMultiLangData?.hsn_code}: {productDetailData?.gst_hsn_code}
           </p>
         ) : (
           ""
@@ -259,15 +232,16 @@ const ProductDetail = ({
         {productDetailData?.oem_part_number !== null &&
         productDetailData?.oem_part_number !== "" ? (
           <p className="mt-2 text-uppercase p-tagfont product_brand_name">
-            OEM PART Number: {productDetailData?.oem_part_number}
+            {selectedMultiLangData?.oem_part_number}:{" "}
+            {productDetailData?.oem_part_number}
           </p>
         ) : (
           ""
         )}
         {productDetailData?.weight_per_unit !== 0 ? (
           <p className="mt-2 text-uppercase p-tagfont product_brand_name">
-            APPROX WEIGHT: {productDetailData?.weight_per_unit}{" "}
-            {productDetailData?.weight_uom}
+            {selectedMultiLangData?.approx_weight}:{" "}
+            {productDetailData?.weight_per_unit} {productDetailData?.weight_uom}
           </p>
         ) : (
           ""
@@ -286,6 +260,7 @@ const ProductDetail = ({
           stockDoesNotExistsForSelectedVariants={
             stockDoesNotExistsForSelectedVariants
           }
+          selectedMultiLangData={selectedMultiLangData}
         />
       </div>
 
@@ -297,7 +272,10 @@ const ProductDetail = ({
                 {isDealer === "true" ? null : (
                   <>
                     <div className="d-flex align-items-center">
-                      <div className="fs-4 text-muted ">Quantity: </div>
+                      <div className="fs-4 text-muted ">
+                        {" "}
+                        {selectedMultiLangData?.quantity}:{" "}
+                      </div>
                       <div>
                         <span
                           className="fs-2 ml-lg-2 arrow_pointer"
@@ -329,7 +307,8 @@ const ProductDetail = ({
                       ) : (
                         <p>
                           {" "}
-                          minimum order qty: {productDetailData.min_order_qty}
+                          {selectedMultiLangData?.minimum_order_qty}:{" "}
+                          {productDetailData.min_order_qty}
                         </p>
                       )}
                     </div>
@@ -341,10 +320,7 @@ const ProductDetail = ({
                           : ""
                       } fs-4 mt-2`}
                     >
-                      {languageData !== undefined &&
-                        languageData[
-                          "check_stock_availability_to_get_delivery_date"
-                        ]}
+                      {selectedMultiLangData?.check_availability_message}
                     </div>
                   </>
                 )}
@@ -352,29 +328,26 @@ const ProductDetail = ({
 
               <div className="row button_sec">
                 {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
-                  <div className="col-md-6 text-start">
+                  <div className="col-lg-4 text-start">
                     <div className="mt-5">
                       <button
                         type="button"
                         id=""
-                        className={`btn btn-primary cart_btn_gtag button_color`}
+                        className={`btn standard_button_filled cart_btn_gtag `}
                         onClick={() => handleStockAvail(productDetailData.name)}
                       >
-                        {languageData !== undefined &&
-                          languageData["check_future_stock_availability"]}
+                        {selectedMultiLangData?.check_availability_btn_label}
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <div className="col-md-6">
+                  <div className="col-lg-3">
                     <div className="mt-5">
                       <Link
                         href="/login"
-                        className="btn btn-primary button_color cart_btn_gtag "
+                        className="btn standard_button_filled cart_btn_gtag "
                       >
-                        {languageData !== undefined &&
-                          languageData["check_future_stock_availability"]}
-                        {/* {multilingualData?.check_future_stock_availability} */}
+                        {selectedMultiLangData?.check_availability_btn_label}
                       </Link>
                     </div>
                   </div>
@@ -385,20 +358,19 @@ const ProductDetail = ({
                       <div className="row">
                         <button
                           type="button"
-                          className={`w-50 btn btn-primary button_color cart_btn_gtag`}
+                          className={`w-50 btn standard_button_filled cart_btn_gtag`}
                           onClick={handleAddCart}
                           disabled={doesSelectedVariantDoesNotExists}
                         >
-                          {languageData !== undefined &&
-                            languageData["add_to_cart"]}
-                          {/* {multilingualData?.add_to_cart} */}
+                          {selectedMultiLangData?.add_to_cart}
                         </button>
                       </div>
                       <div className="col-12">
                         <div className="ms-5">
                           {productQuantity < minQty ? (
                             <p className="text-danger">
-                              Minimum Order Qty:{minQty}
+                              {selectedMultiLangData?.minimum_order_qty}:
+                              {minQty}
                             </p>
                           ) : (
                             ""
@@ -412,20 +384,18 @@ const ProductDetail = ({
                     <div className="mt-5">
                       <div className="row">
                         <button
-                          className={`w-75 btn btn-primary button_color cart_btn_gtag `}
+                          className={`w-75 btn standard_button_filled cart_btn_gtag `}
                           onClick={handleRedirect}
                           disabled={doesSelectedVariantDoesNotExists}
                         >
-                         
-                            {languageData !== undefined &&
-                              languageData["add_to_cart"]}
-                        
+                          {selectedMultiLangData?.add_to_cart}
                         </button>
                       </div>
                       <div className="col-12">
                         {productQuantity < minQty ? (
                           <p className="text-danger">
-                            Minimum Order Qty:{minQty}
+                            {selectedMultiLangData?.minimum_order_qty}: :
+                            {minQty}
                           </p>
                         ) : (
                           ""
@@ -436,7 +406,7 @@ const ProductDetail = ({
                 )}
               </div>
               {/* WhatsApp share button */}
-              <div className="mt-3 d-flex align-items-center">
+              <div className="mt-5 d-flex align-items-center">
                 <i
                   className="fa fa-share me-2"
                   aria-hidden="true"

@@ -20,6 +20,7 @@ const ProductCard = (props: ProductCardProps) => {
     item_slug,
     wishlistData,
     currency_state_from_redux,
+    selectedMultiLangData,
   } = props;
 
   let wishproducts: any;
@@ -177,90 +178,7 @@ const ProductCard = (props: ProductCardProps) => {
         </div>
       </div>
     </div>
-    // <div className="product_card">
-    //   <div className="">
-    //     <div className={!in_stock_status ? "out_of_stock" : "in_stock"}>
-    //       {<p className="out_of_stock_text mb-0">Out of stock</p>}
-    //     </div>
-    //   </div>
-
-    //   <div className="card_inner">
-    //     <div className="card_img">
-    //       <Link href={url} className="">
-    // <Image
-    //   loader={() => `${CONSTANTS.API_BASE_URL}${img_url}`}
-    //   src={`${CONSTANTS.API_BASE_URL}${img_url}`}
-    //   alt="product-detail"
-    //   width={142}
-    //   height={142}
-    //   className="img-fluid"
-    // />
-    //       </Link>
-    //     </div>
-
-    //     <div className="row mt-3">
-    //       <div className="col-12 d-flex justify-content-between">
-    //         <div>
-    //           <p className="product_name mb-0">
-    //             <div className="display_tag">
-    //               {display_tag?.length > 0 ? (
-    //                 <>
-    //                   {display_tag
-    //                     ?.slice(0, 1)
-    //                     ?.map((item: any, index: number) => {
-    //                       console.log("display in map", item);
-    //                       return (
-    //                         <>
-    //                           <span
-    //                             className="d-inline-block px-1 py-0 text-uppercase"
-    //                             style={{
-    //                               border: "1px solid #96c7ef",
-    //                               backgroundColor: "#cae0f1",
-    //                               fontSize: "12px",
-    //                             }}
-    //                           >
-    //                             {item}
-    //                           </span>
-    //                         </>
-    //                       );
-    //                     })}
-    //                 </>
-    //               ) : (
-    //                 ""
-    //               )}
-    //             </div>
-    //             <Link href={url} className="text-dark">{item_name}</Link>
-    //           </p>
-    //         </div>
-    //         {in_stock_status ? (
-    //           <div className="cart ps-2">
-    //             <a className="prodCart" style={{ cursor: "pointer" }}>
-    //               <span
-    //                 className="material-symbols-outlined"
-    //                 id="shopping_cart"
-    //               >
-    //                 shopping_cart
-    //               </span>
-    //             </a>
-    //             {/* </Link> */}
-    //           </div>
-    //         ) : (
-    //           ""
-    //         )}
-    //       </div>
-    //     </div>
-
-    //     <div className="product-price">
-    //       <p className="mb-0 price_p">
-    //         <i className="fa fa-inr" aria-hidden="true"></i>
-    //         <span className="price pe-2 ">{price}</span>
-    //         <span className="price">
-    //           <s>{mrp_price}</s>
-    //         </span>
-    //       </p>
-    //     </div>
-    //   </div>
-    // </div>
+    
   );
 };
 

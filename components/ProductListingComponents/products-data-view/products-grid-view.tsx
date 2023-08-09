@@ -13,14 +13,16 @@ const ProductsGridView = (props: ProductsViewProps) => {
     productListTotalCount,
     handleLoadMore,
     wishlistData,
-    currency_state_from_redux
+    currency_state_from_redux,
+    selectedMultiLangData,
   } = props;
 
   console.log("cube in card", listItems);
   return (
     <div
-      className={`${filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
-        }`}
+      className={`${
+        filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
+      }`}
     >
       <div className="row">
         {loading ? (
@@ -53,13 +55,15 @@ const ProductsGridView = (props: ProductsViewProps) => {
                 star_rating={items?.rating}
                 wishlistData={wishlistData}
                 currency_state_from_redux={currency_state_from_redux}
+                selectedMultiLangData={selectedMultiLangData}
               />
             </div>
           ))
         ) : (
           <Norecord
-            heading=""
-            content="Looking for something specific but couldn't find it? Let us know we will get it for you"
+            heading={selectedMultiLangData?.product_not_found}
+            content={selectedMultiLangData?.product_not_found_s}
+            selectedMultiLangData={selectedMultiLangData}
           />
         )}
       </div>
@@ -73,10 +77,12 @@ const ProductsGridView = (props: ProductsViewProps) => {
           }}
         >
           <button
-            className="btn btn-primary button_color my-5"
+            className="btn btn-primary my-5"
+            style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+
             onClick={handleLoadMore}
           >
-            load more
+            {selectedMultiLangData?.load_more}
           </button>
         </div>
       )}

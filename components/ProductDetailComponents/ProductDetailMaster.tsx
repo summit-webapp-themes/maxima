@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import useProductDetail from "../../hooks/ProductDetailHook/product-detail-hook";
 import { Norecord } from "../NoRecord";
 import ProductDetailLoadingLayout from "./ProductDetailLoadingLayout";
@@ -7,6 +8,8 @@ import ProductDetail from "./ProductDetails/ProductDetail";
 import ProductItemsOptions from "./ProductDetails/ProductItemsOptions";
 import ProductEnlargeImage from "./ProductEnlargeImage";
 import ProductSpecificationMaster from "./ProductSpecifications/ProductSpecificationMaster";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { useEffect, useState } from "react";
 const ProductDetailMaster = () => {
   const {
     productDetailData,
@@ -29,8 +32,21 @@ const ProductDetailMaster = () => {
     stockDoesNotExistsForSelectedVariants,
     productItemOptions,
     productDetailLoading,
+    currency_state_from_redux
   } = useProductDetail();
   console.log(productDetailLoading, "productDetailData");
+  const SelectedLangDataFromStore = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
   return (
     <div className="">
       <div className="container product_detail_container">
@@ -79,13 +95,14 @@ const ProductDetailMaster = () => {
                       stockDoesNotExistsForSelectedVariants={
                         stockDoesNotExistsForSelectedVariants
                       }
+                      selectedMultiLangData={selectedMultiLangData}
                     />
                   </div>
                 </>
               ) : (
                 <Norecord
-                  heading="Product Not Found!!"
-                  content="This Particular Product is not Available Right Now. Soon you can purchase it."
+                  heading={selectedMultiLangData?.product_not_found}
+                  content={selectedMultiLangData?.product_not_found_s}
                 />
               )}
             </>
@@ -93,7 +110,10 @@ const ProductDetailMaster = () => {
         </div>
         {checkStock === true && (
           <div className="col-lg-12 mt-5">
-            <CheckStockAvailability stockAvailability={stockAvailability} />
+            <CheckStockAvailability
+              stockAvailability={stockAvailability}
+              selectedMultiLangData={selectedMultiLangData}
+            />
           </div>
         )}
       </div>
@@ -101,6 +121,7 @@ const ProductDetailMaster = () => {
         {productDetailData?.prod_specifications?.length > 0 && (
           <ProductSpecificationMaster
             specifications={productDetailData?.prod_specifications}
+            selectedMultiLangData={selectedMultiLangData}
           />
         )}
       </div>
@@ -111,7 +132,11 @@ const ProductDetailMaster = () => {
             <>
               <div key={index}>
                 {items?.values?.length > 0 && (
-                  <ProductItemsOptions items={items} />
+                  <ProductItemsOptions
+                    items={items}
+                    selectedMultiLangData={selectedMultiLangData}
+                    currency_state_from_redux={currency_state_from_redux}
+                  />
                 )}
               </div>
             </>

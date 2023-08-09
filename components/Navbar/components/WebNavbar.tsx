@@ -24,6 +24,8 @@ const WebNavbar = ({
   handleCurrencyValueChange,
   selectedCurrencyValue,
   handleKeyDown,
+  multiLanguagesData,
+  selectedMultiLangData,
 }: any) => {
   const { wishlistCount } = useWishlist();
   console.log("navmenu click", navMenuclick);
@@ -32,7 +34,6 @@ const WebNavbar = ({
   const [isShown, setIsShown] = useState(false);
   const [isId, setId] = useState();
   const [LoggedIn, setLoggedIn] = useState(false);
-  const isLoggedIn = useSelector(login_state);
 
   const dispatch = useDispatch();
   const handleHover = (id: any) => {
@@ -44,11 +45,16 @@ const WebNavbar = ({
     setCartCount(cartlisting_data?.orderCount);
   }, [cartlisting_data]);
 
-  useEffect(() => {
-    if (isLoggedIn.user === "LoggedIn") {
-      setLoggedIn(true);
-    }
-  }, [login_state]);
+  let isLoggedIn: any;
+  if (typeof window !== "undefined") {
+    isLoggedIn = localStorage.getItem("isLoggedIn");
+  }
+
+  // useEffect(() => {
+  //   if (isLoggedIn.user === "LoggedIn") {
+  //     setLoggedIn(true);
+  //   }
+  // }, [login_state]);
 
   const router = useRouter();
   console.log("isLoggedIn12", LoggedIn);
@@ -81,20 +87,6 @@ const WebNavbar = ({
     const logoutAPI = await LogoutList();
   };
 
-  // useEffect(() => {
-  //   console.log("clear state")
-  //   const handleBeforeUnload = async () => {
-  //     localStorage.clear();
-  //     const logoutAPI = await LogoutList();
-  //   };
-
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, [handleClick]);
-
   return (
     <div>
       <header className="header">
@@ -115,7 +107,8 @@ const WebNavbar = ({
                   src="/assets/images/summit-logo-ree.png"
                   width={150}
                   height={60}
-                  alt="logo" className="mob-logo-img1"
+                  alt="logo"
+                  className="mob-logo-img1"
                 />
                 {/* <h1 className="text-white text-uppercase">Summit</h1> */}
               </Link>
@@ -126,7 +119,7 @@ const WebNavbar = ({
                 className="form-control "
                 name="search"
                 id="search"
-                placeholder="Search in..."
+                placeholder={selectedMultiLangData?.search_in}
                 value={searchValue}
                 onChange={(e: any) => setSearchValue(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -137,7 +130,7 @@ const WebNavbar = ({
                 type="submit"
                 onClick={handleSearch}
               >
-                <i className="w-icon-search" ></i>
+                <i className="w-icon-search"></i>
               </button>
             </div>
 
@@ -224,7 +217,7 @@ const WebNavbar = ({
             </div> */}
 
             <div className="navbar-left-icon1">
-              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 " >
+              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 ">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">
                     <i className="w-icon-heart fs-1">
@@ -232,7 +225,9 @@ const WebNavbar = ({
                         {wishlistCount || 0}
                       </span>
                     </i>
-                    <span className="wishlist-label d-lg-show">Wishlist</span>
+                    <span className="wishlist-label d-lg-show">
+                      {selectedMultiLangData?.wishlist}
+                    </span>
                   </a>
                 </Link>
               </div>
@@ -244,13 +239,15 @@ const WebNavbar = ({
                         {cartCount || 0}
                       </span>
                     </i>
-                    <span className="cart-label">Cart</span>
+                    <span className="cart-label">
+                      {selectedMultiLangData?.cart}
+                    </span>
                   </a>
                 </Link>
               </div>
               <div className={`custom_dropdown`}>
                 <Dropdown>
-                  {LoggedIn === true ? (
+                  {isLoggedIn ==="true" ? (
                     <Dropdown.Toggle
                       id="dropdown-basic"
                       className="dropdown-icon dropdown_active_icon"
@@ -277,30 +274,29 @@ const WebNavbar = ({
                     </Dropdown.Toggle>
                   )}
 
-                  {LoggedIn === true ? (
+                  {isLoggedIn === "true" ? (
                     <Dropdown.Menu className="fs-4">
                       <Dropdown.Item className="nav_dropdown">
                         <Link href="/quick-order" className="text-dark">
-                          Quick Order
+                          {selectedMultiLangData?.quick_order}
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown">
                         <Link href="profile" className="text-dark">
-                          My Account
+                          {selectedMultiLangData?.my_account}
                         </Link>
                       </Dropdown.Item>
 
                       <Dropdown.Item className="nav_dropdown">
                         <Link href="/myOrder" className="text-dark">
-                          My Order
+                          {selectedMultiLangData?.my_order}
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item
                         className="nav_dropdown text-dark"
                         onClick={handleClick}
                       >
-                        {" "}
-                        Logout{" "}
+                        {selectedMultiLangData?.logout}
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   ) : (
@@ -308,7 +304,7 @@ const WebNavbar = ({
                       <Dropdown.Item className="nav_dropdown">
                         {" "}
                         <Link href="/login" className="text-dark ">
-                          Login{" "}
+                          {selectedMultiLangData?.login}
                         </Link>
                       </Dropdown.Item>
                     </Dropdown.Menu>
@@ -316,10 +312,6 @@ const WebNavbar = ({
                 </Dropdown>
               </div>
             </div>
-
-
-
-
 
             {/* for mobile responsive */}
             {/* <div className={`resp-dropdown-avator custom_dropdown`}>
@@ -407,7 +399,7 @@ const WebNavbar = ({
                       title="Browse Categories"
                     >
                       <i className="w-icon-category"></i>
-                      <span>Browse Categories</span>
+                      <span>{selectedMultiLangData?.browse_categories}</span>
                     </a>
                   </Link>
 
@@ -506,15 +498,14 @@ const WebNavbar = ({
               </div>
             </div>
             <div className="mx-3">
-              <select
-                onChange={(e) => handleLanguageChange(e.target.value)}
-              >
-                <option value="en">English</option>
-                <option value="hi">हिंदी</option>
-                {/* <option value="ta">தமிழ்</option>
-                <option value="te">తెలుగు</option>
-                <option value="ml">മലയാളം</option> */}
-                {/* Add more language options here */}
+              <select onChange={(e) => handleLanguageChange(e.target.value)}>
+                {multiLanguagesData?.length > 0 &&
+                  multiLanguagesData !== null &&
+                  multiLanguagesData.map((lang: any) => {
+                    return (
+                      <option value={lang.lang_code}>{lang.lang_name}</option>
+                    );
+                  })}
               </select>
             </div>
             <div className="mx-3">

@@ -16,22 +16,24 @@ const HandleOrderSection = (props: any) => {
     couponCodeApiRes,
     couponError,
     handlePlaceOrder,
+    selectedMultiLangData,
   } = props;
 
   let isDealer = JSON.parse(localStorage.getItem("isDealer") as any);
 
   return (
     <div>
-      {(!isDealer || isDealer === true && !CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER) && (
+      {(!isDealer ||
+        (isDealer === true && !CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER)) && (
         <div>
           <button
             type="button"
             onClick={handlePlaceOrder}
             // disabled={!acceptedTerms}
-            className="d-grid gap-2 col-lg-12 col-12  btn btn-md bold text-white border-0 button_color mt-2"
+            className="d-grid gap-2 col-lg-12 col-12  btn btn-md bold border-0 mt-2 standard-btn"
           >
             {deleteCoupon}
-            Place Order
+            {selectedMultiLangData?.place_order}
           </button>
         </div>
       )}
@@ -52,7 +54,7 @@ const HandleOrderSection = (props: any) => {
                         aria-expanded="false"
                         aria-controls="collapseOne"
                       >
-                        Apply Coupon Code
+                        {selectedMultiLangData?.apply_coupon_code}
                       </button>
                     </h2>
 
@@ -91,17 +93,17 @@ const HandleOrderSection = (props: any) => {
                                 className="btn btn-sm custom-btn transparent d-block w-100 btn btn-danger mt-2"
                                 onClick={() => handleDeleteCouponCode()}
                               >
-                                Delete Coupon
+                                {selectedMultiLangData?.delete_coupon}
                               </button>
                             </div>
                           ) : (
                             <div>
                               <button
                                 type="button"
-                                className="btn btn-sm custom-btn transparent d-block w-100 btn button_color mt-2"
+                                className="btn btn-sm custom-btn transparent d-block w-100 btn standard-btn btn-fancy mt-2"
                                 onClick={(e: any) => handleApplyCouponCode(e)}
                               >
-                                Apply Coupon
+                                {selectedMultiLangData?.apply_coupon}
                               </button>
                             </div>
                           )}
@@ -131,7 +133,7 @@ const HandleOrderSection = (props: any) => {
                         aria-expanded="false"
                         aria-controls="collapseTwo"
                       >
-                        Use store credit
+                        {selectedMultiLangData?.use_store_credit}
                       </button>
                     </h2>
                     <div
@@ -157,10 +159,10 @@ const HandleOrderSection = (props: any) => {
                         </form>
                         <button
                           type="button"
-                          className="btn btn-sm transparent custom-btn d-block w-100 button_color mt-2"
+                          className="btn btn-sm transparent custom-btn d-block w-100 standard-btn btn-fancy mt-2"
                           onClick={(e: any) => handleStoreCredit(e)}
                         >
-                          Use store credit
+                          {selectedMultiLangData?.use_store_credit}
                         </button>
                       </div>
                     </div>
@@ -172,9 +174,16 @@ const HandleOrderSection = (props: any) => {
             </div>
           )}
 
-          <h5 className="px-2 pt-2 text-uppercase">Order Summary</h5>
+          <h5 className="px-2 pt-2 text-uppercase">
+            {" "}
+            {selectedMultiLangData?.order_summary}
+          </h5>
 
-          <OrderSummary orderSummary={orderSummary} couponError={couponError} />
+          <OrderSummary
+            orderSummary={orderSummary}
+            couponError={couponError}
+            selectedMultiLangData={selectedMultiLangData}
+          />
         </div>
       </div>
     </div>
