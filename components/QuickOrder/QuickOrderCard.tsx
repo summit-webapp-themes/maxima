@@ -5,13 +5,30 @@ import Link from "next/link";
 import IndianNumber from "./IndianNumber";
 
 const QuickOrderCard = (props: any) => {
-  const { partNumbersData, handleRemove, showMinQty, handleInputChange } =
-    props;
+  const {
+    partNumbersData,
+    handleRemove,
+    showMinQty,
+    handleInputChange,
+    selectedMultiLangData,
+  } = props;
   console.log(partNumbersData, "quickOrderPartNumbersData");
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
   let total: any;
+
+  const showValue = (qty_value:any) =>
+  {
+    if(qty_value === 0)
+    {
+      return 1
+    }
+    else
+    {
+      return qty_value;
+    }
+  }
   return (
     <>
       <div className="mt-3">
@@ -55,8 +72,12 @@ const QuickOrderCard = (props: any) => {
                     )}
                   </div>
                   <div className="col-3 text-start">
-                    <p className="mb-0">Item Code: {data.item_name}</p>
-                    <p className="mt-2 mb-0">Brand: {data.brand}</p>
+                    <p className="mb-0">
+                      {selectedMultiLangData?.item_code}: {data.item_name}
+                    </p>
+                    <p className="mt-2 mb-0">
+                      {selectedMultiLangData?.brand}: {data.brand}
+                    </p>
 
                     <Link href="" legacyBehavior>
                       <a
@@ -65,7 +86,7 @@ const QuickOrderCard = (props: any) => {
                         }}
                         className="delete-link"
                       >
-                        Delete
+                        {selectedMultiLangData?.delete}
                       </a>
                     </Link>
                   </div>
@@ -74,10 +95,8 @@ const QuickOrderCard = (props: any) => {
                       {data.price !== 0 ? (
                         <IndianNumber value={data?.price} />
                       ) : (
-                        <p
-                          className="border price_request"
-                        >
-                          Price on Request
+                        <p className="border price_request">
+                          {selectedMultiLangData?.price_on_request}
                         </p>
                       )}
                     </p>
@@ -88,7 +107,7 @@ const QuickOrderCard = (props: any) => {
                         <input
                           type="number"
                           className="w-25 text-center mb-3"
-                          value={data?.min_order_qty}
+                          value={showValue(data?.min_order_qty)}
                           onChange={(e) => handleInputChange(e, index)}
                         />
                         <br />
@@ -98,7 +117,7 @@ const QuickOrderCard = (props: any) => {
                   <div className="col-2">
                     <p>
                       <IndianNumber
-                        value={(total = data.price * data.min_order_qty)}
+                        value={(total = data.price * showValue(data?.min_order_qty))}
                       />
                     </p>
                   </div>

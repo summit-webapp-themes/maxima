@@ -5,14 +5,16 @@ import MobCheckout from "./MobCheckout";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import Link from "next/link";
 import VisitorAddressForm from "./AddressForms/VisitorAddressForm";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { useSelector } from "react-redux";
 
 const CheckoutPageMaster = () => {
   const {
     shippingAddresses,
-    billingAddresses, 
+    billingAddresses,
     initialShippingAddress,
     setInitialShippingAddress,
-    setInitialBillingAddress, 
+    setInitialBillingAddress,
     initialBillingAddress,
     selectedAddress,
     Change,
@@ -84,13 +86,26 @@ const CheckoutPageMaster = () => {
     }
   }, []);
 
-  console.log("visitor state", visitorState)
+  const SelectedLangDataFromStore = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
+
+  console.log("visitor state", visitorState);
   return (
     <div className="mt-5 mb-5">
       {isBreakpoint ? (
         <>
           <div className="container">
-            <h3>Checkout Page</h3>
+            <h3>{selectedMultiLangData?.checkout_page}</h3>
             <hr />
           </div>
           <WebCheckout
@@ -128,12 +143,12 @@ const CheckoutPageMaster = () => {
             setStoreCredit={setStoreCredit}
             handleStoreCredit={handleStoreCredit}
             handlePlaceOrder={handlePlaceOrder}
+            selectedMultiLangData={selectedMultiLangData}
           />
         </>
       ) : (
         <div className="mt-5">
           {visitorState !== null ? (
-
             <MobCheckout
               shippingAddresses={shippingAddresses}
               initialShippingAddress={initialShippingAddress}
@@ -169,14 +184,18 @@ const CheckoutPageMaster = () => {
           ) : (
             <div className=" container row  mb-2 mx-auto">
               <div className="col-lg-8 ">
-                <h4 className="text-uppercase bold mt-3">checkout details</h4>
+                <h4 className="text-uppercase bold mt-3">
+                  {selectedMultiLangData?.checkout_details}
+                </h4>
                 <div className="d-flex align-items-center">
                   <button className="btn btn-warning btn-sm rounded-0 bold yellow_btn">
                     <Link href={"/login"} legacyBehavior>
-                      LOGIN
+                      <a>{selectedMultiLangData?.login}</a>
                     </Link>
                   </button>
-                  <span className="text-muted px-2 fs-4">or</span>
+                  <span className="text-muted px-2 fs-4">
+                    {selectedMultiLangData?.or}
+                  </span>
                   <div className="d-flex align-items-center ">
                     <input
                       className="form-check-input fs-4"
@@ -187,19 +206,26 @@ const CheckoutPageMaster = () => {
                       className="form-check-label px-2 fs-4 text-muted"
                       htmlFor="flexCheckDefault"
                     >
-                      Login as Guest
+                      {selectedMultiLangData?.login_as_guest}
                     </label>
                   </div>
                 </div>
                 <div className="border rounded-1 mt-2">
-                  <h4 className="px-3 mt-3">Create new address</h4>
-                  <h5 className="bold px-3 mb-0">Shipping</h5>
+                  <h4 className="px-3 mt-3">
+                    {selectedMultiLangData?.create_new_address}
+                  </h4>
+                  <h5 className="bold px-3 mb-0">
+                    {" "}
+                    {selectedMultiLangData?.shipping}
+                  </h5>
                   <VisitorAddressForm
                     address_type="Shipping"
                     isSameAsShipping={billingCheckbox}
                     shipping_check={shippingCheck}
                   />
-                  <h6 className="bold px-3 mb-1">Billing</h6>
+                  <h6 className="bold px-3 mb-1">
+                    {selectedMultiLangData?.billing}
+                  </h6>
                   <div className="d-flex align-items-center px-3">
                     <input
                       className="form-check-input fs-4 bill_checkbox mb-2"
@@ -215,13 +241,14 @@ const CheckoutPageMaster = () => {
                       className="form-check-label px-2 fs-4 pb-2"
                       htmlFor="flexCheckDefault"
                     >
-                      Same as Shipping Address
+                      {selectedMultiLangData?.same_as_shipping_address}
                     </label>
                   </div>
                   {billingCheckbox ? null : (
                     <VisitorAddressForm
                       address_type="Billing"
                       isSameAsShipping={billingCheckbox}
+                      selectedMultiLangData={selectedMultiLangData}
                     />
                   )}
                 </div>
@@ -229,8 +256,10 @@ const CheckoutPageMaster = () => {
               <div
                 className={`col-lg-4 mx-auto mt-2 border rounded-1 ordersummary-width `}
               >
-                <h5 className="my-3  bold text-uppercase">Order Summary</h5>
-                <OrderSummary />
+                <h5 className="my-3  bold text-uppercase">
+                  {selectedMultiLangData?.order_summary}
+                </h5>
+                <OrderSummary selectedMultiLangData={selectedMultiLangData} />
               </div>
             </div>
           )}

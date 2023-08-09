@@ -17,7 +17,7 @@ import { fetchOrderSummary } from "../store/slices/checkoutPage-slice/order-summ
 import { product_listing_selector_state } from "../store/slices/product-listing-page-slices/product-listing-slice";
 import { currency_selector_state } from "../store/slices/general_slices/multi-currency-slice";
 
-const CartCard = ({ orders, index }: any) => {
+const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,updateCart }: any) => {
   console.log("cart orders card data", orders);
   const dispatch = useDispatch();
   const cart_listing_data_store = useSelector(cart_listing_state);
@@ -25,24 +25,30 @@ const CartCard = ({ orders, index }: any) => {
   const product_listing_state_from_redux: any = useSelector(
     product_listing_selector_state
   );
-  const [cartQty, setCartQty] = useState(orders.qty);
+  // const [cartQty, setCartQty] = useState(orders.qty);
 
   const handleInputChange = (e: any, index: any) => {
     console.log("cart input", e.target.value, index);
     const numericValue = e.target.value.replace(/\D/g, "");
-    setCartQty(numericValue);
+    // setCartQty(numericValue);
   };
 
-  const UpdateCart = async (item_code: any) => {
-    let AddToCartRes: any = await AddToCartApi(item_code, cartQty);
-    console.log(" cart updated", AddToCartRes);
-    if (AddToCartRes.msg === "success") {
-      dispatch(fetchCartListing());
-      if (Object.keys(cart_listing_data_store?.data).length > 0) {
-        dispatch(fetchOrderSummary(cart_listing_data_store?.data?.name));
-      }
-    }
-  };
+  // const UpdateCart = async (item_code: any) => {
+  //   let AddToCartRes: any = await AddToCartApi(item_code, cartQty);
+  //   console.log(" cart updated", AddToCartRes);
+  //   if (AddToCartRes.msg === "success") {
+  //     dispatch(fetchCartListing());
+  //     if (Object.keys(cart_listing_data_store?.data).length > 0) {
+  //       dispatch(fetchOrderSummary(cart_listing_data_store?.data?.name));
+  //     }
+  //   }
+  // };
+
+  const showValueOfItem = () =>
+  {
+    const desiredObj = arrayofSelectedItems.find((obj:any) => obj.item_code === orders?.item_code);
+    return desiredObj?.quantity;
+  }
 
   const HandleDeleteCart = async (item_code: any) => {
     let DeleteProduct = await DeleteProductFromCart(item_code);
@@ -67,7 +73,10 @@ const CartCard = ({ orders, index }: any) => {
       <div className="d-lg-block d-none">
         <div className="row text-center ">
           <div className="col-lg-3 text-start">
-            <Link href={`${orders.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`} legacyBehavior>
+            <Link
+              href={`${orders.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+              legacyBehavior
+            >
               <a className="prod_name">{orders.item_name}</a>
             </Link>
             <br />
@@ -78,7 +87,7 @@ const CartCard = ({ orders, index }: any) => {
                 onClick={() => HandleDeleteCart(orders.item_code)}
               >
                 <Link href="" className="text-primary">
-                  Delete
+                  {selectedMultiLangData?.delete}
                 </Link>
               </button>
             </p>
@@ -95,10 +104,8 @@ const CartCard = ({ orders, index }: any) => {
                   </span>
                 </p>
               ) : (
-                <p
-                  className="border button_color price_request "
-                >
-                  Price on Request
+                <p className="border button_color price_request ">
+                  {selectedMultiLangData?.price_on_request}
                 </p>
               ))}
           </div>
@@ -115,23 +122,14 @@ const CartCard = ({ orders, index }: any) => {
             <input
               type="text"
               className="w-75 text-center"
-              value={cartQty}
+              value={showValueOfItem()}
               onChange={(e: any) => {
-                handleInputChange(e, index);
+                updateCart(orders.item_code, e.target.value);
               }}
             />
-            <button
-              type="button"
-              className="text-center astext"
-              onClick={() => UpdateCart(orders.item_code)}
-            >
-              <Link href="" legacyBehavior>
-                <a className="text-primary">Update</a>
-              </Link>
-            </button>
           </div>
           <div className="col-1">
-          <p>₹ {orders.amount}</p>
+            <p>₹ {orders.amount}</p>
           </div>
         </div>
       </div>
@@ -139,7 +137,11 @@ const CartCard = ({ orders, index }: any) => {
       {/* For mobile responsive */}
       <div className="d-lg-none d-block">
         <div className="row">
-          <div className="col-6 fs-4">ITEM WITH DESCRIPTION </div>:
+          <div className="col-6 fs-4">
+            {" "}
+            {selectedMultiLangData?.item_with_desc}
+          </div>
+          :
           <div className="col-5">
             <Link href={`${orders.product_url}`} legacyBehavior>
               <a className="prod_name">{orders.item_name}</a>
@@ -151,14 +153,14 @@ const CartCard = ({ orders, index }: any) => {
                 onClick={() => HandleDeleteCart(orders.item_code)}
               >
                 <Link href="" className="text-primary">
-                  Delete
+                  {selectedMultiLangData?.delete}
                 </Link>
               </button>
             </p>
           </div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4">Price </div>:
+          <div className="col-6 fs-4"> {selectedMultiLangData?.price}</div>:
           <div className="col-5 text-start">
             {orders?.details.length > 0 &&
               orders?.details !== null &&
@@ -171,33 +173,38 @@ const CartCard = ({ orders, index }: any) => {
                   </span>
                 </p>
               ) : (
-                <p
-                  className="border button_color price_request"
-                >
-                  Price on Request
+                <p className="border button_color price_request">
+                  {selectedMultiLangData?.price_on_request}
                 </p>
               ))}
           </div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4">UNIT WEIGHT(KG) </div>:
-          <div className="col-5 text-start">{orders.weight_per_unit}</div>
+          <div className="col-6 fs-4">
+            {" "}
+            {selectedMultiLangData?.unit_weight}
+          </div>
+          :<div className="col-5 text-start">{orders.weight_per_unit}</div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4">TOTAL WEIGHT(KG) </div>:
-          <div className="col-5 text-start">{orders.total_weight}</div>
+          <div className="col-6 fs-4">
+            {" "}
+            {selectedMultiLangData?.total_weight}
+          </div>
+          :<div className="col-5 text-start">{orders.total_weight}</div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4">TAX </div>: 
+          <div className="col-6 fs-4">{selectedMultiLangData?.tax} </div>:
           <div className="col-5 text-start">₹ {orders.tax}</div>
         </div>
         <div className="row my-5">
-          <div className="col-6 fs-4">QTY </div>:
+          <div className="col-6 fs-4">{selectedMultiLangData?.quantity_c} </div>
+          :
           <div className="col-5 ">
             <input
               type="text"
               className="w-50 text-start"
-              value={cartQty}
+              value={orders?.qty}
               onChange={(e: any) => {
                 handleInputChange(e, index);
               }}
@@ -206,16 +213,16 @@ const CartCard = ({ orders, index }: any) => {
             <button
               type="button"
               className="text-start astext"
-              onClick={() => UpdateCart(orders.item_code)}
+              // onClick={() => UpdateCart(orders.item_code)}
             >
               <Link href="" legacyBehavior>
-                <a className="text-primary">Update</a>
+                <a className="text-primary">{selectedMultiLangData?.update}</a>
               </Link>
             </button>
           </div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4">TOTAL </div>: 
+          <div className="col-6 fs-4">{selectedMultiLangData?.total} </div>:
           <div className="col-5 ">₹ {orders.amount}</div>
         </div>
       </div>

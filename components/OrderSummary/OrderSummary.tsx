@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import IndianNumber from "../CheckoutPageComponent/IndianNumber";
 import Link from "next/link";
 import Image from "next/image";
-
 import { useSelector } from "react-redux";
 import OrderSummaryModal from "../CheckoutPageComponent/OrderSummaryModal";
 import { CONSTANTS } from "../../services/config/app-config";
 import { cart_listing_state } from "../../store/slices/cart-listing-page-slice/cart-listing-slice";
 
-const OrderSummary = ({ orderSummary, couponError }: any) => {
+const OrderSummary = ({
+  orderSummary,
+  couponError,
+  selectedMultiLangData,
+}: any) => {
   const [cartListingItems, setcartListingItems] = useState<any>([]);
   const [show, setshow] = useState(false);
   const [initial, setInitial] = useState(false);
@@ -40,49 +43,13 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
           <div>
             {couponError === false
               ? orderSummary?.map((data: any, index: number) => (
-                <div className="order-summery px-2 px-sm-0 px-xm-0" key={index}>
-                  <div className="row mb-1 ">
-                    <div className="col-6">
-                      {data?.name === "Total" ? (
-                        <strong className="mb-0 p-0">{data?.name}</strong>
-                      ) : (
-                        <p className={`mb-0 p-0 summary_p`}>{data?.name}</p>
-                      )}
-                    </div>
-                    <div className="col-6 text-end">
-                      <p className={`mb-0 summary_p`}>
-                        {data?.name === "Coupon Code" ? (
-                          <div>
-                            <IndianNumber value={data?.value} />
-                          </div>
-                        ) : (
-                          <div>
-                            <i className="fa fa-inr"></i>
-
-                            <IndianNumber value={data?.value} />
-                          </div>
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))
-              : orderSummary
-                .filter(
-                  (values: any) =>
-                    values?.name !== "Store Credit" &&
-                    values?.name !== "Coupon Code" &&
-                    values?.name !== "Coupon Amount" &&
-                    values?.name !== "Round Off"
-                )
-                .map((data: any, index: number) => (
                   <div
                     className="order-summery px-2 px-sm-0 px-xm-0"
                     key={index}
                   >
                     <div className="row mb-1 ">
                       <div className="col-6">
-                        {data.name === "Total" ? (
+                        {data?.name === "Total" ? (
                           <strong className="mb-0 p-0">{data?.name}</strong>
                         ) : (
                           <p className={`mb-0 p-0 summary_p`}>{data?.name}</p>
@@ -90,16 +57,14 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
                       </div>
                       <div className="col-6 text-end">
                         <p className={`mb-0 summary_p`}>
-                          {data.name === "Coupon Code" ? (
+                          {data?.name === "Coupon Code" ? (
                             <div>
-                              {/* <i className="fa fa-inr"></i> */}
-                              {/* <span> {data?.value}</span> */}
                               <IndianNumber value={data?.value} />
                             </div>
                           ) : (
                             <div>
                               <i className="fa fa-inr"></i>
-                              {/* <span> {data?.value}</span> */}
+
                               <IndianNumber value={data?.value} />
                             </div>
                           )}
@@ -107,7 +72,48 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
                       </div>
                     </div>
                   </div>
-                ))}
+                ))
+              : orderSummary
+                  .filter(
+                    (values: any) =>
+                      values?.name !== "Store Credit" &&
+                      values?.name !== "Coupon Code" &&
+                      values?.name !== "Coupon Amount" &&
+                      values?.name !== "Round Off"
+                  )
+                  .map((data: any, index: number) => (
+                    <div
+                      className="order-summery px-2 px-sm-0 px-xm-0"
+                      key={index}
+                    >
+                      <div className="row mb-1 ">
+                        <div className="col-6">
+                          {data.name === "Total" ? (
+                            <strong className="mb-0 p-0">{data?.name}</strong>
+                          ) : (
+                            <p className={`mb-0 p-0 summary_p`}>{data?.name}</p>
+                          )}
+                        </div>
+                        <div className="col-6 text-end">
+                          <p className={`mb-0 summary_p`}>
+                            {data.name === "Coupon Code" ? (
+                              <div>
+                                {/* <i className="fa fa-inr"></i> */}
+                                {/* <span> {data?.value}</span> */}
+                                <IndianNumber value={data?.value} />
+                              </div>
+                            ) : (
+                              <div>
+                                <i className="fa fa-inr"></i>
+                                {/* <span> {data?.value}</span> */}
+                                <IndianNumber value={data?.value} />
+                              </div>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
           </div>
         )}
       </div>
@@ -135,9 +141,7 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
                             </div>
                           </div>
                           <div className="col-8 ">
-                            <div
-                              className="checkout_item_details "
-                            >
+                            <div className="checkout_item_details ">
                               <h6 className="mb-0 product_item_name ">
                                 {data.item_name}
                               </h6>
@@ -191,7 +195,9 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
                                   )}
                                   <tr className="item_options ">
                                     <td width="50%" className="px-0 py-0 ">
-                                      <p className={`mb-0 cart_p`}>Qty:</p>
+                                      <p className={`mb-0 cart_p`}>
+                                        {selectedMultiLangData?.quantity_c}:
+                                      </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p text-end`}>
@@ -202,7 +208,10 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
                                   <tr className="item_options ">
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p`}>
-                                        Total Item Price:
+                                        {
+                                          selectedMultiLangData?.total_item_price
+                                        }
+                                        :
                                       </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
@@ -216,7 +225,8 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
                                   <tr className="item_options ">
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p`}>
-                                        Total Item Tax:
+                                        {selectedMultiLangData?.total_item_tax}:
+                                        :
                                       </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
@@ -246,7 +256,9 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
                             (value: any, index: any) => (
                               <div key={index}>
                                 {value?.orders?.length > 3 && (
-                                  <div>View All items</div>
+                                  <div>
+                                    {selectedMultiLangData?.view_all_items}:
+                                  </div>
                                 )}
                               </div>
                             )
@@ -265,6 +277,7 @@ const OrderSummary = ({ orderSummary, couponError }: any) => {
           show={show}
           toHide={handleShow}
           cartListingItems={cartListingItems}
+          selectedMultiLangData={selectedMultiLangData}
         />
       ) : null}
     </div>

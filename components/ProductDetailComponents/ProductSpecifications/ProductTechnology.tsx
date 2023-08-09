@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CONSTANTS } from "../../../services/config/app-config";
 import TechnologyModal from "./TechnologyModal";
 
-const ProductTechnology = ({ technologyData }: any) => {
+const ProductTechnology = ({ technologyData, selectedMultiLangData }: any) => {
   console.log("technologies", technologyData);
 
   const myLoader = ({ src, width, quality }: any) => {
@@ -46,7 +46,7 @@ const ProductTechnology = ({ technologyData }: any) => {
                             handleEditModal(cardDetails?.technology_details);
                           }}
                         >
-                          Learn More
+                          {selectedMultiLangData?.learn_more}
                         </button>
                       )}
                     </div>

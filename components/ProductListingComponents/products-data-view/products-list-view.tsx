@@ -15,6 +15,7 @@ const ProductsListView = (props: ProductsProps) => {
     wishlistData,
     handleLoadMore,
     currency_state_from_redux,
+    selectedMultiLangData,
   } = props;
 
   console.log("load moreee", productListTotalCount, product_data);
@@ -46,6 +47,7 @@ const ProductsListView = (props: ProductsProps) => {
                     key={index}
                     wishlistData={wishlistData}
                     handleRenderingOfImages={handleRenderingOfImages}
+                    selectedMultiLangData={selectedMultiLangData}
                   />
                 </div>
               );
@@ -53,7 +55,8 @@ const ProductsListView = (props: ProductsProps) => {
           ) : (
             <Norecord
               heading=""
-              content="Looking for something specific but couldn't find it? Let us know we will get it for you"
+              content="Looking for something specific but couldn't find it?"
+              selectedMultiLangData={selectedMultiLangData}
             />
           )}
         </div>
@@ -68,10 +71,11 @@ const ProductsListView = (props: ProductsProps) => {
           }}
         >
           <button
-            className="btn btn-primary button_color my-5"
+            className="btn btn-primary my-5"
+            style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
             onClick={handleLoadMore}
           >
-            load more
+            {selectedMultiLangData?.load_more}
           </button>
         </div>
       )}

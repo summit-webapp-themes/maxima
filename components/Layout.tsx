@@ -18,13 +18,17 @@ const Layout = ({ children }: any) => {
     router.pathname === "/forgot_password"
       ? false
       : true;
-     
+
   return (
     <>
-      {router.pathname === "/home2"?toShowHeader &&<SecondaryThemeNavbar/>:toShowHeader && <Navbar />}
+      {router.pathname === "/home2"
+        ? toShowHeader && <SecondaryThemeNavbar />
+        : toShowHeader && <Navbar />}
       {children}
 
-      {router.pathname === "/home2"?toShowFooter && <SecondaryThemeFooter/>: toShowFooter &&<Footer />}
+      {router.pathname === "/home2"
+        ? toShowFooter && <SecondaryThemeFooter />
+        : toShowFooter && <Footer />}
     </>
   );
 };

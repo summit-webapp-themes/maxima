@@ -10,6 +10,8 @@ import {
   FetchCitiesForAddressForm,
   FetchStateForAddressForm,
 } from "../../services/api/general_apis/customer-form-data-api";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { useSelector } from "react-redux";
 // import IndianNumber from "./IndianNumber";
 const ProfileMaster = () => {
   const {
@@ -24,6 +26,7 @@ const ProfileMaster = () => {
   console.log("###quot in api tsx file", enquiryHistoryPro);
   const [showEditModal, setshowEditModal] = useState(false);
   const [showShipEditModal, setshowShipEditModal] = useState(false);
+
   const [detailData, setdetailData] = useState();
   const [shippingDetailData, setShippingDetailData] = useState();
   const [addType, setAddType] = useState("");
@@ -32,6 +35,19 @@ const ProfileMaster = () => {
   let [city, setCity] = useState<any>([]);
   const [err, setErr] = useState(false);
   let [selectedStates, setSelectedStates] = useState("");
+
+  const SelectedLangDataFromStore = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
 
   useEffect(() => {
     const getStateData = async () => {
@@ -87,19 +103,28 @@ const ProfileMaster = () => {
   const personalDetails = () => {
     return (
       <>
-        <div className="col-lg-3 bold fs-3">User Name:</div>
+        <div className="col-lg-3 bold fs-3">
+          {selectedMultiLangData?.user_name}:
+        </div>
         <div className="col-lg-9 fs-4">
           {profileList && profileList?.profile_details?.customer_name}
         </div>
-        <div className="col-lg-3 bold fs-3">Company Name :</div>
+        <div className="col-lg-3 bold fs-3">
+          {selectedMultiLangData?.company_name} :
+        </div>
         <div className="col-lg-9 fs-4">
           {profileList && profileList?.profile_details?.company_name}
         </div>
-        <div className="col-lg-3 bold fs-3">Mobile Number :</div>
+        <div className="col-lg-3 bold fs-3">
+          {selectedMultiLangData?.mobile_number} :
+        </div>
         <div className="col-lg-9 fs-4">
           {profileList && profileList?.profile_details?.contact_no}
         </div>
-        <div className="col-lg-3 bold fs-3">Email id (Company id) :</div>
+        <div className="col-lg-3 bold fs-3">
+          {" "}
+          {selectedMultiLangData?.email} :
+        </div>
         <div className="col-lg-9 fs-4">
           {profileList && profileList?.profile_details?.email}
         </div>
@@ -111,7 +136,9 @@ const ProfileMaster = () => {
     return (
       <>
         <div className="mb-2 row">
-          <div className="col-lg-2 fs-3 bold">Coupons :</div>
+          <div className="col-lg-2 fs-3 bold">
+            {selectedMultiLangData?.coupons}:
+          </div>
           <div className="col-lg-9">
             <div className="row">
               {profileList && profileList?.allowed_coupons?.length > 0 ? (
@@ -128,7 +155,7 @@ const ProfileMaster = () => {
                     )}
                 </>
               ) : (
-                "No Coupons Available"
+                <>{selectedMultiLangData?.no_coupons_available}</>
               )}
             </div>
           </div>
@@ -146,7 +173,7 @@ const ProfileMaster = () => {
               <div className="">
                 <div className="profile">
                   <h4 className="text-start fw-bolder text-uppercase">
-                    Ageing Report
+                    {selectedMultiLangData?.ageing_report}
                   </h4>
                 </div>
               </div>
@@ -154,12 +181,10 @@ const ProfileMaster = () => {
           </div>
           <div className="shadow-sm card table-responsive ageing_report">
             {/* <div className="card-body"></div> */}
-            <table
-              className="w-100 ageingreport-table"
-            >
+            <table className="w-100 ageingreport-table">
               <tr>
-                <th>Customer Code</th>
-                <th>Customer Name</th>
+                <th>{selectedMultiLangData?.customer_code}</th>
+                <th>{selectedMultiLangData?.customer_name}</th>
                 <th>0-30</th>
                 <th>31-60</th>
                 <th>61-90</th>
@@ -197,7 +222,10 @@ const ProfileMaster = () => {
           <div className="card-body">
             <div className="row align-items-center">
               <div className="col-lg-8">
-                <h5 className="fw-bolder pt-1">Billing Address</h5>
+                <h5 className="fw-bolder pt-1">
+                  {" "}
+                  {selectedMultiLangData?.billing_addresses}
+                </h5>
               </div>
               <div className="col-lg-4 text-end">
                 <button
@@ -216,7 +244,7 @@ const ProfileMaster = () => {
 
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Name :</p>
+                <p className="">{selectedMultiLangData?.name} :</p>
               </div>
               <div className="col-sm-7 fw-bolder">
                 {profileList && profileList?.billing_address?.name}
@@ -224,7 +252,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Email ID :</p>
+                <p className="">{selectedMultiLangData?.email}:</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.billing_address?.email}
@@ -232,7 +260,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Mobile No:</p>
+                <p className="">{selectedMultiLangData?.mobile_number}:</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.billing_address?.contact}
@@ -240,7 +268,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Address :</p>
+                <p className="">{selectedMultiLangData?.address} :</p>
               </div>
               <div className="col-sm-7 w-lg-25 w-sm-75 ">
                 <div className="fw-bolder">
@@ -254,7 +282,7 @@ const ProfileMaster = () => {
 
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Postal Code:</p>
+                <p className="">{selectedMultiLangData?.postal_code}:</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.billing_address?.postal_code}
@@ -262,7 +290,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">state :</p>
+                <p className="">{selectedMultiLangData?.state} :</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.billing_address?.state}
@@ -270,7 +298,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">City :</p>
+                <p className="">{selectedMultiLangData?.city} :</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.billing_address?.city}
@@ -278,7 +306,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Country:</p>
+                <p className="">{selectedMultiLangData?.country}:</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.billing_address?.country}
@@ -297,7 +325,10 @@ const ProfileMaster = () => {
           <div className="card-body">
             <div className="row align-items-center">
               <div className="col-lg-8">
-                <h5 className="fw-bolder pt-1">Shipping Address</h5>
+                <h5 className="fw-bolder pt-1">
+                  {" "}
+                  {selectedMultiLangData?.shipping_addresses}
+                </h5>
               </div>
               <div className="col-lg-4 text-end">
                 <button
@@ -315,7 +346,7 @@ const ProfileMaster = () => {
 
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Name :</p>
+                <p className="">{selectedMultiLangData?.name} :</p>
               </div>
               <div className="col-sm-7 fw-bolder">
                 {profileList && profileList?.shipping_address?.name}
@@ -323,7 +354,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Email ID :</p>
+                <p className="">{selectedMultiLangData?.email} :</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.shipping_address?.email}
@@ -331,7 +362,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Mobile No:</p>
+                <p className="">{selectedMultiLangData?.mobile_number}:</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.shipping_address?.contact}
@@ -339,7 +370,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Address :</p>
+                <p className="">{selectedMultiLangData?.address} :</p>
               </div>
               <div className="col-sm-7 w-lg-25 w-sm-75 ">
                 <div className="fw-bolder">
@@ -353,7 +384,7 @@ const ProfileMaster = () => {
 
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Postal Code:</p>
+                <p className="">{selectedMultiLangData?.postal_code}:</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.shipping_address?.postal_code}
@@ -361,7 +392,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">state :</p>
+                <p className="">{selectedMultiLangData?.state} :</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.shipping_address?.state}
@@ -369,7 +400,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">City :</p>
+                <p className="">{selectedMultiLangData?.city} :</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.shipping_address?.city}
@@ -377,7 +408,7 @@ const ProfileMaster = () => {
             </div>
             <div className="row mb-2">
               <div className="col-sm-5">
-                <p className="">Country:</p>
+                <p className="">{selectedMultiLangData?.country}:</p>
               </div>
               <div className="col-sm-7 fw-bolder ">
                 {profileList && profileList?.shipping_address?.country}
@@ -395,7 +426,9 @@ const ProfileMaster = () => {
         <div className="shadow-sm card mt-4 ">
           <div className="card-body">
             <div className="mb-2 row">
-              <div className="col-lg-3 fs-3 bold">Payment Terms : </div>
+              <div className="col-lg-3 fs-3 bold">
+                {selectedMultiLangData?.payment_terms} :{" "}
+              </div>
               <div className="col-lg-9">
                 <div className="row">
                   {" "}
@@ -416,7 +449,10 @@ const ProfileMaster = () => {
           <div className="shadow-sm card mt-4 ">
             <div className="card-body">
               <div className="mb-2 row">
-                <div className="col-lg-3 fs-3 bold">Credit limit : </div>
+                <div className="col-lg-3 fs-3 bold">
+                  {" "}
+                  {selectedMultiLangData?.credit_limit}:{" "}
+                </div>
                 <div className="col-lg-9">
                   <div className="row">
                     {" "}
@@ -446,24 +482,21 @@ const ProfileMaster = () => {
             <div className="">
               <div className="profile">
                 <h4 className="text-start fw-bolder text-uppercase">
-                  Enquiry History
+                  {selectedMultiLangData?.enquiry_history}
                 </h4>
               </div>
             </div>
           </div>
         </div>
         <div className="shadow-sm card table-responsive ageing_report">
-          {/* <div className="card-body"></div> */}
-          <table
-            className="w-100 table table-striped ageingreport-table "
-          >
+          <table className="w-100 table table-striped ageingreport-table ">
             <thead>
               <tr>
-                <th>Quotation Id</th>
-                <th>Enquiry Date</th>
-                <th>Total Qty</th>
-                <th>Total Amount</th>
-                <th>Download</th>
+                <th>{selectedMultiLangData?.quotation_id}</th>
+                <th>{selectedMultiLangData?.enquiry_date}</th>
+                <th>{selectedMultiLangData?.total_qty}</th>
+                <th>{selectedMultiLangData?.total_amount}</th>
+                <th>{selectedMultiLangData?.download}</th>
               </tr>
             </thead>
             <tbody>
@@ -475,8 +508,6 @@ const ProfileMaster = () => {
                       <tr>
                         <td>{enq.name}</td>
                         <td>
-                          {/* {enq.enquiry_date} */}
-
                           <span>
                             {(new Date(
                               enq.enquiry_date.toLocaleString()
@@ -506,7 +537,7 @@ const ProfileMaster = () => {
                                 handlePdf(enq?.print_url);
                               }}
                             >
-                              Download
+                              {selectedMultiLangData?.download}
                             </a>
                           </Link>
                         </td>
@@ -526,10 +557,8 @@ const ProfileMaster = () => {
       <div className="container">
         <section className="profile_section ">
           <div className="container">
-            <h1
-              className="bold text-uppercase mb-3 profile_heading"
-            >
-              My Account
+            <h1 className="bold text-uppercase mb-3 profile_heading">
+              {selectedMultiLangData?.my_account}
             </h1>
             <div className="row">
               <div className="col-lg-3 mt-2">
@@ -540,7 +569,7 @@ const ProfileMaster = () => {
                     role="tablist"
                   >
                     <li className="nav-item">
-                      <Link href="#contact_faq" legacyBehavior >
+                      <Link href="#contact_faq" legacyBehavior>
                         <a
                           className={`nav-link profile_nav border tab_width ${
                             !documentQueued?.setTrue ? "active" : ""
@@ -558,7 +587,7 @@ const ProfileMaster = () => {
                               aria-hidden="true"
                             ></i>
                             <p className="mb-0 sidebar_texsize">
-                              Personal Details
+                              {selectedMultiLangData?.personal_details}
                             </p>
                           </h6>
                         </a>
@@ -580,7 +609,10 @@ const ProfileMaster = () => {
                               className="fa fa-map-marker fs-1"
                               aria-hidden="true"
                             ></i>
-                            <p className="mb-0 sidebar_texsize"> Address</p>
+                            <p className="mb-0 sidebar_texsize">
+                              {" "}
+                              {selectedMultiLangData?.address}
+                            </p>
                           </h6>
                         </a>
                       </Link>
@@ -601,7 +633,10 @@ const ProfileMaster = () => {
                               className="fa fa-tags fs-1"
                               aria-hidden="true"
                             ></i>
-                            <p className="mb-0 sidebar_texsize"> Offers</p>
+                            <p className="mb-0 sidebar_texsize">
+                              {" "}
+                              {selectedMultiLangData?.offers}
+                            </p>
                           </h6>
                         </a>
                       </Link>
@@ -625,7 +660,10 @@ const ProfileMaster = () => {
                               className="fa fa-credit-card fs-1"
                               aria-hidden="true"
                             ></i>
-                            <p className="mb-0 sidebar_texsize">Payment</p>
+                            <p className="mb-0 sidebar_texsize">
+                              {" "}
+                              {selectedMultiLangData?.payment}
+                            </p>
                           </h6>
                         </a>
                       </Link>
@@ -647,7 +685,7 @@ const ProfileMaster = () => {
                               aria-hidden="true"
                             ></i>
                             <p className="mb-0 sidebar_texsize">
-                              Enquiry History
+                              {selectedMultiLangData?.enquiry_history}
                             </p>
                           </h6>
                         </a>
@@ -693,7 +731,6 @@ const ProfileMaster = () => {
                   >
                     <div className="card">
                       <div className="card-body">
-                        {/* Coupon code */}
                         <div className="row m-0">
                           <div className="shadow-sm card mt-4 ">
                             <div className="card-body">
@@ -701,7 +738,6 @@ const ProfileMaster = () => {
                             </div>
                           </div>
                         </div>
-                        {/* Discount section */}
                       </div>
                     </div>
                   </div>
@@ -727,13 +763,8 @@ const ProfileMaster = () => {
                     <div className="card">
                       <div className="card-body">
                         <div className="text-center pt-5">
-                          {/* payment terms */}
                           {paymentTerms()}
 
-                          {/* credit limit */}
-                          {/* {creditLimit()} */}
-
-                          {/* ageing report */}
                           {handleAgeingReportDisplay()}
                         </div>
                       </div>
@@ -753,7 +784,7 @@ const ProfileMaster = () => {
                               <div className="card-body">
                                 <div className="mb-2 row">
                                   <div className="col-lg-3 fs-3 bold">
-                                    Past enquiries :
+                                    {selectedMultiLangData?.past_enquiries} :
                                   </div>
                                   <div className="col-lg-9">
                                     <div className="row"></div>
@@ -779,7 +810,8 @@ const ProfileMaster = () => {
                             <div className="card-body">
                               <div className="mb-2 row">
                                 <div className="col-lg-3 fs-3 bold">
-                                  Replenishment orders :
+                                  {selectedMultiLangData?.replenishment_orders}{" "}
+                                  :
                                 </div>
                                 <div className="col-lg-9">
                                   <div className="row"></div>
@@ -821,6 +853,7 @@ const ProfileMaster = () => {
           city={city}
           selectedCity={selectedCity}
           address_type={addType}
+          selectedMultiLangData={selectedMultiLangData}
         />
       ) : null}
 
@@ -837,6 +870,7 @@ const ProfileMaster = () => {
           city={city}
           selectedCity={selectedCity}
           address_type={addType}
+          selectedMultiLangData={selectedMultiLangData}
         />
       ) : null}
     </>

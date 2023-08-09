@@ -10,6 +10,7 @@ const MobNavbar = ({
   setSearchValue,
   handleSearch,
   isLoading,
+  selectedMultiLangData,
 }: any) => {
   // const setmainLink = () => {
   //   let element: HTMLElement = document.getElementsByClassName(
@@ -58,7 +59,7 @@ const MobNavbar = ({
               className="form-control border"
               name="search"
               id="search"
-              placeholder="Search in..."
+              placeholder={selectedMultiLangData?.search_in}
               value={searchValue}
               onChange={(e: any) => setSearchValue(e.target.value)}
               required

@@ -3,7 +3,12 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { CONSTANTS } from "../../services/config/app-config";
 
-const OrderSummaryModal = ({ show, toHide, cartListingItems }: any) => {
+const OrderSummaryModal = ({
+  show,
+  toHide,
+  cartListingItems,
+  selectedMultiLangData,
+}: any) => {
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
@@ -11,7 +16,9 @@ const OrderSummaryModal = ({ show, toHide, cartListingItems }: any) => {
     <>
       <Modal show={show} onHide={toHide}>
         <Modal.Header closeButton>
-          <Modal.Title className="bold text-center">All Items</Modal.Title>
+          <Modal.Title className="bold text-center">
+            {selectedMultiLangData?.all_items}
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body className="modals_body">
@@ -36,9 +43,7 @@ const OrderSummaryModal = ({ show, toHide, cartListingItems }: any) => {
                             </div>
                           </div>
                           <div className="col-8 ">
-                            <div
-                              className="checkout_item_details "
-                            >
+                            <div className="checkout_item_details ">
                               <h6 className="mb-0 product_item_name ">
                                 {data.item_name}
                               </h6>
@@ -88,7 +93,9 @@ const OrderSummaryModal = ({ show, toHide, cartListingItems }: any) => {
                                   )}
                                   <tr className="item_options ">
                                     <td width="50%" className="px-0 py-0 ">
-                                      <p className={`mb-0 cart_p`}>Qty</p>
+                                      <p className={`mb-0 cart_p`}>
+                                        {selectedMultiLangData?.quantity_c}
+                                      </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p`}>
@@ -99,7 +106,9 @@ const OrderSummaryModal = ({ show, toHide, cartListingItems }: any) => {
                                   <tr className="item_options ">
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p`}>
-                                        Total Item Price{" "}
+                                        {
+                                          selectedMultiLangData?.total_item_price
+                                        }
                                       </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
@@ -112,7 +121,7 @@ const OrderSummaryModal = ({ show, toHide, cartListingItems }: any) => {
                                   <tr className="item_options ">
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p`}>
-                                        Total Item Tax{" "}
+                                        {selectedMultiLangData?.total_item_tax}{" "}
                                       </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">

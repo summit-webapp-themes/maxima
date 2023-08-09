@@ -3,17 +3,22 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Thankyouimg from "../../public/assets/images/thankyou-img.png";
 import OrderDetail from "../OrderDetails/OrderDetail";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { useSelector } from "react-redux";
 
-const ThankYou = ({ }: any) => {
+const ThankYou = ({}: any) => {
+  const SelectedLangDataFromStore = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
 
   useEffect(() => {
-    // ga.event({
-    //     action: "page_view",
-    //     params: {
-    //       not_set: thankyou[2]
-    //     },
-    //   });
-  }, []);
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
 
   return (
     <>
@@ -27,8 +32,11 @@ const ThankYou = ({ }: any) => {
               height={100}
               alt="success_img"
             />
-            <h3 className="black bold">Thank You!</h3>
-            <h5 className="black mb-8">Your order has been received</h5>
+            <h3 className="black bold">{selectedMultiLangData?.thank_you}</h3>
+            <h5 className="black mb-8">
+              {" "}
+              {selectedMultiLangData?.your_order_has_been_received}
+            </h5>
           </div>
         </div>
         <OrderDetail />

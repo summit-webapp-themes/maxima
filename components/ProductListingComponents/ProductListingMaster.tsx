@@ -8,6 +8,9 @@ import ProductsListView from "./products-data-view/products-list-view";
 import useWishlist from "../../hooks/WishListHooks/WishListHooks";
 import BreadCrumbs from "../ProductDetailComponents/ProductDetails/BreadCrumbs";
 import MobileFilter from "./filters-view/MobileFilter";
+import { useEffect, useState } from "react";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { useSelector } from "react-redux";
 const ProductListingMaster = () => {
   const {
     productsLoading,
@@ -24,6 +27,20 @@ const ProductListingMaster = () => {
   } = useProductListing();
   console.log("cube ", productListingData);
   const { wishlistData } = useWishlist();
+
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+
+  const SelectedLangDataFromStore = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
@@ -41,6 +58,7 @@ const ProductListingMaster = () => {
             productListTotalCount={productListTotalCount}
             handleRenderingOfImages={handleRenderingOfImages}
             wishlistData={wishlistData}
+            selectedMultiLangData={selectedMultiLangData}
           />
         );
       case "grid-view":
@@ -53,6 +71,7 @@ const ProductListingMaster = () => {
             productListTotalCount={productListTotalCount}
             handleLoadMore={handleLoadMore}
             wishlistData={wishlistData}
+            selectedMultiLangData={selectedMultiLangData}
           />
         );
 
@@ -113,6 +132,7 @@ const ProductListingMaster = () => {
                 handleToggleProductsListingView={
                   handleToggleProductsListingView
                 }
+                selectedMultiLangData={selectedMultiLangData}
               />
             </div>
             <BreadCrumbs />
@@ -124,6 +144,7 @@ const ProductListingMaster = () => {
                   selectedFilters={selectedFilters}
                   handleApplyFilters={handleApplyFilters}
                   productListingData={productListingData}
+                  selectedMultiLangData={selectedMultiLangData}
                 />
               </span>
               {handleDisplayOfProductsList()}
@@ -137,6 +158,7 @@ const ProductListingMaster = () => {
           loading={filtersLoading}
           selectedFilters={selectedFilters}
           handleApplyFilters={handleApplyFilters}
+          selectedMultiLangData={selectedMultiLangData}
         />
       </div>
     </>

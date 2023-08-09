@@ -15,12 +15,24 @@ import {
   FetchCitiesForAddressForm,
   FetchStateForAddressForm,
 } from "../../services/api/general_apis/customer-form-data-api";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 
 const Registration = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const Register_state = useSelector(registration_state);
 
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
   console.log("register details", register_details);
   let [selectedCity, setSelectedCity] = useState("");
   let [selectedStates, setSelectedStates] = useState("");
@@ -64,6 +76,32 @@ const Registration = () => {
     action.resetForm();
   };
 
+  const HandleRegistrationForm = (details: any) => {
+    if (details.label === "Name") {
+      return selectedMultiLangData?.name;
+    } else if (details.label === "Email") {
+      return selectedMultiLangData?.email;
+    } else if (details.label === "Mobile No") {
+      return selectedMultiLangData?.mobile_number;
+    } else if (details.label === "Flat No") {
+      return selectedMultiLangData?.address_1;
+    } else if (details.label === "Street / Road Name") {
+      return selectedMultiLangData?.address_2;
+    } else if (details.label === "GST Number") {
+      return selectedMultiLangData?.gst;
+    } else if (details.label === "State") {
+      return selectedMultiLangData?.state;
+    } else if (details.label === "City") {
+      return selectedMultiLangData?.city;
+    } else if (details.label === "Pincode") {
+      return selectedMultiLangData?.postal_code;
+    } else if (details.label === "Password") {
+      return selectedMultiLangData?.password;
+    } else if (details.label === "Confirm Password") {
+      return selectedMultiLangData?.confirm_password;
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -85,7 +123,9 @@ const Registration = () => {
         </div>
         <div className="registration_form">
           <div className="registr-heading text-center mb-2">
-            <h1 className="text-uppercase registration_title">Register</h1>
+            <h1 className="text-uppercase registration_title">
+              {selectedMultiLangData?.register}
+            </h1>
           </div>
           <Formik
             initialValues={{
@@ -117,7 +157,7 @@ const Registration = () => {
                               <div className="row">
                                 <div className="col-md-4">
                                   <Form.Label className="registration_label">
-                                    {details?.label}:
+                                    {HandleRegistrationForm(details)}:
                                   </Form.Label>
                                 </div>
                                 {details?.name !== "state" &&
@@ -165,8 +205,9 @@ const Registration = () => {
                                       onClick={handleChange}
                                     >
                                       <option>
-                                        Select Select a region, state or
-                                        province
+                                        {
+                                          selectedMultiLangData?.please_select_a_state
+                                        }
                                       </option>
                                       {state?.length > 0 && (
                                         <>
@@ -206,7 +247,11 @@ const Registration = () => {
                                       onClick={handleChange}
                                       onBlur={handleBlur}
                                     >
-                                      <option>Please select a city.</option>
+                                      <option>
+                                        {
+                                          selectedMultiLangData?.please_select_a_city
+                                        }
+                                      </option>
                                       {city?.length > 0 && (
                                         <>
                                           {city.map((data: any, index: any) => (
@@ -230,7 +275,7 @@ const Registration = () => {
                                 <button
                                   className={`btn bold text-uppercase border_btn text-dark`}
                                 >
-                                  Back
+                                  {selectedMultiLangData?.back}
                                 </button>
                               </Link>
                             </div>
@@ -239,7 +284,7 @@ const Registration = () => {
                                 type="submit"
                                 className="btn btn-warning text-uppercase bold button_color"
                               >
-                                Submit
+                                {selectedMultiLangData?.submit}
                               </button>
                             </div>
                           </div>

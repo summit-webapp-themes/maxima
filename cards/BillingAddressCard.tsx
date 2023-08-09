@@ -19,10 +19,9 @@ const BillingAddressCard = ({
   setSelectedCity,
   selectedCity,
   selectedStates,
-  city
-
+  city,
+  selectedMultiLangData,
 }: any) => {
- 
   const [showEditModal, setshowEditModal] = useState(false);
   const [detailData, setdetailData] = useState();
   const [show, setshow] = useState(false);
@@ -30,7 +29,7 @@ const BillingAddressCard = ({
   const [selectedbillAddress, setselectedbillAddress] = useState();
   const [changeAddress, setChangeaddress] = useState(false);
 
-console.log("bill data",billingAddresses)
+  console.log("bill data", billingAddresses);
 
   const handleShow = (val: any) => {
     setshow(!show);
@@ -50,7 +49,7 @@ console.log("bill data",billingAddresses)
   return (
     <>
       <div className=" d-flex ">
-        <h4 className="mb-1">Billing Addresses</h4>
+        <h4 className="mb-1">{selectedMultiLangData?.billing_addresses}</h4>
         <div className="d-flex align-items-center ml-2">
           <input
             className="form-check-input fs-5 bill_checkbox"
@@ -66,7 +65,7 @@ console.log("bill data",billingAddresses)
             className="form-check-label px-2 fs-4 "
             htmlFor="flexCheckDefault"
           >
-            Same as Shipping Address
+            {selectedMultiLangData?.same_as_shipping_address}
           </label>
         </div>
       </div>
@@ -82,7 +81,8 @@ console.log("bill data",billingAddresses)
         onChange={handleBilling}
       >
         <option value="">
-          Select Billing address
+          {" "}
+          {selectedMultiLangData?.select_billing_address}
         </option>
         {billingAddresses.map((billing_ad: any, i: any) => (
           <option key={i}>{billing_ad?.address_id}</option>
@@ -99,9 +99,7 @@ console.log("bill data",billingAddresses)
                   key={detail?.address_id}
                 >
                   <div className="">
-                    <p className={`mb-0 addresscard-p`}>
-                      {detail.name}
-                    </p>
+                    <p className={`mb-0 addresscard-p`}>{detail.name}</p>
                     <p className="mb-0 card_p">{detail?.address_1}</p>
                     <p className="mb-0 card_p">{detail?.address_2}</p>
                     <p className="mb-0 card_p">{detail?.city}</p>
@@ -152,11 +150,10 @@ console.log("bill data",billingAddresses)
                         type="button"
                         onClick={() => {
                           handleEditModal(detail);
-                         
                         }}
                         className="showmodal_button"
                       >
-                        Edit
+                        {selectedMultiLangData?.edit}
                       </button>
                     </div>
                   </div>
@@ -164,7 +161,7 @@ console.log("bill data",billingAddresses)
               ))}
           <div className="d-flex align-items-center">
             <button
-              className="address_icon " 
+              className="address_icon "
               onClick={() => handleShow("Billing")}
             >
               <i className="fa fa-edit text-primary fs-2 ship_edit"></i>
@@ -174,7 +171,7 @@ console.log("bill data",billingAddresses)
               className="fs-4 mt-5 bill_heading"
               onClick={() => handleShow("Billing")}
             >
-              Create New Billing Address
+              {selectedMultiLangData?.create_new_billing_address}
             </div>
           </div>
         </>
@@ -191,13 +188,10 @@ console.log("bill data",billingAddresses)
                 <div
                   className="border px-1 addresscard-width"
                   key={detail?.contact_info}
-                 
                 >
                   <div className="">
                     {/* <p>{detail.address_id}</p> */}
-                    <p className={`mb-0 addresscard-p`}>
-                      {detail?.name}
-                    </p>
+                    <p className={`mb-0 addresscard-p`}>{detail?.name}</p>
                     {/* <p className="mb-0">{detail.phone}</p> */}
                     <p className="mb-0 card_p">{detail?.address_1}</p>
                     <p className="mb-0 card_p">{detail?.address_2}</p>
@@ -257,7 +251,7 @@ console.log("bill data",billingAddresses)
                         }}
                         className="showmodal_button"
                       >
-                        Edit
+                        {selectedMultiLangData?.edit}
                       </button>
                     </div>
                   </div>
@@ -278,6 +272,7 @@ console.log("bill data",billingAddresses)
           selectedCity={selectedCity}
           selectedStates={selectedStates}
           city={city}
+          selectedMultiLangData={selectedMultiLangData}
         />
       ) : null}
 
@@ -294,6 +289,7 @@ console.log("bill data",billingAddresses)
           setSelectedCity={setSelectedCity}
           selectedCity={selectedCity}
           city={city}
+          selectedMultiLangData={selectedMultiLangData}
         />
       ) : null}
     </>

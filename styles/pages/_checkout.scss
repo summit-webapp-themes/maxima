@@ -166,7 +166,13 @@
         border-color: $body-color;
     }
 }
-
+.standard-btn{
+    background-color: #0071DC !important;
+    color: $white-color !important;
+}
+.btn-fancy{
+    border-radius:9px !important;
+}
 .order-table {
     tr {
         border-bottom: 1px solid $border-color;

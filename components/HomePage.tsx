@@ -53,12 +53,6 @@ const HomePage = () => {
           {renderSectionComponent(index)}
         </React.Fragment>
       ))}
-
-      {/* <NewArrivals newarrivalTagListing={newArrivalTagListingOfProducts} />
-      <HomeTopCategoriesBanner homeTopCategories={homeTopCategories} />
-      <SpecialOffer specialTagListing={specialOfferTagListingOfProducts} />
-      <HomeTopBrands />
-      <BestSeller bestSellerListing={bestSellerTagListingOfProducts} /> */}
     </>
   );
 };
