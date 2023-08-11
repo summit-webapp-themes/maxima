@@ -2,10 +2,11 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ShippingValidation } from "../../../validation/addressFormValidation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchShippingAddress } from "../../../store/slices/checkoutPage-slice/customer-shipping-address-slice";
 import { fetchBillingAddress } from "../../../store/slices/checkoutPage-slice/customer-billing-address-slice";
 import { storeCustomerAddresses } from "../../../store/slices/checkoutPage-slice/store-customer-address-slice";
+import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 
 const AddNewAddressForm = ({
   show,
@@ -21,6 +22,7 @@ const AddNewAddressForm = ({
   selectedMultiLangData,
 }: any) => {
   const dispatch = useDispatch();
+  const TokenFromStore: any = useSelector(get_access_token);
 
   const initialValues = {
     name: "",
@@ -50,10 +52,14 @@ const AddNewAddressForm = ({
             validationSchema={ShippingValidation}
             onSubmit={(values: any, action: any) => {
               console.log("form shipping/billing address form values", values);
-              dispatch(storeCustomerAddresses({ ...values }));
+              const requestParams = {
+                value: { ...values },
+                token: TokenFromStore?.token,
+              };
+              dispatch(storeCustomerAddresses(requestParams));
               setTimeout(() => {
-                dispatch(fetchShippingAddress());
-                dispatch(fetchBillingAddress());
+                dispatch(fetchShippingAddress(TokenFromStore?.token));
+                dispatch(fetchBillingAddress(TokenFromStore?.token));
               }, 1800);
               action.resetForm();
               toHide();
@@ -323,7 +329,7 @@ const AddNewAddressForm = ({
                         <div className="text-center ">
                           <button
                             type="submit"
-                            className="btn btn-warning mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
+                            className="btn mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
                             disabled={isSubmitting}
                           >
                             {selectedMultiLangData?.save_address}

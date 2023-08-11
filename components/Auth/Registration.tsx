@@ -16,11 +16,13 @@ import {
   FetchStateForAddressForm,
 } from "../../services/api/general_apis/customer-form-data-api";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { get_access_token } from "../../store/slices/auth/token-login-slice";
 
 const Registration = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const Register_state = useSelector(registration_state);
+  const TokenFromStore: any = useSelector(get_access_token);
 
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
@@ -43,7 +45,7 @@ const Registration = () => {
 
   useEffect(() => {
     const getStateData = async () => {
-      const stateData = await FetchStateForAddressForm();
+      const stateData = await FetchStateForAddressForm(TokenFromStore?.token);
       if (stateData?.length > 0) {
         let stateValues = stateData
           .map((item: any) => item?.name)
@@ -58,7 +60,10 @@ const Registration = () => {
   const handleSelectedState = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue);
+    const getCitiesFromState = await FetchCitiesForAddressForm(
+      stateValue,
+      TokenFromStore?.token
+    );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
       let citiesValues = getCitiesFromState

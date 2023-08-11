@@ -99,7 +99,7 @@ const ProductDetail = ({
         currency_state_from_redux?.selected_currency_value,
         TokenFromStore?.token
       );
-      if (AddToCartRes?.data?.message.msg === "success") {
+      if (AddToCartRes?.data?.message?.msg === "success") {
         dispatch(successmsg("Item Added to cart"));
         dispatch(fetchCartListing(TokenFromStore?.token));
         setTimeout(() => {

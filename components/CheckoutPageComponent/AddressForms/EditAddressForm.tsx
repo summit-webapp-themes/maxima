@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ShippingValidation } from "../../../validation/addressFormValidation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchBillingAddress } from "../../../store/slices/checkoutPage-slice/customer-billing-address-slice";
 import { fetchShippingAddress } from "../../../store/slices/checkoutPage-slice/customer-shipping-address-slice";
 import { storeCustomerAddresses } from "../../../store/slices/checkoutPage-slice/store-customer-address-slice";
 import { fetchprofileDataThunk } from "../../../store/slices/general_slices/profile-page-slice";
+import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 
 const EditAddressForm = ({
   show,
@@ -23,6 +24,8 @@ const EditAddressForm = ({
   selectedMultiLangData,
 }: any) => {
   const dispatch = useDispatch();
+  const TokenFromStore: any = useSelector(get_access_token);
+
   let [selectedStates, setSelectedStates] = useState(detailData?.state);
 
   console.log("address_type", address_type);
@@ -56,11 +59,15 @@ const EditAddressForm = ({
             validationSchema={ShippingValidation}
             onSubmit={(values: any, action: any) => {
               console.log("form shipping/billing address form values", values);
-              dispatch(storeCustomerAddresses({ ...values }));
+              const requestParams = {
+                value: { ...values },
+                token: TokenFromStore?.token,
+              };
+              dispatch(storeCustomerAddresses(requestParams));
               setTimeout(() => {
-                dispatch(fetchShippingAddress());
-                dispatch(fetchBillingAddress());
-                dispatch(fetchprofileDataThunk());
+                dispatch(fetchShippingAddress(TokenFromStore?.token));
+                dispatch(fetchBillingAddress(TokenFromStore?.token));
+                dispatch(fetchprofileDataThunk(TokenFromStore?.token));
               }, 1000);
               action.resetForm();
               toHide();
@@ -334,7 +341,7 @@ const EditAddressForm = ({
                         <div className="text-center ">
                           <button
                             type="submit"
-                            className="btn btn-warning mt-3 px-2 py-3 text-uppercase rounded-0 button_color"
+                            className="btn mt-3 px-2 py-3 text-uppercase rounded-0 button_color"
                             disabled={isSubmitting}
                           >
                             {selectedMultiLangData?.save_address}

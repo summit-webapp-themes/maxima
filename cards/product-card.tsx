@@ -3,7 +3,8 @@ import Link from "next/link";
 import { CONSTANTS } from "../services/config/app-config";
 import { ProductCardProps } from "../interfaces/product-card-interface";
 import { fetchWishlistUser } from "../store/slices/wishlist-slice/wishlist-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
 
 const ProductCard = (props: ProductCardProps) => {
   const {
@@ -26,6 +27,7 @@ const ProductCard = (props: ProductCardProps) => {
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
+  const TokenFromStore: any = useSelector(get_access_token);
 
   const dispatch = useDispatch();
   let isLoggedIn: any;
@@ -61,11 +63,13 @@ const ProductCard = (props: ProductCardProps) => {
                       getWishlist: false,
                       deleteWishlist: false,
                       addTowishlist: true,
+                      token: TokenFromStore?.token,
                     };
                     requestList = {
                       getWishlist: true,
                       deleteWishlist: false,
                       addTowishlist: false,
+                      token: TokenFromStore?.token,
                     };
                     dispatch(fetchWishlistUser(requestNew));
 
@@ -103,11 +107,13 @@ const ProductCard = (props: ProductCardProps) => {
                   getWishlist: false,
                   deleteWishlist: true,
                   addTowishlist: false,
+                  token: TokenFromStore?.token,
                 };
                 requestList = {
                   getWishlist: true,
                   deleteWishlist: false,
                   addTowishlist: false,
+                  token: TokenFromStore?.token,
                 };
                 dispatch(fetchWishlistUser(requestNew));
 
@@ -178,7 +184,6 @@ const ProductCard = (props: ProductCardProps) => {
         </div>
       </div>
     </div>
-    
   );
 };
 

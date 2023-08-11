@@ -282,7 +282,7 @@ const WebNavbar = ({
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown">
-                        <Link href="profile" className="text-dark">
+                        <Link href="/profile" className="text-dark">
                           {selectedMultiLangData?.my_account}
                         </Link>
                       </Dropdown.Item>

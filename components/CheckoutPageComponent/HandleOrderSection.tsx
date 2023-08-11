@@ -1,6 +1,7 @@
 import React from "react";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import { CONSTANTS } from "../../services/config/app-config";
+import useProfilePage from "../../hooks/GeneralHooks/ProfileHooks/ProfileHooks";
 
 const HandleOrderSection = (props: any) => {
   const {
@@ -20,10 +21,11 @@ const HandleOrderSection = (props: any) => {
   } = props;
 
   let isDealer = JSON.parse(localStorage.getItem("isDealer") as any);
+  const { profileList }: any = useProfilePage();
 
   return (
     <div>
-      {(!isDealer ||
+      {/* {(!isDealer ||
         (isDealer === true && !CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER)) && (
         <div>
           <button
@@ -36,7 +38,7 @@ const HandleOrderSection = (props: any) => {
             {selectedMultiLangData?.place_order}
           </button>
         </div>
-      )}
+      )} */}
 
       <div className="shadow-sm card">
         <div className="card-body py-0 px-1">
@@ -164,6 +166,11 @@ const HandleOrderSection = (props: any) => {
                         >
                           {selectedMultiLangData?.use_store_credit}
                         </button>
+                        <span>
+                          Total store credit assigned :{" "}
+                          {profileList &&
+                            profileList?.store_credit_details?.balance}
+                        </span>
                       </div>
                     </div>
                   </div>
