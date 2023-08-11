@@ -247,7 +247,7 @@ const WebNavbar = ({
               </div>
               <div className={`custom_dropdown`}>
                 <Dropdown>
-                  {isLoggedIn ==="true" ? (
+                  {isLoggedIn === "true" ? (
                     <Dropdown.Toggle
                       id="dropdown-basic"
                       className="dropdown-icon dropdown_active_icon"

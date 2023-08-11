@@ -66,7 +66,7 @@ const WebFilters = (props: FiltersViewProps) => {
           <div className="accordion accordion_custom" id="myAccordion">
             {loading ? (
               <div className="row justify-content-center">
-                {[...Array(10)].map(() => (
+                {[...Array(2)].map(() => (
                   <>
                     <div className="col-lg-12 mx-3">
                       <FiltersLoadingLayout />
