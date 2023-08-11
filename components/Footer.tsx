@@ -12,7 +12,7 @@ import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/
 const Footer = () => {
   const dispatch = useDispatch();
   const navbarData: any = [];
-  const [subScription, setSubscriptions] = useState();
+  const [subScription, setSubscriptions] = useState<any>();
   const handleSubscription = async (event: any) => {
     event?.preventDefault();
     console.log(subScription, "subScription");
@@ -27,7 +27,7 @@ const Footer = () => {
     }
   };
   console.log("nav footer", navbarData);
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   console.log("SelectedLangDataFromStore", SelectedLangDataFromStore);

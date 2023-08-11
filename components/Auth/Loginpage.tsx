@@ -21,9 +21,9 @@ import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slic
 
 const Loginpage = () => {
   const dispatch = useDispatch();
-  const loginSucess = useSelector(login_state);
+  const loginSucess: any = useSelector(login_state);
   const [newState, setNewState] = useState<any>([]);
-  const [loginStatus, setLoginStatus] = useState("");
+  const [loginStatus, setLoginStatus] = useState<any>("");
   const [newValues, setnewValue] = useState<any>("");
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore

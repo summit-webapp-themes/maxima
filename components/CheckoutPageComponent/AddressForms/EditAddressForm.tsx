@@ -26,7 +26,7 @@ const EditAddressForm = ({
   const dispatch = useDispatch();
   const TokenFromStore: any = useSelector(get_access_token);
 
-  let [selectedStates, setSelectedStates] = useState(detailData?.state);
+  let [selectedStates, setSelectedStates] = useState<any>(detailData?.state);
 
   console.log("address_type", address_type);
   const initialValues = {

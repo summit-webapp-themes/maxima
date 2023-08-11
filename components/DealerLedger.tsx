@@ -3,11 +3,12 @@ import UseDealerLedgerHook from "../hooks/DealerLedgerHooks/dealer-ledger-hook";
 import DealerAccounting from "./DealerAccounting";
 
 const DealerLedger = () => {
-  const leger = UseDealerLedgerHook();
+  const { dealerLedgerSummary }: any = UseDealerLedgerHook();
+  console.log("DealerLedgerSummary in tsx", dealerLedgerSummary);
   return (
     <>
       <div className="container">
-        <DealerAccounting />
+        <DealerAccounting dealerLedgerSummary={dealerLedgerSummary} />
 
         <div className="row text-center my-5">
           <div className="col-lg-2">

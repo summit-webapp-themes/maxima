@@ -55,32 +55,33 @@ const WebCheckout = ({
 }: CheckoutPageInterface) => {
   const TokenFromStore: any = useSelector(get_access_token);
   const [visitorState, setVisitorState] = useState<any>(null);
-  let [selectedCity, setSelectedCity] = useState("");
-  let [state, setState] = useState([]);
+  let [selectedCity, setSelectedCity] = useState<any>("");
+  let [state, setState] = useState<any>([]);
   let [city, setCity] = useState<any>([]);
-  const [err, setErr] = useState(false);
-  let [selectedStates, setSelectedStates] = useState("");
-  const [shippingCheck, setShippingCheck] = useState(true);
+  const [err, setErr] = useState<boolean>(false);
+  let [selectedStates, setSelectedStates] = useState<any>("");
+  const [shippingCheck, setShippingCheck] = useState<boolean>(true);
   const [checkIsDealer, setCheckIsDealer] = useState<any>("");
 
   let isDealer: any = useRef("");
   useEffect(() => {
     if (typeof window !== "undefined") {
       const visitor_login: any = localStorage.getItem("isLoggedIn");
-      if(localStorage.getItem('isDealer') === 'true')
-      {
+      if (localStorage.getItem("isDealer") === "true") {
         setCheckIsDealer(true);
       }
-        
+
       setVisitorState(visitor_login);
     }
   }, []);
 
   useEffect(() => {
-    const getStateData = async () => {
-      const stateData = await FetchStateForAddressForm(TokenFromStore?.token);
+    const getStateData: any = async () => {
+      const stateData: any = await FetchStateForAddressForm(
+        TokenFromStore?.token
+      );
       if (stateData?.length > 0) {
-        let stateValues = stateData
+        let stateValues: any = stateData
           .map((item: any) => item?.name)
           .filter((item: any) => item !== null);
         setState(stateValues);
@@ -90,13 +91,16 @@ const WebCheckout = ({
     };
     getStateData();
   }, []);
-  const handleSelectedState = async (stateValue: string) => {
+  const handleSelectedState: any = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue, TokenFromStore?.token);
+    const getCitiesFromState: any = await FetchCitiesForAddressForm(
+      stateValue,
+      TokenFromStore?.token
+    );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
-      let citiesValues = getCitiesFromState
+      let citiesValues: any = getCitiesFromState
         .map((item: any) => item.name)
         .filter((item: any) => item !== null);
 
@@ -159,35 +163,34 @@ const WebCheckout = ({
                       />
                     </div>
                   </div>
-                  {(
-                    CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER )&& (
-                      <>
-                        <div className="col-lg-7">
-                          <ShippingMethod
-                            transporterlist={transporterlist}
-                            transporterState={transporterState}
-                            transportHandle={transportHandle}
-                            selectedVal={selectedVal}
-                            selectedState={selectedState}
-                            queryHandle={queryHandle}
-                            locationHandle={locationHandle}
-                            transportCharges={transportCharges}
-                            locationState={locationState}
-                            textState={textState}
-                            transportersCharges={transportersCharges}
-                            selectedMultiLangData={selectedMultiLangData}
-                          />
-                        </div>
-                        <div className="col-lg-10">
-                          <FinalReviewSection
-                            orderSummary={orderSummary}
-                            handlePlaceOrder={handlePlaceOrder}
-                            deleteCoupon={deleteCoupon}
-                            selectedMultiLangData={selectedMultiLangData}
-                          />
-                        </div>
-                      </>
-                    )}
+                  {CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER && (
+                    <>
+                      <div className="col-lg-7">
+                        <ShippingMethod
+                          transporterlist={transporterlist}
+                          transporterState={transporterState}
+                          transportHandle={transportHandle}
+                          selectedVal={selectedVal}
+                          selectedState={selectedState}
+                          queryHandle={queryHandle}
+                          locationHandle={locationHandle}
+                          transportCharges={transportCharges}
+                          locationState={locationState}
+                          textState={textState}
+                          transportersCharges={transportersCharges}
+                          selectedMultiLangData={selectedMultiLangData}
+                        />
+                      </div>
+                      <div className="col-lg-10">
+                        <FinalReviewSection
+                          orderSummary={orderSummary}
+                          handlePlaceOrder={handlePlaceOrder}
+                          deleteCoupon={deleteCoupon}
+                          selectedMultiLangData={selectedMultiLangData}
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="col-lg-4">

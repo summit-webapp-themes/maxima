@@ -22,12 +22,12 @@ const QuickOrder = () => {
     handleAddToCartQuickOrder,
     handleClearReduxStore,
     token_value,
-    selected_currency
+    selected_currency,
   } = useQuickOrder();
   console.log("enter part", partNumbersData);
   const router = useRouter();
-  const [ItemCodename, setItemCodename] = useState();
-  const [ItemCodeMinQty, setItemCodeMinQty] = useState();
+  const [ItemCodename, setItemCodename] = useState<any>();
+  const [ItemCodeMinQty, setItemCodeMinQty] = useState<any>();
 
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
@@ -41,7 +41,7 @@ const QuickOrder = () => {
     }
   }, [SelectedLangDataFromStore]);
 
-  const handleInputChange = (e: any, index: any) => {
+  const handleInputChange: any = (e: any, index: any) => {
     const { value } = e.target;
     console.log("enter min val", value);
 
@@ -56,14 +56,14 @@ const QuickOrder = () => {
     });
   };
 
-  let handleRemove = (item: any) => {
+  let handleRemove: any = (item: any) => {
     console.log("enter name", item);
     const data = partNumbersData.filter(
       (element: any, i: any) => element.name !== item.name
     );
     setPartNumbersData(data);
   };
-  const handleAddCart = async () => {
+  const handleAddCart: any = async () => {
     const addCartData: any = [];
     partNumbersData
       ?.filter(
@@ -80,13 +80,13 @@ const QuickOrder = () => {
         });
       });
     console.log(ItemCodename, "mmmm");
-    await AddToCartApi(addCartData, selected_currency,token_value);
+    await AddToCartApi(addCartData, selected_currency, token_value);
     // dispatch(dealerAddCartApi(addCartData));
     handleClearReduxStore();
 
     router.push("/cart");
   };
-  const showMinQty = (wholeProductData: any) => {
+  const showMinQty: any = (wholeProductData: any) => {
     const productData = minQty.find(
       (val: any) => val.item_code === wholeProductData.name
     );
@@ -126,15 +126,25 @@ const QuickOrder = () => {
                 <button
                   type="button"
                   className="w-50 mb-3 text-uppercase py-2 px-1 me-3"
-                  style={{border:'1px solid #0071DC',borderRadius:"7px",backgroundColor:"#0071DC", color:"#fff"}}
+                  style={{
+                    border: "1px solid #0071DC",
+                    borderRadius: "7px",
+                    backgroundColor: "#0071DC",
+                    color: "#fff",
+                  }}
                   onClick={handleClearReduxStore}
-                  >
+                >
                   {selectedMultiLangData?.reset_form}
                 </button>
                 <button
                   type="button"
                   className="w-50 text-white mb-3 text-uppercase py-2 px-1 standard_btn me-3"
-                  style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#0071DC", color:"#fff"}}
+                  style={{
+                    border: "1px solid #0071DC",
+                    borderRadius: "7px",
+                    backgroundColor: "#0071DC",
+                    color: "#fff",
+                  }}
                   onClick={handleAddCart}
                 >
                   {selectedMultiLangData?.add_to_cart}

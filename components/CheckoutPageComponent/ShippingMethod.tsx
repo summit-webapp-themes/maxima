@@ -15,10 +15,10 @@ const ShippingMethod = ({
   selectedMultiLangData,
 }: any) => {
   const [radioVal, setRadioVal] = useState<any>(false);
-  const handleCheck = () => {
+  const handleCheck: any = () => {
     setRadioVal(true);
   };
-  const handleChecknew = () => {
+  const handleChecknew: any = () => {
     setRadioVal(false);
   };
 

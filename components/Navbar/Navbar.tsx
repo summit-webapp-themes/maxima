@@ -14,11 +14,11 @@ const Navbar = () => {
     handleCurrencyValueChange,
     selectedCurrencyValue,
   } = useNavbar();
-  const { searchValue, setSearchValue, handleSearch, handleKeyDown } =
+  const { searchValue, setSearchValue, handleSearch, handleKeyDown }: any =
     useSearchHook();
-  const { handleLanguageChange, multiLanguagesData } = useMultilangHook();
+  const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
 
-  const [clicks, setClicks] = useState(false);
+  const [clicks, setClicks] = useState<boolean>(false);
 
   const navMenuclick = (e: any) => {
     console.log("clickk");

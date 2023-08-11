@@ -7,10 +7,7 @@ import { useRouter } from "next/router";
 import { RegistrationValidation } from "../../validation/registrationValidation";
 import Image from "next/image";
 import { register_details } from "../dataSets/registrationDataset";
-import {
-  getRegistrationData,
-  registration_state,
-} from "../../store/slices/auth/registration_slice";
+import { getRegistrationData } from "../../store/slices/auth/registration_slice";
 import {
   FetchCitiesForAddressForm,
   FetchStateForAddressForm,
@@ -21,7 +18,6 @@ import { get_access_token } from "../../store/slices/auth/token-login-slice";
 const Registration = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const Register_state = useSelector(registration_state);
   const TokenFromStore: any = useSelector(get_access_token);
 
   const SelectedLangDataFromStore: any = useSelector(
@@ -36,18 +32,20 @@ const Registration = () => {
     }
   }, [SelectedLangDataFromStore]);
   console.log("register details", register_details);
-  let [selectedCity, setSelectedCity] = useState("");
-  let [selectedStates, setSelectedStates] = useState("");
+  let [selectedCity, setSelectedCity] = useState<any>("");
+  let [selectedStates, setSelectedStates] = useState<any>("");
 
   let [city, setCity] = useState<any>([]);
-  const [err, setErr] = useState(false);
-  let [state, setState] = useState([]);
+  const [err, setErr] = useState<boolean>(false);
+  let [state, setState] = useState<any>([]);
 
   useEffect(() => {
-    const getStateData = async () => {
-      const stateData = await FetchStateForAddressForm(TokenFromStore?.token);
+    const getStateData: any = async () => {
+      const stateData: any = await FetchStateForAddressForm(
+        TokenFromStore?.token
+      );
       if (stateData?.length > 0) {
-        let stateValues = stateData
+        let stateValues: any = stateData
           .map((item: any) => item?.name)
           .filter((item: any) => item !== null);
         setState(stateValues);
@@ -57,16 +55,16 @@ const Registration = () => {
     };
     getStateData();
   }, []);
-  const handleSelectedState = async (stateValue: string) => {
+  const handleSelectedState: any = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(
+    const getCitiesFromState: any = await FetchCitiesForAddressForm(
       stateValue,
       TokenFromStore?.token
     );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
-      let citiesValues = getCitiesFromState
+      let citiesValues: any = getCitiesFromState
         .map((item: any) => item.name)
         .filter((item: any) => item !== null);
 
@@ -75,13 +73,13 @@ const Registration = () => {
     }
   };
 
-  const handlesubmit = (values: any, action: any) => {
+  const handlesubmit: any = (values: any, action: any) => {
     console.log("form values", values);
     dispatch(getRegistrationData(values));
     action.resetForm();
   };
 
-  const HandleRegistrationForm = (details: any) => {
+  const HandleRegistrationForm: any = (details: any) => {
     if (details.label === "Name") {
       return selectedMultiLangData?.name;
     } else if (details.label === "Email") {

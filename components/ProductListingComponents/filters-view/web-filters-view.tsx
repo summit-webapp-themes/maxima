@@ -16,13 +16,14 @@ const WebFilters = (props: FiltersViewProps) => {
     selectedMultiLangData,
   } = props;
 
-  const [filterLang, setFilterLang] = useState("");
+  const [filterLang, setFilterLang] = useState<any>("");
 
-  const languageData = useMultiLingual();
+  const languageData: any = useMultiLingual();
 
-  const [showMissingPartsModal, setShowMissingPartsModal] = useState(false);
+  const [showMissingPartsModal, setShowMissingPartsModal] =
+    useState<any>(false);
 
-  const handleMissingPartsModalClose = () => {
+  const handleMissingPartsModalClose: any = () => {
     setShowMissingPartsModal(false);
   };
   useEffect(() => {

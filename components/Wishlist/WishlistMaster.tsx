@@ -32,18 +32,19 @@ const WishlistMaster = () => {
   const dispatch = useDispatch();
   let requestNew: any;
   let requestList: any;
-  const { wishlistData, wishlistCount, Loadings } = useWishlist();
+  const { wishlistData, wishlistCount, Loadings }: any = useWishlist();
   console.log("wishlist response in render file", wishlistData);
 
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   const TokenFromStore: any = useSelector(get_access_token);
-  const [showToast, setshowToast] = useState(false);
+  const [showToast, setshowToast] = useState<boolean>(false);
   const [productCounts, setProductCounts] = useState<any>({});
-  const [alertMinQty, setAlertMinQty] = useState(false);
-  const [showAvailabilityModal, setshowAvailabilityModal] = useState(false);
-  const router = useRouter();
+  const [alertMinQty, setAlertMinQty] = useState<boolean>(false);
+  const [showAvailabilityModal, setshowAvailabilityModal] =
+    useState<boolean>(false);
+  const router: any = useRouter();
 
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
@@ -55,8 +56,12 @@ const WishlistMaster = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
-  const handleQuantityChange = (event: any, productId: any, min_qty: any) => {
-    const inputCount = parseInt(event);
+  const handleQuantityChange: any = (
+    event: any,
+    productId: any,
+    min_qty: any
+  ) => {
+    const inputCount: any = parseInt(event);
     console.log(inputCount, "inputCount");
     if (!isNaN(inputCount) && inputCount >= 0 && inputCount <= 99999) {
       setProductCounts({
@@ -66,8 +71,8 @@ const WishlistMaster = () => {
     }
   };
 
-  const incrementCount = (productId: any, min_qty: any) => {
-    const currentCount = parseInt(productCounts[productId], 10);
+  const incrementCount: any = (productId: any, min_qty: any) => {
+    const currentCount: any = parseInt(productCounts[productId], 10);
     if (productCounts[productId] === undefined) {
       if (min_qty > 0) {
         setProductCounts({
@@ -89,7 +94,7 @@ const WishlistMaster = () => {
     }
   };
 
-  const decrementCount = (productId: any, min_qty: any) => {
+  const decrementCount: any = (productId: any, min_qty: any) => {
     console.log("minqty", productId, min_qty);
     if (productCounts[productId] > min_qty) {
       setProductCounts({
@@ -103,11 +108,11 @@ const WishlistMaster = () => {
     }
   };
 
-  const myLoader = ({ src, width, quality }: any) => {
+  const myLoader: any = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
 
-  const handleAddCart = async (
+  const handleAddCart: any = async (
     id: any,
     in_stock_status: any,
     productCountsQty: any,
@@ -118,7 +123,7 @@ const WishlistMaster = () => {
 
     // if (min_qty <= productCountsQty) {
     console.log("add cart success productCountqty");
-    const addCartData = [];
+    const addCartData: any = [];
     if (productCountsQty === undefined && min_qty > 0) {
       addCartData.push({
         item_code: id,
@@ -176,17 +181,17 @@ const WishlistMaster = () => {
     }
   };
 
-  const handleStockModel = (id: any, min_qty: any, productQty: any) => {
+  const handleStockModel: any = (id: any, min_qty: any, productQty: any) => {
     if (typeof productQty === "undefined") {
       console.log("dispatch min ");
-      const stockAvailable = {
+      const stockAvailable: any = {
         item_code: id,
         qty: min_qty,
       };
       setshowAvailabilityModal(false);
       dispatch(fetchStockAvailability(stockAvailable));
     } else if (productQty >= min_qty) {
-      const stockAvailable = {
+      const stockAvailable: any = {
         item_code: id,
         qty: productQty,
       };
@@ -197,7 +202,7 @@ const WishlistMaster = () => {
     }
   };
 
-  const handleFutureStockAvailability = (doesFutureStockExists: any) => {
+  const handleFutureStockAvailability: any = (doesFutureStockExists: any) => {
     if (doesFutureStockExists?.length > 0) {
       return (
         <>
@@ -238,7 +243,7 @@ const WishlistMaster = () => {
     }
   };
 
-  const handleRenderingOfImages = (items: any) => {
+  const handleRenderingOfImages: any = (items: any) => {
     console.log("items img", items);
     if (items?.image_url !== null) {
       return (

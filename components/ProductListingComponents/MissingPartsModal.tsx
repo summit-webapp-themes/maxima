@@ -13,11 +13,11 @@ const MissingPartsModal = ({
   const [descriptionVal, setdescriptionval] = useState<any>("");
   const TokenFromStore: any = useSelector(get_access_token);
 
-  const [showToast, setshowToast] = useState(false);
-  const [messageNew, setmessageNew] = useState("");
+  const [showToast, setshowToast] = useState<boolean>(false);
+  const [messageNew, setmessageNew] = useState<any>("");
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: any = async (e: any) => {
     e.preventDefault();
     if (descriptionVal !== "") {
       const missingPartsApiRes = await MissingPartsAPI(

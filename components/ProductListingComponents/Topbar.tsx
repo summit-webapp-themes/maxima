@@ -5,9 +5,10 @@ const Topbar = (props: any) => {
   const { listItems, handleToggleProductsListingView, selectedMultiLangData } =
     props;
 
-  const [showMissingPartsModal, setShowMissingPartsModal] = useState(false);
+  const [showMissingPartsModal, setShowMissingPartsModal] =
+    useState<any>(false);
 
-  const handleMissingPartsModalClose = () => {
+  const handleMissingPartsModalClose: any = () => {
     setShowMissingPartsModal(false);
   };
   return (

@@ -24,22 +24,22 @@ const VisitorAddress = ({
 }: any) => {
   const dispatch = useDispatch();
 
-  let [selectedCity, setSelectedCity] = useState("");
+  let [selectedCity, setSelectedCity] = useState<any>("");
   const TokenFromStore: any = useSelector(get_access_token);
 
   let [city, setCity] = useState<any>([]);
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState<boolean>(false);
 
-  const handleSelectedState = async (stateValue: string) => {
+  const handleSelectedState: any = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(
+    const getCitiesFromState: any = await FetchCitiesForAddressForm(
       stateValue,
       TokenFromStore?.token
     );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
-      let citiesValues = getCitiesFromState
+      let citiesValues: any = getCitiesFromState
         ?.map((item: any) => item?.name)
         .filter((item: any) => item !== null);
 

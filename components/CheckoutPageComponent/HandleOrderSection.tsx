@@ -20,7 +20,7 @@ const HandleOrderSection = (props: any) => {
     selectedMultiLangData,
   } = props;
 
-  let isDealer = JSON.parse(localStorage.getItem("isDealer") as any);
+  let isDealer: any = JSON.parse(localStorage.getItem("isDealer") as any);
   const { profileList }: any = useProfilePage();
 
   return (
