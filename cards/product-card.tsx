@@ -5,6 +5,19 @@ import { ProductCardProps } from "../interfaces/product-card-interface";
 import { fetchWishlistUser } from "../store/slices/wishlist-slice/wishlist-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
+import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
+import {
+  failmsg,
+  hideToast,
+  successmsg,
+} from "../store/slices/general_slices/toast_notification_slice";
+import { fetchCartListing } from "../store/slices/cart-listing-page-slice/cart-listing-slice";
+import deleteCatalog from "../services/api/product-catalog-api/delete-catalog-api";
+import { useRouter } from "next/router";
+import deleteItemFromCatalog from "../services/api/product-catalog-api/delete-item-from-catalog-api";
+import { ProductListingThunk } from "../store/slices/product-listing-page-slices/product-listing-slice";
+import { filters_selector_state } from "../store/slices/product-listing-page-slices/filters-slice";
+import CatalogModal from "../components/Catalog/CatalogModal";
 
 const ProductCard = (props: ProductCardProps) => {
   const {
@@ -39,9 +52,8 @@ const ProductCard = (props: ProductCardProps) => {
     <div key={key} className="border p-3 rounded-3 h-100 ">
       <div className="d-flex justify-content-between mb-1">
         <div
-          className={`badge text-bg-primary fs-5 display_tag_badge ${
-            display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
-          }`}
+          className={`badge text-bg-primary fs-5 display_tag_badge ${display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
+            }`}
         >
           {display_tag.length > 0 && display_tag[0]}
         </div>

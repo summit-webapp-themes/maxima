@@ -23,7 +23,6 @@ const CartCard = ({
   selectedMultiLangData,
   arrayofSelectedItems,
   updateCart,
-  HandleDeleteCart,
   cartListingItems,
 }: any) => {
   console.log("cart orders card data", orders);
@@ -74,7 +73,7 @@ const CartCard = ({
               <button
                 className="astext"
                 onClick={() =>
-                  HandleDeleteCart(orders.item_code, cartListingItems.name)
+                  HandleDeleteCart(orders.item_code)
                 }
               >
                 <Link href="" className="text-primary">
@@ -208,7 +207,7 @@ const CartCard = ({
             <button
               type="button"
               className="text-start astext"
-              // onClick={() => UpdateCart(orders.item_code)}
+            // onClick={() => UpdateCart(orders.item_code)}
             >
               <Link href="" legacyBehavior>
                 <a className="text-primary">{selectedMultiLangData?.update}</a>
