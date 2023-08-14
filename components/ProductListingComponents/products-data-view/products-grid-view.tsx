@@ -14,7 +14,6 @@ const ProductsGridView = (props: ProductsViewProps) => {
     handleLoadMore,
     wishlistData,
     currency_state_from_redux,
-    query,
     selectedMultiLangData,
   } = props;
 
@@ -56,7 +55,6 @@ const ProductsGridView = (props: ProductsViewProps) => {
                 star_rating={items?.rating}
                 wishlistData={wishlistData}
                 currency_state_from_redux={currency_state_from_redux}
-                query={query}
                 selectedMultiLangData={selectedMultiLangData}
               />
             </div>

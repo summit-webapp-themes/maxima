@@ -24,7 +24,6 @@ const ProductListingMaster = () => {
     handleToggleProductsListingView,
     handleLoadMore,
     currency_state_from_redux,
-    query
   } = useProductListing();
   console.log("cube ", productListingData);
   const { wishlistData }: any = useWishlist();
@@ -72,7 +71,6 @@ const ProductListingMaster = () => {
             productListTotalCount={productListTotalCount}
             handleLoadMore={handleLoadMore}
             wishlistData={wishlistData}
-            query={query}
             selectedMultiLangData={selectedMultiLangData}
           />
         );
