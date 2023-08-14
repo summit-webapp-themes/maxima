@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import UseDealerLedgerHook from "../../hooks/DealerLedgerHooks/dealer-ledger-hook";
+import UseDealerLedgerHook from "../hooks/DealerLedgerHooks/dealer-ledger-hook";
 import DealerAccounting from "./DealerAccounting";
 import { useDispatch, useSelector } from "react-redux";
-import { dealerLedgerStore, fetchDealerLedger } from "../../store/slices/dealer-ledger-slice/dealer-ledger-slice";
-import { get_access_token } from "../../store/slices/auth/token-login-slice";
+import { dealerLedgerStore, fetchDealerLedger } from "../store/slices/dealer-ledger-slice/dealer-ledger-slice";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
 import DealerLedgerTable from "./DealerLedgerTable";
 
 const DealerLedger = () => {
