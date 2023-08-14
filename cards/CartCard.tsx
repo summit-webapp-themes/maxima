@@ -92,7 +92,7 @@ const CartCard = ({
               <button
                 className="astext"
                 onClick={() =>
-                  HandleDeleteCart(orders.item_code)
+                  HandleDeleteCart(orders?.item_code)
                 }
               >
                 <Link href="" className="text-primary">
@@ -164,7 +164,7 @@ const CartCard = ({
             <p className="my-0">
               <button
                 className="astext"
-                onClick={() => HandleDeleteCart(orders.item_code)}
+                onClick={() => HandleDeleteCart(orders?.item_code)}
               >
                 <Link href="" className="text-primary">
                   {selectedMultiLangData?.delete}
