@@ -134,88 +134,6 @@ const WebNavbar = ({
               </button>
             </div>
 
-            {/* <div className="resp-dropdown header-right mr-2 ">
-              {LoggedIn === true && (
-                <>
-                  <div className="dropdown cart-dropdown cart-offcanvas text-white">
-                    <Link href="/profile" legacyBehavior>
-                      <a className=" cart-toggle label-down link">
-                        <i className="w-icon-account"></i>
-                        <span className="wishlist-label d-lg-show">
-                          My Account
-                        </span>
-                      </a>
-                    </Link>
-                  </div>
-                  <div className="dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 ml-lg-3">
-                    <Link href="/myOrder" legacyBehavior>
-                      <a className=" cart-toggle label-down link">
-                        <i
-                          className="fa fa-check-circle-o"
-                          aria-hidden="true"
-                        ></i>
-                        <span className="wishlist-label d-lg-show">
-                          My Orders
-                        </span>
-                      </a>
-                    </Link>
-                  </div>
-                </>
-              )}
-
-              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3">
-                <Link href="/wishlist" legacyBehavior>
-                  <a className=" cart-toggle label-down link">
-                    <i className="w-icon-heart">
-                      <span className="cart-count text-white">
-                        {wishlistCount || 0}
-                      </span>
-                    </i>
-                    <span className="wishlist-label d-lg-show">Wishlist</span>
-                  </a>
-                </Link>
-              </div>
-              <div className="dropdown cart-dropdown cart-offcanvas text-white mx-lg-4">
-                <Link href="/cart" legacyBehavior>
-                  <a className="cart-toggle label-down link">
-                    <i className="w-icon-cart">
-                      <span className="cart-count text-white">
-                        {cartCount || 0}
-                      </span>
-                    </i>
-                    <span className="cart-label">Cart</span>
-                  </a>
-                </Link>
-              </div>
-              {LoggedIn === true ? (
-                <>
-                  <div className="dropdown cart-dropdown cart-offcanvas text-white ml-lg-2">
-                    <Link href="" legacyBehavior>
-                      <a
-                        className="cart-toggle label-down link"
-                        onClick={handleClick}
-                      >
-                        <i className="fa fa-sign-out" aria-hidden="true"></i>
-                        <span className="cart-label">LogOut</span>
-                      </a>
-                    </Link>
-                  </div>
-                </>
-              ) : (
-                <div
-                  className="dropdown cart-dropdown cart-offcanvas text-white ml-0 ml-lg-2"
-                  style={{ marginRight: "30px" }}
-                >
-                  <Link href="/login" legacyBehavior>
-                    <a className="cart-toggle label-down link">
-                      <i className="w-icon-account"></i>
-                      <span className="cart-label">Login</span>
-                    </a>
-                  </Link>
-                </div> 
-              )}
-            </div> */}
-
             <div className="navbar-left-icon1">
               <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 ">
                 <Link href="/wishlist" legacyBehavior>
@@ -281,17 +199,15 @@ const WebNavbar = ({
                           {selectedMultiLangData?.quick_order}
                         </Link>
                       </Dropdown.Item>
-                     // <Dropdown.Item className="nav_dropdown">
-                      //  <Link href="/profile" className="text-dark">
 
                       <Dropdown.Item className="nav_dropdown dropdown-link">
-                        <Link href="profile" className="text-dark">
+                        <Link href="/profile" className="text-dark">
                           {selectedMultiLangData?.my_account}
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown dropdown-link">
                         <Link href={`/catalog`} className="text-dark">
-                         View Catalogs
+                          View Catalogs
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown dropdown-link">
@@ -319,74 +235,6 @@ const WebNavbar = ({
                 </Dropdown>
               </div>
             </div>
-
-            {/* for mobile responsive */}
-            {/* <div className={`resp-dropdown-avator custom_dropdown`}>
-              <Dropdown>
-                <Dropdown.Toggle
-                  id="dropdown-basic"
-                  style={{
-                    paddingTop: "10px",
-                    backgroundColor: "#0071dc",
-                    color: "white",
-                    border: "none",
-                    boxShadow: "none",
-                    margin: "0px",
-                  }}
-                >
-                  <i className="fa fa-user-circle fs-1" aria-hidden="true"></i>
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  {LoggedIn === true ? (
-                    <>
-                      <Dropdown.Item className="nav_dropdown">
-                        <Link href="/profile" className="text-dark">
-                          My Account
-                        </Link>
-                      </Dropdown.Item>
-
-                      <Dropdown.Item className="nav_dropdown">
-                        {" "}
-                        <Link href="/myOrder" className="text-dark">
-                          My Orders
-                        </Link>
-                      </Dropdown.Item>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                  <Dropdown.Item className="nav_dropdown">
-                    {" "}
-                    <Link href="/wishlist" className="text-dark">
-                      Wishlist
-                    </Link>{" "}
-                  </Dropdown.Item>
-                  <Dropdown.Item className="nav_dropdown">
-                    {" "}
-                    <Link href="/cart" className="text-dark">
-                      Cart
-                    </Link>{" "}
-                  </Dropdown.Item>
-                  {LoggedIn === true ? (
-                    <>
-                      <Dropdown.Item
-                        className="nav_dropdown text-dark"
-                        onClick={handleClick}
-                      >
-                        logout
-                      </Dropdown.Item>
-                    </>
-                  ) : (
-                    <>
-                      <Dropdown.Item className="nav_dropdown text-dark">
-                        Login
-                      </Dropdown.Item>
-                    </>
-                  )}
-                </Dropdown.Menu>
-              </Dropdown>
-            </div> */}
           </div>
         </div>
 
@@ -505,8 +353,10 @@ const WebNavbar = ({
               </div>
             </div>
             <div className="mx-3">
-              <select onChange={(e) => handleLanguageChange(e?.target?.value)}
-              className="select-field">
+              <select
+                onChange={(e) => handleLanguageChange(e?.target?.value)}
+                className="select-field"
+              >
                 {multiLanguagesData?.length > 0 &&
                   multiLanguagesData !== null &&
                   multiLanguagesData.map((lang: any) => {
@@ -518,7 +368,7 @@ const WebNavbar = ({
             </div>
             <div className="mx-3">
               <select
-              className="select-field"
+                className="select-field"
                 // value={selectedLanguage}
                 onChange={(e) => handleCurrencyValueChange(e.target.value)}
               >
