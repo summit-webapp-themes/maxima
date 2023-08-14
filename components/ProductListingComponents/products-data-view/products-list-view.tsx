@@ -16,14 +16,17 @@ const ProductsListView = (props: ProductsProps) => {
     handleLoadMore,
     currency_state_from_redux,
     selectedMultiLangData,
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange
   } = props;
 
   console.log("load moreee", productListTotalCount, product_data);
   return (
     <div
-      className={`${
-        filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
-      }`}
+      className={`${filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
+        }`}
     >
       {loading ? (
         <div className="row justify-content-center">
@@ -48,6 +51,10 @@ const ProductsListView = (props: ProductsProps) => {
                     wishlistData={wishlistData}
                     handleRenderingOfImages={handleRenderingOfImages}
                     selectedMultiLangData={selectedMultiLangData}
+                    catalogListItem={catalogListItem}
+                    handleAddProduct={handleAddProduct}
+                    handleSubmitCatalogName={handleSubmitCatalogName}
+                    handleChange={handleChange}
                   />
                 </div>
               );
@@ -72,7 +79,7 @@ const ProductsListView = (props: ProductsProps) => {
         >
           <button
             className="btn btn-primary my-5"
-            style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+            style={{ border: '1px solid #0071DC', borderRadius: "7px", backgroundColor: "#fff" }}
             onClick={handleLoadMore}
           >
             {selectedMultiLangData?.load_more}

@@ -15,14 +15,17 @@ const ProductsGridView = (props: ProductsViewProps) => {
     wishlistData,
     currency_state_from_redux,
     selectedMultiLangData,
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange
   } = props;
 
   console.log("cube in card", listItems);
   return (
     <div
-      className={`${
-        filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
-      }`}
+      className={`${filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
+        }`}
     >
       <div className="row">
         {loading ? (
@@ -56,6 +59,10 @@ const ProductsGridView = (props: ProductsViewProps) => {
                 wishlistData={wishlistData}
                 currency_state_from_redux={currency_state_from_redux}
                 selectedMultiLangData={selectedMultiLangData}
+                catalogListItem={catalogListItem}
+                handleAddProduct={handleAddProduct}
+                handleSubmitCatalogName={handleSubmitCatalogName}
+                handleChange={handleChange}
               />
             </div>
           ))
@@ -78,7 +85,7 @@ const ProductsGridView = (props: ProductsViewProps) => {
         >
           <button
             className="btn btn-primary my-5"
-            style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+            style={{ border: '1px solid #0071DC', borderRadius: "7px", backgroundColor: "#fff" }}
 
             onClick={handleLoadMore}
           >

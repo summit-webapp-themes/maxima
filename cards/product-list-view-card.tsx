@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Link from "next/link";
 import { CONSTANTS } from "../services/config/app-config";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
@@ -12,8 +13,9 @@ import {
   hideToast,
 } from "../store/slices/general_slices/toast_notification_slice";
 import { login_state } from "../store/slices/auth/login_slice";
-import { Router } from "next/router";
+import { Router, useRouter } from "next/router";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
+import CatalogModal from "../components/Catalog/CatalogModal";
 
 const ProductListViewCard = (props: any) => {
   const {
@@ -22,19 +24,32 @@ const ProductListViewCard = (props: any) => {
     wishlistData,
     currency_state_from_redux,
     selectedMultiLangData,
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange
   } = props;
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
   const dispatch = useDispatch();
   console.log("product card list view", product_data);
+  const router = useRouter();
 
   const TokenFromStore: any = useSelector(get_access_token);
-
+  const [showEditModal, setshowEditModal] = useState(false);
+  const [show, setshow] = useState(false);
   let isLoggedIn: any;
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
+
+  const handleShow = (val: any) => {
+    setshow(true);
+  };
+  const handleClose = () => {
+    setshow(false);
+  };
 
   const AddToCartProduct = async (name: any) => {
     const addCartData = [];
@@ -105,7 +120,7 @@ const ProductListViewCard = (props: any) => {
                     <div>
                       <div className="fs-5 text-gray">
                         {product_data?.short_description ===
-                        product_data?.item_name
+                          product_data?.item_name
                           ? ""
                           : product_data?.short_description}
                       </div>
@@ -114,7 +129,7 @@ const ProductListViewCard = (props: any) => {
                       </div>
 
                       {product_data?.weight_per_unit === 0 ||
-                      product_data?.weight_per_unit === null ? (
+                        product_data?.weight_per_unit === null ? (
                         ""
                       ) : (
                         <div className="product-desc text-gray">
@@ -130,7 +145,7 @@ const ProductListViewCard = (props: any) => {
                       )}
 
                       {product_data?.price === null ||
-                      product_data?.price === 0 ? (
+                        product_data?.price === 0 ? (
                         ""
                       ) : (
                         <>
@@ -164,6 +179,18 @@ const ProductListViewCard = (props: any) => {
                           </button>
                         </div>
                       </Link>
+                    )}
+
+                    {router.route !== "/catalog/[category]" ? (
+                      <button
+                        type="button"
+                        className={`btn btn-link catalog-btn-size`}
+                        onClick={() => handleShow(product_data.name)}
+                      >
+                        Add To Catalog
+                      </button>
+                    ) : (
+                      ""
                     )}
                   </div>
                 </div>
@@ -255,6 +282,16 @@ const ProductListViewCard = (props: any) => {
             </div>
           </div>
         </div>
+        <CatalogModal
+          show={show}
+          toHide={handleShow}
+          name={product_data.name}
+          handleClose={handleClose}
+          catalogListItem={catalogListItem}
+          handleAddProduct={handleAddProduct}
+          handleSubmitCatalogName={handleSubmitCatalogName}
+          handleChange={handleChange}
+        />
       </div>
     </>
   );

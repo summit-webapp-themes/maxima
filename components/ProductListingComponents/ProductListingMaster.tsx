@@ -11,6 +11,7 @@ import MobileFilter from "./filters-view/MobileFilter";
 import { useEffect, useState } from "react";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { useSelector } from "react-redux";
+import useCatalogHook from "../../hooks/CatalogHooks/catalogHook";
 const ProductListingMaster = () => {
   const {
     productsLoading,
@@ -27,6 +28,12 @@ const ProductListingMaster = () => {
   } = useProductListing();
   console.log("cube ", productListingData);
   const { wishlistData }: any = useWishlist();
+  const {
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange,
+  }: any = useCatalogHook();
 
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
 
@@ -59,6 +66,10 @@ const ProductListingMaster = () => {
             handleRenderingOfImages={handleRenderingOfImages}
             wishlistData={wishlistData}
             selectedMultiLangData={selectedMultiLangData}
+            catalogListItem={catalogListItem}
+            handleAddProduct={handleAddProduct}
+            handleSubmitCatalogName={handleSubmitCatalogName}
+            handleChange={handleChange}
           />
         );
       case "grid-view":
@@ -72,6 +83,10 @@ const ProductListingMaster = () => {
             handleLoadMore={handleLoadMore}
             wishlistData={wishlistData}
             selectedMultiLangData={selectedMultiLangData}
+            catalogListItem={catalogListItem}
+            handleAddProduct={handleAddProduct}
+            handleSubmitCatalogName={handleSubmitCatalogName}
+            handleChange={handleChange}
           />
         );
 
