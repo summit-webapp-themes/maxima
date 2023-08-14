@@ -14,7 +14,6 @@ import {
 } from "../store/slices/general_slices/toast_notification_slice";
 import { fetchCartListing } from "../store/slices/cart-listing-page-slice/cart-listing-slice";
 import deleteCatalog from "../services/api/product-catalog-api/delete-catalog-api";
-import { get_access_token } from "../store/slices/auth/token-login-slice";
 import { useRouter } from "next/router";
 import deleteItemFromCatalog from "../services/api/product-catalog-api/delete-item-from-catalog-api";
 import { ProductListingThunk } from "../store/slices/product-listing-page-slices/product-listing-slice";

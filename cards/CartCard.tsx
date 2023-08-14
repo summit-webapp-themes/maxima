@@ -23,7 +23,6 @@ const CartCard = ({
   selectedMultiLangData,
   arrayofSelectedItems,
   updateCart,
-  HandleDeleteCart,
   cartListingItems,
 }: any) => {
   console.log("cart orders card data", orders);
@@ -58,7 +57,7 @@ const CartCard = ({
   }
 
   const HandleDeleteCart = async (item_code: any) => {
-    let DeleteProduct = await DeleteProductFromCart(item_code,tokens?.token);
+    let DeleteProduct = await DeleteProductFromCart(item_code,cartListingItems?.name,tokens?.token);
     if (DeleteProduct?.data?.message?.msg === "success") {
       dispatch(fetchCartListing());
       if (Object.keys(cart_listing_data_store?.data).length > 0) {
@@ -93,7 +92,7 @@ const CartCard = ({
               <button
                 className="astext"
                 onClick={() =>
-                  HandleDeleteCart(orders.item_code, cartListingItems.name)
+                  HandleDeleteCart(orders.item_code)
                 }
               >
                 <Link href="" className="text-primary">
