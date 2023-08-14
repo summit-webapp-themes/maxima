@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-const DealerVariants = ({ variants, variantsData }: any) => {
+const DealerVariants = ({
+  variants,
+  variantsData,
+  selectedMultiLangData,
+}: any) => {
   const [Quanties, setQuanties] = useState<any>();
   const [newobject, setnewObject] = useState<any>([]);
 
@@ -8,7 +12,7 @@ const DealerVariants = ({ variants, variantsData }: any) => {
 
   console.log("dealer variant", variants);
 
-  const InputvalchangeHandler = (e: any, variant_code: any) => {
+  const InputvalchangeHandler: any = (e: any, variant_code: any) => {
     console.log("inputtt", variant_code, e.target.value);
     if (e?.target?.value !== "") {
       newarry = newobject?.find((item: any) => {
@@ -46,18 +50,18 @@ const DealerVariants = ({ variants, variantsData }: any) => {
         <tbody>
           <div className="d-flex">
             <div className="pe-3 inventory inventory_font">
-              <i className="fa fa-check-circle green ">
-                &nbsp;
-              </i>
-              <span className="bold">Available</span>
+              <i className="fa fa-check-circle green ">&nbsp;</i>
+              <span className="bold">{selectedMultiLangData?.available}</span>
             </div>
             <div className="pe-3 inventory_font">
               <i className="fa fa-clock-o yellow">&nbsp;</i>
-              <span className="bold">Future availability</span>
+              <span className="bold">
+                {selectedMultiLangData?.future_availability}
+              </span>
             </div>
             <div className="pe-3 inventory_font">
               <i className="fa fa-times-circle red">&nbsp;</i>
-              <span className="bold">Sold Out</span>
+              <span className="bold">{selectedMultiLangData?.sold_out}</span>
             </div>
           </div>
 
@@ -70,11 +74,11 @@ const DealerVariants = ({ variants, variantsData }: any) => {
                     <div>
                       <div className="d-flex mb-1">
                         <div className="pe-3 col-lg-5 col-md-4 col-sm-6 sku_code sku_code_qty">
-                          SKU Code:{" "}
+                          {selectedMultiLangData?.sku_code}: :{" "}
                           <span className="bold">{item?.variant_code}</span>
                         </div>
                         <div className="pe-3 col-md-6 col-sm-6 variation_code sku_code_qty">
-                          Variation:{" "}
+                          {selectedMultiLangData?.variation}:{" "}
                           <span className="bold">
                             {item?.size}-{item?.colour}
                           </span>
@@ -82,7 +86,9 @@ const DealerVariants = ({ variants, variantsData }: any) => {
                       </div>
                       <div className="d-flex mb-1 align-items-center">
                         <div className="d-flex align-items-center product_quantity">
-                          <div className="pe-3 sku_code_qty">Quantity:</div>
+                          <div className="pe-3 sku_code_qty">
+                            {selectedMultiLangData?.quantity}:
+                          </div>
                           <div>
                             <div className="pe-3">
                               <input
@@ -115,12 +121,15 @@ const DealerVariants = ({ variants, variantsData }: any) => {
           ) : (
             <>
               <div className="b2bborder_bottom mt-3">
-                SKU Code : {variants.item_code}
+                {selectedMultiLangData?.sku_code} : {variants.item_code}
               </div>
               <div>
                 <div className="d-flex mb-1 align-items-center">
                   <div className="d-flex align-items-center product_quantity">
-                    <div className="pe-3 sku_code_qty">Quantity:</div>
+                    <div className="pe-3 sku_code_qty">
+                      {" "}
+                      {selectedMultiLangData?.quantity}:
+                    </div>
                     <div>
                       <div className="pe-3">
                         <input
@@ -136,20 +145,6 @@ const DealerVariants = ({ variants, variantsData }: any) => {
                       </div>
                     </div>
                   </div>
-
-                  {/* <div className={`pe-3 ${styles.quantity_avail}`}> */}
-                  {/* {item.stock ? (
-                            <i
-                              className="fa fa-check-circle green"
-                              style={{ fontSize: "15px;" }}
-                            ></i>
-                          ) : (
-                            <i
-                              className="fa fa-times-circle red"
-                              style={{ fontSize: "15px;" }}
-                            ></i>
-                          )} */}
-                  {/* </div> */}
                 </div>
               </div>
             </>

@@ -1,19 +1,18 @@
-import React, { useState } from "react";
-import useNavbar from "../hooks/GeneralHooks/NavbarHooks/NavbarHook";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import getSubscriber from "../services/api/general_apis/newsletter-subscription-api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   hideToast,
   successmsg,
 } from "../store/slices/general_slices/toast_notification_slice";
-// import {navbarData} from "../../datasets/Digitalshelf_dataset/navbar"
+import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
+
 const Footer = () => {
-  // const { navbarData } = useNavbar();
   const dispatch = useDispatch();
   const navbarData: any = [];
-  const [subScription, setSubscriptions] = useState();
+  const [subScription, setSubscriptions] = useState<any>();
   const handleSubscription = async (event: any) => {
     event?.preventDefault();
     console.log(subScription, "subScription");
@@ -28,9 +27,21 @@ const Footer = () => {
     }
   };
   console.log("nav footer", navbarData);
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  console.log("SelectedLangDataFromStore", SelectedLangDataFromStore);
+  const [selectLangData, setLangData] = useState<any>();
+
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore?.selectedLanguageData]);
   return (
     <>
-      {/* <h1 className='mb-5'>Footer page</h1> */}
       <footer className="footer footer-dark footer-section">
         <div className="container ">
           <div className="footer-newsletter">
@@ -52,11 +63,12 @@ const Footer = () => {
                   </div>
                   <div className="icon-box-content">
                     <h5 className="icon-box-title text-uppercase font-weight-bold text-white text-left pl-1">
-                      Subscribe To Our Newsletter
+                      {selectLangData?.subscribe_to_our_newsletter}
                     </h5>
                     <p className="text-light">
-                      Get all the latest information on Events, Sales and
-                      Offers.
+                      {
+                        selectLangData?.get_all_the_latest_information_on_events_sales_offers
+                      }
                     </p>
                   </div>
                 </div>
@@ -80,7 +92,8 @@ const Footer = () => {
                     type="submit"
                     onClick={handleSubscription}
                   >
-                    Subscribe<i className="w-icon-long-arrow-right"></i>
+                    {selectLangData?.subscribe}
+                    <i className="w-icon-long-arrow-right"></i>
                   </button>
                 </form>
               </div>
@@ -98,30 +111,28 @@ const Footer = () => {
                       <a className="widget-about-call mb-4">1-800-570-7777</a>
                     </Link> */}
                     <p className="widget-about-desc ls-normal mb-3">
-                      Welcome to our premier e-commerce site, where shopping meets convenience and endless possibilities.
-                      We pride ourselves on being your one-stop destination for all your online shopping needs.
-
+                      {selectLangData?.welcome_to_ecommerce_site}
                     </p>
                   </div>
                 </div>
               </div>
               <div className="col-lg-2 col-sm-6">
                 <div className="widget">
-                  <h3 className="widget-title">Company</h3>
+                  <h3 className="widget-title"> {selectLangData?.company}</h3>
                   <ul className="widget-body">
                     <li>
                       <Link href="#" legacyBehavior>
-                        <a>About Us</a>
+                        <a>{selectLangData?.about_us}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="#" legacyBehavior>
-                        <a>Contact Us</a>
+                        <a>{selectLangData?.contact_us}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="#" legacyBehavior>
-                        <a>Order History</a>
+                        <a>{selectLangData?.order_history}</a>
                       </Link>
                     </li>
                   </ul>
@@ -146,21 +157,21 @@ const Footer = () => {
               </div>
               <div className="col-lg-2 col-sm-6">
                 <div className="widget">
-                  <h4 className="widget-title">My Account</h4>
+                  <h4 className="widget-title">{selectLangData?.my_account}</h4>
                   <ul className="widget-body">
                     <li>
                       <Link href="/cart" legacyBehavior>
-                        View Cart
+                        <a>{selectLangData?.view_cart}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/login" legacyBehavior>
-                        Sign In
+                        <a>{selectLangData?.sign_in}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="#" legacyBehavior>
-                        Privacy Policy
+                        <a>{selectLangData?.privacy_policy}</a>
                       </Link>
                     </li>
                   </ul>
@@ -168,21 +179,24 @@ const Footer = () => {
               </div>
               <div className="col-lg-2 col-sm-6">
                 <div className="widget">
-                  <h4 className="widget-title">Customer Service</h4>
+                  <h4 className="widget-title">
+                    {" "}
+                    {selectLangData?.customer_service}
+                  </h4>
                   <ul className="widget-body">
                     <li>
                       <Link href="#" legacyBehavior>
-                        <a>Payment Methods</a>
+                        <a>{selectLangData?.payment_methods}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="#" legacyBehavior>
-                        <a>Product Returns</a>
+                        <a>{selectLangData?.product_returns}</a>
                       </Link>
                     </li>
                     <li>
                       <Link href="#" legacyBehavior>
-                        <a>Term and Conditions</a>
+                        <a>{selectLangData?.terms_and_conditions}</a>
                       </Link>
                     </li>
                   </ul>
@@ -196,35 +210,29 @@ const Footer = () => {
                 <>
                   {navbarData.map((items: any, i: any) => {
                     <div key={i}>
-                      {
-                        items.values.map((items_name: any) => (
-                          <div className="category-box" key={i}>
-                            <h6 className="category-name">{items_name.name}:</h6>
-                            {items_name.values.map((names: any, index: any) => (
-                              <Link href={names.url} legacyBehavior key={index}>
-                                <a key={index}>{names.name}</a>
-                              </Link>
-                            ))}
-                          </div>
-                        ))
-                      }
-                    </div>
-                  }
-
-                  )}
+                      {items.values.map((items_name: any) => (
+                        <div className="category-box" key={i}>
+                          <h6 className="category-name">{items_name.name}:</h6>
+                          {items_name.values.map((names: any, index: any) => (
+                            <Link href={names.url} legacyBehavior key={index}>
+                              <a key={index}>{names.name}</a>
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>;
+                  })}
                 </>
               )}
             </div>
           </div>
           <div className="footer-bottom">
             <div className="footer-left">
-              <p className="copyright">
-                Copyright © 2023 Summit. All Rights Reserved.
-              </p>
+              <p className="copyright">{selectLangData?.copyright_text}</p>
             </div>
             <div className="footer-right">
               <span className="payment-label mr-lg-8">
-                We&apos;re using safe payment for
+                {selectLangData?.using_safe_payment}
               </span>
               <figure className="payment">
                 <Image

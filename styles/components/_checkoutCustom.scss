@@ -1,71 +1,80 @@
 .bill_checkbox {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-
-
 .ship_heading {
-    cursor: pointer;
-    /* padding: 0 20px; */
+  cursor: pointer;
+  /* padding: 0 20px; */
 }
 
 .ship_edit {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 .bill_edit {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 .bill_heading {
-    cursor: pointer;
-
+  cursor: pointer;
 }
 
 .button_color {
-    background-color: $themeternary-btncolor !important;
-    // color: $black-color !important;
-    color:$white-color !important;
-    border: none !important;
+  background-color: #0071DC !important;
+  // color: $black-color !important;
+  color: $white-color !important;
+  border: none !important;
+}
+
+.standard_button {
+  border: 1px solid #0071dc !important;
+  color: #000 !important;
+  border-radius: 7px !important;
+  background-color: #fff !important;
+}
+.standard_button_filled
+{
+  background-color: #0071DC !important;
+  color:#fff !important;
+  border-radius: 7px !important;
 }
 
 .address_button {
-    background-color: #33669a !important;
-    color: $white-color !important;
-    border: none !important;
+  background-color: #33669a !important;
+  color: $white-color !important;
+  border: none !important;
 }
 
 .selected_address_button {
-    background-color: $primary-color !important;
-    color: $white-color !important;
-    border: none !important;
+  background-color: $primary-color !important;
+  color: $white-color !important;
+  border: none !important;
 }
 
 .address_icon {
-    border: none;
-    background: none;
-    /* font-size: 10px; */
+  border: none;
+  background: none;
+  /* font-size: 10px; */
 }
 
 .card_p {
-    font-size: 13px;
-    margin-top: -5px;
+  font-size: 13px;
+  margin-top: -5px;
 }
-
 
 /* order sumamry */
 
 .cart_p {
-    margin: -6px 0px;
-    font-size: 12px;
+  margin: -6px 0px;
+  font-size: 12px;
 }
 
 .summary_p {
-    margin: -6px 0px;
+  margin: -6px 0px;
 }
 
 /* visitor checkout */
 
 .order_summary_sec {
-    margin-top: 69px;
+  margin-top: 69px;
 }

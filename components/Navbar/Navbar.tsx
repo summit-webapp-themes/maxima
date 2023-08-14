@@ -3,27 +3,41 @@ import useNavbar from "../../hooks/GeneralHooks/NavbarHooks/NavbarHook";
 import WebNavbar from "./components/WebNavbar";
 import MobNavbar from "./components/MobNavbar";
 import useSearchHook from "../../hooks/GeneralHooks/SearchHooks/search-hook";
-
+import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const {
     navbarData,
     isLoading,
-    getSelectedLang,
-    handleLanguageChange,
     handleCurrencyValueChange,
     selectedCurrencyValue,
   } = useNavbar();
-  const { searchValue, setSearchValue, handleSearch,handleKeyDown } = useSearchHook();
-  const [clicks, setClicks] = useState(false);
+  const { searchValue, setSearchValue, handleSearch, handleKeyDown }: any =
+    useSearchHook();
+  const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
+
+  const [clicks, setClicks] = useState<boolean>(false);
 
   const navMenuclick = (e: any) => {
-    console.log("clickk")
+    console.log("clickk");
     e.preventDefault();
     setClicks(!clicks);
   };
 
-  console.log("click",clicks)
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
+  console.log("click", clicks);
   return (
     <div className={clicks ? "mmenu-active" : ""}>
       <WebNavbar
@@ -32,11 +46,13 @@ const Navbar = () => {
         navMenuclick={navMenuclick}
         handleLanguageChange={handleLanguageChange}
         handleCurrencyValueChange={handleCurrencyValueChange}
-        selectedCurrencyValue = {selectedCurrencyValue}
+        selectedCurrencyValue={selectedCurrencyValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         handleSearch={handleSearch}
         handleKeyDown={handleKeyDown}
+        multiLanguagesData={multiLanguagesData}
+        selectedMultiLangData={selectedMultiLangData}
       />
       <MobNavbar
         navbarData={navbarData}
@@ -48,6 +64,8 @@ const Navbar = () => {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         handleSearch={handleSearch}
+        multiLanguagesData={multiLanguagesData}
+        selectedMultiLangData={selectedMultiLangData}
       />
     </div>
   );

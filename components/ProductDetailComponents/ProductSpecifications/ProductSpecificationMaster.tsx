@@ -4,7 +4,10 @@ import { useState } from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
-const ProductSpecificationMaster = ({ specifications }: any) => {
+const ProductSpecificationMaster = ({
+  specifications,
+  selectedMultiLangData,
+}: any) => {
   console.log("specifications in master", specifications);
   const [key, setKey] = useState<any>(0);
 
@@ -22,16 +25,17 @@ const ProductSpecificationMaster = ({ specifications }: any) => {
             specifications.map((specsData: any, index: any) => {
               console.log("specs name", specsData, index);
               return (
-              
                 <Tab eventKey={index} title={specsData.name} key={index}>
                   {specsData.name === "Specifications" && (
                     <ProductSpecification specificationData={specsData} />
                   )}
                   {specsData.name === "Technologies" && (
-                    <ProductTechnology technologyData={specsData} />
+                    <ProductTechnology
+                      technologyData={specsData}
+                      selectedMultiLangData={selectedMultiLangData}
+                    />
                   )}
                 </Tab>
-                
               );
             })}
         </Tabs>

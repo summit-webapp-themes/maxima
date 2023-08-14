@@ -9,12 +9,11 @@ interface IMetaData {
 const Header = ({ meta_data }: any) => {
   console.log("meta data incoming", meta_data);
   const router = useRouter();
-  let isDealer;
+  let isDealer: any;
   if (typeof window !== "undefined") {
     isDealer = localStorage.getItem("isDealer");
   }
-  console.log(isDealer);
-  console.log(typeof isDealer);
+
   return (
     <Head>
       <title>
@@ -27,16 +26,16 @@ const Header = ({ meta_data }: any) => {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta
         name="keywords"
-        content={meta_data !== undefined&&
-          Object.keys(meta_data)?.length > 0
+        content={
+          meta_data !== undefined && Object.keys(meta_data)?.length > 0
             ? meta_data?.meta_title
             : "Summit E-Commerce - A Comprehensive E-Commerce Solution"
         }
       />
       <meta
         name="description"
-        content={meta_data !== undefined&&
-          Object.keys(meta_data)?.length > 0
+        content={
+          meta_data !== undefined && Object.keys(meta_data)?.length > 0
             ? meta_data?.description
             : "Summit E-Commerce - A Comprehensive E-Commerce Solution"
         }
@@ -44,19 +43,16 @@ const Header = ({ meta_data }: any) => {
       <meta
         name="robots"
         content={
-          meta_data !== undefined&&
-          Object.keys(meta_data)?.length > 0 ? meta_data?.robot_name : "index"
+          meta_data !== undefined && Object.keys(meta_data)?.length > 0
+            ? meta_data?.robot_name
+            : "index"
         }
       />
-      <meta
-        property="og:image"
-        content=""
-      />
+      <meta property="og:image" content="" />
       <meta
         property="og:title"
         content={
-          meta_data !== undefined&&
-          Object.keys(meta_data)?.length > 0
+          meta_data !== undefined && Object.keys(meta_data)?.length > 0
             ? meta_data?.meta_title
             : "Summit E-Commerce - A Comprehensive E-Commerce Solution"
         }
@@ -64,19 +60,18 @@ const Header = ({ meta_data }: any) => {
       <meta
         property="og:description"
         content={
-          meta_data !== undefined&&
-          Object.keys(meta_data)?.length > 0
+          meta_data !== undefined && Object.keys(meta_data)?.length > 0
             ? meta_data?.description
             : "Summit E-Commerce - A Comprehensive E-Commerce Solution"
         }
       />
       <meta property="og:type" content="website" />
-      <meta
-        property="og:url"
-        content={``}
-      />
+      <meta property="og:url" content={``} />
       <link rel="canonical" href="$OG_URL" />
-      <meta name="description" content="Summit E-Commerce - A Comprehensive E-Commerce Solution" />
+      <meta
+        name="description"
+        content="Summit E-Commerce - A Comprehensive E-Commerce Solution"
+      />
       <link rel="icon" href="/favicon.ico" />
     </Head>
   );

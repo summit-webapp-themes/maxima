@@ -9,19 +9,20 @@ const VariantsMaster = ({
   doesSelectedVariantDoesNotExists,
   stockDoesNotExistsForSelectedVariants,
   variantsData,
+  selectedMultiLangData,
 }: any) => {
-
   let isDealer: any;
   if (typeof window !== "undefined") {
     isDealer = localStorage.getItem("isDealer");
   }
-  console.log("variants data for dealer",productVariants, variantsData)
+  console.log("variants data for dealer", productVariants, variantsData);
   return (
     <>
       {isDealer === "true" ? (
         <DealerVariants
           variants={productVariants}
           variantsData={variantsData}
+          selectedMultiLangData={selectedMultiLangData}
         />
       ) : (
         <CustomerVariants

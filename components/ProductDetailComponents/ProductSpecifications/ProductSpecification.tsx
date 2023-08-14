@@ -1,7 +1,6 @@
 import React from "react";
 
 const ProductSpecification = ({ specificationData }: any) => {
-  console.log("specification data", specificationData);
   return (
     <>
       <div className="container">

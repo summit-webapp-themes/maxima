@@ -4,36 +4,39 @@ import Home3WebNavbar from "./components/SecondaryThemeWebNavbar";
 import MobNavbar from "./components/MobNavbar";
 import useSearchHook from "../../../hooks/GeneralHooks/SearchHooks/search-hook";
 import SecondaryThemeWebNavbar from "./components/SecondaryThemeWebNavbar";
-
+import useMultilangHook from "../../../hooks/LanguageHook/Multilanguages-hook";
 
 const SecondaryThemeNavbar = () => {
   const {
     navbarData,
     isLoading,
-    getSelectedLang,
-    handleLanguageChange,
+
     handleCurrencyValueChange,
     selectedCurrencyValue,
   } = useNavbar();
-  const { searchValue, setSearchValue, handleSearch,handleKeyDown } = useSearchHook();
+  const { searchValue, setSearchValue, handleSearch, handleKeyDown } =
+    useSearchHook();
+  const { handleLanguageChange, multiLanguagesData } = useMultilangHook();
+
   const [clicks, setClicks] = useState(false);
 
   const navMenuclick = (e: any) => {
-    console.log("clickk")
+    console.log("clickk");
     e.preventDefault();
     setClicks(!clicks);
   };
 
-  console.log("click",clicks)
+  console.log("click", clicks);
   return (
     <div className={clicks ? "mmenu-active" : ""}>
       <SecondaryThemeWebNavbar
         navbarData={navbarData}
         isLoading={isLoading}
         navMenuclick={navMenuclick}
+        multiLanguagesData={multiLanguagesData}
         handleLanguageChange={handleLanguageChange}
         handleCurrencyValueChange={handleCurrencyValueChange}
-        selectedCurrencyValue = {selectedCurrencyValue}
+        selectedCurrencyValue={selectedCurrencyValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         handleSearch={handleSearch}
@@ -45,6 +48,7 @@ const SecondaryThemeNavbar = () => {
         navMenuclick={navMenuclick}
         setClicks={setClicks}
         clicks={clicks}
+        multiLanguagesData={multiLanguagesData}
         handleLanguageChange={handleLanguageChange}
         searchValue={searchValue}
         setSearchValue={setSearchValue}

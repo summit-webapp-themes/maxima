@@ -1,9 +1,24 @@
 import Image from "next/image";
+import React, { useState } from "react";
 import Link from "next/link";
 import { CONSTANTS } from "../services/config/app-config";
 import { ProductCardProps } from "../interfaces/product-card-interface";
 import { fetchWishlistUser } from "../store/slices/wishlist-slice/wishlist-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
+import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
+import {
+  failmsg,
+  hideToast,
+  successmsg,
+} from "../store/slices/general_slices/toast_notification_slice";
+import { fetchCartListing } from "../store/slices/cart-listing-page-slice/cart-listing-slice";
+import deleteCatalog from "../services/api/product-catalog-api/delete-catalog-api";
+import { useRouter } from "next/router";
+import deleteItemFromCatalog from "../services/api/product-catalog-api/delete-item-from-catalog-api";
+import { ProductListingThunk } from "../store/slices/product-listing-page-slices/product-listing-slice";
+import { filters_selector_state } from "../store/slices/product-listing-page-slices/filters-slice";
+import CatalogModal from "../components/Catalog/CatalogModal";
 
 const ProductCard = (props: ProductCardProps) => {
   const {
@@ -20,18 +35,104 @@ const ProductCard = (props: ProductCardProps) => {
     item_slug,
     wishlistData,
     currency_state_from_redux,
+    query,
+    selectedMultiLangData,
   } = props;
 
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
-
+  const TokenFromStore: any = useSelector(get_access_token);
+  const router = useRouter();
+  console.log(router, "router45 ");
   const dispatch = useDispatch();
+  const tokens = useSelector(get_access_token);
   let isLoggedIn: any;
+  const filters_state_from_redux: any = useSelector(filters_selector_state);
+  const [showEditModal, setshowEditModal] = useState(false);
+  const [show, setshow] = useState(false);
+  const newSlug = query?.category?.replace(/-/g, " ");
+  console.log(name, " item_slug");
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
+  const handleAddCart = async () => {
+    console.log(
+      "add currency",
+      currency_state_from_redux?.selected_currency_value
+    );
 
+    console.log(
+      "add currency in else",
+      currency_state_from_redux?.selected_currency_value
+    );
+    const addCartData = [];
+    addCartData.push({
+      item_code: name,
+      quantity: 1,
+    });
+    let AddToCartRes: any = await AddToCartApi(
+      addCartData,
+      currency_state_from_redux?.selected_currency_value
+    );
+    if (AddToCartRes.msg === "success") {
+      dispatch(successmsg("Item Added to cart"));
+      dispatch(fetchCartListing());
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1200);
+    } else {
+      dispatch(failmsg("Failed to Add to cart"));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1500);
+    }
+  };
+  const handleShow = (val: any) => {
+    setshow(true);
+  };
+  const handleClose = () => {
+    setshow(false);
+  };
+
+  const handleDeleteCatalogProduct = async () => {
+    const deleteApiParams = {
+      token: tokens?.token,
+      catalog_name: newSlug,
+      item_name: name,
+    };
+   const deleteProductFromCatalog = await deleteItemFromCatalog(deleteApiParams);
+   console.log(deleteProductFromCatalog,"deleteProductFromCatalog")
+   if( deleteProductFromCatalog.message.msg === "success") {
+    dispatch(successmsg(deleteProductFromCatalog?.message?.data))
+    setTimeout(() => {
+      const storeUsefulParamsForFurtherProductListingApi = {
+        router_origin: router.route.split("/")[1],
+        url_params: query,
+        filterDoctype: filters_state_from_redux?.doctype,
+        filterDocname: filters_state_from_redux?.docname.toLowerCase(),
+        token: tokens.token,
+      };
+      console.log(
+        storeUsefulParamsForFurtherProductListingApi,
+        "storeUsefulParamsForFurtherProductListingApi"
+      );
+      dispatch(hideToast());
+      dispatch(
+        ProductListingThunk({
+          storeUsefulParamsForFurtherProductListingApi,
+        }) as any
+      );
+    }, 1000);
+   }
+   else{
+    dispatch(failmsg(deleteProductFromCatalog.message.error));
+    setTimeout(() => {
+      dispatch(hideToast());
+    }, 1500);
+   }
+
+  };
   return (
     <div key={key} className="border p-3 rounded-3 h-100 ">
       <div className="d-flex justify-content-between mb-1">
@@ -60,11 +161,13 @@ const ProductCard = (props: ProductCardProps) => {
                       getWishlist: false,
                       deleteWishlist: false,
                       addTowishlist: true,
+                      token: TokenFromStore?.token,
                     };
                     requestList = {
                       getWishlist: true,
                       deleteWishlist: false,
                       addTowishlist: false,
+                      token: TokenFromStore?.token,
                     };
                     dispatch(fetchWishlistUser(requestNew));
 
@@ -102,11 +205,13 @@ const ProductCard = (props: ProductCardProps) => {
                   getWishlist: false,
                   deleteWishlist: true,
                   addTowishlist: false,
+                  token: TokenFromStore?.token,
                 };
                 requestList = {
                   getWishlist: true,
                   deleteWishlist: false,
                   addTowishlist: false,
+                  token: TokenFromStore?.token,
                 };
                 dispatch(fetchWishlistUser(requestNew));
 
@@ -173,94 +278,47 @@ const ProductCard = (props: ProductCardProps) => {
                 {mrp_price}
               </del>
             </div>
+            {router.route !== "/catalog/[category]" ? (
+              <button
+                type="button"
+                className={`btn btn-link catalog-btn-size`}
+                onClick={handleShow}
+              >
+                Add To Catalog
+              </button>
+            ) : (
+              ""
+            )}
+            <button
+              type="button"
+              className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
+              onClick={handleAddCart}
+            >
+              <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+              {/* {multilingualData?.add_to_cart} */}
+            </button>
+            {router.route === "/catalog/[category]" ? (
+              <button
+                type="button"
+                className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
+                onClick={handleDeleteCatalogProduct}
+              >
+                <i className="fa fa-trash-o" aria-hidden="true"></i>
+                {/* {multilingualData?.add_to_cart} */}
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
+      <CatalogModal
+        show={show}
+        toHide={handleShow}
+        name={name}
+        handleClose={handleClose}
+      />
     </div>
-    // <div className="product_card">
-    //   <div className="">
-    //     <div className={!in_stock_status ? "out_of_stock" : "in_stock"}>
-    //       {<p className="out_of_stock_text mb-0">Out of stock</p>}
-    //     </div>
-    //   </div>
-
-    //   <div className="card_inner">
-    //     <div className="card_img">
-    //       <Link href={url} className="">
-    // <Image
-    //   loader={() => `${CONSTANTS.API_BASE_URL}${img_url}`}
-    //   src={`${CONSTANTS.API_BASE_URL}${img_url}`}
-    //   alt="product-detail"
-    //   width={142}
-    //   height={142}
-    //   className="img-fluid"
-    // />
-    //       </Link>
-    //     </div>
-
-    //     <div className="row mt-3">
-    //       <div className="col-12 d-flex justify-content-between">
-    //         <div>
-    //           <p className="product_name mb-0">
-    //             <div className="display_tag">
-    //               {display_tag?.length > 0 ? (
-    //                 <>
-    //                   {display_tag
-    //                     ?.slice(0, 1)
-    //                     ?.map((item: any, index: number) => {
-    //                       console.log("display in map", item);
-    //                       return (
-    //                         <>
-    //                           <span
-    //                             className="d-inline-block px-1 py-0 text-uppercase"
-    //                             style={{
-    //                               border: "1px solid #96c7ef",
-    //                               backgroundColor: "#cae0f1",
-    //                               fontSize: "12px",
-    //                             }}
-    //                           >
-    //                             {item}
-    //                           </span>
-    //                         </>
-    //                       );
-    //                     })}
-    //                 </>
-    //               ) : (
-    //                 ""
-    //               )}
-    //             </div>
-    //             <Link href={url} className="text-dark">{item_name}</Link>
-    //           </p>
-    //         </div>
-    //         {in_stock_status ? (
-    //           <div className="cart ps-2">
-    //             <a className="prodCart" style={{ cursor: "pointer" }}>
-    //               <span
-    //                 className="material-symbols-outlined"
-    //                 id="shopping_cart"
-    //               >
-    //                 shopping_cart
-    //               </span>
-    //             </a>
-    //             {/* </Link> */}
-    //           </div>
-    //         ) : (
-    //           ""
-    //         )}
-    //       </div>
-    //     </div>
-
-    //     <div className="product-price">
-    //       <p className="mb-0 price_p">
-    //         <i className="fa fa-inr" aria-hidden="true"></i>
-    //         <span className="price pe-2 ">{price}</span>
-    //         <span className="price">
-    //           <s>{mrp_price}</s>
-    //         </span>
-    //       </p>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 

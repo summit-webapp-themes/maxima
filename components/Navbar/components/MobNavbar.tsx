@@ -10,15 +10,10 @@ const MobNavbar = ({
   setSearchValue,
   handleSearch,
   isLoading,
+  selectedMultiLangData,
 }: any) => {
-  // const setmainLink = () => {
-  //   let element: HTMLElement = document.getElementsByClassName(
-  //     "bm-overlay"
-  //   )[0] as HTMLElement;
-  //   element.click();
-  // };
-  const [arrowIndex, setarrowIndex] = useState(null);
-  const [indexVal, setindexVal] = useState(null);
+  const [arrowIndex, setarrowIndex] = useState<any>(null);
+  const [indexVal, setindexVal] = useState<any>(null);
 
   const onClickCloseNav = () => {
     console.log("click close");
@@ -58,7 +53,7 @@ const MobNavbar = ({
               className="form-control border"
               name="search"
               id="search"
-              placeholder="Search in..."
+              placeholder={selectedMultiLangData?.search_in}
               value={searchValue}
               onChange={(e: any) => setSearchValue(e.target.value)}
               required

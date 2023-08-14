@@ -12,6 +12,7 @@ import {
 } from "../../../services/api/general_apis/customer-form-data-api";
 import { fetchShippingAddress } from "../../../store/slices/checkoutPage-slice/customer-shipping-address-slice";
 import { fetchBillingAddress } from "../../../store/slices/checkoutPage-slice/customer-billing-address-slice";
+import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 
 const VisitorAddress = ({
   address_type,
@@ -19,23 +20,26 @@ const VisitorAddress = ({
   state,
   setSelectedState,
   selectedStates,
+  selectedMultiLangData,
 }: any) => {
   const dispatch = useDispatch();
 
-  const storeAddressStore = useSelector(store_address_state);
-
-  let [selectedCity, setSelectedCity] = useState("");
+  let [selectedCity, setSelectedCity] = useState<any>("");
+  const TokenFromStore: any = useSelector(get_access_token);
 
   let [city, setCity] = useState<any>([]);
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState<boolean>(false);
 
-  const handleSelectedState = async (stateValue: string) => {
+  const handleSelectedState: any = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue);
+    const getCitiesFromState: any = await FetchCitiesForAddressForm(
+      stateValue,
+      TokenFromStore?.token
+    );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
-      let citiesValues = getCitiesFromState
+      let citiesValues: any = getCitiesFromState
         ?.map((item: any) => item?.name)
         .filter((item: any) => item !== null);
 
@@ -65,31 +69,38 @@ const VisitorAddress = ({
         onSubmit={async (values: any, action: any) => {
           if (shipping_check) {
             console.log("checking address", values);
-            dispatch(storeCustomerAddresses({ ...values }, false));
+            const requestParams = {
+              value: { ...values },
+              token: TokenFromStore?.token,
+            };
+            dispatch(storeCustomerAddresses(requestParams));
 
             localStorage.setItem("guestLogin", "true");
             localStorage.setItem("isLoggedIn", "true");
 
             setTimeout(() => {
-              dispatch(fetchShippingAddress());
-              dispatch(fetchBillingAddress());
+              dispatch(fetchShippingAddress(TokenFromStore?.token));
+              dispatch(fetchBillingAddress(TokenFromStore?.token));
             }, 6000);
           } else {
+            const requestParams = {
+              value: { ...values },
+              token: TokenFromStore?.token,
+            };
             console.log("checking address else", values);
-            dispatch(storeCustomerAddresses({ ...values }, false));
+            dispatch(storeCustomerAddresses(requestParams));
 
             localStorage.setItem("guestLogin", "true");
             localStorage.setItem("isLoggedIn", "true");
 
             setTimeout(() => {
-              dispatch(fetchShippingAddress());
-              dispatch(fetchBillingAddress());
+              dispatch(fetchShippingAddress(TokenFromStore?.token));
+              dispatch(fetchBillingAddress(TokenFromStore?.token));
               // dispatch(navbarAPI());
             }, 6000);
-            setTimeout(()=>
-            {
+            setTimeout(() => {
               window.location.reload();
-            },8000)
+            }, 8000);
           }
         }}
       >
@@ -106,7 +117,8 @@ const VisitorAddress = ({
                     <div className="fields-group-md mb-4 fs-4">
                       <div className="form-group">
                         <label className="form-Form.Label">
-                          Name <span className="red">*</span>
+                          {selectedMultiLangData?.name}{" "}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           type="text"
@@ -127,7 +139,8 @@ const VisitorAddress = ({
                     <div>
                       <div className="form-group mt-3 fs-4">
                         <label className="form-Form.Label ">
-                          Address 1<span className="red">*</span>
+                          {selectedMultiLangData?.address_1}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           className="form-control rounded-0"
@@ -146,7 +159,8 @@ const VisitorAddress = ({
                     <div>
                       <div className="form-group mt-3 fs-4">
                         <label className="form-Form.Label fs-4">
-                          Address 2<span className="red">*</span>
+                          {selectedMultiLangData?.address_2}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           as="textarea"
@@ -162,7 +176,8 @@ const VisitorAddress = ({
                     <div>
                       <div className="form-group mt-3 fs-4">
                         <label className="form-Form.Label fs-4">
-                          Country <span className="red">*</span>
+                          {selectedMultiLangData?.country}{" "}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           component="select"
@@ -173,7 +188,9 @@ const VisitorAddress = ({
                           onBlur={handleBlur}
                           autoComplete="off"
                         >
-                          <option value="">Please select a country.</option>
+                          <option value="">
+                            {selectedMultiLangData?.please_select_a_country}
+                          </option>
                           <option>India</option>
                         </Field>
                         <span className="error_message text-danger">
@@ -185,7 +202,8 @@ const VisitorAddress = ({
                     <div>
                       <div className="form-group mt-3 fs-4">
                         <label className="form-Form.Label fs-4">
-                          State/Province <span className="red">*</span>
+                          {selectedMultiLangData?.state}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           component="select"
@@ -203,7 +221,7 @@ const VisitorAddress = ({
                           onBlur={handleBlur}
                         >
                           <option>
-                            Select Select a region, state or province
+                            {selectedMultiLangData?.please_select_a_state}
                           </option>
                           {state?.length > 0 && (
                             <>
@@ -229,7 +247,8 @@ const VisitorAddress = ({
                     <div>
                       <div className="form-group mt-3 fs-4">
                         <label className="form-Form.Label fs-4">
-                          City <span className="red">*</span>
+                          {selectedMultiLangData?.city}{" "}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           component="select"
@@ -246,7 +265,7 @@ const VisitorAddress = ({
                           onBlur={handleBlur}
                         >
                           <option>
-                            Please select a region, state, or province.
+                            {selectedMultiLangData?.please_select_a_city}
                           </option>
                           {city?.length > 0 && (
                             <>
@@ -268,7 +287,8 @@ const VisitorAddress = ({
                     <div>
                       <div className="form-group mt-3 fs-4">
                         <label className="form-Form.Label fs-4">
-                          Zip/Postal Code <span className="red">*</span>
+                          {selectedMultiLangData?.postal_code}{" "}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           type="text"
@@ -295,14 +315,15 @@ const VisitorAddress = ({
                         onChange={handleChange}
                       />
                       <span className="fs-4 align-bottom mx-1">
-                        Set as default address
+                        {selectedMultiLangData?.set_as_default_address}
                       </span>
                     </div>
 
                     <div>
                       <div className="form-group  mt-3 fs-4">
                         <label className="form-Form.Label fs-4">
-                          Email ID <span className="red">*</span>
+                          {selectedMultiLangData?.email}{" "}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           type="email"
@@ -323,14 +344,14 @@ const VisitorAddress = ({
                     <div>
                       <div className="form-gr2oup  mt-3 fs-4">
                         <label className="form-Form.Label fs-4">
-                          Mobile No <span className="red">*</span>
+                          {selectedMultiLangData?.mobile_number}{" "}
+                          <span className="red">*</span>
                         </label>
                         <Field
                           type="text"
                           className="form-control rounded-0"
                           id="contact"
                           name="contact"
-                          // value={phone}
                           onChange={handleChange}
                           onBlur={handleBlur}
                           autoComplete="off"
@@ -345,10 +366,10 @@ const VisitorAddress = ({
                     <div className="text-center ">
                       <button
                         type="submit"
-                        className="btn btn-warning mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
+                        className="btn mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
                         disabled={isSubmitting}
                       >
-                        Save the address
+                        {selectedMultiLangData?.save_address}
                       </button>
                     </div>
                   </div>

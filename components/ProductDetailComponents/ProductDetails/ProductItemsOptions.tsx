@@ -3,10 +3,14 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import ProductCard from "../../../cards/product-card";
 import useWishlist from "../../../hooks/WishListHooks/WishListHooks";
-const ProductItemsOptions: any = ({ items }: any) => {
-  const {wishlistData} = useWishlist();
+const ProductItemsOptions: any = ({
+  items,
+  selectedMultiLangData,
+  currency_state_from_redux,
+}: any) => {
+  const { wishlistData }: any = useWishlist();
   const [currentSlide, setCurrentSlide] = React.useState(0);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     slideChanged(slider) {
@@ -28,6 +32,7 @@ const ProductItemsOptions: any = ({ items }: any) => {
       },
     },
   });
+
   return (
     <>
       <>
@@ -37,8 +42,8 @@ const ProductItemsOptions: any = ({ items }: any) => {
               className="title justify-content-center pt-2 pb-2 ls-normal mb-5"
               style={{ backgroundColor: "#bdc3c7" }}
             >
-              TO THE BEST OF OUR UNDERSTANDING, THESE SHALL SUIT YOUR
-              REQUIREMENT AS {items?.name} PRODUCTS
+              {selectedMultiLangData?.display_tag_heading} {items?.name}{" "}
+              {selectedMultiLangData?.products}
             </h2>
           </div>
           <div ref={sliderRef} className=" keen-slider mx-5">
@@ -48,11 +53,15 @@ const ProductItemsOptions: any = ({ items }: any) => {
                   className="keen-slider__slide number-slide1 product "
                   key={i}
                 >
-                  <div className=" col-lg-11 p-3 mb-2 mx-0" style={{height:"380px"}}>
+                  <div
+                    className=" col-lg-11 p-3 mb-2 mx-0"
+                    style={{ height: "380px" }}
+                  >
                     <ProductCard
                       key={i}
                       name={newdata?.name}
                       currency_symbol={newdata?.currency_symbol}
+                      currency_state_from_redux={currency_state_from_redux}
                       item_name={newdata?.item_name}
                       item_slug={newdata?.product_slug}
                       price={newdata?.price}

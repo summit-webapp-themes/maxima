@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React, { useState } from "react";
 import { CONSTANTS } from "../services/config/app-config";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +13,9 @@ import {
   hideToast,
 } from "../store/slices/general_slices/toast_notification_slice";
 import { login_state } from "../store/slices/auth/login_slice";
-import { Router } from "next/router";
+import CatalogModal from "../components/Catalog/CatalogModal";
+import { Router, useRouter } from "next/router";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
 
 const ProductListViewCard = (props: any) => {
   const {
@@ -20,31 +23,47 @@ const ProductListViewCard = (props: any) => {
     handleRenderingOfImages,
     wishlistData,
     currency_state_from_redux,
+    selectedMultiLangData,
   } = props;
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
+  const router = useRouter();
   const dispatch = useDispatch();
+  const[name, setName] = useState("")
   console.log("product card list view", product_data);
+  const [show, setshow] = useState(false);
+
+  const TokenFromStore: any = useSelector(get_access_token);
 
   let isLoggedIn: any;
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
 
-  const AddToCartProduct = async (name: any) => {
+  const handleShow = (nameProduct:any) => {
+    setshow(true);
+    setName(nameProduct)
+  };
+  const handleClose = () => {
+    setshow(false);
+
+  };
+  const AddToCartProduct = async (names: any) => {
+   setName(names)
     const addCartData = [];
     addCartData.push({
-      item_code: name,
+      item_code: names,
       quantity: 1,
     });
     let AddToCartProductRes: any = await AddToCartApi(
       addCartData,
-      currency_state_from_redux?.selected_currency_value
+      currency_state_from_redux?.selected_currency_value,
+      TokenFromStore?.token
     );
     if (AddToCartProductRes.msg === "success") {
       dispatch(successmsg("Item Added to cart"));
-      dispatch(fetchCartListing());
+      dispatch(fetchCartListing(TokenFromStore?.token));
       setTimeout(() => {
         dispatch(hideToast());
       }, 1200);
@@ -55,7 +74,7 @@ const ProductListViewCard = (props: any) => {
       }, 1500);
     }
   };
-
+console.log(name,"namew")
   return (
     <>
       <div className="container">
@@ -105,7 +124,7 @@ const ProductListViewCard = (props: any) => {
                           : product_data?.short_description}
                       </div>
                       <div className="product-desc text-gray">
-                        Item Code: {product_data?.name}
+                        {selectedMultiLangData?.item_code}: {product_data?.name}
                       </div>
 
                       {product_data?.weight_per_unit === 0 ||
@@ -113,13 +132,14 @@ const ProductListViewCard = (props: any) => {
                         ""
                       ) : (
                         <div className="product-desc text-gray">
-                          APPROX WEIGHT: {product_data?.weight_per_unit}
+                          {selectedMultiLangData?.approx_weight}:{" "}
+                          {product_data?.weight_per_unit}
                           {""} {product_data?.weight_uom}
                         </div>
                       )}
                       {product_data?.brand !== null && (
                         <div className="sold-by product-desc">
-                          Brand: {product_data?.brand}
+                          {selectedMultiLangData?.brand}: {product_data?.brand}
                         </div>
                       )}
 
@@ -144,20 +164,31 @@ const ProductListViewCard = (props: any) => {
                     {isLoggedIn === "true" ? (
                       <div className="text-center w-50">
                         <button
-                          className="btn btn-primary button_color"
+                          className="btn  standard_button"
                           onClick={() => AddToCartProduct(product_data.name)}
                         >
-                          Add to cart
+                          {selectedMultiLangData?.add_to_cart}
                         </button>
                       </div>
                     ) : (
                       <Link href="/login">
                         <div className="text-center w-50">
-                          <button className="btn btn-primary button_color">
+                          <button className="btn standard_button">
                             Add to cart
                           </button>
                         </div>
                       </Link>
+                    )}
+                    {router.route !== "/catalog/[category]" ? (
+                      <button
+                        type="button"
+                        className={`btn btn-link catalog-btn-size`}
+                        onClick={() =>handleShow(product_data.name)}
+                      >
+                        Add To Catalog
+                      </button>
+                    ) : (
+                      ""
                     )}
                   </div>
                 </div>
@@ -179,11 +210,13 @@ const ProductListViewCard = (props: any) => {
                             getWishlist: false,
                             deleteWishlist: false,
                             addTowishlist: true,
+                            token: TokenFromStore?.token,
                           };
                           requestList = {
                             getWishlist: true,
                             deleteWishlist: false,
                             addTowishlist: false,
+                            token: TokenFromStore?.token,
                           };
                           dispatch(fetchWishlistUser(requestNew));
 
@@ -221,11 +254,13 @@ const ProductListViewCard = (props: any) => {
                         getWishlist: false,
                         deleteWishlist: true,
                         addTowishlist: false,
+                        token: TokenFromStore?.token,
                       };
                       requestList = {
                         getWishlist: true,
                         deleteWishlist: false,
                         addTowishlist: false,
+                        token: TokenFromStore?.token,
                       };
                       dispatch(fetchWishlistUser(requestNew));
                       setTimeout(() => {
@@ -245,6 +280,12 @@ const ProductListViewCard = (props: any) => {
             </div>
           </div>
         </div>
+        <CatalogModal
+        show={show}
+        toHide={handleShow}
+        name={name}
+        handleClose={handleClose}
+      />
       </div>
     </>
   );
