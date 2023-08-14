@@ -28,15 +28,12 @@ const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
 
     const handleExport = () => {
         console.log("handleexport", exportAsGenerateURL)
+        const version = CONSTANTS.VERSION;
         const method = "export_ledger";
         const entity = "gl";
 
-        // window.location.href = `
-        // ${CONSTANTS.API_BASE_URL}&method=${method}&entity=${entity}&${exportAsGenerateURL}
-        // `;
-
         window.location.href = `
-        ${CONSTANTS.API_BASE_URL}&method=${method}&entity=${entity}&${exportAsGenerateURL}
+        ${CONSTANTS.API_BASE_URL}${CONSTANTS.API_MANDATE_PARAMS}?version=${version}&method=${method}&entity=${entity}&${exportAsGenerateURL}
         `;
 
     };
