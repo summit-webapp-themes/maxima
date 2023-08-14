@@ -33,7 +33,7 @@ const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
                             alt="banner of Topcategory"
                             width={600}
                             height={150}
-                            className="hometopcat_banner"
+                            className="topcat_banner"
                           
                           />
                         </>

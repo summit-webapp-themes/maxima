@@ -28,7 +28,6 @@ const CartCard = ({
 }: any) => {
   console.log("cart orders card data", orders);
   const dispatch = useDispatch();
-  const tokens = useSelector(get_access_token);
   const cart_listing_data_store = useSelector(cart_listing_state);
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   const TokenFromStore: any = useSelector(get_access_token);
@@ -51,29 +50,11 @@ const CartCard = ({
   //   }
   // };
 
-  const showValueOfItem = () =>
-  {
-    const desiredObj = arrayofSelectedItems?.find((obj:any) => obj.item_code === orders?.item_code);
+  const showValueOfItem = () => {
+    const desiredObj = arrayofSelectedItems.find(
+      (obj: any) => obj.item_code === orders?.item_code
+    );
     return desiredObj?.quantity;
-  }
-
-  const HandleDeleteCart = async (item_code: any) => {
-    let DeleteProduct = await DeleteProductFromCart(item_code,tokens?.token);
-    if (DeleteProduct?.data?.message?.msg === "success") {
-      dispatch(fetchCartListing());
-      if (Object.keys(cart_listing_data_store?.data).length > 0) {
-        dispatch(fetchOrderSummary(cart_listing_data_store?.data?.name));
-      }
-      dispatch(successmsg("Item delete from cart"));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
-    } else {
-      dispatch(failmsg("Failed to delete from cart"));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
-    }
   };
 
   return (

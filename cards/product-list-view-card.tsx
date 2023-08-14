@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React, { useState } from "react";
 import { CONSTANTS } from "../services/config/app-config";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,8 +12,7 @@ import {
   hideToast,
 } from "../store/slices/general_slices/toast_notification_slice";
 import { login_state } from "../store/slices/auth/login_slice";
-import CatalogModal from "../components/Catalog/CatalogModal";
-import { Router, useRouter } from "next/router";
+import { Router } from "next/router";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
 
 const ProductListViewCard = (props: any) => {
@@ -28,11 +26,8 @@ const ProductListViewCard = (props: any) => {
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
-  const router = useRouter();
   const dispatch = useDispatch();
-  const[name, setName] = useState("")
   console.log("product card list view", product_data);
-  const [show, setshow] = useState(false);
 
   const TokenFromStore: any = useSelector(get_access_token);
 
@@ -41,19 +36,10 @@ const ProductListViewCard = (props: any) => {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
 
-  const handleShow = (nameProduct:any) => {
-    setshow(true);
-    setName(nameProduct)
-  };
-  const handleClose = () => {
-    setshow(false);
-
-  };
-  const AddToCartProduct = async (names: any) => {
-   setName(names)
+  const AddToCartProduct = async (name: any) => {
     const addCartData = [];
     addCartData.push({
-      item_code: names,
+      item_code: name,
       quantity: 1,
     });
     let AddToCartProductRes: any = await AddToCartApi(
@@ -74,7 +60,7 @@ const ProductListViewCard = (props: any) => {
       }, 1500);
     }
   };
-console.log(name,"namew")
+
   return (
     <>
       <div className="container">
@@ -179,17 +165,6 @@ console.log(name,"namew")
                         </div>
                       </Link>
                     )}
-                    {router.route !== "/catalog/[category]" ? (
-                      <button
-                        type="button"
-                        className={`btn btn-link catalog-btn-size`}
-                        onClick={() =>handleShow(product_data.name)}
-                      >
-                        Add To Catalog
-                      </button>
-                    ) : (
-                      ""
-                    )}
                   </div>
                 </div>
               </div>
@@ -280,12 +255,6 @@ console.log(name,"namew")
             </div>
           </div>
         </div>
-        <CatalogModal
-        show={show}
-        toHide={handleShow}
-        name={name}
-        handleClose={handleClose}
-      />
       </div>
     </>
   );

@@ -276,31 +276,24 @@ const WebNavbar = ({
 
                   {isLoggedIn === "true" ? (
                     <Dropdown.Menu className="fs-4">
-                      <Dropdown.Item className="nav_dropdown dropdown-link">
+                      <Dropdown.Item className="nav_dropdown">
                         <Link href="/quick-order" className="text-dark">
                           {selectedMultiLangData?.quick_order}
                         </Link>
                       </Dropdown.Item>
-                     // <Dropdown.Item className="nav_dropdown">
-                      //  <Link href="/profile" className="text-dark">
-
-                      <Dropdown.Item className="nav_dropdown dropdown-link">
-                        <Link href="profile" className="text-dark">
+                      <Dropdown.Item className="nav_dropdown">
+                        <Link href="/profile" className="text-dark">
                           {selectedMultiLangData?.my_account}
                         </Link>
                       </Dropdown.Item>
-                      <Dropdown.Item className="nav_dropdown dropdown-link">
-                        <Link href={`/catalog`} className="text-dark">
-                         View Catalogs
-                        </Link>
-                      </Dropdown.Item>
-                      <Dropdown.Item className="nav_dropdown dropdown-link">
+
+                      <Dropdown.Item className="nav_dropdown">
                         <Link href="/myOrder" className="text-dark">
                           {selectedMultiLangData?.my_order}
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item
-                        className="nav_dropdown text-dark dropdown-link"
+                        className="nav_dropdown text-dark"
                         onClick={handleClick}
                       >
                         {selectedMultiLangData?.logout}
@@ -308,7 +301,7 @@ const WebNavbar = ({
                     </Dropdown.Menu>
                   ) : (
                     <Dropdown.Menu className="fs-3">
-                      <Dropdown.Item className="nav_dropdown dropdown-link">
+                      <Dropdown.Item className="nav_dropdown">
                         {" "}
                         <Link href="/login" className="text-dark ">
                           {selectedMultiLangData?.login}
@@ -505,8 +498,7 @@ const WebNavbar = ({
               </div>
             </div>
             <div className="mx-3">
-              <select onChange={(e) => handleLanguageChange(e?.target?.value)}
-              className="select-field">
+              <select onChange={(e) => handleLanguageChange(e.target.value)}>
                 {multiLanguagesData?.length > 0 &&
                   multiLanguagesData !== null &&
                   multiLanguagesData.map((lang: any) => {
@@ -518,7 +510,6 @@ const WebNavbar = ({
             </div>
             <div className="mx-3">
               <select
-              className="select-field"
                 // value={selectedLanguage}
                 onChange={(e) => handleCurrencyValueChange(e.target.value)}
               >
