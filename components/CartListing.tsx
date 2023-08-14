@@ -9,23 +9,36 @@ import CartCard from "../cards/CartCard";
 import MissingPartsModal from "./ProductListingComponents/MissingPartsModal";
 import { useDispatch, useSelector } from "react-redux";
 import ClearCartApi from "../services/api/cart-page-api/clear-cart-api";
-import { fetchCartListing } from "../store/slices/cart-listing-page-slice/cart-listing-slice";
+import {
+  cart_listing_state,
+  fetchCartListing,
+} from "../store/slices/cart-listing-page-slice/cart-listing-slice";
 import { Norecord } from "./NoRecord";
 import UseCheckoutPageHook from "../hooks/CheckoutHooks/checkout-page-hook";
 import getQuotationCart from "../services/api/cart-page-api/get-quotation-api";
 import {
+  failmsg,
   hideToast,
   successmsg,
 } from "../store/slices/general_slices/toast_notification_slice";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
+import DeleteProductFromCart from "../services/api/cart-page-api/delete-cart-product";
+import { fetchOrderSummary } from "../store/slices/checkoutPage-slice/order-summary";
 
 const CartListing = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { cartListingItems, orderSummaryForCart , arrayofSelectedItems,updateCart,callUpdateCartAPI} = UseCartPageHook();
+  const {
+    cartListingItems,
+    orderSummaryForCart,
+    arrayofSelectedItems,
+    updateCart,
+    callUpdateCartAPI,
+  } = UseCartPageHook();
 
   const TokenFromStore: any = useSelector(get_access_token);
+  const cart_listing_data_store = useSelector(cart_listing_state);
   // const { orderSummary } = UseCheckoutPageHook();
   // const orderSummary:any = []
 
@@ -50,9 +63,39 @@ const CartListing = () => {
   };
 
   const ClearCartHandle = async (quotation_id: any) => {
-    let ClearCartRes: any = await ClearCartApi(quotation_id, TokenFromStore?.token);
+    let ClearCartRes: any = await ClearCartApi(
+      quotation_id,
+      TokenFromStore?.token
+    );
     if (ClearCartRes?.status === 200) {
       dispatch(fetchCartListing(TokenFromStore?.token));
+    }
+  };
+
+  const HandleDeleteCart = async (item_code: any, quotationId: any) => {
+    let DeleteProduct = await DeleteProductFromCart(
+      item_code,
+      quotationId,
+      TokenFromStore?.token
+    );
+    if (DeleteProduct?.data?.message?.msg === "success") {
+      dispatch(fetchCartListing(TokenFromStore?.token));
+      if (Object.keys(cart_listing_data_store?.data).length > 0) {
+        const params = {
+          quotationId: cart_listing_data_store?.data?.name,
+          token: TokenFromStore?.token,
+        };
+        dispatch(fetchOrderSummary(params));
+      }
+      dispatch(successmsg("Item delete from cart"));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1200);
+    } else {
+      dispatch(failmsg("Failed to delete from cart"));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1500);
     }
   };
 
@@ -115,7 +158,7 @@ const CartListing = () => {
     }
   }, [SelectedLangDataFromStore]);
 
-  console.log('selected array of cart', arrayofSelectedItems);
+  console.log("selected array of cart", arrayofSelectedItems);
 
   return (
     <>
@@ -148,10 +191,7 @@ const CartListing = () => {
               </div>
               <div>
                 <p className="checkbox-cursor">
-                  <a
-                    className="clear_cart"
-                    onClick={() => callUpdateCartAPI()}
-                  >
+                  <a className="clear_cart" onClick={() => callUpdateCartAPI()}>
                     {selectedMultiLangData?.update_cart}
                   </a>
                 </p>
@@ -299,8 +339,12 @@ const CartListing = () => {
                                           selectedMultiLangData={
                                             selectedMultiLangData
                                           }
-                                          arrayofSelectedItems={arrayofSelectedItems}
+                                          arrayofSelectedItems={
+                                            arrayofSelectedItems
+                                          }
                                           updateCart={updateCart}
+                                          cartListingItems={cartListingItems}
+                                          HandleDeleteCart={HandleDeleteCart}
                                         />
                                       </div>
                                     </div>
@@ -358,10 +402,10 @@ const CartListing = () => {
                         </div>
                         :
                         <div className="col-md-3  text-end">
-                          <i
-                            className="fa fa-inr pe-1 ps-1 bold"
-                            aria-hidden="true"
-                          ></i>
+                          {
+                            cartListingItems?.categories[0]?.orders[0]
+                              ?.currency_symbol
+                          }
                           <IndianNumber value={orderSummaryForCart[1]?.value} />
                         </div>
                       </div>
@@ -373,10 +417,10 @@ const CartListing = () => {
                         </div>
                         :
                         <div className="col-md-3 text-end">
-                          <i
-                            className="fa fa-inr pe-1 ps-1 bold"
-                            aria-hidden="true"
-                          ></i>
+                          {
+                            cartListingItems?.categories[0]?.orders[0]
+                              ?.currency_symbol
+                          }
                           <IndianNumber
                             value={orderSummaryForCart[10]?.value}
                           />

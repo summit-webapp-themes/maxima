@@ -9,8 +9,8 @@ import CardsLoadingLayout from "../../cards/CardsLoadingLayout";
 import BannerLoaderComponent from "./BannerLoaderComponent";
 
 const HomeBanner = () => {
-  const { homeBannerData, isLoading } = useHomeBanner();
-  console.log("homebanner",homeBannerData, isLoading);
+  const { homeBannerData, isLoading }: any = useHomeBanner();
+  console.log("homebanner", homeBannerData, isLoading);
 
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}/${src}?w=${width}&q=${quality || 75}`;
@@ -56,12 +56,11 @@ const HomeBanner = () => {
         </>
       ) : (
         <>
-        <div className="mb-3">
-        <BannerLoaderComponent/>
-        </div>
-         
+          <div className="mb-3">
+            <BannerLoaderComponent />
+          </div>
         </>
-       )}
+      )}
     </>
   );
 };

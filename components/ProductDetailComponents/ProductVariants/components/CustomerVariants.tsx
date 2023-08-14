@@ -10,7 +10,7 @@ const CustomerVariants = ({
   doesSelectedVariantDoesNotExists,
   stockDoesNotExistsForSelectedVariants,
 }: any) => {
-  const languageData = useMultiLingual();
+  const languageData: any = useMultiLingual();
 
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;

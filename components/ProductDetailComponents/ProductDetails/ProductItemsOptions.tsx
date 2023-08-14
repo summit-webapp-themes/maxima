@@ -3,12 +3,14 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import ProductCard from "../../../cards/product-card";
 import useWishlist from "../../../hooks/WishListHooks/WishListHooks";
-import { useSelector } from "react-redux";
-const ProductItemsOptions: any = ({ items, selectedMultiLangData,currency_state_from_redux }: any) => {
-
-  const { wishlistData } = useWishlist();
+const ProductItemsOptions: any = ({
+  items,
+  selectedMultiLangData,
+  currency_state_from_redux,
+}: any) => {
+  const { wishlistData }: any = useWishlist();
   const [currentSlide, setCurrentSlide] = React.useState(0);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
     slideChanged(slider) {

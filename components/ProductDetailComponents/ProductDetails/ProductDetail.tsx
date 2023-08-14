@@ -48,12 +48,12 @@ const ProductDetail = ({
 }: any) => {
   const dispatch = useDispatch();
   const TokenFromStore: any = useSelector(get_access_token);
-  const currency_state_from_redux = useSelector(currency_selector_state);
+  const currency_state_from_redux: any = useSelector(currency_selector_state);
   const router = useRouter();
 
   const [newobjectState, setnewObjectState] = useState<any>([]);
 
-  const handleVariantsData = (newData: any) => {
+  const handleVariantsData: any = (newData: any) => {
     setnewObjectState(newData);
   };
 
@@ -64,11 +64,7 @@ const ProductDetail = ({
     isDealer = localStorage.getItem("isDealer");
   }
 
-  const handleAddCart = async () => {
-    console.log(
-      "add currency",
-      currency_state_from_redux?.selected_currency_value
-    );
+  const handleAddCart: any = async () => {
     if (isDealer === "true") {
       console.log("dealer cart", newobjectState);
       let newObjects =
@@ -89,7 +85,7 @@ const ProductDetail = ({
         }, 1500);
       }
     } else {
-      const addCartData = [];
+      const addCartData: any = [];
       addCartData.push({
         item_code: productDetailData?.name,
         quantity: productQuantity,
@@ -99,7 +95,7 @@ const ProductDetail = ({
         currency_state_from_redux?.selected_currency_value,
         TokenFromStore?.token
       );
-      if (AddToCartRes?.data?.message.msg === "success") {
+      if (AddToCartRes?.data?.message?.msg === "success") {
         dispatch(successmsg("Item Added to cart"));
         dispatch(fetchCartListing(TokenFromStore?.token));
         setTimeout(() => {
@@ -113,7 +109,7 @@ const ProductDetail = ({
       }
     }
   };
-  const [fullUrl, setFullUrl] = useState("");
+  const [fullUrl, setFullUrl] = useState<any>("");
   const shareUrl = fullUrl !== "" ? fullUrl : "http://3.13.55.94:3004/";
   const shareMessage = `Check out this product: ${shareUrl}`;
   useEffect(() => {
@@ -123,7 +119,7 @@ const ProductDetail = ({
     }
   }, [router.asPath]);
   console.log("details@@", fullUrl);
-  const handleRedirect = () => {
+  const handleRedirect: any = () => {
     router.push("/login");
   };
   return (

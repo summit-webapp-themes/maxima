@@ -27,11 +27,11 @@ const ProductListingMaster = () => {
     query
   } = useProductListing();
   console.log("cube ", productListingData);
-  const { wishlistData } = useWishlist();
+  const { wishlistData }: any = useWishlist();
 
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
 
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
 

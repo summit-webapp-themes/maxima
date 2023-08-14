@@ -8,7 +8,7 @@ interface props {
 }
 
 const ToastNotification = () => {
-  const selector_state = useSelector(notiifcationBar);
+  const selector_state: any = useSelector(notiifcationBar);
   return (
     <ToastContainer className="p-3 toast_custom_css ">
       <Toast show={selector_state?.show} delay={3000} autohide>

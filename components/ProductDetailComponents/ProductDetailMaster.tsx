@@ -32,10 +32,10 @@ const ProductDetailMaster = () => {
     stockDoesNotExistsForSelectedVariants,
     productItemOptions,
     productDetailLoading,
-    currency_state_from_redux
+    currency_state_from_redux,
   } = useProductDetail();
   console.log(productDetailLoading, "productDetailData");
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();

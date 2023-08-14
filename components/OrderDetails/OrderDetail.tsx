@@ -16,9 +16,9 @@ const Index = ({ sales_order_id }: any) => {
   console.log("detail", detail);
   const dispatch = useDispatch();
 
-  const [typeOf, setTypeOf] = useState("Replacement");
-  const [text, setText] = useState("");
-  const [productId, setProductId] = useState("");
+  const [typeOf, setTypeOf] = useState<any>("Replacement");
+  const [text, setText] = useState<any>("");
+  const [productId, setProductId] = useState<any>("");
   const [newData, setData] = useState<any>();
   let years: any;
 
@@ -32,15 +32,15 @@ const Index = ({ sales_order_id }: any) => {
       quality || 75
     }`;
   };
-  let thankyou = router.asPath.split("/")[1];
+  let thankyou: any = router.asPath.split("/")[1];
   console.log("thank", thankyou);
   console.log("my orders get order detail data in order detail file", detail);
 
-  const handleTypeChange = (e: any) => {
+  const handleTypeChange: any = (e: any) => {
     setTypeOf(e.target.value);
   };
 
-  const handleTextChange = (e: any) => {
+  const handleTextChange: any = (e: any) => {
     setText(e.target.value);
   };
 
@@ -51,7 +51,7 @@ const Index = ({ sales_order_id }: any) => {
     }
   }, [detail]);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: any = async (e: any) => {
     console.log("+++++++handle submit function");
     e.preventDefault();
     setProductId("");
@@ -59,7 +59,7 @@ const Index = ({ sales_order_id }: any) => {
     setText("");
   };
 
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();

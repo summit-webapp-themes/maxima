@@ -12,6 +12,7 @@ import {
 } from "../../../services/api/general_apis/customer-form-data-api";
 import { fetchShippingAddress } from "../../../store/slices/checkoutPage-slice/customer-shipping-address-slice";
 import { fetchBillingAddress } from "../../../store/slices/checkoutPage-slice/customer-billing-address-slice";
+import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 
 const VisitorAddress = ({
   address_type,
@@ -23,18 +24,22 @@ const VisitorAddress = ({
 }: any) => {
   const dispatch = useDispatch();
 
-  let [selectedCity, setSelectedCity] = useState("");
+  let [selectedCity, setSelectedCity] = useState<any>("");
+  const TokenFromStore: any = useSelector(get_access_token);
 
   let [city, setCity] = useState<any>([]);
-  const [err, setErr] = useState(false);
+  const [err, setErr] = useState<boolean>(false);
 
-  const handleSelectedState = async (stateValue: string) => {
+  const handleSelectedState: any = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue);
+    const getCitiesFromState: any = await FetchCitiesForAddressForm(
+      stateValue,
+      TokenFromStore?.token
+    );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
-      let citiesValues = getCitiesFromState
+      let citiesValues: any = getCitiesFromState
         ?.map((item: any) => item?.name)
         .filter((item: any) => item !== null);
 
@@ -64,25 +69,33 @@ const VisitorAddress = ({
         onSubmit={async (values: any, action: any) => {
           if (shipping_check) {
             console.log("checking address", values);
-            dispatch(storeCustomerAddresses({ ...values }, false));
+            const requestParams = {
+              value: { ...values },
+              token: TokenFromStore?.token,
+            };
+            dispatch(storeCustomerAddresses(requestParams));
 
             localStorage.setItem("guestLogin", "true");
             localStorage.setItem("isLoggedIn", "true");
 
             setTimeout(() => {
-              dispatch(fetchShippingAddress());
-              dispatch(fetchBillingAddress());
+              dispatch(fetchShippingAddress(TokenFromStore?.token));
+              dispatch(fetchBillingAddress(TokenFromStore?.token));
             }, 6000);
           } else {
+            const requestParams = {
+              value: { ...values },
+              token: TokenFromStore?.token,
+            };
             console.log("checking address else", values);
-            dispatch(storeCustomerAddresses({ ...values }, false));
+            dispatch(storeCustomerAddresses(requestParams));
 
             localStorage.setItem("guestLogin", "true");
             localStorage.setItem("isLoggedIn", "true");
 
             setTimeout(() => {
-              dispatch(fetchShippingAddress());
-              dispatch(fetchBillingAddress());
+              dispatch(fetchShippingAddress(TokenFromStore?.token));
+              dispatch(fetchBillingAddress(TokenFromStore?.token));
               // dispatch(navbarAPI());
             }, 6000);
             setTimeout(() => {
@@ -353,7 +366,7 @@ const VisitorAddress = ({
                     <div className="text-center ">
                       <button
                         type="submit"
-                        className="btn btn-warning mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
+                        className="btn mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
                         disabled={isSubmitting}
                       >
                         {selectedMultiLangData?.save_address}

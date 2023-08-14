@@ -31,9 +31,9 @@ const WebNavbar = ({
   console.log("navmenu click", navMenuclick);
   const cartlisting_data: any = useSelector(cart_listing_state);
   const [cartCount, setCartCount] = useState<number>();
-  const [isShown, setIsShown] = useState(false);
-  const [isId, setId] = useState();
-  const [LoggedIn, setLoggedIn] = useState(false);
+  const [isShown, setIsShown] = useState<boolean>(false);
+  const [isId, setId] = useState<any>();
+  const [LoggedIn, setLoggedIn] = useState<boolean>(false);
 
   const dispatch = useDispatch();
   const handleHover = (id: any) => {
@@ -58,12 +58,12 @@ const WebNavbar = ({
 
   const router = useRouter();
   console.log("isLoggedIn12", LoggedIn);
-  const handleLeave = (id: any) => {
+  const handleLeave: any = (id: any) => {
     setId(id);
     setIsShown(false);
   };
 
-  const handleClick = async () => {
+  const handleClick: any = async () => {
     let obj = {
       Logouts: true,
     };
@@ -247,7 +247,7 @@ const WebNavbar = ({
               </div>
               <div className={`custom_dropdown`}>
                 <Dropdown>
-                  {isLoggedIn ==="true" ? (
+                  {isLoggedIn === "true" ? (
                     <Dropdown.Toggle
                       id="dropdown-basic"
                       className="dropdown-icon dropdown_active_icon"
@@ -281,6 +281,9 @@ const WebNavbar = ({
                           {selectedMultiLangData?.quick_order}
                         </Link>
                       </Dropdown.Item>
+                     // <Dropdown.Item className="nav_dropdown">
+                      //  <Link href="/profile" className="text-dark">
+
                       <Dropdown.Item className="nav_dropdown dropdown-link">
                         <Link href="profile" className="text-dark">
                           {selectedMultiLangData?.my_account}

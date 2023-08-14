@@ -4,6 +4,7 @@ import { FiltersViewProps } from "../../../interfaces/filters-view-interface";
 import FiltersLoadingLayout from "./FiltersLoadingLayout";
 import { CONSTANTS } from "../../../services/config/app-config";
 import MissingPartsModal from "../MissingPartsModal";
+import Link from "next/link";
 
 const WebFilters = (props: FiltersViewProps) => {
   const {
@@ -15,13 +16,14 @@ const WebFilters = (props: FiltersViewProps) => {
     selectedMultiLangData,
   } = props;
 
-  const [filterLang, setFilterLang] = useState("");
+  const [filterLang, setFilterLang] = useState<any>("");
 
-  const languageData = useMultiLingual();
+  const languageData: any = useMultiLingual();
 
-  const [showMissingPartsModal, setShowMissingPartsModal] = useState(false);
+  const [showMissingPartsModal, setShowMissingPartsModal] =
+    useState<any>(false);
 
-  const handleMissingPartsModalClose = () => {
+  const handleMissingPartsModalClose: any = () => {
     setShowMissingPartsModal(false);
   };
   useEffect(() => {
@@ -47,26 +49,28 @@ const WebFilters = (props: FiltersViewProps) => {
         )}
       </div>
 
-      <div
+      {/* <div
         className={` ${
           filtersData?.length > 0 ? "clear_filter mb-2" : "d-none"
         }`}
       >
-        <a
-          //   onClick={handleClearFilter}
-          href="#"
-          className="clear_filter_link"
-        >
-          {selectedMultiLangData?.clear_filter}
-        </a>
-      </div>
+        <Link href="#" >
+          <a
+            
+            href="#"
+            className="clear_filter_link"
+          >
+            {selectedMultiLangData?.clear_filter}
+          </a>
+        </Link>
+      </div> */}
 
       <div className="filter_section">
         <div className="filter_block">
           <div className="accordion accordion_custom" id="myAccordion">
             {loading ? (
               <div className="row justify-content-center">
-                {[...Array(10)].map(() => (
+                {[...Array(2)].map(() => (
                   <>
                     <div className="col-lg-12 mx-3">
                       <FiltersLoadingLayout />

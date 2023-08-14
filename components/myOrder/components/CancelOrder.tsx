@@ -12,7 +12,7 @@ const CancelOrder = ({
 }: any) => {
   const dispatch = useDispatch();
 
-  const orderCancelled =
+  const orderCancelled: any =
     orderHistoryItems.length > 0 &&
     orderHistoryItems.filter(
       (items: any) => items?.payment_status === "Cancelled"

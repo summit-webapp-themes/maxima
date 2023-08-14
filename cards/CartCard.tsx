@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import IndianNumber from "../components/CheckoutPageComponent/IndianNumber";
-import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
 import { useDispatch, useSelector } from "react-redux";
 import {
   cart_listing_state,
@@ -18,15 +17,21 @@ import { product_listing_selector_state } from "../store/slices/product-listing-
 import { currency_selector_state } from "../store/slices/general_slices/multi-currency-slice";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
 
-const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,updateCart }: any) => {
+const CartCard = ({
+  orders,
+  index,
+  selectedMultiLangData,
+  arrayofSelectedItems,
+  updateCart,
+  HandleDeleteCart,
+  cartListingItems,
+}: any) => {
   console.log("cart orders card data", orders);
   const dispatch = useDispatch();
   const tokens = useSelector(get_access_token);
   const cart_listing_data_store = useSelector(cart_listing_state);
   const currency_state_from_redux: any = useSelector(currency_selector_state);
-  const product_listing_state_from_redux: any = useSelector(
-    product_listing_selector_state
-  );
+  const TokenFromStore: any = useSelector(get_access_token);
   // const [cartQty, setCartQty] = useState(orders.qty);
 
   const handleInputChange = (e: any, index: any) => {
@@ -70,6 +75,7 @@ const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,up
       }, 1500);
     }
   };
+
   return (
     <>
       <div className="d-lg-block d-none">
@@ -86,7 +92,9 @@ const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,up
             <p>
               <button
                 className="astext"
-                onClick={() => HandleDeleteCart(orders.item_code)}
+                onClick={() =>
+                  HandleDeleteCart(orders.item_code, cartListingItems.name)
+                }
               >
                 <Link href="" className="text-primary">
                   {selectedMultiLangData?.delete}
@@ -99,8 +107,7 @@ const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,up
               orders?.details !== null &&
               (orders.details[1]?.value !== 0 ? (
                 <p className="text-center">
-                  {" "}
-                  <i className="fa fa-inr" aria-hidden="true"></i>{" "}
+                  {orders.currency_symbol}
                   <span className="text-center">
                     <IndianNumber value={orders.details[1]?.value} />
                   </span>
@@ -118,7 +125,10 @@ const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,up
             <p>{orders.total_weight}</p>
           </div>
           <div className="col-1">
-            <p>₹ {orders.tax}</p>
+            <p>
+              {orders.currency_symbol}
+              {orders.tax}
+            </p>
           </div>
           <div className="col-lg-1 col-2">
             <input
@@ -131,7 +141,10 @@ const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,up
             />
           </div>
           <div className="col-1">
-            <p>₹ {orders.amount}</p>
+            <p>
+              {orders.currency_symbol}
+              {orders.amount}
+            </p>
           </div>
         </div>
       </div>
@@ -182,22 +195,21 @@ const CartCard = ({ orders, index, selectedMultiLangData,arrayofSelectedItems,up
           </div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4">
-            {" "}
-            {selectedMultiLangData?.unit_weight}
-          </div>
+          <div className="col-6 fs-4">{selectedMultiLangData?.unit_weight}</div>
           :<div className="col-5 text-start">{orders.weight_per_unit}</div>
         </div>
         <div className="row">
           <div className="col-6 fs-4">
-            {" "}
             {selectedMultiLangData?.total_weight}
           </div>
           :<div className="col-5 text-start">{orders.total_weight}</div>
         </div>
         <div className="row">
           <div className="col-6 fs-4">{selectedMultiLangData?.tax} </div>:
-          <div className="col-5 text-start">₹ {orders.tax}</div>
+          <div className="col-5 text-start">
+            {orders.currency_symbol}
+            {orders.tax}
+          </div>
         </div>
         <div className="row my-5">
           <div className="col-6 fs-4">{selectedMultiLangData?.quantity_c} </div>

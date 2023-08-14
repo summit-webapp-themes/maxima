@@ -9,7 +9,7 @@ const PlaceOrder = ({
   history,
 }: any) => {
   console.log("orderHistoryItems", orderHistoryItems);
-  const placeorderCount =
+  const placeorderCount: any =
     orderHistoryItems &&
     orderHistoryItems?.filter(
       (items: any) => items?.payment_status !== "Cancelled"

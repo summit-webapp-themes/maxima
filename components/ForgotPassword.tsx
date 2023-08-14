@@ -19,15 +19,15 @@ const ForgotPassword = () => {
   const initialValues: FormValues = {
     email: "",
   };
-  const [message, setMessage] = useState("");
-  const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [message, setMessage] = useState<any>("");
+  const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false);
   useEffect(() => {
     if (message === "success" || message === "error") {
       setIsAlertVisible(true);
     }
   }, [message]);
 
-  const HandleSubmit = async (values: any) => {
+  const HandleSubmit: any = async (values: any) => {
     let resetApi = await ResetPasswordLink(values);
     console.log("forgot pswd api res", resetApi);
     if (resetApi?.data?.message?.msg === "success") {
@@ -46,7 +46,6 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="container my-5">
-        
         <div className={`col-lg-6 col-sm-9 col-12  mx-auto form_wrap`}>
           <div className="page_heading text-center">
             <h4 className="forgot_passwordh4">forgot your password</h4>
@@ -70,10 +69,7 @@ const ForgotPassword = () => {
                     <div className="row">
                       <div className="col-md-3 ">
                         <div className={`label text-end mt-1`}>
-                          <label
-                            htmlFor=""
-                            className="forgotpassword_label"
-                          >
+                          <label htmlFor="" className="forgotpassword_label">
                             Email ID:
                           </label>
                         </div>

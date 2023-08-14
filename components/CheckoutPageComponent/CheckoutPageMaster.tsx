@@ -49,7 +49,7 @@ const CheckoutPageMaster = () => {
   } = UseCheckoutPageHook();
 
   const useMediaQuery = (width: any) => {
-    const [targetReached, setTargetReached] = useState(true);
+    const [targetReached, setTargetReached] = useState<boolean>(true);
 
     const updateTarget = useCallback((e: any) => {
       if (e.matches) {
@@ -76,8 +76,8 @@ const CheckoutPageMaster = () => {
 
   const isBreakpoint = useMediaQuery(600);
 
-  const [visitorState, setVisitorState] = useState(null);
-  const [shippingCheck, setShippingCheck] = useState(true);
+  const [visitorState, setVisitorState] = useState<any>(null);
+  const [shippingCheck, setShippingCheck] = useState<any>(true);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -86,7 +86,7 @@ const CheckoutPageMaster = () => {
     }
   }, []);
 
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();

@@ -12,7 +12,7 @@ const DealerVariants = ({
 
   console.log("dealer variant", variants);
 
-  const InputvalchangeHandler = (e: any, variant_code: any) => {
+  const InputvalchangeHandler: any = (e: any, variant_code: any) => {
     console.log("inputtt", variant_code, e.target.value);
     if (e?.target?.value !== "") {
       newarry = newobject?.find((item: any) => {

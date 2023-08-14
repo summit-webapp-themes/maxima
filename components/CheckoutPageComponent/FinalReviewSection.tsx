@@ -9,7 +9,7 @@ const FinalReviewSection = ({
 }: any) => {
   const [acceptedTerms, setAcceptedTerms] = useState<any>(false);
 
-  const handleAcceptTerms = () => {
+  const handleAcceptTerms: any = () => {
     setAcceptedTerms(!acceptedTerms);
   };
   console.log("acceptedTerms", acceptedTerms);

@@ -12,14 +12,8 @@ const MobNavbar = ({
   isLoading,
   selectedMultiLangData,
 }: any) => {
-  // const setmainLink = () => {
-  //   let element: HTMLElement = document.getElementsByClassName(
-  //     "bm-overlay"
-  //   )[0] as HTMLElement;
-  //   element.click();
-  // };
-  const [arrowIndex, setarrowIndex] = useState(null);
-  const [indexVal, setindexVal] = useState(null);
+  const [arrowIndex, setarrowIndex] = useState<any>(null);
+  const [indexVal, setindexVal] = useState<any>(null);
 
   const onClickCloseNav = () => {
     console.log("click close");

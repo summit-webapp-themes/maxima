@@ -2,6 +2,7 @@ import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MissingPartsAPI } from "../../services/api/product-listing-page-api/missing-parts-api";
+import { get_access_token } from "../../store/slices/auth/token-login-slice";
 
 const MissingPartsModal = ({
   show,
@@ -10,15 +11,20 @@ const MissingPartsModal = ({
   selectedMultiLangData,
 }: any) => {
   const [descriptionVal, setdescriptionval] = useState<any>("");
-  const [message, setMessage] = useState<any>("");
-  const [showToast, setshowToast] = useState(false);
-  const [messageNew, setmessageNew] = useState("");
+  const TokenFromStore: any = useSelector(get_access_token);
+
+  const [showToast, setshowToast] = useState<boolean>(false);
+  const [messageNew, setmessageNew] = useState<any>("");
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: any = async (e: any) => {
     e.preventDefault();
     if (descriptionVal !== "") {
-      const missingPartsApiRes = await MissingPartsAPI(null, descriptionVal);
+      const missingPartsApiRes = await MissingPartsAPI(
+        null,
+        descriptionVal,
+        TokenFromStore?.token
+      );
       if (
         missingPartsApiRes?.status === 200 &&
         missingPartsApiRes?.data?.message?.msg === "success"
@@ -57,8 +63,11 @@ const MissingPartsModal = ({
           <div className="text-right mt-4">
             <button
               className="btn btn-primary text-white"
-              style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#0071DC"}}
-
+              style={{
+                border: "1px solid #0071DC",
+                borderRadius: "7px",
+                backgroundColor: "#0071DC",
+              }}
               onClick={(e) => handleSubmit(e)}
             >
               {selectedMultiLangData?.submit_enquiry}

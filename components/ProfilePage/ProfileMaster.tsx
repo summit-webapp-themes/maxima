@@ -12,6 +12,7 @@ import {
 } from "../../services/api/general_apis/customer-form-data-api";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { useSelector } from "react-redux";
+import { get_access_token } from "../../store/slices/auth/token-login-slice";
 // import IndianNumber from "./IndianNumber";
 const ProfileMaster = () => {
   const {
@@ -24,19 +25,20 @@ const ProfileMaster = () => {
   const router = useRouter();
   console.log("tsx profile", profileList);
   console.log("###quot in api tsx file", enquiryHistoryPro);
-  const [showEditModal, setshowEditModal] = useState(false);
-  const [showShipEditModal, setshowShipEditModal] = useState(false);
+  const [showEditModal, setshowEditModal] = useState<boolean>(false);
+  const [showShipEditModal, setshowShipEditModal] = useState<boolean>(false);
 
-  const [detailData, setdetailData] = useState();
-  const [shippingDetailData, setShippingDetailData] = useState();
-  const [addType, setAddType] = useState("");
-  let [selectedCity, setSelectedCity] = useState("");
-  let [state, setState] = useState([]);
+  const [detailData, setdetailData] = useState<any>();
+  const [shippingDetailData, setShippingDetailData] = useState<any>();
+  const [addType, setAddType] = useState<any>("");
+  let [selectedCity, setSelectedCity] = useState<any>("");
+  let [state, setState] = useState<any>([]);
   let [city, setCity] = useState<any>([]);
-  const [err, setErr] = useState(false);
-  let [selectedStates, setSelectedStates] = useState("");
+  const [err, setErr] = useState<boolean>(false);
+  let [selectedStates, setSelectedStates] = useState<any>("");
+  const TokenFromStore: any = useSelector(get_access_token);
 
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
@@ -50,10 +52,12 @@ const ProfileMaster = () => {
   }, [SelectedLangDataFromStore]);
 
   useEffect(() => {
-    const getStateData = async () => {
-      const stateData = await FetchStateForAddressForm();
+    const getStateData: any = async () => {
+      const stateData: any = await FetchStateForAddressForm(
+        TokenFromStore?.token
+      );
       if (stateData?.length > 0) {
-        let stateValues = stateData
+        let stateValues: any = stateData
           .map((item: any) => item?.name)
           .filter((item: any) => item !== null);
         setState(stateValues);
@@ -63,13 +67,16 @@ const ProfileMaster = () => {
     };
     getStateData();
   }, []);
-  const handleSelectedState = async (stateValue: string) => {
+  const handleSelectedState: any = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue);
+    const getCitiesFromState: any = await FetchCitiesForAddressForm(
+      stateValue,
+      TokenFromStore?.token
+    );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
-      let citiesValues = getCitiesFromState
+      let citiesValues: any = getCitiesFromState
         .map((item: any) => item.name)
         .filter((item: any) => item !== null);
 
@@ -78,11 +85,11 @@ const ProfileMaster = () => {
     }
   };
 
-  const documentQueued = router.query.data
+  const documentQueued: any = router.query.data
     ? JSON.parse(router.query.data as string)
     : "";
   console.log("paytab", documentQueued.setTrue);
-  const handleEditModal = (billingData: any, add_type: any) => {
+  const handleEditModal: any = (billingData: any, add_type: any) => {
     console.log("profile billing edit data", billingData);
     setshowEditModal(!showEditModal);
     // setdetailData(profileBillingData);
@@ -91,7 +98,7 @@ const ProfileMaster = () => {
     setAddType(add_type);
   };
 
-  const handleShippingEditModal = (shippingData: any, add_type: any) => {
+  const handleShippingEditModal: any = (shippingData: any, add_type: any) => {
     console.log("shipping data", shippingData);
     setshowShipEditModal(!showShipEditModal);
     setAddType(add_type);
@@ -100,7 +107,7 @@ const ProfileMaster = () => {
 
   console.log("address_type pr", addType);
 
-  const personalDetails = () => {
+  const personalDetails: any = () => {
     return (
       <>
         <div className="col-lg-3 bold fs-3">
@@ -132,7 +139,7 @@ const ProfileMaster = () => {
     );
   };
 
-  const availableCoupons = () => {
+  const availableCoupons: any = () => {
     return (
       <>
         <div className="mb-2 row">
@@ -164,7 +171,7 @@ const ProfileMaster = () => {
     );
   };
 
-  const handleAgeingReportDisplay = () => {
+  const handleAgeingReportDisplay: any = () => {
     if (ageingReport.length > 0) {
       return (
         <>
@@ -215,7 +222,7 @@ const ProfileMaster = () => {
     }
   };
 
-  const showBillingAddresses = () => {
+  const showBillingAddresses: any = () => {
     return (
       <>
         <div className="shadow-sm card">
@@ -318,7 +325,7 @@ const ProfileMaster = () => {
     );
   };
 
-  const showShippigAddresses = () => {
+  const showShippigAddresses: any = () => {
     return (
       <>
         <div className="shadow-sm card">
@@ -420,7 +427,7 @@ const ProfileMaster = () => {
     );
   };
 
-  const paymentTerms = () => {
+  const paymentTerms: any = () => {
     return (
       <div className="row m-0">
         <div className="shadow-sm card mt-4 ">
@@ -442,7 +449,7 @@ const ProfileMaster = () => {
     );
   };
 
-  const creditLimit = () => {
+  const creditLimit: any = () => {
     return (
       <>
         <div className="row m-0">
@@ -466,7 +473,7 @@ const ProfileMaster = () => {
       </>
     );
   };
-  const handlePdf = async (pdf_link: any) => {
+  const handlePdf: any = async (pdf_link: any) => {
     const pdfRes = await GetEnquiryHistoryPdf(pdf_link);
     console.log("pdf res in jsx", pdfRes);
     // window.open (`${pdfRes}` , '_blank')
@@ -474,7 +481,7 @@ const ProfileMaster = () => {
 
   let dateObj: any;
   let formattedDate: any;
-  const enquiryHistory = () => {
+  const enquiryHistory: any = () => {
     return (
       <>
         <div className="row mt-5">

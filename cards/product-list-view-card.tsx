@@ -210,11 +210,13 @@ console.log(name,"namew")
                             getWishlist: false,
                             deleteWishlist: false,
                             addTowishlist: true,
+                            token: TokenFromStore?.token,
                           };
                           requestList = {
                             getWishlist: true,
                             deleteWishlist: false,
                             addTowishlist: false,
+                            token: TokenFromStore?.token,
                           };
                           dispatch(fetchWishlistUser(requestNew));
 
@@ -252,11 +254,13 @@ console.log(name,"namew")
                         getWishlist: false,
                         deleteWishlist: true,
                         addTowishlist: false,
+                        token: TokenFromStore?.token,
                       };
                       requestList = {
                         getWishlist: true,
                         deleteWishlist: false,
                         addTowishlist: false,
+                        token: TokenFromStore?.token,
                       };
                       dispatch(fetchWishlistUser(requestNew));
                       setTimeout(() => {

@@ -6,7 +6,7 @@ import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slic
 import { useSelector } from "react-redux";
 
 const MyOrderMaster = () => {
-  const SelectedLangDataFromStore = useSelector(
+  const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();

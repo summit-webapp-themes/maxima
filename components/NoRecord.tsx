@@ -12,7 +12,8 @@ export const Norecord = ({
   img,
   selectedMultiLangData,
 }: any) => {
-  const [showMissingPartsModal, setShowMissingPartsModal] = useState(false);
+  const [showMissingPartsModal, setShowMissingPartsModal] =
+    useState<boolean>(false);
 
   const router = useRouter();
 
@@ -37,7 +38,11 @@ export const Norecord = ({
                     setShowMissingPartsModal(true);
                   }}
                   className="btn btn-warning my-4 text-dark"
-                  style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+                  style={{
+                    border: "1px solid #0071DC",
+                    borderRadius: "7px",
+                    backgroundColor: "#fff",
+                  }}
                 >
                   {selectedMultiLangData?.let_us_know}
                 </button>
@@ -47,10 +52,16 @@ export const Norecord = ({
             <button
               type="button"
               className="btn btn-warning my-4 text-dark"
-              onClick={()=> {router.push('/')}}
-              style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+              onClick={() => {
+                router.push("/");
+              }}
+              style={{
+                border: "1px solid #0071DC",
+                borderRadius: "7px",
+                backgroundColor: "#fff",
+              }}
             >
-             {selectedMultiLangData?.shop_now}
+              {selectedMultiLangData?.shop_now}
             </button>
           )}
         </div>

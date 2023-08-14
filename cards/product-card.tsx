@@ -5,6 +5,7 @@ import { CONSTANTS } from "../services/config/app-config";
 import { ProductCardProps } from "../interfaces/product-card-interface";
 import { fetchWishlistUser } from "../store/slices/wishlist-slice/wishlist-slice";
 import { useDispatch, useSelector } from "react-redux";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
 import {
   failmsg,
@@ -42,6 +43,7 @@ const ProductCard = (props: ProductCardProps) => {
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
+  const TokenFromStore: any = useSelector(get_access_token);
   const router = useRouter();
   console.log(router, "router45 ");
   const dispatch = useDispatch();
@@ -160,11 +162,13 @@ const ProductCard = (props: ProductCardProps) => {
                       getWishlist: false,
                       deleteWishlist: false,
                       addTowishlist: true,
+                      token: TokenFromStore?.token,
                     };
                     requestList = {
                       getWishlist: true,
                       deleteWishlist: false,
                       addTowishlist: false,
+                      token: TokenFromStore?.token,
                     };
                     dispatch(fetchWishlistUser(requestNew));
 
@@ -202,11 +206,13 @@ const ProductCard = (props: ProductCardProps) => {
                   getWishlist: false,
                   deleteWishlist: true,
                   addTowishlist: false,
+                  token: TokenFromStore?.token,
                 };
                 requestList = {
                   getWishlist: true,
                   deleteWishlist: false,
                   addTowishlist: false,
+                  token: TokenFromStore?.token,
                 };
                 dispatch(fetchWishlistUser(requestNew));
 
@@ -314,7 +320,6 @@ const ProductCard = (props: ProductCardProps) => {
         handleClose={handleClose}
       />
     </div>
-    
   );
 };
 

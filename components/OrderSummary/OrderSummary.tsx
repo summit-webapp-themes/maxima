@@ -15,7 +15,7 @@ const OrderSummary = ({
   const [cartListingItems, setcartListingItems] = useState<any>([]);
   const [show, setshow] = useState(false);
   const [initial, setInitial] = useState(false);
-  const cartProducts = useSelector(cart_listing_state);
+  const cartProducts: any = useSelector(cart_listing_state);
 
   let order;
   useEffect(() => {
