@@ -194,7 +194,7 @@ const WebNavbar = ({
 
                   {isLoggedIn === "true" ? (
                     <Dropdown.Menu className="fs-4">
-                      <Dropdown.Item className="nav_dropdown dropdown-link">
+                      <Dropdown.Item className="nav_dropdown">
                         <Link href="/quick-order" className="text-dark">
                           {selectedMultiLangData?.quick_order}
                         </Link>
@@ -203,6 +203,11 @@ const WebNavbar = ({
                       <Dropdown.Item className="nav_dropdown dropdown-link">
                         <Link href="/profile" className="text-dark">
                           {selectedMultiLangData?.my_account}
+                        </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item className="nav_dropdown dropdown-link">
+                        <Link href="/dealer-ledger" className="text-dark">
+                          {selectedMultiLangData?.dealer_ledger}
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown dropdown-link">
@@ -216,7 +221,7 @@ const WebNavbar = ({
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item
-                        className="nav_dropdown text-dark dropdown-link"
+                        className="nav_dropdown text-dark"
                         onClick={handleClick}
                       >
                         {selectedMultiLangData?.logout}
@@ -224,7 +229,7 @@ const WebNavbar = ({
                     </Dropdown.Menu>
                   ) : (
                     <Dropdown.Menu className="fs-3">
-                      <Dropdown.Item className="nav_dropdown dropdown-link">
+                      <Dropdown.Item className="nav_dropdown">
                         {" "}
                         <Link href="/login" className="text-dark ">
                           {selectedMultiLangData?.login}
