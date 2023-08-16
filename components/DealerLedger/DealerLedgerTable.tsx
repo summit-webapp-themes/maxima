@@ -5,7 +5,10 @@ import { CONSTANTS } from "../../services/config/app-config";
 import GetSalesVoucherPdf from "../../services/api/dealer-ledger-api/sales-voucher-pdf";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
 
-const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
+const DealerLedgerTable = ({
+  dealerLedgerSummary,
+  selectedMultiLangData,
+}: any) => {
   const dealerledger: any = useSelector(dealerLedgerStore);
   console.log("dealerledgerData in table", dealerledger);
   let [exportAsGenerateURL, setExportAsGenerateURL] = useState("");
@@ -53,7 +56,7 @@ const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
               <div className="d-flex py-3">
                 <>
                   <h5 className="bold black mb-0 flex-fill fs-2 dealer-ledger-td-l">
-                    Ledger
+                    {selectedMultiLangData?.ledger}
                   </h5>
                   <div>
                     <a
@@ -62,7 +65,7 @@ const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
                       style={{ cursor: "pointer" }}
                       onClick={handleExport}
                     >
-                      Export as
+                      {selectedMultiLangData?.export_as}
                       <i
                         className="fa fa-file-excel-o ps-2"
                         aria-hidden="true"
@@ -98,29 +101,29 @@ const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
                 <thead>
                   <tr>
                     <th className="text-nowrap ledger-table-header  dealer-ledger-td-l">
-                      Date
+                      {selectedMultiLangData?.date}
                     </th>
                     <th className="text-nowrap ledger-table-header">
-                      Particulars
+                      {selectedMultiLangData?.particulars}
                     </th>
                     <th className="text-nowrap ledger-table-header">
-                      Vch Type
+                      {selectedMultiLangData?.vch_type}
                     </th>
                     <th className="text-right text-nowrap ledger-table-header">
-                      Vch No.
+                      {selectedMultiLangData?.vch_no}
                     </th>
                     <th className="text-right text-nowrap ledger-table-header">
-                      Debit
+                      {selectedMultiLangData?.debit}
                     </th>
                     <th className="text-right text-nowrap ledger-table-header dealer-ledger-td-r">
-                      Credit
+                      {selectedMultiLangData?.credit}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td colSpan={4} className="text-right bold">
-                      Opening Balance
+                      {selectedMultiLangData?.opening_balance}
                     </td>
 
                     <td className="text-right bold">
@@ -167,7 +170,7 @@ const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
                 <tfoot>
                   <tr>
                     <td colSpan={4} className="text-right bold">
-                      Current Total
+                      {selectedMultiLangData?.current_total}
                     </td>
                     <td className="text-right bold">
                       ₹{dealerledger?.data?.general_data?.current_total}
@@ -175,7 +178,7 @@ const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
                   </tr>
                   <tr>
                     <td colSpan={4} className="text-right bold">
-                      Closing Balance
+                      {selectedMultiLangData?.closing_balance}
                     </td>
                     <td className="text-right bold">
                       ₹{dealerledger?.data?.general_data?.debit_closing_balance}
