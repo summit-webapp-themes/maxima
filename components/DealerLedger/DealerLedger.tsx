@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import UseDealerLedgerHook from "../../hooks/DealerLedgerHooks/dealer-ledger-hook";
 import DealerAccounting from "./DealerAccounting";
 import { useDispatch, useSelector } from "react-redux";
-import { dealerLedgerStore, fetchDealerLedger } from "../../store/slices/dealer-ledger-slice/dealer-ledger-slice";
+import {
+  dealerLedgerStore,
+  fetchDealerLedger,
+} from "../../store/slices/dealer-ledger-slice/dealer-ledger-slice";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
 import DealerLedgerTable from "./DealerLedgerTable";
+import {
+  failmsg,
+  hideToast,
+} from "../../store/slices/general_slices/toast_notification_slice";
 
 const DealerLedger = () => {
   const dispatch = useDispatch();
@@ -24,37 +31,48 @@ const DealerLedger = () => {
   const [dlSelectedmonth, setDlSelectedMonth] = useState<any>("");
   const [dlFromDate, setDlFromDate] = useState<any>("");
   const [dlToDate, setDlToDate] = useState<any>("");
-  const [showDlData, setDlData] = useState<boolean>(false)
+  const [showDlData, setDlData] = useState<boolean>(false);
 
-  console.log("showDlData", showDlData)
+  console.log("showDlData", showDlData);
   const [year, month, day] = dlFromDate.split("-");
   customFromDate = [day, month, year].join("-");
   const [toYear, toMonth, toDay] = dlToDate.split("-");
   customToDate = [toDay, toMonth, toYear].join("-");
 
-  const HandleLedgerData = () => {
-    console.log("onsubmit data", dlSelectedmonth, dlFromDate, dlToDate)
+  const HandleLedgerData = async () => {
+    console.log("onsubmit data", dlSelectedmonth, dlFromDate, dlToDate);
     const getDealerLedgerParams = {
       partyName: dealerLedgerSummary?.party_name,
       month: dlSelectedmonth,
       fromDate: customFromDate,
       toDate: customToDate,
-      token: TokenFromStore?.token
+      token: TokenFromStore?.token,
+    };
+
+    try {
+      const DealerLedgerData = await dispatch(
+        fetchDealerLedger(getDealerLedgerParams)
+      );
+
+      if (DealerLedgerData?.payload?.data?.message?.msg === "success") {
+        setDlData(true);
+        setDlSelectedMonth("");
+        setDlFromDate("");
+        setDlToDate("");
+      } else {
+        dispatch(failmsg("Please select a month or date range"));
+        setTimeout(() => {
+          dispatch(hideToast());
+        }, 800);
+      }
+    } catch (error) {
+      console.log("Error occurred:", error);
     }
-    dispatch(fetchDealerLedger(getDealerLedgerParams))
-    setDlSelectedMonth("")
-    setDlFromDate("")
-    setDlToDate("")
-    setDlData(true)
-  }
-
-
-
+  };
 
   return (
     <>
       <div className="container">
-
         <DealerAccounting dealerLedgerSummary={dealerLedgerSummary} />
 
         <div className="row text-center dealer-ledger-container">
@@ -84,7 +102,6 @@ const DealerLedger = () => {
               className={`${fieldDisable ? "" : "disabled"} form-select mt-5`}
               disabled={fieldDisable}
               onChange={(e) => setDlSelectedMonth(e.target.value)}
-
             >
               <option>SELECT MONTH</option>
               {dealerLedgerSummary?.months?.map(
@@ -109,7 +126,10 @@ const DealerLedger = () => {
                 value="option1"
                 onClick={() => setFieldDisable(true)}
               />
-              <label className="form-check-label ms-3 text-start" htmlFor="radio1">
+              <label
+                className="form-check-label ms-3 text-start"
+                htmlFor="radio1"
+              >
                 Date Range
               </label>
             </div>
@@ -123,8 +143,6 @@ const DealerLedger = () => {
                   onChange={(e) => setDlFromDate(e.target.value)}
                   className={`${fieldDisable ? "" : "disabled"} mt-2`}
                   disabled={!fieldDisable}
-
-
                 />
               </div>
               <div className="col-lg-4 ml-5">
@@ -136,13 +154,17 @@ const DealerLedger = () => {
                   onChange={(e) => setDlToDate(e.target.value)}
                   className={`${fieldDisable ? "" : "disabled"} mt-2`}
                   disabled={!fieldDisable}
-
                 />
               </div>
             </div>
           </div>
           <div className="col-lg-2 ">
-            <button className="btn btn-primary rounded-3 my-3" onClick={HandleLedgerData}>Submit</button>
+            <button
+              className="btn btn-primary rounded-3 my-3"
+              onClick={HandleLedgerData}
+            >
+              Submit
+            </button>
           </div>
         </div>
 
