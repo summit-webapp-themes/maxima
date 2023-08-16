@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { dealerLedgerStore } from "../../store/slices/dealer-ledger-slice/dealer-ledger-slice";
 import { useSelector } from "react-redux";
 import { CONSTANTS } from "../../services/config/app-config";
-import GetSalesVoucherPdf from "../../store/slices/dealer-ledger-slice/sales-voucher-pdf";
+import GetSalesVoucherPdf from "../../services/api/dealer-ledger-api/sales-voucher-pdf";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
 
 const DealerLedgerTable = ({ dealerLedgerSummary }: any) => {
