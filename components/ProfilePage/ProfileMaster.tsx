@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import useProfilePage from "../../hooks/GeneralHooks/ProfileHooks/ProfileHooks";
-// import ResetPassword from "./ResetPassword";
 import { useRouter } from "next/router";
-// import EditFormShippingAddressProfile from "./AddressForm/edit_address_form_profile";
 import { GetEnquiryHistoryPdf } from "../../services/api/general_apis/ProfilePageApi/enquiry-history-pdf-api";
 import EditAddressForm from "../CheckoutPageComponent/AddressForms/EditAddressForm";
 import {
@@ -13,7 +11,6 @@ import {
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { useSelector } from "react-redux";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
-// import IndianNumber from "./IndianNumber";
 const ProfileMaster = () => {
   const {
     profileList,
