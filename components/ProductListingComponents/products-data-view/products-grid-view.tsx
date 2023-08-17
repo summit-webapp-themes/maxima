@@ -1,9 +1,8 @@
 import CardsLoadingLayout from "../../../cards/CardsLoadingLayout";
 import ProductCard from "../../../cards/product-card";
 import { ProductsViewProps } from "../../../interfaces/products-view-interface";
-import styles from "../../../styles/Product_Listing.module.css";
 import { Norecord } from "../../NoRecord";
-import Topbar from "../Topbar";
+import ReactPaginate from "react-paginate";
 
 const ProductsGridView = (props: ProductsViewProps) => {
   const {
@@ -18,14 +17,18 @@ const ProductsGridView = (props: ProductsViewProps) => {
     catalogListItem,
     handleAddProduct,
     handleSubmitCatalogName,
-    handleChange
+    handleChange,
+    pageCount,
+    handlePageClick,
+    pageOffset,
   } = props;
 
-  console.log("cube in card", listItems);
+  console.log("productListTotalCount", productListTotalCount);
   return (
     <div
-      className={`${filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
-        }`}
+      className={`${
+        filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
+      }`}
     >
       <div className="row">
         {loading ? (
@@ -74,8 +77,25 @@ const ProductsGridView = (props: ProductsViewProps) => {
           />
         )}
       </div>
+      {listItems?.length > 0 && (
+        <div>
+          <ReactPaginate
+            previousLabel={selectedMultiLangData?.prev}
+            nextLabel={selectedMultiLangData?.next}
+            pageCount={pageCount}
+            pageRangeDisplayed={3}
+            onPageChange={handlePageClick}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+            forcePage={pageOffset}
+          />
+        </div>
+      )}
 
-      {productListTotalCount > listItems?.length && (
+      {/* {productListTotalCount > listItems?.length && (
         <div
           style={{
             display: "flex",
@@ -92,7 +112,7 @@ const ProductsGridView = (props: ProductsViewProps) => {
             {selectedMultiLangData?.load_more}
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

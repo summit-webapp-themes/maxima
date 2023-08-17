@@ -2,10 +2,9 @@ import { ProductsProps } from "../../../interfaces/products-view-interface";
 import ProductListViewCard from "../../../cards/product-list-view-card";
 import ListViewLoadingLayout from "./ListViewLoadingLayout";
 import { Norecord } from "../../NoRecord";
+import ReactPaginate from "react-paginate";
 
 const ProductsListView = (props: ProductsProps) => {
-  // console.log("product card", props.product_data);
-
   const {
     productListTotalCount,
     loading,
@@ -19,14 +18,18 @@ const ProductsListView = (props: ProductsProps) => {
     catalogListItem,
     handleAddProduct,
     handleSubmitCatalogName,
-    handleChange
+    handleChange,
+    pageCount,
+    handlePageClick,
+    pageOffset,
   } = props;
 
   console.log("load moreee", productListTotalCount, product_data);
   return (
     <div
-      className={`${filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
-        }`}
+      className={`${
+        filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
+      }`}
     >
       {loading ? (
         <div className="row justify-content-center">
@@ -66,10 +69,28 @@ const ProductsListView = (props: ProductsProps) => {
               selectedMultiLangData={selectedMultiLangData}
             />
           )}
+
+          {product_data?.length > 0 && (
+            <div>
+              <ReactPaginate
+                previousLabel={selectedMultiLangData?.prev}
+                nextLabel={selectedMultiLangData?.next}
+                pageCount={pageCount}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={"paginationBttns"}
+                previousLinkClassName={"previousBttn"}
+                nextLinkClassName={"nextBttn"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+                forcePage={pageOffset}
+              />
+            </div>
+          )}
         </div>
       )}
 
-      {productListTotalCount > product_data?.length && (
+      {/* {productListTotalCount > product_data?.length && (
         <div
           style={{
             display: "flex",
@@ -85,7 +106,7 @@ const ProductsListView = (props: ProductsProps) => {
             {selectedMultiLangData?.load_more}
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
