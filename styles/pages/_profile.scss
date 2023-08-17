@@ -17,6 +17,9 @@
 }
 
 .tab_width.active{
-    background-color: #6cb1f2 !important;
+    background-color: #3e9df6 !important;
 }
 
+.nav_tabs_list.active h6{
+    color: $white-color!important;
+}

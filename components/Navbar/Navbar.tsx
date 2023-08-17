@@ -61,6 +61,7 @@ const Navbar = () => {
         setClicks={setClicks}
         clicks={clicks}
         handleLanguageChange={handleLanguageChange}
+        selectedCurrencyValue={selectedCurrencyValue}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         handleSearch={handleSearch}

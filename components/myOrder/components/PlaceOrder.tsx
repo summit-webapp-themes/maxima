@@ -73,7 +73,7 @@ const PlaceOrder = ({
           <Norecord
             heading={selectedMultiLangData?.no_orders_found}
             content={selectedMultiLangData?.orders_show_up_here}
-            selectLangData={selectedMultiLangData}
+            selectedMultiLangData={selectedMultiLangData}
           />
         )}
       </div>

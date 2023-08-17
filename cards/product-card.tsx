@@ -40,7 +40,7 @@ const ProductCard = (props: ProductCardProps) => {
     catalogListItem,
     handleAddProduct,
     handleSubmitCatalogName,
-    handleChange
+    handleChange,
   } = props;
 
   let wishproducts: any;
@@ -53,10 +53,11 @@ const ProductCard = (props: ProductCardProps) => {
   let isLoggedIn: any;
   const filters_state_from_redux: any = useSelector(filters_selector_state);
   const [showEditModal, setshowEditModal] = useState(false);
+
   const [show, setshow] = useState(false);
 
-  const { query }: any = useRouter()
-  console.log("delete que", query)
+  const { query }: any = useRouter();
+  console.log("delete que", query);
   const newSlug = query?.category?.replace(/-/g, " ");
   console.log(newSlug, " newSlug");
   if (typeof window !== "undefined") {
@@ -79,7 +80,8 @@ const ProductCard = (props: ProductCardProps) => {
     });
     let AddToCartRes: any = await AddToCartApi(
       addCartData,
-      currency_state_from_redux?.selected_currency_value
+      currency_state_from_redux?.selected_currency_value,
+      tokens?.token
     );
     if (AddToCartRes.msg === "success") {
       dispatch(successmsg("Item Added to cart"));
@@ -107,10 +109,12 @@ const ProductCard = (props: ProductCardProps) => {
       catalog_name: newSlug,
       item_name: name,
     };
-    const deleteProductFromCatalog = await deleteItemFromCatalog(deleteApiParams);
-    console.log(deleteProductFromCatalog, "deleteProductFromCatalog")
+    const deleteProductFromCatalog = await deleteItemFromCatalog(
+      deleteApiParams
+    );
+    console.log(deleteProductFromCatalog, "deleteProductFromCatalog");
     if (deleteProductFromCatalog.message.msg === "success") {
-      dispatch(successmsg(deleteProductFromCatalog?.message?.data))
+      dispatch(successmsg(deleteProductFromCatalog?.message?.data));
       setTimeout(() => {
         const storeUsefulParamsForFurtherProductListingApi = {
           router_origin: router.route.split("/")[1],
@@ -130,21 +134,20 @@ const ProductCard = (props: ProductCardProps) => {
           }) as any
         );
       }, 1000);
-    }
-    else {
+    } else {
       dispatch(failmsg(deleteProductFromCatalog.message.error));
       setTimeout(() => {
         dispatch(hideToast());
       }, 1500);
     }
-
   };
   return (
     <div key={key} className="border p-3 rounded-3 h-100 ">
       <div className="d-flex justify-content-between mb-1">
         <div
-          className={`badge text-bg-primary fs-5 display_tag_badge ${display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
-            }`}
+          className={`badge text-bg-primary fs-5 display_tag_badge ${
+            display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
+          }`}
         >
           {display_tag.length > 0 && display_tag[0]}
         </div>
@@ -166,11 +169,13 @@ const ProductCard = (props: ProductCardProps) => {
                       getWishlist: false,
                       deleteWishlist: false,
                       addTowishlist: true,
+                      token: tokens?.token,
                     };
                     requestList = {
                       getWishlist: true,
                       deleteWishlist: false,
                       addTowishlist: false,
+                      token: tokens?.token,
                     };
                     dispatch(fetchWishlistUser(requestNew));
 
@@ -208,11 +213,13 @@ const ProductCard = (props: ProductCardProps) => {
                   getWishlist: false,
                   deleteWishlist: true,
                   addTowishlist: false,
+                  token: tokens?.token,
                 };
                 requestList = {
                   getWishlist: true,
                   deleteWishlist: false,
                   addTowishlist: false,
+                  token: tokens?.token,
                 };
                 dispatch(fetchWishlistUser(requestNew));
 
@@ -324,7 +331,6 @@ const ProductCard = (props: ProductCardProps) => {
         handleChange={handleChange}
       />
     </div>
-
   );
 };
 

@@ -212,7 +212,7 @@ const WebNavbar = ({
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown dropdown-link">
                         <Link href={`/catalog`} className="text-dark">
-                          View Catalogs
+                          {selectedMultiLangData?.view_catalogs}
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown dropdown-link">

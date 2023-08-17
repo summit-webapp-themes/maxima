@@ -27,7 +27,7 @@ const ProductListViewCard = (props: any) => {
     catalogListItem,
     handleAddProduct,
     handleSubmitCatalogName,
-    handleChange
+    handleChange,
   } = props;
   let wishproducts: any;
   let requestNew: any;
@@ -84,7 +84,7 @@ const ProductListViewCard = (props: any) => {
             <div className="row w-100 product product-list border rounded py-3">
               <div className="col-md-4 my-auto">
                 <div className="product-tags col-md-4">
-                  <p className="product_tag text-center my-0">
+                  <p className="product_tag text-lg-center my-0">
                     {product_data?.display_tag.length > 0 && (
                       <span className="badge text-bg-primary p-2 fs-5">
                         {product_data?.display_tag.length > 0 &&
@@ -97,7 +97,7 @@ const ProductListViewCard = (props: any) => {
                   href={`${product_data?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
                 >
                   {" "}
-                  <div className="product-img list-view-img">
+                  <div className="product-img list-view-img text-center">
                     {handleRenderingOfImages(
                       product_data?.image_url,
                       product_data?.brand_img
@@ -120,7 +120,7 @@ const ProductListViewCard = (props: any) => {
                     <div>
                       <div className="fs-5 text-gray">
                         {product_data?.short_description ===
-                          product_data?.item_name
+                        product_data?.item_name
                           ? ""
                           : product_data?.short_description}
                       </div>
@@ -129,7 +129,7 @@ const ProductListViewCard = (props: any) => {
                       </div>
 
                       {product_data?.weight_per_unit === 0 ||
-                        product_data?.weight_per_unit === null ? (
+                      product_data?.weight_per_unit === null ? (
                         ""
                       ) : (
                         <div className="product-desc text-gray">
@@ -145,7 +145,7 @@ const ProductListViewCard = (props: any) => {
                       )}
 
                       {product_data?.price === null ||
-                        product_data?.price === 0 ? (
+                      product_data?.price === 0 ? (
                         ""
                       ) : (
                         <>
@@ -162,36 +162,45 @@ const ProductListViewCard = (props: any) => {
                         </>
                       )}
                     </div>
-                    {isLoggedIn === "true" ? (
-                      <div className="text-center w-50">
-                        <button
-                          className="btn  standard_button"
-                          onClick={() => AddToCartProduct(product_data.name)}
-                        >
-                          {selectedMultiLangData?.add_to_cart}
-                        </button>
+                    <div className="row mt-lg-5 mt-2 ps-5">
+                      <div className="col-lg-6">
+                        {isLoggedIn === "true" ? (
+                          <div className="text-center w-50">
+                            <button
+                              className="btn  standard_button"
+                              onClick={() =>
+                                AddToCartProduct(product_data.name)
+                              }
+                            >
+                              {selectedMultiLangData?.add_to_cart}
+                            </button>
+                          </div>
+                        ) : (
+                          <Link href="/login">
+                            <div className="text-center w-50">
+                              <button className="btn standard_button">
+                                Add to cart
+                              </button>
+                            </div>
+                          </Link>
+                        )}
                       </div>
-                    ) : (
-                      <Link href="/login">
-                        <div className="text-center w-50">
-                          <button className="btn standard_button">
-                            Add to cart
-                          </button>
-                        </div>
-                      </Link>
-                    )}
-
-                    {router.route !== "/catalog/[category]" ? (
-                      <button
-                        type="button"
-                        className={`btn btn-link catalog-btn-size`}
-                        onClick={() => handleShow(product_data.name)}
-                      >
-                        Add To Catalog
-                      </button>
-                    ) : (
-                      ""
-                    )}
+                      <div className="col-lg-6">
+                        {router.route !== "/catalog/[category]" ? (
+                          <div className="text-center w-50">
+                            <button
+                              type="button"
+                              className={`btn btn-link catalog-btn-size pt-2`}
+                              onClick={() => handleShow(product_data.name)}
+                            >
+                              Add To Catalog
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
