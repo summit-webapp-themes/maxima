@@ -12,33 +12,35 @@ const CatalogList = () => {
     handleDeleteCatalog,
     handleAddProduct,
     currency_state_from_redux,
-    loading
+    loading,
   }: any = useCatalogHook();
 
   return (
-    <>{loading === "pending" ? (
-      <div className="row justify-content-center">
-        {[...Array(6)].map(() => (
-          <>
-            <div className="col-lg-7 mx-3">
-              <ListViewLoadingLayout />
-            </div>
-          </>
-        ))}
-      </div>
-    ) :
-      <div className="container mt-5">
-        <CreateCatalog
-          handleSubmitCatalogName={handleSubmitCatalogName}
-          handleChange={handleChange}
-        />
-        <CatalogListCard
-          catalogListItem={catalogListItem}
-          handleDeleteCatalog={handleDeleteCatalog}
-          handleAddProduct={handleAddProduct}
-          currency_state_from_redux={currency_state_from_redux}
-        />
-      </div>}
+    <>
+      {loading === "pending" ? (
+        <div className="row justify-content-center">
+          {[...Array(6)].map(() => (
+            <>
+              <div className="col-lg-7 mx-3">
+                <ListViewLoadingLayout />
+              </div>
+            </>
+          ))}
+        </div>
+      ) : (
+        <div className="container">
+          <CreateCatalog
+            handleSubmitCatalogName={handleSubmitCatalogName}
+            handleChange={handleChange}
+          />
+          <CatalogListCard
+            catalogListItem={catalogListItem}
+            handleDeleteCatalog={handleDeleteCatalog}
+            handleAddProduct={handleAddProduct}
+            currency_state_from_redux={currency_state_from_redux}
+          />
+        </div>
+      )}
     </>
   );
 };

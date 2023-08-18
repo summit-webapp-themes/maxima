@@ -114,7 +114,7 @@ const Registration = () => {
               <Link href="/" legacyBehavior>
                 <a>
                   <Image
-                    src="/assets/images/summit-logo-bb.jpg"
+                    src="/assets/images/maxima_b2b_b.png"
                     width={130}
                     height={40}
                     alt="logo"

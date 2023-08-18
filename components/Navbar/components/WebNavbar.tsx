@@ -104,7 +104,7 @@ const WebNavbar = ({
             <div className="mx-2 my-2 logo_containers">
               <Link href="/" legacyBehavior>
                 <Image
-                  src="/assets/images/summit-logo-ree.png"
+                  src="/assets/images/maxima_b2b.png"
                   width={150}
                   height={60}
                   alt="logo"
@@ -360,7 +360,7 @@ const WebNavbar = ({
             <div className="mx-3">
               <select
                 onChange={(e) => handleLanguageChange(e?.target?.value)}
-                className="select-field"
+                className="select-field cursor_pointer"
               >
                 {multiLanguagesData?.length > 0 &&
                   multiLanguagesData !== null &&
@@ -373,7 +373,7 @@ const WebNavbar = ({
             </div>
             <div className="mx-3">
               <select
-                className="select-field"
+                className="select-field cursor_pointer"
                 // value={selectedLanguage}
                 onChange={(e) => handleCurrencyValueChange(e.target.value)}
               >
