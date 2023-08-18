@@ -49,7 +49,7 @@ const Footer = () => {
               <div className="col-xl-3 col-lg-2">
                 <Link href="" legacyBehavior>
                   <Image
-                    src="/assets/images/summit-logo-ree.png"
+                    src="/assets/images/maxima_b2b.png"
                     alt="logo-footer"
                     width={150}
                     height={55}

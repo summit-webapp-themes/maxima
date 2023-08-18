@@ -1021,7 +1021,7 @@ header.header.fixed {
 }
 
 .wishlist_count {
-  right: -10px !important;
+  right: 1px !important;
 }
 
 // Homepage 4
@@ -1160,4 +1160,8 @@ padding: 7px !important;
     width: 120px;
     
   }
+}
+
+.cursor_pointer {
+  cursor: pointer !important;
 }

@@ -1,8 +1,7 @@
-.catalogListing-card {
-    border: none;
-    // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    // background-color: #DDE9F8;
-}
+// .catalogListing-card {
+//     border: 1px solid gray;
+
+// }
 
 .catalogListing-cardHeader {
     border: none;
@@ -12,13 +11,10 @@
     margin-bottom: 1rem !important;
 }
 
-.catalog-count {
-    background-color: $black-color;
-    padding: 3px 8px;
-    border-radius: 17px;
-    color: $white-color;
-    margin-left: 2px;
-}
+// .catalog-count {
+//     border-radius: 17px;
+//     margin-left: 2px;
+// }
 
 .btn-colors {
     color: $primary-color !important;
@@ -26,7 +22,8 @@
 }
 
 .catalog-wrapper {
-    background-color: #D6EBFF;
+    // background-color: #D6EBFF;
+    // border: 1px solid rgb(69, 68, 68) ;
     padding: 30px;
 }
 
@@ -34,12 +31,22 @@
     background-color: #FFF1D6 !important;
     border: 1px solid #FFEBC2 !important;
     border-radius: 6px;
+    margin-left: 100px !important;
 }
+
+@media only screen and (max-width: 600px) {
+    .catalog-inputBox {
+       
+        margin-left: 0px !important;
+    }
+    
+  }
 
 .createCatalog-btn {
     background-color: $primary-color !important;
     border: 1px solid $primary-color !important;
     color: $white-color !important;
+    border-radius: 9px !important;
 }
 
 .catalogCreate-wrapper {
@@ -67,9 +74,17 @@
 }
 
 .btn-catalogview {
-    height: 28px;
+    border-radius: 5px !important;
+  
 }
 
 .toggleView-icon {
     cursor: pointer;
+}
+
+.btn-catalogAddProduct{
+    background-color: #F2CD5C !important;
+    border: 1px solid $primary-color !important;
+    border-radius: 5px !important;
+
 }
