@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FetchOrderListing } from "../../../store/slices/order-listing-page-slice/order-listing-page-slice";
 import MyOrderCard from "../../../cards/MyOrderCard";
 import { Norecord } from "../../NoRecord";
+import { currency_selector_state } from "../../../store/slices/general_slices/multi-currency-slice";
 
 const CancelOrder = ({
   orderHistoryItems,
@@ -19,7 +20,7 @@ const CancelOrder = ({
     );
 
   console.log("orderHistoryItems", orderCancelled);
-
+  const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
     <div role="tabpanel" aria-hidden="false">
       <div className="row mb-3">
