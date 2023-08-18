@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MyOrderCard from "../../../cards/MyOrderCard";
 import { Norecord } from "../../NoRecord";
+import { currency_selector_state } from "../../../store/slices/general_slices/multi-currency-slice";
+import { useSelector } from "react-redux";
 
 const PlaceOrder = ({
   orderHistoryItems,
@@ -14,7 +16,7 @@ const PlaceOrder = ({
     orderHistoryItems?.filter(
       (items: any) => items?.payment_status !== "Cancelled"
     );
-
+    const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
     <>
       <div role="tabpanel" aria-hidden="false">
