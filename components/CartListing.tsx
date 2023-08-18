@@ -25,6 +25,7 @@ import { get_access_token } from "../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
 import DeleteProductFromCart from "../services/api/cart-page-api/delete-cart-product";
 import { fetchOrderSummary } from "../store/slices/checkoutPage-slice/order-summary";
+import ListViewLoadingLayout from "./ProductListingComponents/products-data-view/ListViewLoadingLayout";
 
 const CartListing = () => {
   const router = useRouter();
@@ -35,12 +36,14 @@ const CartListing = () => {
     arrayofSelectedItems,
     updateCart,
     callUpdateCartAPI,
+    Loadings,
   } = UseCartPageHook();
 
   const TokenFromStore: any = useSelector(get_access_token);
   const cart_listing_data_store = useSelector(cart_listing_state);
   // const { orderSummary } = UseCheckoutPageHook();
   // const orderSummary:any = []
+  console.log("cartListingItems", cartListingItems, Loadings);
 
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
@@ -162,284 +165,316 @@ const CartListing = () => {
 
   return (
     <>
-      {Object.keys(cartListingItems).length > 0 ? (
-        <div className="container py-5">
-          <div className="cart_heading mb-3">
-            <h2 className="text-uppercase">
-              {selectedMultiLangData?.shopping_cart}
-            </h2>
-          </div>
+      {Loadings === "pending" ? (
+        <div className="row justify-content-center">
+          {[...Array(10)].map(() => (
+            <>
+              <div className="col-lg-9 mx-auto">
+                <ListViewLoadingLayout />
+              </div>
+            </>
+          ))}
+        </div>
+      ) : (
+        <>
+          {Object.keys(cartListingItems).length > 0 ? (
+            <div className="container py-5">
+              <div className="cart_heading mb-3">
+                <h2 className="text-uppercase">
+                  {selectedMultiLangData?.shopping_cart}
+                </h2>
+              </div>
 
-          <div className="row">
-            <div className="col-md-6">
-              <h5>
-                {" "}
-                {selectedMultiLangData?.customer_name}:{" "}
-                {cartListingItems?.party_name}{" "}
-              </h5>
-            </div>
-            <div className="col-md-6 d-flex justify-content-end">
-              <div className="me-5">
-                <p className="checkbox-cursor">
-                  <a
-                    className="clear_cart"
-                    onClick={() => ClearCartHandle(cartListingItems.name)}
-                  >
-                    {selectedMultiLangData?.clear_cart}
-                  </a>
-                </p>
+              <div className="row">
+                <div className="col-md-6">
+                  <h5>
+                    {" "}
+                    {selectedMultiLangData?.customer_name}:{" "}
+                    {cartListingItems?.party_name}{" "}
+                  </h5>
+                </div>
+                <div className="col-md-6 d-flex justify-content-end">
+                  <div className="me-5">
+                    <p className="checkbox-cursor">
+                      <a
+                        className="clear_cart"
+                        onClick={() => ClearCartHandle(cartListingItems.name)}
+                      >
+                        {selectedMultiLangData?.clear_cart}
+                      </a>
+                    </p>
+                  </div>
+                  <div>
+                    <p className="checkbox-cursor">
+                      <a
+                        className="clear_cart"
+                        onClick={() => callUpdateCartAPI()}
+                      >
+                        {selectedMultiLangData?.update_cart}
+                      </a>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="checkbox-cursor">
-                  <a className="clear_cart" onClick={() => callUpdateCartAPI()}>
-                    {selectedMultiLangData?.update_cart}
-                  </a>
-                </p>
-              </div>
-            </div>
-          </div>
 
-          <div className="row cart_wrapper">
-            <div className="col-12">
-              <div className="row justify-content-between">
-                <div className="col-md-4 text-left">
-                  <button
-                    type="button"
-                    className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
-                    // style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
-                    onClick={goToHomeCheckout}
-                  >
-                    {selectedMultiLangData?.continue_shopping}
-                  </button>
+              <div className="row cart_wrapper">
+                <div className="col-12">
+                  <div className="row justify-content-between">
+                    <div className="col-md-4 text-left">
+                      <button
+                        type="button"
+                        className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
+                        // style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+                        onClick={goToHomeCheckout}
+                      >
+                        {selectedMultiLangData?.continue_shopping}
+                      </button>
+                    </div>
+                    <div className="col-md-4 text-center">
+                      <Link href="">
+                        <button
+                          type="button"
+                          className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
+                          // style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+                          onClick={(e: any) =>
+                            handleQuotation(e, cartListingItems.name)
+                          }
+                        >
+                          {selectedMultiLangData?.request_for_quotation}
+                        </button>
+                      </Link>
+                    </div>
+                    <div className="col-md-4 text-right">
+                      <Link href="/checkout">
+                        <button
+                          type="button"
+                          className="w-75 checkout_button mb-3 text-uppercase py-2 px-1"
+                          style={{
+                            backgroundColor: "#0071DC",
+                            color: "#fff",
+                            borderRadius: "7px",
+                          }}
+                          onClick={goToCheckout}
+                        >
+                          {selectedMultiLangData?.order_checkout}
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <div className="col-md-4 text-center">
-                  <Link href="">
-                    <button
-                      type="button"
-                      className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
-                      // style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
-                      onClick={(e: any) =>
-                        handleQuotation(e, cartListingItems.name)
-                      }
-                    >
-                      {selectedMultiLangData?.request_for_quotation}
-                    </button>
-                  </Link>
-                </div>
-                <div className="col-md-4 text-right">
-                  <Link href="/checkout">
-                    <button
-                      type="button"
-                      className="w-75 checkout_button mb-3 text-uppercase py-2 px-1"
-                      style={{
-                        backgroundColor: "#0071DC",
-                        color: "#fff",
-                        borderRadius: "7px",
-                      }}
-                      onClick={goToCheckout}
-                    >
-                      {selectedMultiLangData?.order_checkout}
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <hr />
-            <div className="col-12 text-end">
-              <h5 className="mb-0 sub-total-h5">
-                {selectedMultiLangData?.sub_total} (
-                {cartListingItems?.total_qty}{" "}
-                {selectedMultiLangData?.quantity_c}):{" "}
-                <span>
-                  {cartListingItems?.categories[0]?.orders[0]?.currency_symbol}{" "}
-                  {cartListingItems?.grand_total_excluding_tax}
-                </span>
-                {/* <p></p>
+                <hr />
+                <div className="col-12 text-end">
+                  <h5 className="mb-0 sub-total-h5">
+                    {selectedMultiLangData?.sub_total} (
+                    {cartListingItems?.total_qty}{" "}
+                    {selectedMultiLangData?.quantity_c}):{" "}
+                    <span>
+                      {
+                        cartListingItems?.categories[0]?.orders[0]
+                          ?.currency_symbol
+                      }{" "}
+                      {cartListingItems?.grand_total_excluding_tax}
+                    </span>
+                    {/* <p></p>
                 <IndianNumber
                   value={cartListingItems?.grand_total_excluding_tax}
                 /> */}
-              </h5>
-            </div>
-            <hr />
+                  </h5>
+                </div>
+                <hr />
 
-            <div className="col-12 ">
-              {cartListingItems?.categories?.length > 0 &&
-                cartListingItems?.categories !== null &&
-                cartListingItems?.categories.map(
-                  (category: any, index: any) => {
-                    return (
-                      <>
-                        <div key={index}>
-                          <h3 className="mt-1 text-decoration-underline">
-                            {category.category}
-                          </h3>
-                          <div className="col-12">
-                            <div className="row cart_heading_bg my-auto">
-                              <div className="col-md-3 col-12">
-                                <h6 className="mt-4">
-                                  {" "}
-                                  {selectedMultiLangData?.image}
-                                </h6>
-                              </div>
-                              <div className="col-md-9 col-12 d-lg-block d-none">
-                                <div className="row text-center ">
-                                  <div className="col-3 text-start my-0">
+                <div className="col-12 ">
+                  {cartListingItems?.categories?.length > 0 &&
+                    cartListingItems?.categories !== null &&
+                    cartListingItems?.categories.map(
+                      (category: any, index: any) => {
+                        return (
+                          <>
+                            <div key={index}>
+                              <h3 className="mt-1 text-decoration-underline">
+                                {category.category}
+                              </h3>
+                              <div className="col-12">
+                                <div className="row cart_heading_bg my-auto">
+                                  <div className="col-md-3 col-12">
                                     <h6 className="mt-4">
-                                      {selectedMultiLangData?.item_with_desc}
+                                      {" "}
+                                      {selectedMultiLangData?.image}
                                     </h6>
                                   </div>
-                                  <div className="col-2 my-0">
-                                    <h6 className="mt-4">
-                                      {selectedMultiLangData?.price}
-                                    </h6>
-                                  </div>
-                                  <div className="col-2">
-                                    <h6 className="mt-4">
-                                      {selectedMultiLangData?.unit_weight}
-                                    </h6>
-                                  </div>
-                                  <div className="col-2">
-                                    <h6 className="mt-4">
-                                      {selectedMultiLangData?.total_weight}
-                                    </h6>
-                                  </div>
-                                  <div className="col-1">
-                                    <h6 className="mt-4">
-                                      {selectedMultiLangData?.tax}
-                                    </h6>
-                                  </div>
-                                  <div className="col-1">
-                                    <h6 className="mt-4">
-                                      {selectedMultiLangData?.quantity_c}
-                                    </h6>
-                                  </div>
-                                  <div className="col-1">
-                                    <h6 className="mt-4">
-                                      {selectedMultiLangData?.total}
-                                    </h6>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <hr />
-                            {/* </div> */}
-                            {category?.orders?.length > 0 &&
-                              category?.orders !== null &&
-                              category?.orders.map((orders: any, i: any) => {
-                                return (
-                                  <div key={i}>
-                                    <div className="row">
-                                      <div className="col-lg-3 text-center">
-                                        {handleRenderingOfCartImages(orders)}
+                                  <div className="col-md-9 col-12 d-lg-block d-none">
+                                    <div className="row text-center ">
+                                      <div className="col-3 text-start my-0">
+                                        <h6 className="mt-4">
+                                          {
+                                            selectedMultiLangData?.item_with_desc
+                                          }
+                                        </h6>
                                       </div>
-                                      <div className="col-lg-9  ">
-                                        <CartCard
-                                          orders={orders}
-                                          index={i}
-                                          selectedMultiLangData={
-                                            selectedMultiLangData
-                                          }
-                                          arrayofSelectedItems={
-                                            arrayofSelectedItems
-                                          }
-                                          updateCart={updateCart}
-                                          cartListingItems={cartListingItems}
-                                          HandleDeleteCart={HandleDeleteCart}
-                                        />
+                                      <div className="col-2 my-0">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.price}
+                                        </h6>
+                                      </div>
+                                      <div className="col-2">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.unit_weight}
+                                        </h6>
+                                      </div>
+                                      <div className="col-2">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.total_weight}
+                                        </h6>
+                                      </div>
+                                      <div className="col-1">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.tax}
+                                        </h6>
+                                      </div>
+                                      <div className="col-1">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.quantity_c}
+                                        </h6>
+                                      </div>
+                                      <div className="col-1">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.total}
+                                        </h6>
                                       </div>
                                     </div>
                                   </div>
-                                );
-                              })}
-                          </div>
-                        </div>
-                      </>
-                    );
-                  }
-                )}
-            </div>
+                                </div>
+                                <hr />
+                                {/* </div> */}
+                                {category?.orders?.length > 0 &&
+                                  category?.orders !== null &&
+                                  category?.orders.map(
+                                    (orders: any, i: any) => {
+                                      return (
+                                        <div key={i}>
+                                          <div className="row">
+                                            <div className="col-lg-3 text-center">
+                                              {handleRenderingOfCartImages(
+                                                orders
+                                              )}
+                                            </div>
+                                            <div className="col-lg-9  ">
+                                              <CartCard
+                                                orders={orders}
+                                                index={i}
+                                                selectedMultiLangData={
+                                                  selectedMultiLangData
+                                                }
+                                                arrayofSelectedItems={
+                                                  arrayofSelectedItems
+                                                }
+                                                updateCart={updateCart}
+                                                cartListingItems={
+                                                  cartListingItems
+                                                }
+                                                HandleDeleteCart={
+                                                  HandleDeleteCart
+                                                }
+                                              />
+                                            </div>
+                                          </div>
+                                        </div>
+                                      );
+                                    }
+                                  )}
+                              </div>
+                            </div>
+                          </>
+                        );
+                      }
+                    )}
+                </div>
 
-            <hr />
-            <div className="col-12">
-              <div className="row justify-content-end">
-                <div className="col-md-6">
-                  <h5>{selectedMultiLangData?.note}:-</h5>
-                  <p>{selectedMultiLangData?.note_1}</p>
-                  <p>
-                    {selectedMultiLangData?.note_2}{" "}
-                    <button
-                      onClick={handlemodalOpen}
-                      className="missing_parts_btn ps-0"
-                    >
-                      {selectedMultiLangData?.let_us_now}
-                    </button>{" "}
-                    {selectedMultiLangData?.to_mail_us}{" "}
-                  </p>
+                <hr />
+                <div className="col-12">
+                  <div className="row justify-content-end">
+                    <div className="col-md-6">
+                      <h5>{selectedMultiLangData?.note}:-</h5>
+                      <p>{selectedMultiLangData?.note_1}</p>
+                      <p>
+                        {selectedMultiLangData?.note_2}{" "}
+                        <button
+                          onClick={handlemodalOpen}
+                          className="missing_parts_btn ps-0"
+                        >
+                          {selectedMultiLangData?.let_us_now}
+                        </button>{" "}
+                        {selectedMultiLangData?.to_mail_us}{" "}
+                      </p>
+                    </div>
+                    <div className="col-md-6 text-end cart-total">
+                      {!orderSummaryForCart ? null : (
+                        <>
+                          <div className="row justify-content-end">
+                            <div className="col-md-4"></div>
+                            <div className="col-md-4 text-left">
+                              {" "}
+                              {selectedMultiLangData?.sub_total}{" "}
+                            </div>
+                            :
+                            <div className="col-md-3 text-end">
+                              {
+                                cartListingItems?.categories[0]?.orders[0]
+                                  ?.currency_symbol
+                              }{" "}
+                              {orderSummaryForCart[0]?.value}{" "}
+                            </div>
+                          </div>
+                          <div className="row justify-content-end">
+                            <div className="col-md-4"></div>
+                            <div className="col-md-4 text-left">
+                              {" "}
+                              {selectedMultiLangData?.tax}{" "}
+                            </div>
+                            :
+                            <div className="col-md-3  text-end">
+                              {
+                                cartListingItems?.categories[0]?.orders[0]
+                                  ?.currency_symbol
+                              }
+                              <IndianNumber
+                                value={orderSummaryForCart[1]?.value}
+                              />
+                            </div>
+                          </div>
+                          <div className="row justify-content-end">
+                            <div className="col-md-4"></div>
+                            <div className="col-md-4 text-left">
+                              {" "}
+                              {selectedMultiLangData?.order_total_including_tax}
+                            </div>
+                            :
+                            <div className="col-md-3 text-end">
+                              {
+                                cartListingItems?.categories[0]?.orders[0]
+                                  ?.currency_symbol
+                              }
+                              <IndianNumber
+                                value={orderSummaryForCart[10]?.value}
+                              />
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <div className="col-md-6 text-end cart-total">
-                  {!orderSummaryForCart ? null : (
-                    <>
-                      <div className="row justify-content-end">
-                        <div className="col-md-4"></div>
-                        <div className="col-md-4 text-left">
-                          {" "}
-                          {selectedMultiLangData?.sub_total}{" "}
-                        </div>
-                        :
-                        <div className="col-md-3 text-end">
-                          {
-                            cartListingItems?.categories[0]?.orders[0]
-                              ?.currency_symbol
-                          }{" "}
-                          {orderSummaryForCart[0]?.value}{" "}
-                        </div>
-                      </div>
-                      <div className="row justify-content-end">
-                        <div className="col-md-4"></div>
-                        <div className="col-md-4 text-left">
-                          {" "}
-                          {selectedMultiLangData?.tax}{" "}
-                        </div>
-                        :
-                        <div className="col-md-3  text-end">
-                          {
-                            cartListingItems?.categories[0]?.orders[0]
-                              ?.currency_symbol
-                          }
-                          <IndianNumber value={orderSummaryForCart[1]?.value} />
-                        </div>
-                      </div>
-                      <div className="row justify-content-end">
-                        <div className="col-md-4"></div>
-                        <div className="col-md-4 text-left">
-                          {" "}
-                          {selectedMultiLangData?.order_total_including_tax}
-                        </div>
-                        :
-                        <div className="col-md-3 text-end">
-                          {
-                            cartListingItems?.categories[0]?.orders[0]
-                              ?.currency_symbol
-                          }
-                          <IndianNumber
-                            value={orderSummaryForCart[10]?.value}
-                          />
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
+                <hr />
               </div>
             </div>
-            <hr />
-          </div>
-        </div>
-      ) : (
-        <Norecord
-          heading={selectedMultiLangData?.cart_is_empty}
-          content={selectedMultiLangData?.cart_is_empty_s}
-          selectedMultiLangData={selectedMultiLangData}
-        />
+          ) : (
+            <Norecord
+              heading={selectedMultiLangData?.cart_is_empty}
+              content={selectedMultiLangData?.cart_is_empty_s}
+              selectedMultiLangData={selectedMultiLangData}
+            />
+          )}
+        </>
       )}
 
       <MissingPartsModal

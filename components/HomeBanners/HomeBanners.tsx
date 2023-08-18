@@ -35,20 +35,18 @@ const HomeBanner = () => {
                     height={600}
                   />
 
-                  {/* <CarouselCaption className="corousel-captionn">
+                  <CarouselCaption className="corousel-captionn">
                     {banner?.btn_info?.map((btn_item: any, index: number) => (
-                      <div
-                        className={`text-end carousel_capt`}
-                        key={index}
-                      >
+                      <div className={`text-end carousel_capt`} key={index}>
                         <a href={btn_item?.btn_url} className="text-white">
                           <span className="btn btn-primary banner-btn px-3">
-                            {btn_item?.btn_title} &nbsp; <i className="fa fa-forward text-light align-items-center"></i>
+                            {btn_item?.btn_title} &nbsp;{" "}
+                            <i className="fa fa-forward text-light align-items-center"></i>
                           </span>
                         </a>
                       </div>
                     ))}
-                  </CarouselCaption> */}
+                  </CarouselCaption>
                 </CarouselItem>
               );
             })}
