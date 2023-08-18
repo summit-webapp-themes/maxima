@@ -161,6 +161,18 @@ const ProductListViewCard = (props: any) => {
                           )}
                         </>
                       )}
+
+                      {router.route !== "/catalog/[category]" ? (
+                        <button
+                          type="button"
+                          className={`btn btn-link catalog-btn-size pt-2 fs-5`}
+                          onClick={() => handleShow(product_data.name)}
+                        >
+                          Add To Catalog
+                        </button>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <div className="row mt-lg-5 mt-2 ps-5">
                       <div className="col-lg-6">
@@ -185,7 +197,7 @@ const ProductListViewCard = (props: any) => {
                           </Link>
                         )}
                       </div>
-                      <div className="col-lg-6">
+                      {/* <div className="col-lg-6">
                         {router.route !== "/catalog/[category]" ? (
                           <div className="text-center w-50">
                             <button
@@ -199,7 +211,7 @@ const ProductListViewCard = (props: any) => {
                         ) : (
                           ""
                         )}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
