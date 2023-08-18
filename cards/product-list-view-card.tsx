@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Link from "next/link";
 import { CONSTANTS } from "../services/config/app-config";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
@@ -12,7 +13,9 @@ import {
   hideToast,
 } from "../store/slices/general_slices/toast_notification_slice";
 import { login_state } from "../store/slices/auth/login_slice";
-import { Router } from "next/router";
+import { Router, useRouter } from "next/router";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
+import CatalogModal from "../components/Catalog/CatalogModal";
 
 const ProductListViewCard = (props: any) => {
   const {
@@ -20,17 +23,33 @@ const ProductListViewCard = (props: any) => {
     handleRenderingOfImages,
     wishlistData,
     currency_state_from_redux,
+    selectedMultiLangData,
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange,
   } = props;
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
   const dispatch = useDispatch();
   console.log("product card list view", product_data);
+  const router = useRouter();
 
+  const TokenFromStore: any = useSelector(get_access_token);
+  const [showEditModal, setshowEditModal] = useState(false);
+  const [show, setshow] = useState(false);
   let isLoggedIn: any;
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
+
+  const handleShow = (val: any) => {
+    setshow(true);
+  };
+  const handleClose = () => {
+    setshow(false);
+  };
 
   const AddToCartProduct = async (name: any) => {
     const addCartData = [];
@@ -40,11 +59,12 @@ const ProductListViewCard = (props: any) => {
     });
     let AddToCartProductRes: any = await AddToCartApi(
       addCartData,
-      currency_state_from_redux?.selected_currency_value
+      currency_state_from_redux?.selected_currency_value,
+      TokenFromStore?.token
     );
     if (AddToCartProductRes.msg === "success") {
       dispatch(successmsg("Item Added to cart"));
-      dispatch(fetchCartListing());
+      dispatch(fetchCartListing(TokenFromStore?.token));
       setTimeout(() => {
         dispatch(hideToast());
       }, 1200);
@@ -64,7 +84,7 @@ const ProductListViewCard = (props: any) => {
             <div className="row w-100 product product-list border rounded py-3">
               <div className="col-md-4 my-auto">
                 <div className="product-tags col-md-4">
-                  <p className="product_tag text-center my-0">
+                  <p className="product_tag text-lg-center my-0">
                     {product_data?.display_tag.length > 0 && (
                       <span className="badge text-bg-primary p-2 fs-5">
                         {product_data?.display_tag.length > 0 &&
@@ -77,7 +97,7 @@ const ProductListViewCard = (props: any) => {
                   href={`${product_data?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
                 >
                   {" "}
-                  <div className="product-img list-view-img">
+                  <div className="product-img list-view-img text-center">
                     {handleRenderingOfImages(
                       product_data?.image_url,
                       product_data?.brand_img
@@ -105,7 +125,7 @@ const ProductListViewCard = (props: any) => {
                           : product_data?.short_description}
                       </div>
                       <div className="product-desc text-gray">
-                        Item Code: {product_data?.name}
+                        {selectedMultiLangData?.item_code}: {product_data?.name}
                       </div>
 
                       {product_data?.weight_per_unit === 0 ||
@@ -113,13 +133,14 @@ const ProductListViewCard = (props: any) => {
                         ""
                       ) : (
                         <div className="product-desc text-gray">
-                          APPROX WEIGHT: {product_data?.weight_per_unit}
+                          {selectedMultiLangData?.approx_weight}:{" "}
+                          {product_data?.weight_per_unit}
                           {""} {product_data?.weight_uom}
                         </div>
                       )}
                       {product_data?.brand !== null && (
                         <div className="sold-by product-desc">
-                          Brand: {product_data?.brand}
+                          {selectedMultiLangData?.brand}: {product_data?.brand}
                         </div>
                       )}
 
@@ -140,25 +161,58 @@ const ProductListViewCard = (props: any) => {
                           )}
                         </>
                       )}
-                    </div>
-                    {isLoggedIn === "true" ? (
-                      <div className="text-center w-50">
+
+                      {router.route !== "/catalog/[category]" ? (
                         <button
-                          className="btn btn-primary button_color"
-                          onClick={() => AddToCartProduct(product_data.name)}
+                          type="button"
+                          className={`btn btn-link catalog-btn-size pt-2 fs-5`}
+                          onClick={() => handleShow(product_data.name)}
                         >
-                          Add to cart
+                          Add To Catalog
                         </button>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="row mt-lg-5 mt-2 ps-5">
+                      <div className="col-lg-6">
+                        {isLoggedIn === "true" ? (
+                          <div className="text-center w-50">
+                            <button
+                              className="btn  standard_button"
+                              onClick={() =>
+                                AddToCartProduct(product_data.name)
+                              }
+                            >
+                              {selectedMultiLangData?.add_to_cart}
+                            </button>
+                          </div>
+                        ) : (
+                          <Link href="/login">
+                            <div className="text-center w-50">
+                              <button className="btn standard_button">
+                                Add to cart
+                              </button>
+                            </div>
+                          </Link>
+                        )}
                       </div>
-                    ) : (
-                      <Link href="/login">
-                        <div className="text-center w-50">
-                          <button className="btn btn-primary button_color">
-                            Add to cart
-                          </button>
-                        </div>
-                      </Link>
-                    )}
+                      {/* <div className="col-lg-6">
+                        {router.route !== "/catalog/[category]" ? (
+                          <div className="text-center w-50">
+                            <button
+                              type="button"
+                              className={`btn btn-link catalog-btn-size pt-2`}
+                              onClick={() => handleShow(product_data.name)}
+                            >
+                              Add To Catalog
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -179,11 +233,13 @@ const ProductListViewCard = (props: any) => {
                             getWishlist: false,
                             deleteWishlist: false,
                             addTowishlist: true,
+                            token: TokenFromStore?.token,
                           };
                           requestList = {
                             getWishlist: true,
                             deleteWishlist: false,
                             addTowishlist: false,
+                            token: TokenFromStore?.token,
                           };
                           dispatch(fetchWishlistUser(requestNew));
 
@@ -221,11 +277,13 @@ const ProductListViewCard = (props: any) => {
                         getWishlist: false,
                         deleteWishlist: true,
                         addTowishlist: false,
+                        token: TokenFromStore?.token,
                       };
                       requestList = {
                         getWishlist: true,
                         deleteWishlist: false,
                         addTowishlist: false,
+                        token: TokenFromStore?.token,
                       };
                       dispatch(fetchWishlistUser(requestNew));
                       setTimeout(() => {
@@ -245,6 +303,16 @@ const ProductListViewCard = (props: any) => {
             </div>
           </div>
         </div>
+        <CatalogModal
+          show={show}
+          toHide={handleShow}
+          name={product_data.name}
+          handleClose={handleClose}
+          catalogListItem={catalogListItem}
+          handleAddProduct={handleAddProduct}
+          handleSubmitCatalogName={handleSubmitCatalogName}
+          handleChange={handleChange}
+        />
       </div>
     </>
   );

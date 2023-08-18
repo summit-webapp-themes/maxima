@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UseCartPageHook from "../hooks/CartPageHooks/cart-page-hook";
 import Link from "next/link";
 import IndianNumber from "./CheckoutPageComponent/IndianNumber";
@@ -7,21 +7,38 @@ import Image from "next/image";
 import { CONSTANTS } from "../services/config/app-config";
 import CartCard from "../cards/CartCard";
 import MissingPartsModal from "./ProductListingComponents/MissingPartsModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ClearCartApi from "../services/api/cart-page-api/clear-cart-api";
-import { fetchCartListing } from "../store/slices/cart-listing-page-slice/cart-listing-slice";
+import {
+  cart_listing_state,
+  fetchCartListing,
+} from "../store/slices/cart-listing-page-slice/cart-listing-slice";
 import { Norecord } from "./NoRecord";
 import UseCheckoutPageHook from "../hooks/CheckoutHooks/checkout-page-hook";
 import getQuotationCart from "../services/api/cart-page-api/get-quotation-api";
 import {
+  failmsg,
   hideToast,
   successmsg,
 } from "../store/slices/general_slices/toast_notification_slice";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
+import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
+import DeleteProductFromCart from "../services/api/cart-page-api/delete-cart-product";
+import { fetchOrderSummary } from "../store/slices/checkoutPage-slice/order-summary";
 
 const CartListing = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { cartListingItems, orderSummaryForCart } = UseCartPageHook();
+  const {
+    cartListingItems,
+    orderSummaryForCart,
+    arrayofSelectedItems,
+    updateCart,
+    callUpdateCartAPI,
+  } = UseCartPageHook();
+
+  const TokenFromStore: any = useSelector(get_access_token);
+  const cart_listing_data_store = useSelector(cart_listing_state);
   // const { orderSummary } = UseCheckoutPageHook();
   // const orderSummary:any = []
 
@@ -46,29 +63,60 @@ const CartListing = () => {
   };
 
   const ClearCartHandle = async (quotation_id: any) => {
-    let ClearCartRes: any = await ClearCartApi(quotation_id);
+    let ClearCartRes: any = await ClearCartApi(
+      quotation_id,
+      TokenFromStore?.token
+    );
     if (ClearCartRes?.status === 200) {
-      dispatch(fetchCartListing());
+      dispatch(fetchCartListing(TokenFromStore?.token));
+    }
+  };
+
+  const HandleDeleteCart = async (item_code: any, quotationId: any) => {
+    let DeleteProduct = await DeleteProductFromCart(
+      item_code,
+      quotationId,
+      TokenFromStore?.token
+    );
+    if (DeleteProduct?.data?.message?.msg === "success") {
+      dispatch(fetchCartListing(TokenFromStore?.token));
+      if (Object.keys(cart_listing_data_store?.data).length > 0) {
+        const params = {
+          quotationId: cart_listing_data_store?.data?.name,
+          token: TokenFromStore?.token,
+        };
+        dispatch(fetchOrderSummary(params));
+      }
+      dispatch(successmsg("Item delete from cart"));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1200);
+    } else {
+      dispatch(failmsg("Failed to delete from cart"));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1500);
     }
   };
 
   const handleQuotation = async (e: any, quot_id: any) => {
     e.preventDefault();
     console.log("quot in api", quot_id);
-    const getQuotationInCart = await getQuotationCart(quot_id).then(
-      (res: any) => {
-        if (res?.data?.message?.msg === "success") {
-          dispatch(
-            successmsg(
-              "Quotation Request has been Created. Please check your Profile"
-            )
-          );
-          setTimeout(() => {
-            dispatch(hideToast());
-          }, 2000);
-        }
+    const getQuotationInCart = await getQuotationCart(
+      quot_id,
+      TokenFromStore?.token
+    ).then((res: any) => {
+      if (res?.data?.message?.msg === "success") {
+        dispatch(
+          successmsg(
+            "Quotation Request has been Created. Please check your Profile"
+          )
+        );
+        setTimeout(() => {
+          dispatch(hideToast());
+        }, 2000);
       }
-    );
+    });
     return getQuotationInCart;
   };
 
@@ -98,27 +146,56 @@ const CartListing = () => {
     }
   };
 
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
+
+  console.log("selected array of cart", arrayofSelectedItems);
+
   return (
     <>
       {Object.keys(cartListingItems).length > 0 ? (
         <div className="container py-5">
           <div className="cart_heading mb-3">
-            <h2 className="text-uppercase">Shopping cart</h2>
+            <h2 className="text-uppercase">
+              {selectedMultiLangData?.shopping_cart}
+            </h2>
           </div>
 
           <div className="row">
             <div className="col-md-6">
-              <h5>Customer name: {cartListingItems?.party_name} </h5>
+              <h5>
+                {" "}
+                {selectedMultiLangData?.customer_name}:{" "}
+                {cartListingItems?.party_name}{" "}
+              </h5>
             </div>
-            <div className="col-md-6 text-end">
-              <p className="checkbox-cursor">
-                <a
-                  className="clear_cart"
-                  onClick={() => ClearCartHandle(cartListingItems.name)}
-                >
-                  Clear Cart
-                </a>
-              </p>
+            <div className="col-md-6 d-flex justify-content-end">
+              <div className="me-5">
+                <p className="checkbox-cursor">
+                  <a
+                    className="clear_cart"
+                    onClick={() => ClearCartHandle(cartListingItems.name)}
+                  >
+                    {selectedMultiLangData?.clear_cart}
+                  </a>
+                </p>
+              </div>
+              <div>
+                <p className="checkbox-cursor">
+                  <a className="clear_cart" onClick={() => callUpdateCartAPI()}>
+                    {selectedMultiLangData?.update_cart}
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
 
@@ -128,22 +205,24 @@ const CartListing = () => {
                 <div className="col-md-4 text-left">
                   <button
                     type="button"
-                    className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 button_color"
+                    className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
+                    // style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
                     onClick={goToHomeCheckout}
                   >
-                    CONTINUE SHOPPING(ADD ITEMS)
+                    {selectedMultiLangData?.continue_shopping}
                   </button>
                 </div>
                 <div className="col-md-4 text-center">
                   <Link href="">
                     <button
                       type="button"
-                      className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 button_color"
+                      className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
+                      // style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
                       onClick={(e: any) =>
                         handleQuotation(e, cartListingItems.name)
                       }
                     >
-                      REQUEST FOR QUOTATION
+                      {selectedMultiLangData?.request_for_quotation}
                     </button>
                   </Link>
                 </div>
@@ -151,10 +230,15 @@ const CartListing = () => {
                   <Link href="/checkout">
                     <button
                       type="button"
-                      className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 button_color"
+                      className="w-75 checkout_button mb-3 text-uppercase py-2 px-1"
+                      style={{
+                        backgroundColor: "#0071DC",
+                        color: "#fff",
+                        borderRadius: "7px",
+                      }}
                       onClick={goToCheckout}
                     >
-                      ORDER CHECKOUT
+                      {selectedMultiLangData?.order_checkout}
                     </button>
                   </Link>
                 </div>
@@ -163,8 +247,13 @@ const CartListing = () => {
             <hr />
             <div className="col-12 text-end">
               <h5 className="mb-0 sub-total-h5">
-                Sub total ({cartListingItems?.total_qty} Qty):{" "}
-                <span>{cartListingItems?.categories[0]?.orders[0]?.currency_symbol}{" "}{cartListingItems?.grand_total_excluding_tax}</span>
+                {selectedMultiLangData?.sub_total} (
+                {cartListingItems?.total_qty}{" "}
+                {selectedMultiLangData?.quantity_c}):{" "}
+                <span>
+                  {cartListingItems?.categories[0]?.orders[0]?.currency_symbol}{" "}
+                  {cartListingItems?.grand_total_excluding_tax}
+                </span>
                 {/* <p></p>
                 <IndianNumber
                   value={cartListingItems?.grand_total_excluding_tax}
@@ -185,61 +274,84 @@ const CartListing = () => {
                             {category.category}
                           </h3>
                           <div className="col-12">
-                            <div
-                              className="row cart_heading_bg my-auto"
-                            >
+                            <div className="row cart_heading_bg my-auto">
                               <div className="col-md-3 col-12">
-                                <h6 className="mt-4">IMAGE</h6>
+                                <h6 className="mt-4">
+                                  {" "}
+                                  {selectedMultiLangData?.image}
+                                </h6>
                               </div>
                               <div className="col-md-9 col-12 d-lg-block d-none">
                                 <div className="row text-center ">
                                   <div className="col-3 text-start my-0">
                                     <h6 className="mt-4">
-                                      ITEM WITH DESCRIPTION
+                                      {selectedMultiLangData?.item_with_desc}
                                     </h6>
                                   </div>
                                   <div className="col-2 my-0">
-                                    <h6 className="mt-4">PRICE</h6>
-                                  </div>
-                                  <div className="col-2">
-                                    <h6 className="mt-4">UNIT WEIGHT(KG)</h6>
+                                    <h6 className="mt-4">
+                                      {selectedMultiLangData?.price}
+                                    </h6>
                                   </div>
                                   <div className="col-2">
                                     <h6 className="mt-4">
-                                      TOTAL WEIGHT(KG)
+                                      {selectedMultiLangData?.unit_weight}
+                                    </h6>
+                                  </div>
+                                  <div className="col-2">
+                                    <h6 className="mt-4">
+                                      {selectedMultiLangData?.total_weight}
                                     </h6>
                                   </div>
                                   <div className="col-1">
-                                    <h6 className="mt-4">TAX</h6>
+                                    <h6 className="mt-4">
+                                      {selectedMultiLangData?.tax}
+                                    </h6>
                                   </div>
                                   <div className="col-1">
-                                    <h6 className="mt-4">QTY</h6>
+                                    <h6 className="mt-4">
+                                      {selectedMultiLangData?.quantity_c}
+                                    </h6>
                                   </div>
                                   <div className="col-1">
-                                    <h6 className="mt-4">TOTAL</h6>
+                                    <h6 className="mt-4">
+                                      {selectedMultiLangData?.total}
+                                    </h6>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <hr />
-                          {/* </div> */}
-                          {category?.orders?.length > 0 &&
-                            category?.orders !== null &&
-                            category?.orders.map((orders: any, i: any) => {
-                              return (
-                                <div key={i}>
-                                  <div className="row">
-                                    <div className="col-lg-3 text-center">
-                                    {handleRenderingOfCartImages(orders)}
-                                    </div>
-                                    <div className="col-lg-9  ">
-                                     <CartCard orders={orders} index={i} />
+                            {/* </div> */}
+                            {category?.orders?.length > 0 &&
+                              category?.orders !== null &&
+                              category?.orders.map((orders: any, i: any) => {
+                                return (
+                                  <div key={i}>
+                                    <div className="row">
+                                      <div className="col-lg-3 text-center">
+                                        {handleRenderingOfCartImages(orders)}
+                                      </div>
+                                      <div className="col-lg-9  ">
+                                        <CartCard
+                                          orders={orders}
+                                          index={i}
+                                          selectedMultiLangData={
+                                            selectedMultiLangData
+                                          }
+                                          arrayofSelectedItems={
+                                            arrayofSelectedItems
+                                          }
+                                          updateCart={updateCart}
+                                          cartListingItems={cartListingItems}
+                                          HandleDeleteCart={HandleDeleteCart}
+                                        />
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              );
-                            })}
-                        </div>
+                                );
+                              })}
+                          </div>
                         </div>
                       </>
                     );
@@ -249,59 +361,67 @@ const CartListing = () => {
 
             <hr />
             <div className="col-12">
-              <div className="row justify-content-end" >
+              <div className="row justify-content-end">
                 <div className="col-md-6">
-                  <h5>Note:-</h5>
+                  <h5>{selectedMultiLangData?.note}:-</h5>
+                  <p>{selectedMultiLangData?.note_1}</p>
                   <p>
-                    1. For item marked as POR (price on request),you can
-                    checkout and place order.we shall provide you our price
-                    offline and process your order after you provide
-                    confirmation.
-                  </p>
-                  <p>
-                    2. If you could not find the item you were looking for press{" "}
+                    {selectedMultiLangData?.note_2}{" "}
                     <button
                       onClick={handlemodalOpen}
                       className="missing_parts_btn ps-0"
                     >
-                      Missing Parts
+                      {selectedMultiLangData?.let_us_now}
                     </button>{" "}
-                    to mail us and we will quote to you offline.
+                    {selectedMultiLangData?.to_mail_us}{" "}
                   </p>
                 </div>
                 <div className="col-md-6 text-end cart-total">
                   {!orderSummaryForCart ? null : (
                     <>
                       <div className="row justify-content-end">
-                      <div className="col-md-4"></div>
-                        <div className="col-md-4 text-left">Sub Total </div>:
+                        <div className="col-md-4"></div>
+                        <div className="col-md-4 text-left">
+                          {" "}
+                          {selectedMultiLangData?.sub_total}{" "}
+                        </div>
+                        :
                         <div className="col-md-3 text-end">
-                        {cartListingItems?.categories[0]?.orders[0]?.currency_symbol}{" "}{orderSummaryForCart[0]?.value}{" "}
+                          {
+                            cartListingItems?.categories[0]?.orders[0]
+                              ?.currency_symbol
+                          }{" "}
+                          {orderSummaryForCart[0]?.value}{" "}
                         </div>
                       </div>
                       <div className="row justify-content-end">
-                      <div className="col-md-4"></div>
-                        <div className="col-md-4 text-left">Tax </div>:
+                        <div className="col-md-4"></div>
+                        <div className="col-md-4 text-left">
+                          {" "}
+                          {selectedMultiLangData?.tax}{" "}
+                        </div>
+                        :
                         <div className="col-md-3  text-end">
-                          <i
-                            className="fa fa-inr pe-1 ps-1 bold"
-                            aria-hidden="true"
-                          ></i>
+                          {
+                            cartListingItems?.categories[0]?.orders[0]
+                              ?.currency_symbol
+                          }
                           <IndianNumber value={orderSummaryForCart[1]?.value} />
                         </div>
                       </div>
                       <div className="row justify-content-end">
-                      <div className="col-md-4"></div>
+                        <div className="col-md-4"></div>
                         <div className="col-md-4 text-left">
                           {" "}
-                          Order Total Including Tax 
-                        </div>:
+                          {selectedMultiLangData?.order_total_including_tax}
+                        </div>
+                        :
                         <div className="col-md-3 text-end">
-                          <i
-                            className="fa fa-inr pe-1 ps-1 bold"
-                            aria-hidden="true"
-                          ></i>
-                          <IndianNumber 
+                          {
+                            cartListingItems?.categories[0]?.orders[0]
+                              ?.currency_symbol
+                          }
+                          <IndianNumber
                             value={orderSummaryForCart[10]?.value}
                           />
                         </div>
@@ -316,8 +436,9 @@ const CartListing = () => {
         </div>
       ) : (
         <Norecord
-          heading="Your cart is empty!!"
-          content="Items added to your cart will show up here"
+          heading={selectedMultiLangData?.cart_is_empty}
+          content={selectedMultiLangData?.cart_is_empty_s}
+          selectedMultiLangData={selectedMultiLangData}
         />
       )}
 

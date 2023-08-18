@@ -12,21 +12,24 @@ import DisplayTagMaster from "./DisplayTags/DisplayTagMaster";
 import { askForPermissionToReceiveNotifications } from "../push-notifications";
 
 const HomePage = () => {
-
   // useEffect(()=>
   // {
   //   askForPermissionToReceiveNotifications();
   // },[])
-  
-  const { allTagsData } = useDisplayTagHooks();
 
-  const { homeTopCategories, isLoading,selectedCurrencyVal } = useHomeTopCategories();
+  const { allTagsData }: any = useDisplayTagHooks();
 
-  const renderSectionComponent = (index: number) => {
+  const { homeTopCategories, isLoading, selectedCurrencyVal }: any =
+    useHomeTopCategories();
+
+  const renderSectionComponent: any = (index: number) => {
     switch (index) {
       case 0:
         return (
-          <HomeTopCategoriesBanner homeTopCategories={homeTopCategories} selectedCurrencyVal={selectedCurrencyVal}/>
+          <HomeTopCategoriesBanner
+            homeTopCategories={homeTopCategories}
+            selectedCurrencyVal={selectedCurrencyVal}
+          />
         );
       case 1:
         return <HomeTopBrands />;
@@ -53,12 +56,6 @@ const HomePage = () => {
           {renderSectionComponent(index)}
         </React.Fragment>
       ))}
-
-      {/* <NewArrivals newarrivalTagListing={newArrivalTagListingOfProducts} />
-      <HomeTopCategoriesBanner homeTopCategories={homeTopCategories} />
-      <SpecialOffer specialTagListing={specialOfferTagListingOfProducts} />
-      <HomeTopBrands />
-      <BestSeller bestSellerListing={bestSellerTagListingOfProducts} /> */}
     </>
   );
 };

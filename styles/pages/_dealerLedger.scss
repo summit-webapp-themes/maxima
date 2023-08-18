@@ -1,0 +1,33 @@
+.ledger-table-header {
+    width: 10% !important;
+}
+
+.dealer-ledger-container {
+    margin: 70px 0px !important;
+}
+
+.ledger-submit-button {
+    border: 1px solid #3884f5 !important;
+    color: $body-color !important;
+
+}
+
+.ledger-submit-button:hover {
+    background-color: #3884f5 !important;
+    color: $white-color !important;
+}
+
+.dealer-ledger-td-l {
+    padding-left: 10px !important;
+}
+
+
+.dealer-ledger-td-r {
+    padding-right: 10px !important;
+}
+
+@media screen and (min-width: 580px) {
+.dealer-ledger-table {
+    overflow-x: hidden !important; 
+}
+  }

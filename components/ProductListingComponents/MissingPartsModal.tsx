@@ -2,18 +2,29 @@ import { Modal, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MissingPartsAPI } from "../../services/api/product-listing-page-api/missing-parts-api";
+import { get_access_token } from "../../store/slices/auth/token-login-slice";
 
-const MissingPartsModal = ({ show, handlemodalclose, setShow }: any) => {
+const MissingPartsModal = ({
+  show,
+  handlemodalclose,
+  setShow,
+  selectedMultiLangData,
+}: any) => {
   const [descriptionVal, setdescriptionval] = useState<any>("");
-  const [message, setMessage] = useState<any>("");
-  const [showToast, setshowToast] = useState(false);
-  const [messageNew, setmessageNew] = useState("");
+  const TokenFromStore: any = useSelector(get_access_token);
+
+  const [showToast, setshowToast] = useState<boolean>(false);
+  const [messageNew, setmessageNew] = useState<any>("");
   const dispatch = useDispatch();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit: any = async (e: any) => {
     e.preventDefault();
     if (descriptionVal !== "") {
-      const missingPartsApiRes = await MissingPartsAPI(null, descriptionVal);
+      const missingPartsApiRes = await MissingPartsAPI(
+        null,
+        descriptionVal,
+        TokenFromStore?.token
+      );
       if (
         missingPartsApiRes?.status === 200 &&
         missingPartsApiRes?.data?.message?.msg === "success"
@@ -21,16 +32,6 @@ const MissingPartsModal = ({ show, handlemodalclose, setShow }: any) => {
         setdescriptionval("");
       }
       handlemodalclose();
-      //   setmessageNew("");
-      //   setMessage(missingPartsApiRes.msg);
-      //   if (missingPartsApiRes?.msg == "success") {
-      //     //   setshowToast(true);
-      //     dispatch(successmsg("Enquiry Send Sucessfully"));
-      //     setTimeout(() => {
-      //       dispatch(hideToast());
-      //     }, 1200);
-      //     setShow(false);
-      //   }
     } else {
       setmessageNew("*Please fill one of the field");
     }
@@ -39,12 +40,14 @@ const MissingPartsModal = ({ show, handlemodalclose, setShow }: any) => {
     <>
       <Modal show={show} onHide={handlemodalclose}>
         <Modal.Header closeButton>
-          <h4 className="text-center mt-2">Missing Parts</h4>
+          <h4 className="text-center mt-2">
+            {selectedMultiLangData?.what_are_you_searching_today}
+          </h4>
         </Modal.Header>
         <Modal.Body>
           <div className="form-group mt-2">
             <h6 className="text-capitalize">
-              Let us know if you couldn&apos;t Find any Product of your Choice
+              {selectedMultiLangData?.choice_product_not_f}
             </h6>
             <textarea
               className="form-control"
@@ -59,10 +62,15 @@ const MissingPartsModal = ({ show, handlemodalclose, setShow }: any) => {
           <p className="text-danger">{messageNew}</p>
           <div className="text-right mt-4">
             <button
-              className="btn btn-primary button_color text-white"
+              className="btn btn-primary text-white"
+              style={{
+                border: "1px solid #0071DC",
+                borderRadius: "7px",
+                backgroundColor: "#0071DC",
+              }}
               onClick={(e) => handleSubmit(e)}
             >
-              Submit Enquiry
+              {selectedMultiLangData?.submit_enquiry}
             </button>
           </div>
         </Modal.Body>

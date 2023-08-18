@@ -2,10 +2,11 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { ShippingValidation } from "../../../validation/addressFormValidation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchShippingAddress } from "../../../store/slices/checkoutPage-slice/customer-shipping-address-slice";
 import { fetchBillingAddress } from "../../../store/slices/checkoutPage-slice/customer-billing-address-slice";
 import { storeCustomerAddresses } from "../../../store/slices/checkoutPage-slice/store-customer-address-slice";
+import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 
 const AddNewAddressForm = ({
   show,
@@ -18,8 +19,10 @@ const AddNewAddressForm = ({
   city,
   selectedStates,
   selectedCity,
+  selectedMultiLangData,
 }: any) => {
   const dispatch = useDispatch();
+  const TokenFromStore: any = useSelector(get_access_token);
 
   const initialValues = {
     name: "",
@@ -38,7 +41,9 @@ const AddNewAddressForm = ({
     <>
       <Modal show={show} onHide={toHide}>
         <Modal.Header closeButton>
-          <Modal.Title className="bold">Customer Address Form</Modal.Title>
+          <Modal.Title className="bold">
+            {selectedMultiLangData?.customer_address_form}
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -47,10 +52,14 @@ const AddNewAddressForm = ({
             validationSchema={ShippingValidation}
             onSubmit={(values: any, action: any) => {
               console.log("form shipping/billing address form values", values);
-              dispatch(storeCustomerAddresses({ ...values }));
+              const requestParams = {
+                value: { ...values },
+                token: TokenFromStore?.token,
+              };
+              dispatch(storeCustomerAddresses(requestParams));
               setTimeout(() => {
-                dispatch(fetchShippingAddress());
-                dispatch(fetchBillingAddress());
+                dispatch(fetchShippingAddress(TokenFromStore?.token));
+                dispatch(fetchBillingAddress(TokenFromStore?.token));
               }, 1800);
               action.resetForm();
               toHide();
@@ -66,7 +75,7 @@ const AddNewAddressForm = ({
                       <div className="col-lg-12">
                         <div className="billing-add-heading">
                           <h4 className="mb-4 my-sm-2 mt-lg-0 fw-bold billing-header">
-                            Customer address
+                            {selectedMultiLangData?.customer_address}
                           </h4>
                         </div>
                       </div>
@@ -75,7 +84,8 @@ const AddNewAddressForm = ({
                         <div className="fields-group-md mb-4 fs-6">
                           <div className="form-group">
                             <label className="form-Form.Label fs-4 text-dark">
-                              Name <span className="red">*</span>
+                              {selectedMultiLangData?.name}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               type="text"
@@ -96,7 +106,8 @@ const AddNewAddressForm = ({
                         <div>
                           <div className="form-group mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              Address 1<span className="red">*</span>
+                              {selectedMultiLangData?.address_1}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               className="form-control rounded-0"
@@ -115,7 +126,8 @@ const AddNewAddressForm = ({
                         <div>
                           <div className="form-group mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              Address 2<span className="red">*</span>
+                              {selectedMultiLangData?.address_2}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               as="textarea"
@@ -131,7 +143,8 @@ const AddNewAddressForm = ({
                         <div>
                           <div className="form-group mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              Country <span className="red">*</span>
+                              {selectedMultiLangData?.country}{" "}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               component="select"
@@ -142,7 +155,9 @@ const AddNewAddressForm = ({
                               onBlur={handleBlur}
                               autoComplete="off"
                             >
-                              <option>Please select a country.</option>
+                              <option>
+                                {selectedMultiLangData?.please_select_a_country}
+                              </option>
                               <option>India</option>
                             </Field>
                             <span className="error_message text-danger fs-5">
@@ -154,7 +169,8 @@ const AddNewAddressForm = ({
                         <div>
                           <div className="form-group mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              State/Province <span className="red">*</span>
+                              {selectedMultiLangData?.state}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               component="select"
@@ -170,7 +186,7 @@ const AddNewAddressForm = ({
                               onBlur={handleBlur}
                             >
                               <option>
-                                Select Select a region, state or province
+                                {selectedMultiLangData?.please_select_a_state}
                               </option>
                               {state?.length > 0 && (
                                 <>
@@ -195,7 +211,8 @@ const AddNewAddressForm = ({
                         <div>
                           <div className="form-group mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              City <span className="red">*</span>
+                              {selectedMultiLangData?.city}{" "}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               component="select"
@@ -212,7 +229,7 @@ const AddNewAddressForm = ({
                               onBlur={handleBlur}
                             >
                               <option>
-                                Please select a region, state, or province.
+                                {selectedMultiLangData?.please_select_a_city}
                               </option>
                               {city?.length > 0 && (
                                 <>
@@ -233,7 +250,8 @@ const AddNewAddressForm = ({
                         <div>
                           <div className="form-group mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              Zip/Postal Code <span className="red">*</span>
+                              {selectedMultiLangData?.postal_code}{" "}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               type="text"
@@ -260,14 +278,15 @@ const AddNewAddressForm = ({
                             onChange={handleChange}
                           />
                           <span className="fs-5 align-bottom mx-1 text-dark">
-                            Set as default address
+                            {selectedMultiLangData?.set_as_default_address}
                           </span>
                         </div>
 
                         <div>
                           <div className="form-group  mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              Email ID <span className="red">*</span>
+                              {selectedMultiLangData?.email}{" "}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               type="email"
@@ -288,7 +307,8 @@ const AddNewAddressForm = ({
                         <div>
                           <div className="form-gr2oup  mt-3 fs-6">
                             <label className="form-Form.Label fs-4 text-dark">
-                              Mobile No <span className="red">*</span>
+                              {selectedMultiLangData?.mobile_number}{" "}
+                              <span className="red">*</span>
                             </label>
                             <Field
                               type="text"
@@ -309,10 +329,10 @@ const AddNewAddressForm = ({
                         <div className="text-center ">
                           <button
                             type="submit"
-                            className="btn btn-warning mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
+                            className="btn mt-3 px-4 py-3 text-uppercase rounded-0 button_color"
                             disabled={isSubmitting}
                           >
-                            Save the address
+                            {selectedMultiLangData?.save_address}
                           </button>
                         </div>
                       </div>

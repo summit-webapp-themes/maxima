@@ -1,6 +1,7 @@
-import { AnyObject } from "yup";
-
-const CheckStockAvailibility = ({ stockAvailability }: any) => {
+const CheckStockAvailibility = ({
+  stockAvailability,
+  selectedMultiLangData,
+}: any) => {
   const handleFutureStockAvailability = (doesFutureStockExists: any) => {
     if (doesFutureStockExists?.length > 0) {
       return (
@@ -53,18 +54,28 @@ const CheckStockAvailibility = ({ stockAvailability }: any) => {
         <table className="table table-hover stock table-bordered">
           <thead>
             <tr className="stock_availa_header">
-              <th className="text-center stock_availa_header">
-                Warehouse name
+              <th className="text-center stock_availability_header">
+                {selectedMultiLangData?.warehouse_name}
               </th>
-              <th className="text-center">Available Stock Qty</th>
-              <th className="text-center">Incoming Stock Qty</th>
-              <th className="text-center">Estimated Incoming Stock Date</th>
-              <th className="text-center">Additional Qty</th>
-              <th className="text-center">Available On</th>
+              <th className="text-center stock_availability_header">
+                {selectedMultiLangData?.available_stock_qty}
+              </th>
+              <th className="text-center stock_availability_header">
+                {selectedMultiLangData?.incoming_stock_qty}
+              </th>
+              <th className="text-center stock_availability_header">
+                {selectedMultiLangData?.estimated_incoming_stock_date}
+              </th>
+              <th className="text-center stock_availability_header">
+                {selectedMultiLangData?.additional_qty}
+              </th>
+              <th className="text-center stock_availability_header">
+                {selectedMultiLangData?.available_on}
+              </th>
             </tr>
           </thead>
 
-          {handleFutureStockAvailability(stockAvailability?.stockAvailability)}
+          {handleFutureStockAvailability(stockAvailability)}
         </table>
       </div>
     </div>

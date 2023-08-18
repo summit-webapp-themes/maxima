@@ -4,6 +4,7 @@ const MobileFilter = ({
   filtersData,
   selectedFilters,
   handleApplyFilters,
+  selectedMultiLangData,
 }: any) => {
   return (
     <div className="container-fluid d-block d-lg-none">
@@ -13,17 +14,16 @@ const MobileFilter = ({
           data-bs-target="#myFilterModal"
           className="text-uppercase sticky_btn"
         >
-          <i className="fa fa-filter me-1" aria-hidden="true"></i>Filter
+          <i className="fa fa-filter me-1" aria-hidden="true"></i>
+          {selectedMultiLangData?.filter}
         </a>
-
-     
       </div>
 
       <div className="modal" id="myFilterModal">
-        <div className="modal-dialog">
+        <div className="modal-dialog filter-modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h4 className="modal-title">Filters</h4>
+              <h4 className="modal-title">{selectedMultiLangData?.filter}</h4>
               <button
                 type="button"
                 className="btn-close"
@@ -32,11 +32,11 @@ const MobileFilter = ({
             </div>
 
             <div className="modal-body">
-              <div className="clear_filter mb-1">
+              {/* <div className="clear_filter mb-1">
                 <a href="#" className="clear_filter_link">
-                  Clear Filter
+                  {selectedMultiLangData?.clear_filter}
                 </a>
-              </div>
+              </div> */}
               <div className="filter_section">
                 <div className="filter_block">
                   <div className="accordion accordion_custom" id="myAccordion">
@@ -85,10 +85,11 @@ const MobileFilter = ({
                                         value={vals}
                                         id="flexCheckDefault"
                                         checked={selectedFilters.some(
-                                            (selectedFilter: any) =>
-                                              selectedFilter.name === item.section &&
-                                              selectedFilter.value.includes(vals)
-                                          )}
+                                          (selectedFilter: any) =>
+                                            selectedFilter.name ===
+                                              item.section &&
+                                            selectedFilter.value.includes(vals)
+                                        )}
                                         onChange={(e) =>
                                           handleApplyFilters(
                                             e,
@@ -111,7 +112,7 @@ const MobileFilter = ({
                             </div>
                           );
                         })
-                      : "Sorry no filters available for this page"}
+                      : ""}
                   </div>
                 </div>
               </div>
@@ -123,7 +124,7 @@ const MobileFilter = ({
                 className="btn button_color text-center"
                 data-bs-dismiss="modal"
               >
-                Submit
+                {selectedMultiLangData?.submit}
               </button>
             </div>
           </div>
@@ -142,7 +143,7 @@ const MobileFilter = ({
               ></button>
             </div> */}
 
-            {/* <div className="modal-body sort-by">
+      {/* <div className="modal-body sort-by">
               <div className="p-0 text-right d-flex align-items-center justify-content-end">
                 <p>Price:</p>
                 <select
@@ -157,7 +158,7 @@ const MobileFilter = ({
                 </select>
               </div>
             </div> */}
-          {/* </div>
+      {/* </div>
         </div>
       </div> */}
     </div>

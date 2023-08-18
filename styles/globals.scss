@@ -20,9 +20,9 @@
 @import 'mixins/buttons';
 @import 'mixins/direction';
 
-/*Vendor*/ 
+/*Vendor*/
 @import 'bootstrap.min';
-/*Vendor*/ 
+/*Vendor*/
 /* 3. Base */
 @import 'base/base';
 @import 'base/layout';
@@ -89,6 +89,7 @@
 @import 'components/listViewLoadingLayoutCustom';
 @import 'components/bannerLoaderCustom';
 @import 'components/profile';
+@import 'components/catalog';
 
 @import 'components/norecord';
 @import 'components/variants';
@@ -126,4 +127,5 @@
 @import 'pages/profile';
 @import 'pages/forgotpassword';
 @import 'demos/demo1/demo1.scss';
-@import 'pages/notfound'
+@import 'pages/notfound';
+@import 'pages/dealerLedger';

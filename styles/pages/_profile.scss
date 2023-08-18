@@ -15,3 +15,11 @@
     font-weight: 1000;
     font-size: 20px;
 }
+
+.tab_width.active{
+    background-color: #3e9df6 !important;
+}
+
+.nav_tabs_list.active h6{
+    color: $white-color!important;
+}

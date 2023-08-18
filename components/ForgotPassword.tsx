@@ -3,12 +3,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ForgotValidation } from "../validation/forgotValidation";
 import ResetPasswordLink from "../services/api/auth/reset-password-link-api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   failmsg,
   hideToast,
   successmsg,
 } from "../store/slices/general_slices/toast_notification_slice";
+import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
 
 interface FormValues {
   email: any;
@@ -16,6 +17,18 @@ interface FormValues {
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
+
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
   const initialValues: FormValues = {
     email: "",
   };
@@ -46,14 +59,14 @@ const ForgotPassword = () => {
   return (
     <>
       <div className="container my-5">
-        
         <div className={`col-lg-6 col-sm-9 col-12  mx-auto form_wrap`}>
           <div className="page_heading text-center">
-            <h4 className="forgot_passwordh4">forgot your password</h4>
+            <h4 className="forgot_passwordh4">
+              {selectedMultiLangData?.forgot_your_password}
+            </h4>
           </div>
           <p className={`mt-4 forgotpassword_p`}>
-            Please enter your email address associated with your account and we
-            will email you instructions to reset your password.
+            {selectedMultiLangData?.reset_password_instruction}
           </p>
           <Formik
             initialValues={initialValues}
@@ -70,11 +83,8 @@ const ForgotPassword = () => {
                     <div className="row">
                       <div className="col-md-3 ">
                         <div className={`label text-end mt-1`}>
-                          <label
-                            htmlFor=""
-                            className="forgotpassword_label"
-                          >
-                            Email ID:
+                          <label htmlFor="" className="forgotpassword_label">
+                            {selectedMultiLangData?.email}
                           </label>
                         </div>
                       </div>
@@ -118,14 +128,14 @@ const ForgotPassword = () => {
                           type="button"
                           className={`btn button_color back_forgotpassword mr-2`}
                         >
-                          Back
+                          {selectedMultiLangData?.back}
                         </button>
                       </Link>
                       <button
                         type="submit"
-                        className={`btn btn-warning button_color btn_forgotpassword`}
+                        className={`btn button_color btn_forgotpassword`}
                       >
-                        SUBMIT
+                        {selectedMultiLangData?.submit}
                       </button>
                     </div>
                   </div>

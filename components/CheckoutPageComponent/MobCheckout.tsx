@@ -13,6 +13,8 @@ import {
 } from "../../services/api/general_apis/customer-form-data-api";
 import VisitorAddressForm from "./AddressForms/VisitorAddressForm";
 import { CONSTANTS } from "../../services/config/app-config";
+import { useSelector } from "react-redux";
+import { get_access_token } from "../../store/slices/auth/token-login-slice";
 
 const MobCheckout = ({
   shippingAddresses,
@@ -51,15 +53,16 @@ const MobCheckout = ({
   handleStoreCredit,
 }: CheckoutPageInterface) => {
   const [visitorState, setVisitorState] = useState<any>(null);
-  let [selectedCity, setSelectedCity] = useState("");
-  let [state, setState] = useState([]);
+  let [selectedCity, setSelectedCity] = useState<any>("");
+  let [state, setState] = useState<any>([]);
   let [city, setCity] = useState<any>([]);
-  const [err, setErr] = useState(false);
-  let [selectedStates, setSelectedStates] = useState("");
-  const [shippingCheck, setShippingCheck] = useState(true);
-  const [checkIsDealer, setCheckIsDealer] = useState<any>('');
+  const [err, setErr] = useState<boolean>(false);
+  let [selectedStates, setSelectedStates] = useState<any>("");
+  const [shippingCheck, setShippingCheck] = useState<any>(true);
+  const [checkIsDealer, setCheckIsDealer] = useState<any>("");
+  const TokenFromStore: any = useSelector(get_access_token);
 
-  let isDealer:any = useRef('');
+  let isDealer: any = useRef("");
   useEffect(() => {
     if (typeof window !== "undefined") {
       const visitor_login: any = localStorage.getItem("isLoggedIn");
@@ -69,10 +72,12 @@ const MobCheckout = ({
   }, []);
 
   useEffect(() => {
-    const getStateData = async () => {
-      const stateData = await FetchStateForAddressForm();
+    const getStateData: any = async () => {
+      const stateData: any = await FetchStateForAddressForm(
+        TokenFromStore?.token
+      );
       if (stateData?.length > 0) {
-        let stateValues = stateData
+        let stateValues: any = stateData
           .map((item: any) => item?.name)
           .filter((item: any) => item !== null);
         setState(stateValues);
@@ -85,10 +90,13 @@ const MobCheckout = ({
   const handleSelectedState = async (stateValue: string) => {
     setSelectedCity("");
     setCity([]);
-    const getCitiesFromState = await FetchCitiesForAddressForm(stateValue);
+    const getCitiesFromState: any = await FetchCitiesForAddressForm(
+      stateValue,
+      TokenFromStore?.token
+    );
     console.log("cities values", getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
-      let citiesValues = getCitiesFromState
+      let citiesValues: any = getCitiesFromState
         .map((item: any) => item.name)
         .filter((item: any) => item !== null);
 
@@ -149,8 +157,8 @@ const MobCheckout = ({
                       />
                     </div>
                   </div>
-                  {(checkIsDealer === 'true' &&
-                    CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER) && (
+                  {checkIsDealer === "true" &&
+                    CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER && (
                       <>
                         <div className="col-lg-7">
                           <ShippingMethod
@@ -179,7 +187,7 @@ const MobCheckout = ({
                 </div>
 
                 <div className="col-lg-4">
-                  <HandleOrderSection 
+                  <HandleOrderSection
                     orderSummary={orderSummary}
                     handleApplyCouponCode={handleApplyCouponCode}
                     handleDeleteCouponCode={handleDeleteCouponCode}
@@ -251,7 +259,7 @@ const MobCheckout = ({
                             htmlFor="flexCheckDefault"
                           >
                             Same as Shipping Address
-                          </label> 
+                          </label>
                         </div>
                         {billingCheckbox ? null : (
                           <VisitorAddressForm
@@ -270,7 +278,7 @@ const MobCheckout = ({
                     </div>
                   </div>
                 </div>
-              </div>  
+              </div>
             </>
           )}
         </div>
@@ -280,14 +288,6 @@ const MobCheckout = ({
 };
 
 export default MobCheckout;
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import VisitorAddress from "./AddressForms/VisitorAddressForm";
@@ -330,7 +330,7 @@ export default MobCheckout;
 //   storeCredit,
 //   setStoreCredit,
 //   couponCodeApiRes,
-  
+
 // }: any) => {
 //   const [showEditModal, setshowEditModal] = useState(false);
 //   const [detailData, setdetailData] = useState();

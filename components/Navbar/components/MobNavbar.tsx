@@ -10,15 +10,11 @@ const MobNavbar = ({
   setSearchValue,
   handleSearch,
   isLoading,
+  selectedMultiLangData,
+  selectedCurrencyValue,
 }: any) => {
-  // const setmainLink = () => {
-  //   let element: HTMLElement = document.getElementsByClassName(
-  //     "bm-overlay"
-  //   )[0] as HTMLElement;
-  //   element.click();
-  // };
-  const [arrowIndex, setarrowIndex] = useState(null);
-  const [indexVal, setindexVal] = useState(null);
+  const [arrowIndex, setarrowIndex] = useState<any>(null);
+  const [indexVal, setindexVal] = useState<any>(null);
 
   const onClickCloseNav = () => {
     console.log("click close");
@@ -58,7 +54,7 @@ const MobNavbar = ({
               className="form-control border"
               name="search"
               id="search"
-              placeholder="Search in..."
+              placeholder={selectedMultiLangData?.search_in}
               value={searchValue}
               onChange={(e: any) => setSearchValue(e.target.value)}
               required
@@ -91,7 +87,10 @@ const MobNavbar = ({
                         {navbardata?.values?.map(
                           (navbarVal: any, index: any) => (
                             <li key={index}>
-                              <Link href={navbarVal.url} legacyBehavior>
+                              <Link
+                                href={`${navbarVal.url}?page=1&currency=${selectedCurrencyValue}`}
+                                legacyBehavior
+                              >
                                 <a
                                   className="text-dark"
                                   // onClick={onClickCloseNav}
@@ -113,7 +112,7 @@ const MobNavbar = ({
                                   (navbarlist: any, i: any) => (
                                     <li key={i}>
                                       <Link
-                                        href={navbarlist?.url}
+                                        href={`${navbarlist.url}?page=1&currency=${selectedCurrencyValue}`}
                                         legacyBehavior
                                       >
                                         <a

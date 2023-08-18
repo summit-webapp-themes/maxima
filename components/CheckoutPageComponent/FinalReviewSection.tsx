@@ -1,25 +1,31 @@
 import React, { useState } from "react";
 import IndianNumber from "./IndianNumber";
 
-const FinalReviewSection = ({ orderSummary, handlePlaceOrder, deleteCoupon }: any) => {
+const FinalReviewSection = ({
+  orderSummary,
+  handlePlaceOrder,
+  deleteCoupon,
+  selectedMultiLangData,
+}: any) => {
   const [acceptedTerms, setAcceptedTerms] = useState<any>(false);
 
-  const handleAcceptTerms = () => {
+  const handleAcceptTerms: any = () => {
     setAcceptedTerms(!acceptedTerms);
   };
-  console.log("acceptedTerms", acceptedTerms
-  )
+  console.log("acceptedTerms", acceptedTerms);
   return (
     <>
       <div className="finalreview pb-3 pr-3">
         <h4 className="mb-3 finalreview-heading ">
-          Final Review
+          {selectedMultiLangData?.final_review}
         </h4>
         <table width="100%" className="mb-0 mt-1 table table-borderless">
           <tbody>
             <tr className="item_options">
               <td width="50%" className="px-0 py-0 pb-1 ">
-                <p className={`text-capitalize mb-0 fs-4 bold `}>SubTotal:</p>
+                <p className={`text-capitalize mb-0 fs-4 bold `}>
+                  {selectedMultiLangData?.sub_total}:
+                </p>
               </td>
               <td width="50%" className="px-0 py-0 pb-1">
                 <p className={`text-capitalize mb-0`}>
@@ -28,8 +34,8 @@ const FinalReviewSection = ({ orderSummary, handlePlaceOrder, deleteCoupon }: an
                     ?.filter(
                       (vals: any) => vals?.name === "Subtotal Excluding Tax"
                     )
-                    .map((vals: any , index:any) => (
-                      <IndianNumber value={vals?.value} key={index}/>
+                    .map((vals: any, index: any) => (
+                      <IndianNumber value={vals?.value} key={index} />
                     ))}
                 </p>
               </td>
@@ -37,7 +43,10 @@ const FinalReviewSection = ({ orderSummary, handlePlaceOrder, deleteCoupon }: an
 
             <tr className="item_options ">
               <td width="50%" className="px-0 py-0 ">
-                <p className={`mb-0 fs-4 bold `}>Order Total Including Tax:</p>
+                <p className={`mb-0 fs-4 bold `}>
+                  {" "}
+                  {selectedMultiLangData?.order_total_including_tax}:
+                </p>
               </td>
               <td width="50%" className="px-0 py-0 ">
                 <i className="fa fa-inr"></i>
@@ -45,8 +54,8 @@ const FinalReviewSection = ({ orderSummary, handlePlaceOrder, deleteCoupon }: an
                   ?.filter(
                     (vals: any) => vals?.name === "Subtotal Including Tax"
                   )
-                  .map((vals: any , index:any) => (
-                    <IndianNumber value={vals?.value} key={index}/>
+                  .map((vals: any, index: any) => (
+                    <IndianNumber value={vals?.value} key={index} />
                   ))}
               </td>
             </tr>
@@ -64,18 +73,17 @@ const FinalReviewSection = ({ orderSummary, handlePlaceOrder, deleteCoupon }: an
             className="form-check-label text-dark text-label"
             htmlFor="flexCheckChecked"
           >
-            By placing the order, I am confirming that I have read and agreed
-            with the Terms and Conditions
+            {selectedMultiLangData?.place_order_confirmation_text}
           </label>
         </div>
         <button
           type="button"
           onClick={handlePlaceOrder}
           disabled={!acceptedTerms}
-          className="d-grid gap-2 col-lg-10 col-12 btn btn-md bold border-0 button_color mt-2"
+          className="d-grid gap-2 col-lg-10 col-12 btn btn-md standard_button_filled mt-2"
         >
           {deleteCoupon}
-          Place Order
+          {selectedMultiLangData?.place_order}
         </button>
       </div>
     </>

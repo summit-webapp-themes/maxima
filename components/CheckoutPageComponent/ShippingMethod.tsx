@@ -12,26 +12,28 @@ const ShippingMethod = ({
   locationState,
   textState,
   transportersCharges,
+  selectedMultiLangData,
 }: any) => {
   const [radioVal, setRadioVal] = useState<any>(false);
-  const handleCheck = () => {
+  const handleCheck: any = () => {
     setRadioVal(true);
   };
-  const handleChecknew = () => {
+  const handleChecknew: any = () => {
     setRadioVal(false);
   };
 
   return (
     <>
       <h4 className="mb-3 shippingmethod-heading ">
-        Shipping Method
+        {" "}
+        {selectedMultiLangData?.shipping_method}
       </h4>
       <table width="100%" className="mb-0 mt-1 table table-borderless">
         <tbody>
           <tr className="item_options">
             <td width="50%" className="px-0 py-0 pb-1 ">
               <p className={`text-capitalize mb-0 fs-5 `}>
-                Preferred Transport:
+                {selectedMultiLangData?.preferred_transport}:
               </p>
             </td>
             <td width="50%" className="px-0 py-0 pb-1">
@@ -42,13 +44,17 @@ const ShippingMethod = ({
                     aria-label="Default select example"
                     onChange={transportHandle}
                   >
-                    <option value="">Select Preferred Transport</option>
+                    <option value="">
+                      {selectedMultiLangData?.select_preferred_transport}
+                    </option>
                     {transporterlist?.sort()?.map((list: any, i: any) => (
                       <option key={i}>{list}</option>
                     ))}
                   </select>
                   <p className="mb-0 ms-3 mt-1 shipping-ptag">
-                    (Transport will be subject to availability)
+                    {
+                      selectedMultiLangData?.transport_will_be_subject_to_availability
+                    }
                   </p>
                 </p>
               </div>
@@ -62,7 +68,7 @@ const ShippingMethod = ({
                   className="form-check-label text-left"
                   htmlFor="flexRadioDefault1"
                 >
-                  Door Delivery:
+                  {selectedMultiLangData?.door_delivery}
                 </label>
               </p>
             </td>
@@ -85,7 +91,7 @@ const ShippingMethod = ({
                   className="form-check-label text-left"
                   htmlFor="flexRadioDefault2"
                 >
-                  Godown Delivery:
+                  {selectedMultiLangData?.godown_delivery}
                 </label>
               </p>
             </td>
@@ -101,11 +107,10 @@ const ShippingMethod = ({
               />
             </td>
           </tr>
-          <tr className={`item_options ${radioVal? "" : "d-none"}`}>
+          <tr className={`item_options ${radioVal ? "" : "d-none"}`}>
             <td width="50%" className="px-0 py-0 ">
               <p className={`mb-0 fs-5`}>
-                {" "}
-                Location (Preferred godown of Transporter):
+                {selectedMultiLangData?.Location_godown_tranporter}
               </p>
             </td>
             <td width="50%" className="px-0 py-0 ">
@@ -121,7 +126,9 @@ const ShippingMethod = ({
           </tr>
           <tr className="item_options ">
             <td width="50%" className="px-0 py-0 ">
-              <p className={`mb-0  fs-5`}>Special remark (if any): </p>
+              <p className={`mb-0  fs-5`}>
+                {selectedMultiLangData?.special_remark_if_any}: :{" "}
+              </p>
             </td>
             <td width="50%" className="px-0 py-0 ">
               <input

@@ -1,4 +1,3 @@
-
 import React from "react";
 import useDisplayTagHooks from "../hooks/HomePageHooks/DisplayTagHooks";
 import useHomeTopCategories from "../hooks/HomePageHooks/HomeTopCategoriesHook";
@@ -14,19 +13,22 @@ import SecondaryThemeTopCategoriesBanner from "./Home_page2/SecondaryThemeTopCat
 import SecondaryThemeDisplayTag from "./Home_page2/SecondaryThemeDisplayTag";
 
 const Homepage3Master = () => {
+  const { allTagsData }: any = useDisplayTagHooks();
 
-  const { allTagsData } = useDisplayTagHooks();
+  const { homeTopCategories, isLoading, selectedCurrencyVal }: any =
+    useHomeTopCategories();
 
-  const { homeTopCategories, isLoading,selectedCurrencyVal }:any = useHomeTopCategories();
-
-  const renderSectionComponent = (index: number) => {
+  const renderSectionComponent: any = (index: number) => {
     switch (index) {
       case 0:
         return (
-          <SecondaryThemeTopCategoriesBanner homeTopCategories={homeTopCategories} selectedCurrencyVal={selectedCurrencyVal}/>
+          <SecondaryThemeTopCategoriesBanner
+            homeTopCategories={homeTopCategories}
+            selectedCurrencyVal={selectedCurrencyVal}
+          />
         );
       case 1:
-        return <SecondaryThemeOurFeaturedBrand/>;
+        return <SecondaryThemeOurFeaturedBrand />;
       // Add more cases as needed for other section components
       default:
         return null;
@@ -37,7 +39,7 @@ const Homepage3Master = () => {
 
   return (
     <>
-      <SecondaryThemeHomeBanner/>
+      <SecondaryThemeHomeBanner />
       <SecondaryThemeHomeTopCategories
         homeTopCategories={homeTopCategories}
         isLoading={isLoading}
