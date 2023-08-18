@@ -30,7 +30,7 @@ const HomeTopCategories = ({
                       alt="Picture of the author"
                       width={700}
                       height={1000}
-                      className="catagory_banner"
+                      className="topcat_banner"
                     />
                     {/* <div className="banner-content homecategory_btn3">
                          View All

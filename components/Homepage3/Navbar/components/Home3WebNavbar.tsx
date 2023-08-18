@@ -120,7 +120,10 @@ const Home3WebNavbar = ({
               </select>
             </div>
             <div className="mx-3">
-              <select onChange={(e) => handleLanguageChange(e.target.value)}  className="ternary-select">
+              <select
+                onChange={(e) => handleLanguageChange(e.target.value)}
+                className="ternary-select"
+              >
                 <option value="en">English</option>
                 <option value="hi">हिंदी</option>
               </select>
@@ -148,7 +151,7 @@ const Home3WebNavbar = ({
                       id="dropdown-basic"
                       className="dropdown-icon ternarytheme-login"
                     >
-                     Log In
+                      Log In
                     </Dropdown.Toggle>
                   )}
 

@@ -28,20 +28,20 @@ const CatalogListCard = ({
                   <div className="card-header catalogListing-cardHeader d-flex justify-content-between">
                     <h5 className="text-uppercase catalog-heading">{catalog?.name}</h5>
                     <p className="card-text">
-                      Product Counts :<span className="catalog-count">{catalog?.product_counts>10?catalog?.product_counts:`0${catalog?.product_counts}`}</span>
+                      Product Counts :<span className="catalog-count">{catalog?.product_counts > 10 ? catalog?.product_counts : `0${catalog?.product_counts}`}</span>
                     </p>
                   </div>
                   <div className="card-body">
                     <div className="d-flex">
                       <Link
-                        href={`/${catalog.url}?page=1&currency=${ currency_state_from_redux?.selected_currency_value}`}
+                        href={`/${catalog.url}?page=1&currency=${currency_state_from_redux?.selected_currency_value}`}
                         className="btn btn-catalogview btn-colors mr-2"
                       >
-                  
+
                         View Catalog Product
                         <i className="fa fa-eye ml-2" aria-hidden="true"></i>
                       </Link>
-                      <Link href={`/product-category/?page=1&currency=${ currency_state_from_redux?.selected_currency_value}`} className="btn btn-warning btn-catalogview mr-2">
+                      <Link href={`/product-category/?page=1&currency=${currency_state_from_redux?.selected_currency_value}`} className="btn btn-warning btn-catalogview mr-2">
                         Add Product
                         <i className="fa fa-plus ml-2" aria-hidden="true"></i>
                       </Link>

@@ -3,13 +3,15 @@
     // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     // background-color: #DDE9F8;
 }
+
 .catalogListing-cardHeader {
-   border: none;
+    border: none;
 }
+
 .catalog-heading {
     margin-bottom: 1rem !important;
 }
-    
+
 .catalog-count {
     background-color: $black-color;
     padding: 3px 8px;
@@ -17,46 +19,57 @@
     color: $white-color;
     margin-left: 2px;
 }
+
 .btn-colors {
     color: $primary-color !important;
     border: 1px solid $primary-color !important;
 }
-.catalog-wrapper  {
+
+.catalog-wrapper {
     background-color: #D6EBFF;
     padding: 30px;
 }
+
 .catalog-inputBox {
     background-color: #FFF1D6 !important;
     border: 1px solid #FFEBC2 !important;
     border-radius: 6px;
 }
-.createCatalog-btn{
+
+.createCatalog-btn {
     background-color: $primary-color !important;
     border: 1px solid $primary-color !important;
-    color: $white-color!important;
+    color: $white-color !important;
 }
+
 .catalogCreate-wrapper {
     margin-top: 50px;
     margin-bottom: 10px;
 }
-.modal-dialog  {
+
+.modal-dialog {
     width: 450px;
 }
+
 .modal-catalogBlock {
-   background-color: #D6EBFF; 
-   padding: 10px;
-   border: none !important;
+    background-color: #D6EBFF;
+    padding: 10px;
+    border: none !important;
 }
+
 .catalog-modal .modal-content {
     height: 550px;
 }
+
 .catalog-title {
     font-size: 20px;
     text-align: center;
 }
+
 .btn-catalogview {
     height: 28px;
 }
+
 .toggleView-icon {
     cursor: pointer;
 }

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import React, { useState } from "react";
+import Link from "next/link";
 import { CONSTANTS } from "../services/config/app-config";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,9 +13,9 @@ import {
   hideToast,
 } from "../store/slices/general_slices/toast_notification_slice";
 import { login_state } from "../store/slices/auth/login_slice";
-import CatalogModal from "../components/Catalog/CatalogModal";
 import { Router, useRouter } from "next/router";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
+import CatalogModal from "../components/Catalog/CatalogModal";
 
 const ProductListViewCard = (props: any) => {
   const {
@@ -24,36 +24,37 @@ const ProductListViewCard = (props: any) => {
     wishlistData,
     currency_state_from_redux,
     selectedMultiLangData,
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange,
   } = props;
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
-  const router = useRouter();
   const dispatch = useDispatch();
-  const[name, setName] = useState("")
   console.log("product card list view", product_data);
-  const [show, setshow] = useState(false);
+  const router = useRouter();
 
   const TokenFromStore: any = useSelector(get_access_token);
-
+  const [showEditModal, setshowEditModal] = useState(false);
+  const [show, setshow] = useState(false);
   let isLoggedIn: any;
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
 
-  const handleShow = (nameProduct:any) => {
+  const handleShow = (val: any) => {
     setshow(true);
-    setName(nameProduct)
   };
   const handleClose = () => {
     setshow(false);
-
   };
-  const AddToCartProduct = async (names: any) => {
-   setName(names)
+
+  const AddToCartProduct = async (name: any) => {
     const addCartData = [];
     addCartData.push({
-      item_code: names,
+      item_code: name,
       quantity: 1,
     });
     let AddToCartProductRes: any = await AddToCartApi(
@@ -74,7 +75,7 @@ const ProductListViewCard = (props: any) => {
       }, 1500);
     }
   };
-console.log(name,"namew")
+
   return (
     <>
       <div className="container">
@@ -83,7 +84,7 @@ console.log(name,"namew")
             <div className="row w-100 product product-list border rounded py-3">
               <div className="col-md-4 my-auto">
                 <div className="product-tags col-md-4">
-                  <p className="product_tag text-center my-0">
+                  <p className="product_tag text-lg-center my-0">
                     {product_data?.display_tag.length > 0 && (
                       <span className="badge text-bg-primary p-2 fs-5">
                         {product_data?.display_tag.length > 0 &&
@@ -96,7 +97,7 @@ console.log(name,"namew")
                   href={`${product_data?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
                 >
                   {" "}
-                  <div className="product-img list-view-img">
+                  <div className="product-img list-view-img text-center">
                     {handleRenderingOfImages(
                       product_data?.image_url,
                       product_data?.brand_img
@@ -161,35 +162,45 @@ console.log(name,"namew")
                         </>
                       )}
                     </div>
-                    {isLoggedIn === "true" ? (
-                      <div className="text-center w-50">
-                        <button
-                          className="btn  standard_button"
-                          onClick={() => AddToCartProduct(product_data.name)}
-                        >
-                          {selectedMultiLangData?.add_to_cart}
-                        </button>
+                    <div className="row mt-lg-5 mt-2 ps-5">
+                      <div className="col-lg-6">
+                        {isLoggedIn === "true" ? (
+                          <div className="text-center w-50">
+                            <button
+                              className="btn  standard_button"
+                              onClick={() =>
+                                AddToCartProduct(product_data.name)
+                              }
+                            >
+                              {selectedMultiLangData?.add_to_cart}
+                            </button>
+                          </div>
+                        ) : (
+                          <Link href="/login">
+                            <div className="text-center w-50">
+                              <button className="btn standard_button">
+                                Add to cart
+                              </button>
+                            </div>
+                          </Link>
+                        )}
                       </div>
-                    ) : (
-                      <Link href="/login">
-                        <div className="text-center w-50">
-                          <button className="btn standard_button">
-                            Add to cart
-                          </button>
-                        </div>
-                      </Link>
-                    )}
-                    {router.route !== "/catalog/[category]" ? (
-                      <button
-                        type="button"
-                        className={`btn btn-link catalog-btn-size`}
-                        onClick={() =>handleShow(product_data.name)}
-                      >
-                        Add To Catalog
-                      </button>
-                    ) : (
-                      ""
-                    )}
+                      <div className="col-lg-6">
+                        {router.route !== "/catalog/[category]" ? (
+                          <div className="text-center w-50">
+                            <button
+                              type="button"
+                              className={`btn btn-link catalog-btn-size pt-2`}
+                              onClick={() => handleShow(product_data.name)}
+                            >
+                              Add To Catalog
+                            </button>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -281,11 +292,15 @@ console.log(name,"namew")
           </div>
         </div>
         <CatalogModal
-        show={show}
-        toHide={handleShow}
-        name={name}
-        handleClose={handleClose}
-      />
+          show={show}
+          toHide={handleShow}
+          name={product_data.name}
+          handleClose={handleClose}
+          catalogListItem={catalogListItem}
+          handleAddProduct={handleAddProduct}
+          handleSubmitCatalogName={handleSubmitCatalogName}
+          handleChange={handleChange}
+        />
       </div>
     </>
   );

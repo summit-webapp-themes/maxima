@@ -11,6 +11,8 @@ import MobileFilter from "./filters-view/MobileFilter";
 import { useEffect, useState } from "react";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { useSelector } from "react-redux";
+import useCatalogHook from "../../hooks/CatalogHooks/catalogHook";
+
 const ProductListingMaster = () => {
   const {
     productsLoading,
@@ -24,10 +26,22 @@ const ProductListingMaster = () => {
     handleToggleProductsListingView,
     handleLoadMore,
     currency_state_from_redux,
-    query
+    handlePaginationBtn,
   } = useProductListing();
   console.log("cube ", productListingData);
   const { wishlistData }: any = useWishlist();
+  const {
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange,
+  }: any = useCatalogHook();
+  const [pageOffset, setpageOffset] = useState(0);
+  const handlePageClick = (event: any) => {
+    console.log("page number", event?.selected);
+    handlePaginationBtn(event?.selected);
+    setpageOffset(event?.selected);
+  };
 
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
 
@@ -45,7 +59,7 @@ const ProductListingMaster = () => {
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
-
+  const pageCount = Math.ceil(productListTotalCount / 8);
   const handleDisplayOfProductsList = () => {
     switch (toggleProductListView) {
       case "list-view":
@@ -60,6 +74,13 @@ const ProductListingMaster = () => {
             handleRenderingOfImages={handleRenderingOfImages}
             wishlistData={wishlistData}
             selectedMultiLangData={selectedMultiLangData}
+            catalogListItem={catalogListItem}
+            handleAddProduct={handleAddProduct}
+            handleSubmitCatalogName={handleSubmitCatalogName}
+            handleChange={handleChange}
+            pageCount={pageCount}
+            handlePageClick={handlePageClick}
+            pageOffset={pageOffset}
           />
         );
       case "grid-view":
@@ -72,8 +93,14 @@ const ProductListingMaster = () => {
             productListTotalCount={productListTotalCount}
             handleLoadMore={handleLoadMore}
             wishlistData={wishlistData}
-            query={query}
             selectedMultiLangData={selectedMultiLangData}
+            catalogListItem={catalogListItem}
+            handleAddProduct={handleAddProduct}
+            handleSubmitCatalogName={handleSubmitCatalogName}
+            handleChange={handleChange}
+            pageCount={pageCount}
+            handlePageClick={handlePageClick}
+            pageOffset={pageOffset}
           />
         );
 
@@ -154,6 +181,7 @@ const ProductListingMaster = () => {
           </div>
         </section>
       </div>
+
       <div className="handle_display_mob_filter">
         <MobileFilter
           filtersData={filtersData}

@@ -1,9 +1,8 @@
 import CardsLoadingLayout from "../../../cards/CardsLoadingLayout";
 import ProductCard from "../../../cards/product-card";
 import { ProductsViewProps } from "../../../interfaces/products-view-interface";
-import styles from "../../../styles/Product_Listing.module.css";
 import { Norecord } from "../../NoRecord";
-import Topbar from "../Topbar";
+import ReactPaginate from "react-paginate";
 
 const ProductsGridView = (props: ProductsViewProps) => {
   const {
@@ -14,11 +13,17 @@ const ProductsGridView = (props: ProductsViewProps) => {
     handleLoadMore,
     wishlistData,
     currency_state_from_redux,
-    query,
     selectedMultiLangData,
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange,
+    pageCount,
+    handlePageClick,
+    pageOffset,
   } = props;
 
-  console.log("cube in card", listItems);
+  console.log("productListTotalCount", productListTotalCount);
   return (
     <div
       className={`${
@@ -56,8 +61,11 @@ const ProductsGridView = (props: ProductsViewProps) => {
                 star_rating={items?.rating}
                 wishlistData={wishlistData}
                 currency_state_from_redux={currency_state_from_redux}
-                query={query}
                 selectedMultiLangData={selectedMultiLangData}
+                catalogListItem={catalogListItem}
+                handleAddProduct={handleAddProduct}
+                handleSubmitCatalogName={handleSubmitCatalogName}
+                handleChange={handleChange}
               />
             </div>
           ))
@@ -69,8 +77,25 @@ const ProductsGridView = (props: ProductsViewProps) => {
           />
         )}
       </div>
+      {listItems?.length > 0 && (
+        <div>
+          <ReactPaginate
+            previousLabel={selectedMultiLangData?.prev}
+            nextLabel={selectedMultiLangData?.next}
+            pageCount={pageCount}
+            pageRangeDisplayed={3}
+            onPageChange={handlePageClick}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+            forcePage={pageOffset}
+          />
+        </div>
+      )}
 
-      {productListTotalCount > listItems?.length && (
+      {/* {productListTotalCount > listItems?.length && (
         <div
           style={{
             display: "flex",
@@ -80,14 +105,14 @@ const ProductsGridView = (props: ProductsViewProps) => {
         >
           <button
             className="btn btn-primary my-5"
-            style={{border:'1px solid #0071DC',borderRadius:"7px", backgroundColor:"#fff"}}
+            style={{ border: '1px solid #0071DC', borderRadius: "7px", backgroundColor: "#fff" }}
 
             onClick={handleLoadMore}
           >
             {selectedMultiLangData?.load_more}
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

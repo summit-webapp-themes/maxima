@@ -16,17 +16,17 @@ const CatalogList = () => {
   }: any = useCatalogHook();
 
   return (
-    <>{loading ==="pending"? (
+    <>{loading === "pending" ? (
       <div className="row justify-content-center">
         {[...Array(6)].map(() => (
           <>
             <div className="col-lg-7 mx-3">
-            <ListViewLoadingLayout />
+              <ListViewLoadingLayout />
             </div>
           </>
         ))}
       </div>
-    ) : 
+    ) :
       <div className="container mt-5">
         <CreateCatalog
           handleSubmitCatalogName={handleSubmitCatalogName}

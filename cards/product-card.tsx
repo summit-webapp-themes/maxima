@@ -5,7 +5,6 @@ import { CONSTANTS } from "../services/config/app-config";
 import { ProductCardProps } from "../interfaces/product-card-interface";
 import { fetchWishlistUser } from "../store/slices/wishlist-slice/wishlist-slice";
 import { useDispatch, useSelector } from "react-redux";
-import { get_access_token } from "../store/slices/auth/token-login-slice";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
 import {
   failmsg,
@@ -14,6 +13,7 @@ import {
 } from "../store/slices/general_slices/toast_notification_slice";
 import { fetchCartListing } from "../store/slices/cart-listing-page-slice/cart-listing-slice";
 import deleteCatalog from "../services/api/product-catalog-api/delete-catalog-api";
+import { get_access_token } from "../store/slices/auth/token-login-slice";
 import { useRouter } from "next/router";
 import deleteItemFromCatalog from "../services/api/product-catalog-api/delete-item-from-catalog-api";
 import { ProductListingThunk } from "../store/slices/product-listing-page-slices/product-listing-slice";
@@ -35,14 +35,17 @@ const ProductCard = (props: ProductCardProps) => {
     item_slug,
     wishlistData,
     currency_state_from_redux,
-    query,
+    // query,
     selectedMultiLangData,
+    catalogListItem,
+    handleAddProduct,
+    handleSubmitCatalogName,
+    handleChange,
   } = props;
 
   let wishproducts: any;
   let requestNew: any;
   let requestList: any;
-  const TokenFromStore: any = useSelector(get_access_token);
   const router = useRouter();
   console.log(router, "router45 ");
   const dispatch = useDispatch();
@@ -50,9 +53,13 @@ const ProductCard = (props: ProductCardProps) => {
   let isLoggedIn: any;
   const filters_state_from_redux: any = useSelector(filters_selector_state);
   const [showEditModal, setshowEditModal] = useState(false);
+
   const [show, setshow] = useState(false);
+
+  const { query }: any = useRouter();
+  console.log("delete que", query);
   const newSlug = query?.category?.replace(/-/g, " ");
-  console.log(name, " item_slug");
+  console.log(newSlug, " newSlug");
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
@@ -73,7 +80,8 @@ const ProductCard = (props: ProductCardProps) => {
     });
     let AddToCartRes: any = await AddToCartApi(
       addCartData,
-      currency_state_from_redux?.selected_currency_value
+      currency_state_from_redux?.selected_currency_value,
+      tokens?.token
     );
     if (AddToCartRes.msg === "success") {
       dispatch(successmsg("Item Added to cart"));
@@ -101,37 +109,37 @@ const ProductCard = (props: ProductCardProps) => {
       catalog_name: newSlug,
       item_name: name,
     };
-   const deleteProductFromCatalog = await deleteItemFromCatalog(deleteApiParams);
-   console.log(deleteProductFromCatalog,"deleteProductFromCatalog")
-   if( deleteProductFromCatalog.message.msg === "success") {
-    dispatch(successmsg(deleteProductFromCatalog?.message?.data))
-    setTimeout(() => {
-      const storeUsefulParamsForFurtherProductListingApi = {
-        router_origin: router.route.split("/")[1],
-        url_params: query,
-        filterDoctype: filters_state_from_redux?.doctype,
-        filterDocname: filters_state_from_redux?.docname.toLowerCase(),
-        token: tokens.token,
-      };
-      console.log(
-        storeUsefulParamsForFurtherProductListingApi,
-        "storeUsefulParamsForFurtherProductListingApi"
-      );
-      dispatch(hideToast());
-      dispatch(
-        ProductListingThunk({
+    const deleteProductFromCatalog = await deleteItemFromCatalog(
+      deleteApiParams
+    );
+    console.log(deleteProductFromCatalog, "deleteProductFromCatalog");
+    if (deleteProductFromCatalog.message.msg === "success") {
+      dispatch(successmsg(deleteProductFromCatalog?.message?.data));
+      setTimeout(() => {
+        const storeUsefulParamsForFurtherProductListingApi = {
+          router_origin: router.route.split("/")[1],
+          url_params: query,
+          filterDoctype: filters_state_from_redux?.doctype,
+          filterDocname: filters_state_from_redux?.docname.toLowerCase(),
+          token: tokens.token,
+        };
+        console.log(
           storeUsefulParamsForFurtherProductListingApi,
-        }) as any
-      );
-    }, 1000);
-   }
-   else{
-    dispatch(failmsg(deleteProductFromCatalog.message.error));
-    setTimeout(() => {
-      dispatch(hideToast());
-    }, 1500);
-   }
-
+          "storeUsefulParamsForFurtherProductListingApi"
+        );
+        dispatch(hideToast());
+        dispatch(
+          ProductListingThunk({
+            storeUsefulParamsForFurtherProductListingApi,
+          }) as any
+        );
+      }, 1000);
+    } else {
+      dispatch(failmsg(deleteProductFromCatalog.message.error));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1500);
+    }
   };
   return (
     <div key={key} className="border p-3 rounded-3 h-100 ">
@@ -161,13 +169,13 @@ const ProductCard = (props: ProductCardProps) => {
                       getWishlist: false,
                       deleteWishlist: false,
                       addTowishlist: true,
-                      token: TokenFromStore?.token,
+                      token: tokens?.token,
                     };
                     requestList = {
                       getWishlist: true,
                       deleteWishlist: false,
                       addTowishlist: false,
-                      token: TokenFromStore?.token,
+                      token: tokens?.token,
                     };
                     dispatch(fetchWishlistUser(requestNew));
 
@@ -205,13 +213,13 @@ const ProductCard = (props: ProductCardProps) => {
                   getWishlist: false,
                   deleteWishlist: true,
                   addTowishlist: false,
-                  token: TokenFromStore?.token,
+                  token: tokens?.token,
                 };
                 requestList = {
                   getWishlist: true,
                   deleteWishlist: false,
                   addTowishlist: false,
-                  token: TokenFromStore?.token,
+                  token: tokens?.token,
                 };
                 dispatch(fetchWishlistUser(requestNew));
 
@@ -317,6 +325,10 @@ const ProductCard = (props: ProductCardProps) => {
         toHide={handleShow}
         name={name}
         handleClose={handleClose}
+        catalogListItem={catalogListItem}
+        handleAddProduct={handleAddProduct}
+        handleSubmitCatalogName={handleSubmitCatalogName}
+        handleChange={handleChange}
       />
     </div>
   );

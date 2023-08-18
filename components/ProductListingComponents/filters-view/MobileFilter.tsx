@@ -20,7 +20,7 @@ const MobileFilter = ({
       </div>
 
       <div className="modal" id="myFilterModal">
-        <div className="modal-dialog">
+        <div className="modal-dialog filter-modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
               <h4 className="modal-title">{selectedMultiLangData?.filter}</h4>
@@ -32,11 +32,11 @@ const MobileFilter = ({
             </div>
 
             <div className="modal-body">
-              <div className="clear_filter mb-1">
+              {/* <div className="clear_filter mb-1">
                 <a href="#" className="clear_filter_link">
                   {selectedMultiLangData?.clear_filter}
                 </a>
-              </div>
+              </div> */}
               <div className="filter_section">
                 <div className="filter_block">
                   <div className="accordion accordion_custom" id="myAccordion">

@@ -85,204 +85,125 @@ const DealerLedger = () => {
   return (
     <>
       <div className="container">
-        <DealerAccounting dealerLedgerSummary={dealerLedgerSummary} />
-        {/* 
-        <div className="row text-center dealer-ledger-container">
-          <div className="col-lg-3">
-            <h5>Account Name :</h5>
-            <div className="mt-5 fs-2 bold">
-              {dealerLedgerSummary?.party_name}
-            </div>
-          </div>
-          <div className="col-lg-2">
-            <div className="text-start">
-              <input
-                type="radio"
-                className="form-check-input"
-                id="radio1"
-                name="optradio"
-                value="option1"
-                onClick={() => setFieldDisable(false)}
-                defaultChecked
-              />
-              <label className="form-check-label ms-3" htmlFor="radio1">
-                Month
-              </label>
-            </div>
-            <select
-           
-              className={`${fieldDisable ? "" : "disabled"} form-select mt-5`}
-              disabled={fieldDisable}
-              onChange={(e) => setDlSelectedMonth(e.target.value)}
-            >
-              <option>SELECT MONTH</option>
-              {dealerLedgerSummary?.months?.map(
-                (month: string, index: number) => (
-                  <>
-                    <option key={index} value={month}>
-                      {month}
-                    </option>
-                  </>
-                )
-              )}
-            </select>
-          </div>
-​
-          <div className="col-lg-4">
-            <div className="text-start ms-5">
-              <input
-                type="radio"
-                className="form-check-input"
-                id="radio2"
-                name="optradio"
-                value="option1"
-                onClick={() => setFieldDisable(true)}
-              />
-              <label
-                className="form-check-label ms-3 text-start"
-                htmlFor="radio1"
-              >
-                Date Range
-              </label>
-            </div>
-            <div className="row mt-3">
-              <div className="col-lg-6">
-                <input
-                  type="date"
-                  id="FromDate"
-                  value={dlFromDate}
-                  name="FromDate"
-                  onChange={(e) => setDlFromDate(e.target.value)}
-                  className={`${fieldDisable ? "" : "disabled"} mt-2`}
-                  disabled={!fieldDisable}
-                />
-              </div>
-              <div className="col-lg-4 ml-5">
-                <input
-                  type="date"
-                  id="toDate"
-                  value={dlToDate}
-                  name="ToDate"
-                  onChange={(e) => setDlToDate(e.target.value)}
-                  className={`${fieldDisable ? "" : "disabled"} mt-2`}
-                  disabled={!fieldDisable}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-2 ">
-            <button
-              className="btn btn-primary rounded-3 my-3"
-              onClick={HandleLedgerData}
-            >
-              {selectedMultiLangData?.submit}
-            </button>
-          </div>
-        </div> */}
-
-        {/* secondui */}
-
-        <div className="container mx-lg-5 dealer-ledger-container">
-          <div className="row m-lg-5">
-            <div className="col-lg-2 col-6">
-              <div className="fs-3">Account Name :</div>
-            </div>
-            <div className="col-lg-6 col-6">
-              <div className="fs-3 bold">{dealerLedgerSummary?.party_name}</div>
-            </div>
-          </div>
-          <div className="row mx-lg-5">
-            <div className="col-lg-2">
-              <input
-                type="radio"
-                className="form-check-input"
-                id="radio1"
-                name="optradio"
-                value="option1"
-                onClick={() => setFieldDisable(false)}
-                defaultChecked
-              />
-              <label className="form-check-label ms-4" htmlFor="radio1">
-                Month
-              </label>
-            </div>
-            <div className="col-lg-4">
-              <select
-                className={`${fieldDisable ? "" : "disabled"} form-select fs-5`}
-                disabled={fieldDisable}
-                onChange={(e) => setDlSelectedMonth(e.target.value)}
-              >
-                <option>SELECT MONTH</option>
-                {dealerLedgerSummary?.months?.map(
-                  (month: string, index: number) => (
-                    <>
-                      <option key={index} value={month}>
-                        {month}
-                      </option>
-                    </>
-                  )
-                )}
-              </select>
-            </div>
-          </div>
-          <div className="row mx-lg-5 my-5">
-            <div className="col-lg-2 mt-lg-2">
-              <input
-                type="radio"
-                className="form-check-input"
-                id="radio2"
-                name="optradio"
-                value="option1"
-                onClick={() => setFieldDisable(true)}
-              />
-              <label
-                className="form-check-label ms-4 text-start"
-                htmlFor="radio1"
-              >
-                Date Range
-              </label>
-            </div>
-            <div className="col-lg-6">
-              <div className="row">
-                <div className="col-lg-4 col-5">
-                  <input
-                    type="date"
-                    id="FromDate"
-                    value={dlFromDate}
-                    name="FromDate"
-                    onChange={(e) => setDlFromDate(e.target.value)}
-                    className={`${fieldDisable ? "" : "disabled"} mt-lg-2 px-1`}
-                    disabled={!fieldDisable}
-                  />
+        <DealerAccounting
+          dealerLedgerSummary={dealerLedgerSummary}
+          selectedMultiLangData={selectedMultiLangData}
+        />
+        <div className="row justify-content-center dealer-ledger-container">
+          <div className="col-lg-8">
+            <div className="row m-lg-5">
+              <div className="col-lg-4 col-6">
+                <div className="fs-3 ">
+                  {selectedMultiLangData?.account_name} :
                 </div>
-                <div className="col-lg-4 col-5">
-                  <input
-                    type="date"
-                    id="toDate"
-                    value={dlToDate}
-                    name="ToDate"
-                    onChange={(e) => setDlToDate(e.target.value)}
-                    className={`${fieldDisable ? "" : "disabled"} mt-lg-2 px-1`}
-                    disabled={!fieldDisable}
-                  />
+              </div>
+              <div className="col-lg-6 col-6">
+                <div className="fs-3 bold">
+                  {dealerLedgerSummary?.party_name}
                 </div>
               </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-6 text-center mb-3">
-              <button
-                className="btn btn-outline-primary ledger-submit-button rounded-3 my-3 w-25"
-                onClick={HandleLedgerData}
-              >
-                {selectedMultiLangData?.submit}
-              </button>
+            <div className="row mx-lg-5 mt-2">
+              <div className="col-lg-4 col-4">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  id="radio1"
+                  name="optradio"
+                  value="option1"
+                  onClick={() => setFieldDisable(false)}
+                  defaultChecked
+                />
+                <label className="form-check-label ms-4" htmlFor="radio1">
+                  {selectedMultiLangData?.month}
+                </label>
+              </div>
+              <div className="col-lg-4 col-6">
+                <select
+                  className={`${
+                    fieldDisable ? "" : "disabled"
+                  } form-select fs-5`}
+                  disabled={fieldDisable}
+                  onChange={(e) => setDlSelectedMonth(e.target.value)}
+                >
+                  <option>{selectedMultiLangData?.select_month}</option>
+                  {dealerLedgerSummary?.months?.map(
+                    (month: string, index: number) => (
+                      <>
+                        <option key={index} value={month}>
+                          {month}
+                        </option>
+                      </>
+                    )
+                  )}
+                </select>
+              </div>
+            </div>
+            <div className="row mx-lg-5 my-5">
+              <div className="col-lg-4 col-4 mt-lg-2">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  id="radio2"
+                  name="optradio"
+                  value="option1"
+                  onClick={() => setFieldDisable(true)}
+                />
+                <label
+                  className="form-check-label ms-lg-4 ms-1 text-start"
+                  htmlFor="radio1"
+                >
+                  {selectedMultiLangData?.date_range}
+                </label>
+              </div>
+              <div className="col-lg-6 col-12 ">
+                <div className="row">
+                  <div className="col-lg-6 col-7">
+                    <input
+                      type="date"
+                      id="FromDate"
+                      value={dlFromDate}
+                      name="FromDate"
+                      onChange={(e) => setDlFromDate(e.target.value)}
+                      className={`${
+                        fieldDisable ? "" : "disabled"
+                      } mt-lg-2 px-1`}
+                      disabled={!fieldDisable}
+                    />
+                  </div>
+                  <div className="col-lg-4 col-5">
+                    <input
+                      type="date"
+                      id="toDate"
+                      value={dlToDate}
+                      name="ToDate"
+                      onChange={(e) => setDlToDate(e.target.value)}
+                      className={`${
+                        fieldDisable ? "" : "disabled"
+                      } mt-lg-2 px-1`}
+                      disabled={!fieldDisable}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-8 text-center mb-3">
+                <button
+                  className="btn btn-outline-primary ledger-submit-button rounded-3 my-3 w-25"
+                  onClick={HandleLedgerData}
+                >
+                  {selectedMultiLangData?.submit}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-
         {showDlData === true && (
-          <DealerLedgerTable dealerLedgerSummary={dealerLedgerSummary} />
+          <DealerLedgerTable
+            dealerLedgerSummary={dealerLedgerSummary}
+            selectedMultiLangData={selectedMultiLangData}
+          />
         )}
       </div>
     </>
