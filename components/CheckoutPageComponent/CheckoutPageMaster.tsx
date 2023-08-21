@@ -180,6 +180,7 @@ const CheckoutPageMaster = () => {
               //storeCredit={storeCredit}
               setStoreCredit={setStoreCredit}
               couponCodeApiRes={couponCodeApiRes}
+              selectedMultiLangData={selectedMultiLangData}
             />
           ) : (
             <div className=" container row  mb-2 mx-auto">
@@ -222,6 +223,7 @@ const CheckoutPageMaster = () => {
                     address_type="Shipping"
                     isSameAsShipping={billingCheckbox}
                     shipping_check={shippingCheck}
+                    selectedMultiLangData={selectedMultiLangData}
                   />
                   <h6 className="bold px-3 mb-1">
                     {selectedMultiLangData?.billing}

@@ -160,9 +160,6 @@
   display: none !important;
 }
 
-.logout-icon {
-  margin-bottom: 2.2rem !important;
-}
 
 @media screen and (max-width: 1000px) {
   .resp-dropdown {
@@ -171,6 +168,12 @@
 
   .resp-dropdown-avator {
     display: block !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav_custom_dropdown {
+    margin-left: 13px !important;
   }
 }
 

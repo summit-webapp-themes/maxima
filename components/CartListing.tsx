@@ -220,7 +220,7 @@ const CartListing = () => {
               <div className="row cart_wrapper">
                 <div className="col-12">
                   <div className="row justify-content-between">
-                    <div className="col-md-4 text-left">
+                    <div className="col-md-4 text-center">
                       <button
                         type="button"
                         className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
@@ -244,7 +244,7 @@ const CartListing = () => {
                         </button>
                       </Link>
                     </div>
-                    <div className="col-md-4 text-right">
+                    <div className="col-md-4 text-center">
                       <Link href="/checkout">
                         <button
                           type="button"
@@ -275,10 +275,6 @@ const CartListing = () => {
                       }{" "}
                       {cartListingItems?.grand_total_excluding_tax}
                     </span>
-                    {/* <p></p>
-                <IndianNumber
-                  value={cartListingItems?.grand_total_excluding_tax}
-                /> */}
                   </h5>
                 </div>
                 <hr />
@@ -411,13 +407,13 @@ const CartListing = () => {
                       {!orderSummaryForCart ? null : (
                         <>
                           <div className="row justify-content-end">
-                            <div className="col-md-4"></div>
-                            <div className="col-md-4 text-left">
+                            {/* <div className="col-lg-4 col-4 "></div> */}
+                            <div className="col-lg-4 col-4 ">
                               {" "}
                               {selectedMultiLangData?.sub_total}{" "}
                             </div>
                             :
-                            <div className="col-md-3 text-end">
+                            <div className="col-lg-3 col-6 text-end">
                               {
                                 cartListingItems?.categories[0]?.orders[0]
                                   ?.currency_symbol
@@ -426,13 +422,13 @@ const CartListing = () => {
                             </div>
                           </div>
                           <div className="row justify-content-end">
-                            <div className="col-md-4"></div>
-                            <div className="col-md-4 text-left">
+                            {/* <div className="col-md-4"></div> */}
+                            <div className="col-lg-4 col-4 ">
                               {" "}
                               {selectedMultiLangData?.tax}{" "}
                             </div>
                             :
-                            <div className="col-md-3  text-end">
+                            <div className="col-lg-3 col-6 text-end">
                               {
                                 cartListingItems?.categories[0]?.orders[0]
                                   ?.currency_symbol
@@ -443,13 +439,13 @@ const CartListing = () => {
                             </div>
                           </div>
                           <div className="row justify-content-end">
-                            <div className="col-md-4"></div>
-                            <div className="col-md-4 text-left">
+                            {/* <div className="col-md-4"></div> */}
+                            <div className="col-lg-4 col-4 ">
                               {" "}
                               {selectedMultiLangData?.order_total_including_tax}
                             </div>
                             :
-                            <div className="col-md-3 text-end">
+                            <div className="col-lg-3 col-6 text-end">
                               {
                                 cartListingItems?.categories[0]?.orders[0]
                                   ?.currency_symbol

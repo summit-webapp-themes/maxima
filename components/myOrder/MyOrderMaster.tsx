@@ -18,7 +18,7 @@ const MyOrderMaster = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
-  const { orderHistoryItems, handleHistoryDate, history } =
+  const { orderHistoryItems, handleHistoryDate, history, loadingStatus } =
     UseCartOrderHistory();
   return (
     <>
@@ -57,6 +57,7 @@ const MyOrderMaster = () => {
               handleHistoryDate={handleHistoryDate}
               selectedMultiLangData={selectedMultiLangData}
               history={history}
+              loadingStatus={loadingStatus}
             />
           </div>
           <div id="can_order" className="container tab-pane fade">

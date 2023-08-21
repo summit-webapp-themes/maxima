@@ -419,7 +419,7 @@ const ProductDetail = ({
 
               <div className="row button_sec">
                 {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
-                  <div className="col-lg-4 text-start">
+                  <div className="col-lg-4 col-6 text-start">
                     <div className="mt-5">
                       <button
                         type="button"
@@ -432,7 +432,7 @@ const ProductDetail = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="col-lg-3">
+                  <div className="col-lg-3 col-6">
                     <div className="mt-5">
                       <Link
                         href="/login"
@@ -444,7 +444,7 @@ const ProductDetail = ({
                   </div>
                 )}
                 {isLoggedIn === "true" ? (
-                  <div className="col-md-6">
+                  <div className="col-md-4 col-6 text-start">
                     <div className="mt-5">
                       <div className="row">
                         <button
@@ -471,7 +471,7 @@ const ProductDetail = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="col-md-6 mx-auto">
+                  <div className="col-md-4 col-6 text-start ">
                     <div className="mt-5">
                       <div className="row">
                         <button

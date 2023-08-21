@@ -414,7 +414,7 @@
 
 // Product Details
 .product-details {
-    position: relative;
+    // position: relative;
     // height: 100px !important;
     @include print_css( product, body );
     transition: box-shadow .3s;
