@@ -214,7 +214,8 @@
 }
 .delete-link {
     margin-top: 46px;
-    color: $secondary-color-light;
+    // color: $secondary-color-light;
+    color: $secondaryTheme-secondarycolor;
     text-decoration: underline;
 }
 .delete-link:hover {
