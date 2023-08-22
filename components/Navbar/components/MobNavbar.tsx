@@ -73,13 +73,24 @@ const MobNavbar = ({
                 navbarData.map((navbardata: any, i: any) => (
                   <ul className="mobile-menu" key={i}>
                     <li className="bg-light">
-                      <a href="#" className="text-dark">
-                        <i className="fa fa-anchor " aria-hidden="true"></i>
-                        {navbardata.name}
-                        <span
+                      <a
+                        href="#"
+                        className="text-dark d-flex justify-content-between"
+                      >
+                        <span>
+                          <i className="fa fa-anchor " aria-hidden="true"></i>
+                          {navbardata.name}
+                        </span>
+                        {/* <span
                           className="toggle-btn"
                           onClick={() => mobileHandle(i)}
-                        ></span>
+                        ></span> */}
+                        <span>
+                          <i
+                            className="fa fa-arrow-right fs-2"
+                            onClick={() => mobileHandle(i)}
+                          ></i>
+                        </span>
                       </a>
                       <ul
                         style={{ display: indexVal === i ? "block" : "none" }}
@@ -91,15 +102,18 @@ const MobNavbar = ({
                                 href={`${navbarVal.url}?page=1&currency=${selectedCurrencyValue}`}
                                 legacyBehavior
                               >
-                                <a
-                                  className="text-dark"
-                                  // onClick={onClickCloseNav}
-                                >
-                                  {navbarVal.name}
-                                  <span
+                                <a className="text-dark d-flex justify-content-around">
+                                  <span className="w-75">{navbarVal.name}</span>
+                                  <span className="">
+                                    <i
+                                      className="fa fa-arrow-right fs-5"
+                                      onClick={() => mobileHandle(i)}
+                                    ></i>
+                                  </span>
+                                  {/* <span
                                     className="toggle-btn "
                                     onClick={() => arrowHandle(index)}
-                                  ></span>
+                                  ></span> */}
                                 </a>
                               </Link>
                               <ul

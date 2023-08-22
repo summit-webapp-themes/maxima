@@ -23,3 +23,15 @@
 .nav_tabs_list.active h6{
     color: $white-color!important;
 }
+
+.profile_tab-icons {
+    font-size: 30px !important;
+    margin-bottom: 4px !important;
+}
+
+@media only screen and (max-width:500px){
+.profile_tab-icons {
+    font-size: 40px !important;
+    margin-bottom: 4px !important;
+}
+}

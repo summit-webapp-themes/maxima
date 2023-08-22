@@ -28,7 +28,7 @@ const QuickOrderCard = (props: any) => {
   return (
     <>
       <div className="mt-3">
-        <div className="col-12"></div>
+        {/* <div className="col-12"></div> */}
 
         {partNumbersData?.length > 0 &&
           partNumbersData !== null &&
@@ -44,7 +44,7 @@ const QuickOrderCard = (props: any) => {
             .map((data: any, index: any) => (
               <>
                 <div className="row justify-content-center mt-3 mb-3 ">
-                  <div className="col-lg-2 text-center">
+                  <div className="col-lg-2 text-start ps-lg-0">
                     {data.image_url !== null ? (
                       <Image
                         loader={myLoader}
@@ -67,7 +67,7 @@ const QuickOrderCard = (props: any) => {
                       />
                     )}
                   </div>
-                  <div className="col-lg-3 text-start">
+                  <div className="col-lg-4 col-3 text-start">
                     <p className="mb-0">
                       {selectedMultiLangData?.item_code}: {data.item_name}
                     </p>
