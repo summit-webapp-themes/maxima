@@ -70,7 +70,7 @@ const Index = ({ sales_order_id }: any) => {
   }, [SelectedLangDataFromStore]);
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
-    <div>
+    <div className="margin_from_nav_l">
       {detail?.length > 0 &&
         detail !== null &&
         detail?.map((data: any) => (

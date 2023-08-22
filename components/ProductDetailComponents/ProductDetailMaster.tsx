@@ -50,7 +50,7 @@ const ProductDetailMaster = () => {
     }
   }, [SelectedLangDataFromStore]);
   return (
-    <div className="">
+    <div className="margin_from_nav_l">
       <div className="container product_detail_container">
         <div className="row">
           <div className="col-12 mt-4">

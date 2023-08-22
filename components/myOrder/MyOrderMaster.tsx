@@ -22,7 +22,7 @@ const MyOrderMaster = () => {
     UseCartOrderHistory();
   return (
     <>
-      <div className="container mt-3">
+      <div className="container margin_from_nav">
         <div className="mt-4 row">
           <div className="col-md-6">
             <div className="page_heading">

@@ -200,12 +200,19 @@
 }
 
 .fixed-header {
-  // position: fixed;
+  position: fixed;
+  top:0;
   background-color: $primary-color !important;
   z-index: 888;
   width: 100% !important;
 }
 
+.margin_from_nav_l {
+  margin-top: 157px !important;
+}
+.margin_from_nav {
+  margin-top: 167px !important;
+}
 
 .btn_close_btn {
   font-size: 30px !important;
@@ -1035,7 +1042,7 @@ header.header.fixed {
 }
 
 .wishlist_count {
-  right: 1px !important;
+  right: -4px !important;
 }
 
 // Homepage 4

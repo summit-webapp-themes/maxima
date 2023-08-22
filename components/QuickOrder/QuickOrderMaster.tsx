@@ -112,7 +112,7 @@ const QuickOrder = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container margin_from_nav">
       <div className="row mt-5 justify-content-center">
         <div className="col-lg-10 col-12 px-2">
           <h3>{selectedMultiLangData?.quick_order}</h3>

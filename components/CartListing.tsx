@@ -164,7 +164,7 @@ const CartListing = () => {
   console.log("selected array of cart", arrayofSelectedItems);
 
   return (
-    <>
+    <div className="margin_from_nav_l">
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (
@@ -478,7 +478,7 @@ const CartListing = () => {
         handlemodalclose={handlemodalclose}
         setShow={setShow}
       />
-    </>
+    </div>
   );
 };
 

@@ -101,7 +101,7 @@ const CheckoutPageMaster = () => {
 
   console.log("visitor state", visitorState);
   return (
-    <div className="mt-5 mb-5">
+    <div className="margin_from_nav mb-5">
       {isBreakpoint ? (
         <>
           <div className="container">

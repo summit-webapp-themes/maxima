@@ -280,7 +280,7 @@ const WishlistMaster = () => {
   };
 
   return (
-    <>
+    <div className="margin_from_nav">
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (
@@ -591,7 +591,7 @@ const WishlistMaster = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
