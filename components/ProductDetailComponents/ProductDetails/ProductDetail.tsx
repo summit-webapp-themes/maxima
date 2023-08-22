@@ -65,14 +65,24 @@ const ProductDetail = ({
   }
 
   const handleAddCart: any = async () => {
+    let DealerCartNewObjects: any =
+      newobjectState &&
+      newobjectState?.filter((newitems: any) => newitems.quantity !== "");
+
+    const addCartData: any = [];
+    addCartData.push({
+      item_code: productDetailData?.name,
+      quantity: productQuantity,
+    });
+
     if (isDealer === "true") {
-      console.log("dealer cart", newobjectState);
-      let newObjects =
-        newobjectState &&
-        newobjectState?.filter((newitems: any) => newitems.quantity !== "");
-      let dealerApi = await DealerAddToCartApi(newObjects);
-      console.log("dealer api res", dealerApi);
-      if (dealerApi.msg === "success") {
+      let AddToCartRes: any = await AddToCartApi(
+        DealerCartNewObjects,
+        currency_state_from_redux?.selected_currency_value,
+        TokenFromStore?.token
+      );
+      console.log("dealer AddToCartRes", AddToCartRes);
+      if (AddToCartRes?.msg === "success") {
         dispatch(successmsg("Item Added to cart"));
         dispatch(fetchCartListing(TokenFromStore?.token));
         setTimeout(() => {
@@ -85,17 +95,12 @@ const ProductDetail = ({
         }, 1500);
       }
     } else {
-      const addCartData: any = [];
-      addCartData.push({
-        item_code: productDetailData?.name,
-        quantity: productQuantity,
-      });
       let AddToCartRes: any = await AddToCartApi(
         addCartData,
         currency_state_from_redux?.selected_currency_value,
         TokenFromStore?.token
       );
-      if (AddToCartRes?.data?.message?.msg === "success") {
+      if (AddToCartRes?.msg === "success") {
         dispatch(successmsg("Item Added to cart"));
         dispatch(fetchCartListing(TokenFromStore?.token));
         setTimeout(() => {
@@ -108,7 +113,97 @@ const ProductDetail = ({
         }, 1500);
       }
     }
+
+    // if (isDealer === "true") {
+    //   let newObjects: any =
+    //     newobjectState &&
+    //     newobjectState?.filter((newitems: any) => newitems.quantity !== "");
+    //   console.log("dealer cart", newObjects);
+    //   let dealerApi = await DealerAddToCartApi(newObjects);
+    //   console.log("dealer api res", dealerApi);
+    //   if (dealerApi.msg === "success") {
+    //     dispatch(successmsg("Item Added to cart"));
+    //     dispatch(fetchCartListing(TokenFromStore?.token));
+    //     setTimeout(() => {
+    //       dispatch(hideToast());
+    //     }, 1200);
+    //   } else {
+    //     dispatch(failmsg("Failed to Add to cart"));
+    //     setTimeout(() => {
+    //       dispatch(hideToast());
+    //     }, 1500);
+    //   }
+    // } else {
+    //   const addCartData: any = [];
+    //   addCartData.push({
+    //     item_code: productDetailData?.name,
+    //     quantity: productQuantity,
+    //   });
+    //   let AddToCartRes: any = await AddToCartApi(
+    //     addCartData,
+    //     currency_state_from_redux?.selected_currency_value,
+    //     TokenFromStore?.token
+    //   );
+    //   if (AddToCartRes?.data?.message?.msg === "success") {
+    //     dispatch(successmsg("Item Added to cart"));
+    //     dispatch(fetchCartListing(TokenFromStore?.token));
+    //     setTimeout(() => {
+    //       dispatch(hideToast());
+    //     }, 1200);
+    //   } else {
+    //     dispatch(failmsg("Failed to Add to cart"));
+    //     setTimeout(() => {
+    //       dispatch(hideToast());
+    //     }, 1500);
+    //   }
+    // }
   };
+
+  // const handleAddCart: any = async () => {
+  //   if (isDealer === "true") {
+  //     let newObjects: any =
+  //       newobjectState &&
+  //       newobjectState?.filter((newitems: any) => newitems.quantity !== "");
+  //     console.log("dealer cart", newObjects);
+  //     let dealerApi = await DealerAddToCartApi(newObjects);
+  //     console.log("dealer api res", dealerApi);
+  //     if (dealerApi.msg === "success") {
+  //       dispatch(successmsg("Item Added to cart"));
+  //       dispatch(fetchCartListing(TokenFromStore?.token));
+  //       setTimeout(() => {
+  //         dispatch(hideToast());
+  //       }, 1200);
+  //     } else {
+  //       dispatch(failmsg("Failed to Add to cart"));
+  //       setTimeout(() => {
+  //         dispatch(hideToast());
+  //       }, 1500);
+  //     }
+  //   } else {
+  //     const addCartData: any = [];
+  //     addCartData.push({
+  //       item_code: productDetailData?.name,
+  //       quantity: productQuantity,
+  //     });
+  //     let AddToCartRes: any = await AddToCartApi(
+  //       addCartData,
+  //       currency_state_from_redux?.selected_currency_value,
+  //       TokenFromStore?.token
+  //     );
+  //     if (AddToCartRes?.data?.message?.msg === "success") {
+  //       dispatch(successmsg("Item Added to cart"));
+  //       dispatch(fetchCartListing(TokenFromStore?.token));
+  //       setTimeout(() => {
+  //         dispatch(hideToast());
+  //       }, 1200);
+  //     } else {
+  //       dispatch(failmsg("Failed to Add to cart"));
+  //       setTimeout(() => {
+  //         dispatch(hideToast());
+  //       }, 1500);
+  //     }
+  //   }
+  // };
   const [fullUrl, setFullUrl] = useState<any>("");
   const shareUrl = fullUrl !== "" ? fullUrl : "http://3.13.55.94:3004/";
   const shareMessage = `Check out this product: ${shareUrl}`;

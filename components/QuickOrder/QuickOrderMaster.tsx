@@ -6,9 +6,11 @@ import { useQuickOrder } from "../../hooks/GeneralHooks/QuickOrderHooks/quick-or
 import { useRouter } from "next/router";
 import AddToCartApi from "../../services/api/cart-page-api/add-to-cart-api";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { currency_selector_state } from "../../store/slices/general_slices/multi-currency-slice";
 
 const QuickOrder = () => {
   const {
+    removeSingleItem,
     partNumbersData,
     setPartNumbersData,
     minQty,
@@ -24,15 +26,19 @@ const QuickOrder = () => {
     token_value,
     selected_currency,
   } = useQuickOrder();
-  console.log("enter part", partNumbersData);
+
   const router = useRouter();
+
+  const dispatch = useDispatch();
   const [ItemCodename, setItemCodename] = useState<any>();
   const [ItemCodeMinQty, setItemCodeMinQty] = useState<any>();
 
+  const currency_state_from_redux: any = useSelector(currency_selector_state);
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+
   useEffect(() => {
     if (
       Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
@@ -62,6 +68,7 @@ const QuickOrder = () => {
       (element: any, i: any) => element.name !== item.name
     );
     setPartNumbersData(data);
+    dispatch(removeSingleItem(data));
   };
   const handleAddCart: any = async () => {
     const addCartData: any = [];
@@ -80,7 +87,11 @@ const QuickOrder = () => {
         });
       });
     console.log(ItemCodename, "mmmm");
-    await AddToCartApi(addCartData, selected_currency, token_value);
+    await AddToCartApi(
+      addCartData,
+      currency_state_from_redux?.selected_currency_value,
+      token_value
+    );
     // dispatch(dealerAddCartApi(addCartData));
     handleClearReduxStore();
 

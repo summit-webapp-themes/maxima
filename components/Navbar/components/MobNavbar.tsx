@@ -11,6 +11,7 @@ const MobNavbar = ({
   handleSearch,
   isLoading,
   selectedMultiLangData,
+  selectedCurrencyValue,
 }: any) => {
   const [arrowIndex, setarrowIndex] = useState<any>(null);
   const [indexVal, setindexVal] = useState<any>(null);
@@ -86,7 +87,10 @@ const MobNavbar = ({
                         {navbardata?.values?.map(
                           (navbarVal: any, index: any) => (
                             <li key={index}>
-                              <Link href={navbarVal.url} legacyBehavior>
+                              <Link
+                                href={`${navbarVal.url}?page=1&currency=${selectedCurrencyValue}`}
+                                legacyBehavior
+                              >
                                 <a
                                   className="text-dark"
                                   // onClick={onClickCloseNav}
@@ -108,7 +112,7 @@ const MobNavbar = ({
                                   (navbarlist: any, i: any) => (
                                     <li key={i}>
                                       <Link
-                                        href={navbarlist?.url}
+                                        href={`${navbarlist.url}?page=1&currency=${selectedCurrencyValue}`}
                                         legacyBehavior
                                       >
                                         <a

@@ -1,41 +1,44 @@
 import React, { useEffect, useState } from "react";
 import useCatalogHook from "../../hooks/CatalogHooks/catalogHook";
 import CatalogListCard from "./CatalogListCard";
+import CreateCatalog from "./CreateCatalog";
+import ListViewLoadingLayout from "../ProductListingComponents/products-data-view/ListViewLoadingLayout";
 
 const CatalogList = () => {
-   const {handleChange,handleSubmitCatalogName,catalogListItem,handleDeleteCatalog}:any = useCatalogHook()
+  const {
+    handleChange,
+    handleSubmitCatalogName,
+    catalogListItem,
+    handleDeleteCatalog,
+    handleAddProduct,
+    currency_state_from_redux,
+    loading
+  }: any = useCatalogHook();
 
   return (
-    <>
-      <div className="container mt-5">
-        <div className="d-flex justify-content-center">
-          <div className="col-md-7 ">
-            <div className="row">
-              <h3>Create Catalog</h3>
-              <div className="col-md-7">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="catalog-name"
-                  onChange={handleChange}
-                  placeholder="Enter Catalog Name"
-                />
-              </div>
-              <div className="col-md-4">
-                <button
-                  type="submit"
-                  className="btn btn-primary mb-3"
-                  onClick={handleSubmitCatalogName}
-                >
-                  Create Template
-                </button>
-              </div>
+    <>{loading === "pending" ? (
+      <div className="row justify-content-center">
+        {[...Array(6)].map(() => (
+          <>
+            <div className="col-lg-7 mx-3">
+              <ListViewLoadingLayout />
             </div>
-          </div>
-        </div>
-      
-        <CatalogListCard catalogListItem={catalogListItem} handleDeleteCatalog={handleDeleteCatalog}/>
+          </>
+        ))}
       </div>
+    ) :
+      <div className="container mt-5">
+        <CreateCatalog
+          handleSubmitCatalogName={handleSubmitCatalogName}
+          handleChange={handleChange}
+        />
+        <CatalogListCard
+          catalogListItem={catalogListItem}
+          handleDeleteCatalog={handleDeleteCatalog}
+          handleAddProduct={handleAddProduct}
+          currency_state_from_redux={currency_state_from_redux}
+        />
+      </div>}
     </>
   );
 };

@@ -206,8 +206,13 @@ const WebNavbar = ({
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown dropdown-link">
+                        <Link href="/dealer-ledger" className="text-dark">
+                          {selectedMultiLangData?.dealer_ledger}
+                        </Link>
+                      </Dropdown.Item>
+                      <Dropdown.Item className="nav_dropdown dropdown-link">
                         <Link href={`/catalog`} className="text-dark">
-                          View Catalogs
+                          {selectedMultiLangData?.view_catalogs}
                         </Link>
                       </Dropdown.Item>
                       <Dropdown.Item className="nav_dropdown dropdown-link">
@@ -377,10 +382,10 @@ const WebNavbar = ({
                 <option value="EUR">€</option>
               </select>
             </div>
-          </div >
-        </div >
-      </header >
-    </div >
+          </div>
+        </div>
+      </header>
+    </div>
   );
 };
 
