@@ -152,7 +152,7 @@ const ProductListingMaster = () => {
   console.log("filters product listing in master", filtersData);
   return (
     <>
-      <div>
+      <div className="margin_from_nav">
         <section className="listing-page mt-3">
           <div className="container">
             <div className="mt-3">

@@ -23,7 +23,7 @@ const ProductTechnology = ({ technologyData, selectedMultiLangData }: any) => {
           {technologyData?.details?.length > 0 &&
             technologyData?.details.map((cardDetails: any, index: any) => {
               return (
-                <div className="col-lg-3" key={index}>
+                <div className="col-lg-3 my-3 my-lg-0" key={index}>
                   <div className="card h-100 rounded-2">
                     <div className="h-100">
                       <Image

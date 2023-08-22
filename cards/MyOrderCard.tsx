@@ -2,6 +2,8 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import IndianNumber from "../components/CheckoutPageComponent/IndianNumber";
 import { CONSTANTS } from "../services/config/app-config";
+import { currency_selector_state } from "../store/slices/general_slices/multi-currency-slice";
+import { useSelector } from "react-redux";
 
 const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
   const [isDealer, setIsDealer] = useState(false);
@@ -14,6 +16,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
       }
     }
   }, []);
+  const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
     <>
       <div key={data.id}>
@@ -258,7 +261,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
               {isDealer ? (
                 <div className="text-end col-lg-2 col-md-2 col-12">
                   <button className=" order_links mb-2 d-block text-uppercase">
-                    <Link href={detail?.product_url} legacyBehavior>
+                    <Link  href={`${detail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`} legacyBehavior>
                       <a className="orderdetails_btn">
                         {" "}
                         {selectedMultiLangData?.view_product}
@@ -271,7 +274,10 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                   <div className=" col-lg-2"></div>
                   <div className="text-end col-lg-2 col-md-2 col-12">
                     <button className=" order_links mb-2 d-block text-uppercase">
-                      <Link href={detail?.product_url} legacyBehavior>
+                      <Link 
+                       href={`${detail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                  
+                      legacyBehavior>
                         <a className="orderdetails_btn">
                           {" "}
                           {selectedMultiLangData?.view_product}

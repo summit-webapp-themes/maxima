@@ -44,7 +44,7 @@ const MobNavbar = ({
           <div className="d-flex justify-content-end mb-1 ">
             <Link href="#" legacyBehavior>
               <a className="#" onClick={navMenuclick}>
-                <i className="close-icon"></i>
+                <i className="btn-close btn_close_btn"></i>
               </a>
             </Link>
           </div>

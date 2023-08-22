@@ -680,6 +680,7 @@
             @include css(padding, mobile-menu, item, padding);
             color: inherit;
             transition: color .3s;
+            font-size: 17px !important;
         }
 
         i {

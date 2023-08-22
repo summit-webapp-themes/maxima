@@ -51,6 +51,7 @@ const MobCheckout = ({
   couponError,
   setStoreCredit,
   handleStoreCredit,
+  selectedMultiLangData,
 }: CheckoutPageInterface) => {
   const [visitorState, setVisitorState] = useState<any>(null);
   let [selectedCity, setSelectedCity] = useState<any>("");
@@ -132,6 +133,7 @@ const MobCheckout = ({
                         setSelectedCity={setSelectedCity}
                         city={city}
                         selectedCity={selectedCity}
+                        selectedMultiLangData={selectedMultiLangData}
                       />
                     </div>
                     <div className="col-lg-6 ">
@@ -154,6 +156,7 @@ const MobCheckout = ({
                         setSelectedStates={setSelectedStates}
                         setSelectedCity={setSelectedCity}
                         city={city}
+                        selectedMultiLangData={selectedMultiLangData}
                       />
                     </div>
                   </div>
@@ -173,6 +176,7 @@ const MobCheckout = ({
                             locationState={locationState}
                             textState={textState}
                             transportersCharges={transportersCharges}
+                            selectedMultiLangData={selectedMultiLangData}
                           />
                         </div>
                         <div className="col-lg-10">
@@ -180,6 +184,7 @@ const MobCheckout = ({
                             orderSummary={orderSummary}
                             handlePlaceOrder={handlePlaceOrder}
                             deleteCoupon={deleteCoupon}
+                            selectedMultiLangData={selectedMultiLangData}
                           />
                         </div>
                       </>
@@ -199,6 +204,7 @@ const MobCheckout = ({
                     setStoreCredit={setStoreCredit}
                     handleStoreCredit={handleStoreCredit}
                     handlePlaceOrder={handlePlaceOrder}
+                    selectedMultiLangData={selectedMultiLangData}
                   />
                 </div>
               </div>
@@ -207,14 +213,18 @@ const MobCheckout = ({
             <>
               <div className=" container row mb-4 mx-auto">
                 <div className="col-lg-12 ">
-                  <h4 className="text-uppercase bold mt-3">checkout details</h4>
+                  <h4 className="text-uppercase bold mt-3">
+                    {selectedMultiLangData?.checkout_details}
+                  </h4>
                   <div className="d-flex align-items-center">
-                    <button className="btn btn-warning btn-sm rounded-0 bold button_color">
+                    <button className="btn btn-sm rounded-0 bold button_color">
                       <Link href={"/login"} legacyBehavior>
-                        LOGIN
+                        {selectedMultiLangData?.login}
                       </Link>
                     </button>
-                    <span className="text-muted px-2 fs-4">or</span>
+                    <span className="text-muted px-2 fs-4">
+                      {selectedMultiLangData?.or}
+                    </span>
                     <div className="d-flex align-items-center ">
                       <input
                         className="form-check-input fs-4"
@@ -225,15 +235,20 @@ const MobCheckout = ({
                         className="form-check-label px-2 fs-4 text-muted"
                         htmlFor="flexCheckDefault"
                       >
-                        Login as Guest
+                        {selectedMultiLangData?.login_as_guest}
                       </label>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-lg-8 ">
                       <div className="border rounded-1 mt-2">
-                        <h4 className="px-3 mt-3">Create new address</h4>
-                        <h5 className="bold px-3 mb-0">Shipping</h5>
+                        <h4 className="px-3 mt-3">
+                          {" "}
+                          {selectedMultiLangData?.create_new_address}
+                        </h4>
+                        <h5 className="bold px-3 mb-0">
+                          {selectedMultiLangData?.shipping}
+                        </h5>
                         <VisitorAddressForm
                           address_type="Shipping"
                           isSameAsShipping={billingCheckbox}
@@ -241,8 +256,11 @@ const MobCheckout = ({
                           state={state}
                           setSelectedState={setSelectedStates}
                           selectedStates={selectedStates}
+                          selectedMultiLangData={selectedMultiLangData}
                         />
-                        <h6 className="bold px-3 mb-1">Billing</h6>
+                        <h6 className="bold px-3 mb-1">
+                          {selectedMultiLangData?.billing}
+                        </h6>
                         <div className="d-flex align-items-center px-3">
                           <input
                             className="form-check-input fs-4 bill_checkbox mb-2"
@@ -258,7 +276,7 @@ const MobCheckout = ({
                             className="form-check-label px-2 fs-4 pb-2"
                             htmlFor="flexCheckDefault"
                           >
-                            Same as Shipping Address
+                            {selectedMultiLangData?.same_as_shipping_address}
                           </label>
                         </div>
                         {billingCheckbox ? null : (
@@ -268,13 +286,19 @@ const MobCheckout = ({
                             state={state}
                             setSelectedState={setSelectedStates}
                             selectedStates={selectedStates}
+                            selectedMultiLangData={selectedMultiLangData}
                           />
                         )}
                       </div>
                     </div>
                     <div className="col-lg-4 mt-2 border">
-                      <h5 className=" bold text-uppercase">Order Summary</h5>
-                      <OrderSummary orderSummary={orderSummary} />
+                      <h5 className=" bold text-uppercase">
+                        {selectedMultiLangData?.order_summary}
+                      </h5>
+                      <OrderSummary
+                        orderSummary={orderSummary}
+                        selectedMultiLangData={selectedMultiLangData}
+                      />
                     </div>
                   </div>
                 </div>

@@ -19,48 +19,48 @@ const HomeBanner = () => {
   console.log("home banner loading", isLoading);
   return (
     <>
-      {isLoading === "succeeded" && homeBannerData?.length > 0 ? (
-        <>
-          <Carousel>
-            {homeBannerData?.map((banner: any, index: number) => {
-              return (
-                <CarouselItem key={index}>
-                  <Image
-                    loader={myLoader}
-                    className="d-block w-100"
-                    src={`${banner?.img}`}
-                    alt="Banner Images"
-                    priority
-                    width={1200}
-                    height={600}
-                  />
+      <div className="margin_from_nav_l">
+        {isLoading === "succeeded" && homeBannerData?.length > 0 ? (
+          <>
+            <Carousel>
+              {homeBannerData?.map((banner: any, index: number) => {
+                return (
+                  <CarouselItem key={index}>
+                    <Image
+                      loader={myLoader}
+                      className="d-block w-100"
+                      src={`${banner?.img}`}
+                      alt="Banner Images"
+                      priority
+                      width={1200}
+                      height={600}
+                    />
 
-                  {/* <CarouselCaption className="corousel-captionn">
-                    {banner?.btn_info?.map((btn_item: any, index: number) => (
-                      <div
-                        className={`text-end carousel_capt`}
-                        key={index}
-                      >
-                        <a href={btn_item?.btn_url} className="text-white">
-                          <span className="btn btn-primary banner-btn px-3">
-                            {btn_item?.btn_title} &nbsp; <i className="fa fa-forward text-light align-items-center"></i>
-                          </span>
-                        </a>
-                      </div>
-                    ))}
-                  </CarouselCaption> */}
-                </CarouselItem>
-              );
-            })}
-          </Carousel>
-        </>
-      ) : (
-        <>
-          <div className="mb-3">
-            <BannerLoaderComponent />
-          </div>
-        </>
-      )}
+                    <CarouselCaption className="corousel-captionn">
+                      {banner?.btn_info?.map((btn_item: any, index: number) => (
+                        <div className={`text-end carousel_capt`} key={index}>
+                          <a href={btn_item?.btn_url} className="text-white">
+                            <span className="btn btn-primary banner-btn px-3">
+                              {btn_item?.btn_title} &nbsp;{" "}
+                              <i className="fa fa-forward text-light align-items-center"></i>
+                            </span>
+                          </a>
+                        </div>
+                      ))}
+                    </CarouselCaption>
+                  </CarouselItem>
+                );
+              })}
+            </Carousel>
+          </>
+        ) : (
+          <>
+            <div className="mb-3">
+              <BannerLoaderComponent />
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 };

@@ -89,10 +89,10 @@ const WebNavbar = ({
 
   return (
     <div>
-      <header className="header">
+      <header className="header fixed-header">
         <div className="header-middle">
-          <div className="container">
-            <div className="mobile-nav">
+          <div className="container justify-content-sm-start justify-content-md-end justify-content-lg-end  justify-content-xl-end">
+            <div className="mobile-nav d-flex justify-content-sm-between">
               <Link href="#" legacyBehavior>
                 <a
                   className="mobile-menu-toggle  w-icon-hamburger"
@@ -104,13 +104,12 @@ const WebNavbar = ({
             <div className="mx-2 my-2 logo_containers">
               <Link href="/" legacyBehavior>
                 <Image
-                  src="/assets/images/summit-logo-ree.png"
+                  src="/assets/images/maxima_b2b.png"
                   width={150}
                   height={60}
                   alt="logo"
                   className="mob-logo-img1"
                 />
-                {/* <h1 className="text-white text-uppercase">Summit</h1> */}
               </Link>
             </div>
             <div className="header-search  hs-expanded hs-round d-none d-md-flex input-wrapper rounded-searchbar">
@@ -138,7 +137,7 @@ const WebNavbar = ({
               <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 ">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">
-                    <i className="w-icon-heart fs-1">
+                    <i className="w-icon-heart wish_iconn">
                       <span className="cart-count wishlist_count text-white">
                         {wishlistCount || 0}
                       </span>
@@ -152,7 +151,7 @@ const WebNavbar = ({
               <div className="dropdown cart-dropdown cart-offcanvas text-white mx-lg-4 ml-3">
                 <Link href="/cart" legacyBehavior>
                   <a className="cart-toggle label-down link">
-                    <i className="w-icon-cart fs-1">
+                    <i className="w-icon-cart cart_iconn">
                       <span className="cart-count text-white">
                         {cartCount || 0}
                       </span>
@@ -163,20 +162,15 @@ const WebNavbar = ({
                   </a>
                 </Link>
               </div>
-              <div className={`custom_dropdown`}>
+              <div className="nav_custom_dropdown">
                 <Dropdown>
                   {isLoggedIn === "true" ? (
                     <Dropdown.Toggle
                       id="dropdown-basic"
                       className="dropdown-icon dropdown_active_icon"
                     >
-                      {/* <i
-                    
-                      className="fa fa-sign-out mt-2 fs-1"
-                      aria-hidden="true"
-                    ></i> */}
                       <i
-                        className=" fa fa-user-o mt-5 mb-2  fs-1 logout-icon"
+                        className=" fa fa-user-o mt-5 mb-2 fs-1 logout-icon"
                         aria-hidden="true"
                       ></i>
                     </Dropdown.Toggle>
@@ -186,7 +180,7 @@ const WebNavbar = ({
                       className="dropdown-icon dropdown_active_icon"
                     >
                       <i
-                        className="w-icon-account mt-2 fs-1"
+                        className="w-icon-account mt-2 fs-1 logout-icon"
                         aria-hidden="true"
                       ></i>
                     </Dropdown.Toggle>
@@ -322,7 +316,7 @@ const WebNavbar = ({
                         >
                           <a className="menu_titlee">{items.name}</a>
                           <ul className="megamenu">
-                            {items.values.map((items_val: any, index: any) => (
+                            {items?.values.map((items_val: any, index: any) => (
                               <li key={index}>
                                 <Link
                                   href={`${items_val.url}?page=1&currency=${selectedCurrencyValue}`}
@@ -360,20 +354,20 @@ const WebNavbar = ({
             <div className="mx-3">
               <select
                 onChange={(e) => handleLanguageChange(e?.target?.value)}
-                className="select-field"
+                className="select-field cursor_pointer"
               >
                 {multiLanguagesData?.length > 0 &&
                   multiLanguagesData !== null &&
                   multiLanguagesData.map((lang: any) => {
                     return (
-                      <option value={lang.lang_code}>{lang.lang_name}</option>
+                      <option value={lang?.lang_code}>{lang?.lang_name}</option>
                     );
                   })}
               </select>
             </div>
             <div className="mx-3">
               <select
-                className="select-field"
+                className="select-field cursor_pointer"
                 // value={selectedLanguage}
                 onChange={(e) => handleCurrencyValueChange(e.target.value)}
               >

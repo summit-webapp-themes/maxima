@@ -6,6 +6,7 @@ import Image from "next/image";
 import UseThankyou from "../../hooks/order-listing-page-hook/order-list-hook";
 import { CONSTANTS } from "../../services/config/app-config";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { currency_selector_state } from "../../store/slices/general_slices/multi-currency-slice";
 
 type PropsType = {
   id?: any;
@@ -27,11 +28,7 @@ const Index = ({ sales_order_id }: any) => {
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}/${src}?w=${width}&q=${quality || 75}`;
   };
-  const myLoadernew = ({ src, width, quality }: any) => {
-    return `http://staging-sportnetwork.ascratech.com/uploads/brands/original/${src}?w=${width}&q=${
-      quality || 75
-    }`;
-  };
+
   let thankyou: any = router.asPath.split("/")[1];
   console.log("thank", thankyou);
   console.log("my orders get order detail data in order detail file", detail);
@@ -71,9 +68,9 @@ const Index = ({ sales_order_id }: any) => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
-
+  const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
-    <div>
+    <div className="margin_from_nav_l">
       {detail?.length > 0 &&
         detail !== null &&
         detail?.map((data: any) => (
@@ -305,15 +302,6 @@ const Index = ({ sales_order_id }: any) => {
                         <div className="flex-fill">
                           <h6 className="green text-capitalize bold mb-0 status"></h6>
                         </div>
-                        <div className="justify-content-end d-none d-sm-block align-items-end">
-                          <Image
-                            loader={myLoadernew}
-                            src="t37eUXG24dmzcxZV.png"
-                            alt="product_brand_img"
-                            width={100}
-                            height={30}
-                          />
-                        </div>
                       </div>
                       <div className="d-flex align-items-center row">
                         <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4">
@@ -343,7 +331,10 @@ const Index = ({ sales_order_id }: any) => {
                         <div className="product_item_details col-lg-8 col-md-7 col-8">
                           <div className="d-flex orderdetail-name">
                             <div className="flex-fill">
-                              <Link href={oDetail.product_url} legacyBehavior>
+                              <Link
+                                href={`${oDetail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                                legacyBehavior
+                              >
                                 <a className="product_item_name">
                                   {oDetail?.item_name}
                                 </a>
@@ -423,7 +414,10 @@ const Index = ({ sales_order_id }: any) => {
                             ""
                           ) : (
                             <button className=" order_links mb-2 d-block text-uppercase">
-                              <Link href={oDetail?.product_url} legacyBehavior>
+                              <Link
+                                href={`${oDetail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                                legacyBehavior
+                              >
                                 <a className="order_linkshover text-dark">
                                   {selectedMultiLangData?.view_product}
                                 </a>

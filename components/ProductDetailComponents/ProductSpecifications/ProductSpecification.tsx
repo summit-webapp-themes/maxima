@@ -11,8 +11,10 @@ const ProductSpecification = ({ specificationData }: any) => {
                 <div key={index} className="col-lg-6">
                   <table className="table">
                     <div className="row">
-                      <div className="col-lg-4 bold pl-5">{items.name}</div>
-                      <div className="col-lg-8 pl-1">{items.values}</div>
+                      <div className="col-lg-4 col-5 bold pl-5">
+                        {items.name}
+                      </div>
+                      <div className="col-lg-8 col-7 pl-1">{items.values}</div>
                     </div>
                   </table>
                 </div>
