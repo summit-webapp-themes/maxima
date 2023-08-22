@@ -50,7 +50,7 @@ const CheckStockAvailibility = ({
 
   return (
     <div id="scroll_btn">
-      <div className="stock_availibility_table">
+      <div className="stock_availibility_table table-responsive">
         <table className="table table-hover stock table-bordered">
           <thead>
             <tr className="stock_availa_header">
