@@ -1,16 +1,22 @@
 import React from "react";
 
-const CreateCatalog = ({ handleChange, handleSubmitCatalogName }: any) => {
+const CreateCatalog = ({
+  handleChange,
+  handleSubmitCatalogName,
+  selectedMultiLangData,
+}: any) => {
   return (
     <>
       <div className="d-flex justify-content-center">
         <div className="col-lg-7 text-center">
           <div className="row catalogCreate-wrapper mx-auto">
-            <h3 className="text-center text-uppercase">Create Catalog</h3>
+            <h3 className="text-center text-uppercase">
+              {selectedMultiLangData?.create_catalog}
+            </h3>
             <div className="col-lg-8 col-12 px-0  d-flex justify-content-center">
               <input
                 type="text"
-                className="form-control catalog-inputBox  "
+                className="form-control catalog-inputBox  px-3"
                 id="catalog-name"
                 onChange={handleChange}
                 placeholder="Enter Catalog Name"
@@ -22,7 +28,7 @@ const CreateCatalog = ({ handleChange, handleSubmitCatalogName }: any) => {
                 className="btn createCatalog-btn "
                 onClick={handleSubmitCatalogName}
               >
-                Create Catalog
+                {selectedMultiLangData?.create_catalog}
               </button>
             </div>
           </div>

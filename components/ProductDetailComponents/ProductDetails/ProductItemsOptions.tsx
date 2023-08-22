@@ -50,7 +50,7 @@ const ProductItemsOptions: any = ({
             {items?.values?.length > 0 &&
               items?.values?.map((newdata: any, i: any) => (
                 <div
-                  className="keen-slider__slide number-slide1 product ml-2  "
+                  className="keen-slider__slide number-slide1 product ml-2 "
                   key={i}
                 >
                   <div className=" col-lg-11 p-3 mb-2 mx-0">

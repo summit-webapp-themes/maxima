@@ -13,14 +13,10 @@ const CatalogModal = ({
   handleAddProduct,
   handleSubmitCatalogName,
   handleChange,
+  selectedMultiLangData,
 }: any) => {
   console.log(catalogListItem, name, "name");
-  // const {
-  //     catalogListItem,
-  //     handleAddProduct,
-  //     handleSubmitCatalogName,
-  //     handleChange,
-  // }: any = useCatalogHook();
+
   return (
     <>
       <Modal
@@ -33,7 +29,7 @@ const CatalogModal = ({
       >
         <Modal.Header>
           <Modal.Title className="bold text-center catalog-title">
-            Add Product to Template
+            {selectedMultiLangData?.add_product_to_catalog}
           </Modal.Title>
           <button className="btn btn-warning mt-3" onClick={handleClose}>
             X
@@ -43,25 +39,28 @@ const CatalogModal = ({
           <CreateCatalog
             handleSubmitCatalogName={handleSubmitCatalogName}
             handleChange={handleChange}
+            selectedMultiLangData={selectedMultiLangData}
           />
           <div className="row d-flex justify-content-center">
-            <div className="col-md-10">
-              <h4 className="text-center">Catalog List</h4>
+            <div className="col-lg-11">
+              <h4 className="text-center">
+                {selectedMultiLangData?.catalog_list}
+              </h4>
               {catalogListItem?.length > 0 &&
                 catalogListItem?.map((catalog: any, i: any) => (
                   <>
                     <div className="row justify-content-center">
-                      <div className="col-md-12 mt-3">
+                      <div className="col-lg-12 mt-3">
                         <div className="card modal-catalogBlock">
                           <div className="d-flex justify-content-between">
                             <h5 className="text-uppercase">{catalog?.name}</h5>
                             <button
-                              className="btn btn-warning btn-catalogview mr-2"
+                              className="btn btn-colors text-dark rounded-3 mr-2"
                               onClick={() =>
                                 handleAddProduct(catalog?.name, name)
                               }
                             >
-                              Add Product
+                              {selectedMultiLangData?.add_product}
                             </button>
                           </div>
                         </div>
@@ -71,11 +70,6 @@ const CatalogModal = ({
                 ))}
             </div>
           </div>
-          {/* <div className="d-flex justify-content-center">
-            <button className="btn btn-warning mt-3" onClick={handleClose}>
-              Close Modal
-            </button>
-          </div> */}
         </Modal.Body>
       </Modal>
     </>

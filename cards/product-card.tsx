@@ -142,7 +142,7 @@ const ProductCard = (props: ProductCardProps) => {
     }
   };
   return (
-    <div key={key} className="border p-3 rounded-3 h-100 ">
+    <div key={key} className="border p-3 rounded-3  ">
       <div className="d-flex justify-content-between mb-1">
         <div
           className={`badge text-bg-primary fs-5 display_tag_badge ${
@@ -292,7 +292,7 @@ const ProductCard = (props: ProductCardProps) => {
                 className={`btn btn-link catalog-btn-size`}
                 onClick={handleShow}
               >
-                Add To Catalog
+                {selectedMultiLangData?.add_to_catalog}
               </button>
             ) : (
               ""
@@ -329,6 +329,7 @@ const ProductCard = (props: ProductCardProps) => {
         handleAddProduct={handleAddProduct}
         handleSubmitCatalogName={handleSubmitCatalogName}
         handleChange={handleChange}
+        selectedMultiLangData={selectedMultiLangData}
       />
     </div>
   );

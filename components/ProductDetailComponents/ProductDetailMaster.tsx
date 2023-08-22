@@ -33,6 +33,8 @@ const ProductDetailMaster = () => {
     productItemOptions,
     productDetailLoading,
     currency_state_from_redux,
+    newobjectState,
+    setnewObjectState,
   } = useProductDetail();
   console.log(productDetailLoading, "productDetailData");
   const SelectedLangDataFromStore: any = useSelector(
@@ -96,6 +98,8 @@ const ProductDetailMaster = () => {
                         stockDoesNotExistsForSelectedVariants
                       }
                       selectedMultiLangData={selectedMultiLangData}
+                      newobjectState={newobjectState}
+                      setnewObjectState={setnewObjectState}
                     />
                   </div>
                 </>

@@ -89,7 +89,7 @@ const WebNavbar = ({
 
   return (
     <div>
-      <header className="header">
+      <header className="header fixed-header">
         <div className="header-middle">
           <div className="container justify-content-sm-start justify-content-md-end justify-content-lg-end  justify-content-xl-end">
             <div className="mobile-nav d-flex justify-content-sm-between">
