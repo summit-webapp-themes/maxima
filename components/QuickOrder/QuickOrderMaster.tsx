@@ -202,7 +202,7 @@ const QuickOrder = () => {
         </div>
       </div>
 
-      <div className="row mx-lg-5 mt-5 ">
+      <div className="row mx-lg-5 mt-3">
         <QuickOrderCard
           partNumbersData={partNumbersData}
           handleRemove={handleRemove}
