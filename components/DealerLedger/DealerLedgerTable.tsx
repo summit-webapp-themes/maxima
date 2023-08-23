@@ -47,8 +47,6 @@ const DealerLedgerTable = ({
   };
   return (
     <>
-      {/* {dealerledger?.data?.sales_data?.length > 0 ? (
-        <> */}
       <div className="table-responsive dealer-ledger-table">
         <table className="table table-bordered ">
           <thead className="">
@@ -126,10 +124,10 @@ const DealerLedgerTable = ({
                       {selectedMultiLangData?.opening_balance}
                     </td>
 
-                    <td className="text-right bold">
+                    <td className="text-right bold price_font_family ">
                       ₹{dealerledger?.item?.general_data?.debit_opening_balance}
                     </td>
-                    <td className="text-right bold dealer-ledger-td-r">
+                    <td className="text-right bold dealer-ledger-td-r price_font_family">
                       ₹
                       {dealerledger?.item?.general_data?.credit_opening_balance}
                     </td>
@@ -155,7 +153,7 @@ const DealerLedgerTable = ({
                             <td className="text-right text-nowrap">
                               {salesVoucher.Voucher_number}
                             </td>
-                            <td className="text-right text-nowrap">
+                            <td className="text-right text-nowrap price_font_family">
                               ₹{salesVoucher.debit_amount}
                             </td>
                             <td className="text-right text-nowrap dealer-ledger-td-r">
@@ -172,7 +170,7 @@ const DealerLedgerTable = ({
                     <td colSpan={4} className="text-right bold">
                       {selectedMultiLangData?.current_total}
                     </td>
-                    <td className="text-right bold">
+                    <td className="text-right bold price_font_family">
                       ₹{dealerledger?.data?.general_data?.current_total}
                     </td>
                   </tr>
@@ -180,7 +178,7 @@ const DealerLedgerTable = ({
                     <td colSpan={4} className="text-right bold">
                       {selectedMultiLangData?.closing_balance}
                     </td>
-                    <td className="text-right bold">
+                    <td className="text-right bold price_font_family">
                       ₹{dealerledger?.data?.general_data?.debit_closing_balance}
                     </td>
                     <td></td>

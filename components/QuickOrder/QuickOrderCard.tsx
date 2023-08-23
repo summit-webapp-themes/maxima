@@ -27,100 +27,101 @@ const QuickOrderCard = (props: any) => {
   };
   return (
     <>
-      <div className="mt-3">
-        <div className="col-12"></div>
+      {partNumbersData?.length > 0 &&
+        partNumbersData !== null &&
+        partNumbersData
+          .filter(
+            (element: any, i: any) =>
+              i ===
+              partNumbersData.findIndex(
+                (elem: any) => elem.oem_part_number === element.oem_part_number
+              )
+          )
+          .map((data: any, index: any) => (
+            <>
+              <div className="col-lg-2 col-2"></div>
+              <div className="col-lg-2 col-12 text-start ps-lg-0 ">
+                {data.image_url !== null ? (
+                  <Image
+                    loader={myLoader}
+                    src={`${data.image_url}`}
+                    // src={maximaCard}
+                    alt="product-img"
+                    width={150}
+                    height={150}
+                    className="img-fluid"
+                  />
+                ) : (
+                  <Image
+                    loader={myLoader}
+                    src={`${data.brand_img}`}
+                    // src={maximaCard}
+                    alt="product-img"
+                    width={150}
+                    height={150}
+                    className="img-fluid"
+                  />
+                )}
+              </div>
+              <div className="col-lg-4 col-12 mb-5">
+                <p className="mb-0">
+                  {selectedMultiLangData?.item_code}: {data.name}
+                </p>
+                <p className="mb-0">
+                  {" "}
+                  {selectedMultiLangData?.item_name}
+                  {data.item_name}
+                </p>
+                <p className=" mb-0">
+                  {selectedMultiLangData?.brand}: {data.brand}
+                </p>
 
-        {partNumbersData?.length > 0 &&
-          partNumbersData !== null &&
-          partNumbersData
-            .filter(
-              (element: any, i: any) =>
-                i ===
-                partNumbersData.findIndex(
-                  (elem: any) =>
-                    elem.oem_part_number === element.oem_part_number
-                )
-            )
-            .map((data: any, index: any) => (
-              <>
-                <div className="row justify-content-center mt-3 mb-3 ">
-                  <div className="col-lg-2 text-center">
-                    {data.image_url !== null ? (
-                      <Image
-                        loader={myLoader}
-                        src={`${data.image_url}`}
-                        // src={maximaCard}
-                        alt="product-img"
-                        width={150}
-                        height={150}
-                        className="img-fluid"
-                      />
-                    ) : (
-                      <Image
-                        loader={myLoader}
-                        src={`${data.brand_img}`}
-                        // src={maximaCard}
-                        alt="product-img"
-                        width={150}
-                        height={150}
-                        className="img-fluid"
-                      />
-                    )}
-                  </div>
-                  <div className="col-lg-3 text-start">
-                    <p className="mb-0">
-                      {selectedMultiLangData?.item_code}: {data.item_name}
+                <Link href="" legacyBehavior>
+                  <a
+                    onClick={() => {
+                      handleRemove(data);
+                    }}
+                    className="delete-link"
+                  >
+                    {selectedMultiLangData?.delete}
+                  </a>
+                </Link>
+              </div>
+              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family">
+                <p>
+                  {data.price !== 0 ? (
+                    <>
+                      {data.currency_symbol}
+                      <IndianNumber value={data?.price} />
+                    </>
+                  ) : (
+                    <p className="border price_request">
+                      {selectedMultiLangData?.price_on_request}
                     </p>
-                    <p className="mt-2 mb-0">
-                      {selectedMultiLangData?.brand}: {data.brand}
-                    </p>
-
-                    <Link href="" legacyBehavior>
-                      <a
-                        onClick={() => {
-                          handleRemove(data);
-                        }}
-                        className="delete-link"
-                      >
-                        {selectedMultiLangData?.delete}
-                      </a>
-                    </Link>
-                  </div>
-                  <div className="col-lg-1 col-4 text-center">
-                    <p>
-                      {data.price !== 0 ? (
-                        <IndianNumber value={data?.price} />
-                      ) : (
-                        <p className="border price_request">
-                          {selectedMultiLangData?.price_on_request}
-                        </p>
-                      )}
-                    </p>
-                  </div>
-                  <div className="col-lg-1 col-4 text-center">
-                    {
-                      <>
-                        <input
-                          type="number"
-                          className="w-50  text-center mb-3"
-                          value={showValue(data?.min_order_qty)}
-                          onChange={(e) => handleInputChange(e, index)}
-                        />
-                        <br />
-                      </>
-                    }
-                  </div>
-                  <div className="col-lg-1 col-4 text-center">
-                    <IndianNumber
-                      value={
-                        (total = data.price * showValue(data?.min_order_qty))
-                      }
+                  )}
+                </p>
+              </div>
+              <div className="col-lg-1 col-6 mx-lg-0 mx-4">
+                {
+                  <>
+                    <input
+                      type="number"
+                      className="w-50  text-center mb-3"
+                      value={showValue(data?.min_order_qty)}
+                      onChange={(e) => handleInputChange(e, index)}
                     />
-                  </div>
-                </div>
-              </>
-            ))}
-      </div>
+                    <br />
+                  </>
+                }
+              </div>
+              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family">
+                {data.currency_symbol}
+                <IndianNumber
+                  value={(total = data.price * showValue(data?.min_order_qty))}
+                />
+              </div>
+            </>
+          ))}
     </>
   );
 };
