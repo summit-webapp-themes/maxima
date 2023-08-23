@@ -9,6 +9,7 @@ const CatalogListCard = ({
   handleDeleteCatalog,
   name,
   currency_state_from_redux,
+  selectedMultiLangData,
 }: any) => {
   console.log(name, "CatalogName");
   const dispatch = useDispatch();
@@ -19,8 +20,10 @@ const CatalogListCard = ({
   return (
     <>
       <div className="row mb-5 d-flex justify-content-center mt-1">
-        <div className="col-md-7 catalog-wrapper text-center">
-          <h3 className="text-center text-uppercase">Catalog List</h3>
+        <div className="col-lg-7 catalog-wrapper text-center">
+          <h3 className="text-center text-uppercase">
+            {selectedMultiLangData?.catalog_list}
+          </h3>
           {catalogListItem?.length > 0 &&
             catalogListItem?.map((catalog: any, i: any) => (
               <div className="col-md-7 col-lg-12 mt-4 " key={i}>
@@ -30,7 +33,7 @@ const CatalogListCard = ({
                       {catalog?.name}
                     </h5>
                     <p className="card-text">
-                      Product Counts :
+                      {selectedMultiLangData?.product_count} :
                       <span className="catalog-count ps-5">
                         {catalog?.product_counts > 10
                           ? catalog?.product_counts
@@ -38,27 +41,31 @@ const CatalogListCard = ({
                       </span>
                     </p>
                   </div>
-                  <div className="card-body">
-                    <div className="d-flex">
+                  <div className="row card-body ">
+                    <div className="col-lg-4">
                       <Link
                         href={`/${catalog.url}?page=1&currency=${currency_state_from_redux?.selected_currency_value}`}
                         className="btn btn-catalogview btn-colors mr-2"
                       >
-                        View Catalog Product
+                        {selectedMultiLangData?.view_catalog_product}
                         <i className="fa fa-eye ml-2" aria-hidden="true"></i>
                       </Link>
+                    </div>
+                    <div className="col-lg-4 pl-lg-5 my-lg-0 my-3">
                       <Link
                         href={`/product-category/?page=1&currency=${currency_state_from_redux?.selected_currency_value}`}
                         className="btn btn-catalogAddProduct mr-2 text-dark "
                       >
-                        Add Product
+                        {selectedMultiLangData?.add_product}
                         <i className="fa fa-plus ml-2" aria-hidden="true"></i>
                       </Link>
+                    </div>
+                    <div className="col-lg-4 pr-lg-5">
                       <button
-                        className="btn btn-catalogview btn-colors mr-2"
+                        className="btn btn-catalogview btn-colors mr-lg-5"
                         onClick={() => handleDeleteCatalog(catalog?.name)}
                       >
-                        Delete Catalog
+                        {selectedMultiLangData?.delete_catalog}
                         <i
                           className="fa fa-trash-o ml-2"
                           aria-hidden="true"
@@ -67,7 +74,6 @@ const CatalogListCard = ({
                     </div>
                   </div>
                 </div>
-                {/* <hr className="hr_line py-0" /> */}
               </div>
             ))}
         </div>

@@ -101,7 +101,7 @@ const CheckoutPageMaster = () => {
 
   console.log("visitor state", visitorState);
   return (
-    <div className="mt-5 mb-5">
+    <div className="margin_from_nav mb-5">
       {isBreakpoint ? (
         <>
           <div className="container">
@@ -180,6 +180,7 @@ const CheckoutPageMaster = () => {
               //storeCredit={storeCredit}
               setStoreCredit={setStoreCredit}
               couponCodeApiRes={couponCodeApiRes}
+              selectedMultiLangData={selectedMultiLangData}
             />
           ) : (
             <div className=" container row  mb-2 mx-auto">
@@ -222,6 +223,7 @@ const CheckoutPageMaster = () => {
                     address_type="Shipping"
                     isSameAsShipping={billingCheckbox}
                     shipping_check={shippingCheck}
+                    selectedMultiLangData={selectedMultiLangData}
                   />
                   <h6 className="bold px-3 mb-1">
                     {selectedMultiLangData?.billing}

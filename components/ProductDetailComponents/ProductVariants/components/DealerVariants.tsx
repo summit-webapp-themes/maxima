@@ -44,22 +44,24 @@ const DealerVariants = ({
   };
   variantsData(newobject);
 
+  console.log("input qty", newobject);
+
   return (
     <div>
       <table className="mx-auto mb-0 inventory_table table table-sm dealer_variants_table">
         <tbody>
           <div className="d-flex">
-            <div className="pe-3 inventory inventory_font">
-              <i className="fa fa-check-circle green ">&nbsp;</i>
+            <div className="pe-lg-3 pe-0 inventory inventory_font">
+              <i className="fa fa-check-circle green my-auto">&nbsp;</i>
               <span className="bold">{selectedMultiLangData?.available}</span>
             </div>
-            <div className="pe-3 inventory_font">
+            <div className="pe-lg-3 pe-0 inventory_font">
               <i className="fa fa-clock-o yellow">&nbsp;</i>
               <span className="bold">
                 {selectedMultiLangData?.future_availability}
               </span>
             </div>
-            <div className="pe-3 inventory_font">
+            <div className="pe-lg-3 pe-0 inventory_font">
               <i className="fa fa-times-circle red">&nbsp;</i>
               <span className="bold">{selectedMultiLangData?.sold_out}</span>
             </div>

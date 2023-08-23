@@ -3,20 +3,22 @@ import MyOrderCard from "../../../cards/MyOrderCard";
 import { Norecord } from "../../NoRecord";
 import { currency_selector_state } from "../../../store/slices/general_slices/multi-currency-slice";
 import { useSelector } from "react-redux";
+import ListViewLoadingLayout from "../../ProductListingComponents/products-data-view/ListViewLoadingLayout";
 
 const PlaceOrder = ({
   orderHistoryItems,
   selectedMultiLangData,
   handleHistoryDate,
   history,
+  loadingStatus,
 }: any) => {
-  console.log("orderHistoryItems", orderHistoryItems);
+  console.log("orderHistoryItems", orderHistoryItems, loadingStatus);
   const placeorderCount: any =
     orderHistoryItems &&
     orderHistoryItems?.filter(
       (items: any) => items?.payment_status !== "Cancelled"
     );
-    const currency_state_from_redux: any = useSelector(currency_selector_state);
+  const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
     <>
       <div role="tabpanel" aria-hidden="false">
@@ -52,31 +54,46 @@ const PlaceOrder = ({
             </div>
           </div>
         </div>
-
-        {orderHistoryItems && orderHistoryItems?.length > 0 ? (
-          <>
-            {orderHistoryItems &&
-              orderHistoryItems
-                ?.filter((items: any) => items?.payment_status !== "Cancelled")
-                ?.map((data: any, i: any) => (
-                  <div className="row" key={i}>
-                    <div className="col-lg-12">
-                      <div className="order_card cart_table mb-3 card">
-                        <MyOrderCard
-                          data={data}
-                          selectedMultiLangData={selectedMultiLangData}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-          </>
+        {loadingStatus === true ? (
+          <div className="row justify-content-center">
+            {[...Array(10)].map(() => (
+              <>
+                <div className="col-lg-12 mx-3">
+                  <ListViewLoadingLayout />
+                </div>
+              </>
+            ))}
+          </div>
         ) : (
-          <Norecord
-            heading={selectedMultiLangData?.no_orders_found}
-            content={selectedMultiLangData?.orders_show_up_here}
-            selectedMultiLangData={selectedMultiLangData}
-          />
+          <>
+            {orderHistoryItems && orderHistoryItems?.length > 0 ? (
+              <>
+                {orderHistoryItems &&
+                  orderHistoryItems
+                    ?.filter(
+                      (items: any) => items?.payment_status !== "Cancelled"
+                    )
+                    ?.map((data: any, i: any) => (
+                      <div className="row" key={i}>
+                        <div className="col-lg-12">
+                          <div className="order_card cart_table mb-3 card">
+                            <MyOrderCard
+                              data={data}
+                              selectedMultiLangData={selectedMultiLangData}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+              </>
+            ) : (
+              <Norecord
+                heading={selectedMultiLangData?.no_orders_found}
+                content={selectedMultiLangData?.orders_show_up_here}
+                selectedMultiLangData={selectedMultiLangData}
+              />
+            )}
+          </>
         )}
       </div>
     </>
