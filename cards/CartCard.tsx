@@ -148,6 +148,7 @@ const CartCard = ({
                 onClick={() =>
                   HandleDeleteCart(orders.item_code, cartListingItems.name)
                 }
+
               >
                 <Link href="" className="text-primary">
                   {selectedMultiLangData?.delete}

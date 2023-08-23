@@ -10,6 +10,7 @@ import { currency_selector_state } from "../../store/slices/general_slices/multi
 
 const QuickOrder = () => {
   const {
+    removeSingleItem,
     partNumbersData,
     setPartNumbersData,
     minQty,
@@ -27,6 +28,8 @@ const QuickOrder = () => {
   } = useQuickOrder();
 
   const router = useRouter();
+
+  const dispatch = useDispatch();
   const [ItemCodename, setItemCodename] = useState<any>();
   const [ItemCodeMinQty, setItemCodeMinQty] = useState<any>();
 
@@ -65,6 +68,7 @@ const QuickOrder = () => {
       (element: any, i: any) => element.name !== item.name
     );
     setPartNumbersData(data);
+    dispatch(removeSingleItem(data));
   };
   const handleAddCart: any = async () => {
     const addCartData: any = [];
