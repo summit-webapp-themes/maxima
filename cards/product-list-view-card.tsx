@@ -150,10 +150,10 @@ const ProductListViewCard = (props: any) => {
                       ) : (
                         <>
                           {CONSTANTS.DISPLAY_PRODUCT_PRICE_ON_PRODUCT_LISTING_CARD && (
-                            <div className="product-price">
+                            <div className="product-price price_font_family">
                               {product_data?.currency_symbol}{" "}
                               {product_data?.price}{" "}
-                              <del className="old-price fs-3 pl-1">
+                              <del className="old-price fs-3 pl-1 price_font_family">
                                 <span>{product_data?.currency_symbol}</span>{" "}
                                 {product_data?.mrp_price}
                               </del>

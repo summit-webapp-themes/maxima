@@ -116,140 +116,105 @@ const QuickOrder = () => {
   };
 
   return (
-    <div className="container margin_from_nav">
-      <div className="row mt-5 justify-content-center">
-        <div className="col-lg-10 col-12 px-2">
-          <h3>{selectedMultiLangData?.quick_order}</h3>
-        </div>
-      </div>
-      <div className="row justify-content-center">
-        <div className="col-12">
-          <div className="row justify-content-center">
-            <div className="col-lg-6 col-12  text-center px-0">
-              {
-                selectedMultiLangData?.you_can_add_upto_25_valid_item_code_oem_part_no_below
-              }
-            </div>
-            <div className="col-lg-6 col-12 mt-lg-0 mt-3">
+    <div className="container-md  margin_from_nav_quick_o">
+      <div className="row mx-lg-5 mx-0 mt-5  ">
+        <div className="col-lg-11  ">
+          <div className="row">
+            <div className="col-lg-2"></div>
+            <div className="col-lg-10 ">
+              <h3>{selectedMultiLangData?.quick_order}</h3>
               <div className="row">
-                <div className="col-lg-3 col-6 text-center ">
-                  <button
-                    type="button"
-                    className=" mb-3 text-uppercase py-2 px-lg-4 px-5 me-3"
-                    style={{
-                      border: "1px solid #0071DC",
-                      borderRadius: "7px",
-                      backgroundColor: "#0071DC",
-                      color: "#fff",
-                    }}
-                    onClick={handleClearReduxStore}
-                  >
-                    {selectedMultiLangData?.reset_form}
-                  </button>
+                <div className="col-lg-7 my-lg-2">
+                  {
+                    selectedMultiLangData?.you_can_add_upto_25_valid_item_code_oem_part_no_below
+                  }
                 </div>
-                <div className="col-lg-6 col-6">
-                  <button
-                    type="button"
-                    className=" text-white mb-3 text-uppercase py-2 px-lg-4 px-5 standard_btn me-3"
-                    style={{
-                      border: "1px solid #0071DC",
-                      borderRadius: "7px",
-                      backgroundColor: "#0071DC",
-                      color: "#fff",
-                    }}
-                    onClick={handleAddCart}
-                  >
-                    {selectedMultiLangData?.add_to_cart}
-                  </button>
+                <div className="col-lg-5">
+                  <div className="row mt-lg-0 mt-4">
+                    <div className="col-lg-7 col-6 text-end ">
+                      <button
+                        type="button"
+                        className=" mb-3 text-uppercase py-2 px-lg-4 px-5 me-3"
+                        style={{
+                          border: "1px solid #0071DC",
+                          borderRadius: "7px",
+                          backgroundColor: "#0071DC",
+                          color: "#fff",
+                        }}
+                        onClick={handleClearReduxStore}
+                      >
+                        {selectedMultiLangData?.reset_form}
+                      </button>
+                    </div>
+                    <div className="col-lg-5 col-6 text-end">
+                      <button
+                        type="button"
+                        className=" text-white mb-3 text-uppercase py-2 px-lg-4 px-5 standard_btn "
+                        style={{
+                          border: "1px solid #0071DC",
+                          borderRadius: "7px",
+                          backgroundColor: "#0071DC",
+                          color: "#fff",
+                        }}
+                        onClick={handleAddCart}
+                      >
+                        {selectedMultiLangData?.add_to_cart}
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              {/* <div className="d-flex justify-content-center mt-2 ">
-                <button
-                  type="button"
-                  className="w-25 mb-3 text-uppercase py-2 px-1 me-3"
-                  style={{
-                    border: "1px solid #0071DC",
-                    borderRadius: "7px",
-                    backgroundColor: "#0071DC",
-                    color: "#fff",
-                  }}
-                  onClick={handleClearReduxStore}
-                >
-                  {selectedMultiLangData?.reset_form}
-                </button>
-                <button
-                  type="button"
-                  className="w-25 text-white mb-3 text-uppercase py-2 px-1 standard_btn me-3"
-                  style={{
-                    border: "1px solid #0071DC",
-                    borderRadius: "7px",
-                    backgroundColor: "#0071DC",
-                    color: "#fff",
-                  }}
-                  onClick={handleAddCart}
-                >
-                  {selectedMultiLangData?.add_to_cart}
-                </button>
-              </div> */}
             </div>
           </div>
         </div>
-        <div className="col-lg-10  col-12 mx-auto">
-          <div className="row justify-content-center cart_heading_bg cart_wrapper">
-            <div className="col-2 text-center">
-              <h5 className="mb-0 pt-2"> {selectedMultiLangData?.image}</h5>
+      </div>
+
+      <div className="row mx-lg-5 mx-0 mt-5  ">
+        <div className="col-lg-11 text-center cart_heading_bg">
+          <div className="row">
+            <div className="col-lg-2 cart_heading_bg_none"></div>
+            <div className="col-lg-2 col-2">
+              <h5 className="mb-0 pt-2 text-start ps-lg-4">
+                {selectedMultiLangData?.image}
+              </h5>
             </div>
-            <div className="col-lg-4 col-3 text-start">
-              <h5 className="mb-0 pt-2 ps-lg-5">
-                {" "}
+            <div className="col-lg-4 col-4 ">
+              <h5 className="mb-0 pt-2 text-start ps-lg-5">
                 {selectedMultiLangData?.details}
               </h5>
             </div>
-            <div className="col-1 text-start mr-lg-0 mr-3">
-              <h5 className="mb-0 pt-2 "> {selectedMultiLangData?.price}</h5>
+            <div className="col-lg-1 col-1 mx-lg-5">
+              <h5 className="mb-0 pt-2 text-end ps-lg-5">
+                {selectedMultiLangData?.price}
+              </h5>
             </div>
-            <div className="col-1 text-center mr-lg-0 mr-3">
-              <h5 className="mb-0 pt-2">
-                {" "}
+            <div className="col-lg-1 col-1 text-start">
+              <h5 className="mb-0 pt-2 ps-lg-2">
                 {selectedMultiLangData?.quantity_c}
               </h5>
             </div>
-            <div className="col-1 text-end">
-              <h5 className="mb-2 pt-2"> {selectedMultiLangData?.total}</h5>
+            <div className="col-lg-1 col-1 text-start">
+              <h5 className="mb-2 pt-2 ps-lg-3">
+                {selectedMultiLangData?.total}
+              </h5>
             </div>
           </div>
-          <hr />
         </div>
+      </div>
 
-        <div className="col-12 mt-3 mb-5">
-          <QuickOrderCard
-            partNumbersData={partNumbersData}
-            handleRemove={handleRemove}
-            showMinQty={showMinQty}
-            handleInputChange={handleInputChange}
-            selectedMultiLangData={selectedMultiLangData}
-          />
-          <div className="col-lg-6 mt-5 text-center">
-            {inputFieldCount === 25 ? (
-              <div>
-                <input type="text" name="inputValue" value="" disabled />
-              </div>
-            ) : (
-              <div>
-                <input
-                  type="text"
-                  name="inputValue"
-                  value={partNumberInputField}
-                  onChange={(e: any) => setPartNumberInputField(e.target.value)}
-                  onKeyDown={(e: any) => handleKeyDown(e)}
-                  placeholder={selectedMultiLangData?.item_code}
-                />
-              </div>
-            )}
-          </div>
-        </div>
+      <div className="row mx-lg-5 mt-3">
+        <QuickOrderCard
+          partNumbersData={partNumbersData}
+          handleRemove={handleRemove}
+          showMinQty={showMinQty}
+          handleInputChange={handleInputChange}
+          selectedMultiLangData={selectedMultiLangData}
+        />
+      </div>
 
-        <div className="col-12 mt-5 mb-5">
+      <div className="row justify-content-center my-5  py-lg-0 py-1">
+        <div className="col-lg-2"></div>
+        <div className="col-lg-10 col-12">
           {ifInputEmptyErr && (
             <div className="mt-3">
               <span className="error-color">
@@ -279,6 +244,23 @@ const QuickOrder = () => {
               <span className="error-color">
                 {selectedMultiLangData?.data_not_found_for_this_part_number}
               </span>
+            </div>
+          )}
+
+          {inputFieldCount === 25 ? (
+            <>
+              <input type="text" name="inputValue" value="" disabled />
+            </>
+          ) : (
+            <div>
+              <input
+                type="text"
+                name="inputValue"
+                value={partNumberInputField}
+                onChange={(e: any) => setPartNumberInputField(e.target.value)}
+                onKeyDown={(e: any) => handleKeyDown(e)}
+                placeholder={selectedMultiLangData?.item_code}
+              />
             </div>
           )}
         </div>

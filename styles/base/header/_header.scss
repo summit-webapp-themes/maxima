@@ -214,6 +214,23 @@
   margin-top: 167px !important;
 }
 
+.margin_from_nav_quick_o {
+  margin-top: 198px !important;
+}
+
+@media only screen and (max-width:560px){
+
+.margin_from_nav_l {
+  margin-top: 117px !important;
+}
+.margin_from_nav {
+  margin-top: 117px !important;
+}
+.margin_from_nav_quick_o {
+  margin-top: 117px !important;
+}
+}
+
 .btn_close_btn {
   font-size: 30px !important;
 }
@@ -1185,4 +1202,11 @@ padding: 7px !important;
 
 .cursor_pointer {
   cursor: pointer !important;
+}
+
+.select-field {
+  background-color: #e2e8f1 !important;
+  border: none !important;
+  border-radius: 3px !important;
+  padding: 2px !important;
 }

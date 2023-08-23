@@ -355,7 +355,6 @@ const WishlistMaster = () => {
                           <div className="col-lg-7 col-12">
                             <p className="mb-0 fs-5 ">
                               <span className="bold">
-                                {" "}
                                 {selectedMultiLangData?.item_code}:
                               </span>
                               {item?.name}
@@ -380,9 +379,8 @@ const WishlistMaster = () => {
                       </div>
                       <div className="col-lg-2 col-md-2 product-price">
                         {item?.price !== 0 ? (
-                          <ins className="new-price fs-3">
-                            {" "}
-                            <span>&#x20B9;</span>
+                          <ins className="new-price fs-3 price_font_family ">
+                            {item?.currency_symbol}
                             {item?.price?.toLocaleString("en-IN")}
                           </ins>
                         ) : (
@@ -391,10 +389,9 @@ const WishlistMaster = () => {
                           </p>
                         )}
                         {item?.mrp_price !== 0 ? (
-                          <s className="old-price fs-3 pl-1">
-                            <span>&#x20B9;</span>
+                          <s className="old-price fs-3 pl-1 price_font_family ">
+                            {item?.currency_symbol}
                             {item?.mrp_price?.toLocaleString("en-IN")}
-                            {/* {item?.mrp_price} */}
                           </s>
                         ) : (
                           ""
@@ -413,16 +410,12 @@ const WishlistMaster = () => {
                           <div className="pe-3 input-width">
                             <input
                               type="text"
-                              // defaultValue={
-                              //   item?.min_order_qty
-                              // }
                               defaultValue={
                                 item?.min_order_qty === 0
                                   ? "1"
                                   : item?.min_order_qty
                               }
                               value={productCounts[index]}
-                              // className="w-100 ml-2 "
                               className={`${
                                 alertMinQty === true &&
                                 productCounts[index] === item?.min_order_qty
