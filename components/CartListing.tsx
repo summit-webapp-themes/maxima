@@ -413,7 +413,7 @@ const CartListing = () => {
                               {selectedMultiLangData?.sub_total}{" "}
                             </div>
                             :
-                            <div className="col-lg-3 col-6 text-end">
+                            <div className="col-lg-3 col-6 text-end price_font_family">
                               {
                                 cartListingItems?.categories[0]?.orders[0]
                                   ?.currency_symbol
@@ -428,7 +428,7 @@ const CartListing = () => {
                               {selectedMultiLangData?.tax}{" "}
                             </div>
                             :
-                            <div className="col-lg-3 col-6 text-end">
+                            <div className="col-lg-3 col-6 text-end price_font_family">
                               {
                                 cartListingItems?.categories[0]?.orders[0]
                                   ?.currency_symbol

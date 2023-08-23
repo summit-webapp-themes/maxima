@@ -188,7 +188,7 @@ const Index = ({ sales_order_id }: any) => {
                             </p>
                           </div>
                           <div className="text-right col-6">
-                            <p className="mb-0 order_summary_p">
+                            <p className="mb-0 order_summary_p price_font_family">
                               {data?.currency_symbol}{" "}
                               {data?.subtotal_exclude_tax}
                             </p>
@@ -202,7 +202,7 @@ const Index = ({ sales_order_id }: any) => {
                             </p>
                           </div>
                           <div className="text-right col-6">
-                            <p className="mb-0 order_summary_p">
+                            <p className="mb-0 order_summary_p price_font_family">
                               {data?.currency_symbol} {data?.tax}
                             </p>
                           </div>
@@ -255,7 +255,7 @@ const Index = ({ sales_order_id }: any) => {
                             </p>
                           </div>
                           <div className="text-right col-6">
-                            <p className="mb-0 order_summary_p">
+                            <p className="mb-0 order_summary_p price_font_family">
                               {data?.currency_symbol}{" "}
                               {data?.subtotal_include_tax}
                             </p>
@@ -269,7 +269,7 @@ const Index = ({ sales_order_id }: any) => {
                             </p>
                           </div>
                           <div className="text-right col-6">
-                            <p className="mb-0 bold order_summary_p">
+                            <p className="mb-0 bold order_summary_p price_font_family">
                               {data?.currency_symbol} {data?.total}
                             </p>
                           </div>
@@ -283,7 +283,7 @@ const Index = ({ sales_order_id }: any) => {
                             </p>
                           </div>
                           <div className="text-right col-6">
-                            <p className="mb-0 bold order_summary_p">
+                            <p className="mb-0 bold order_summary_p price_font_family">
                               {data?.currency_symbol} {data?.total}
                             </p>
                           </div>
@@ -373,7 +373,7 @@ const Index = ({ sales_order_id }: any) => {
                                     >
                                       <p className="text-capitalize black mb-0 myorder_p">
                                         {oDetail?.prod_info[1].value !== 0 ? (
-                                          <p className="mb-0">
+                                          <p className="mb-0 price_font_family">
                                             {" "}
                                             : {data?.currency_symbol}{" "}
                                             {oDetail?.prod_info[1].value}
@@ -566,12 +566,6 @@ const Index = ({ sales_order_id }: any) => {
                                                 type="submit"
                                                 className="btn btn-warning yellow_btn"
                                                 data-bs-toggle="modal"
-                                                //   onClick={() =>
-                                                //     handleSubmitReturnReplacementRequest(
-                                                //       data.id,
-                                                //       oDetail.prod_name
-                                                //     )
-                                                //   }
                                               >
                                                 {
                                                   selectedMultiLangData?.submit_request

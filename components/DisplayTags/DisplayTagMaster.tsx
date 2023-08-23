@@ -98,8 +98,10 @@ const DisplayTagMaster = (props: any) => {
                                 </Link>
                               </h4>
                               <div className="product-price">
-                                <ins className="new-price">₹{list?.price}</ins>
-                                <del className="old-price">
+                                <ins className="new-price price_font_family">
+                                  ₹{list?.price}
+                                </ins>
+                                <del className="old-price price_font_family">
                                   ₹{list?.mrp_price}
                                 </del>
                               </div>

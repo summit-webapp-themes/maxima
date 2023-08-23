@@ -277,11 +277,11 @@ const ProductCard = (props: ProductCardProps) => {
               </Link>
             </h4>
             <div className="product-price">
-              <ins className="new-price">
+              <ins className="new-price price_font_family">
                 {currency_symbol}
                 {price}
               </ins>
-              <del className="old-price">
+              <del className="old-price price_font_family">
                 {currency_symbol}
                 {mrp_price}
               </del>

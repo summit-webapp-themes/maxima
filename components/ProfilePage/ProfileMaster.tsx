@@ -587,7 +587,7 @@ const ProfileMaster = () => {
                         >
                           <h6 className="link-tabs my-3">
                             <i
-                              className="fa fa-user-circle fs-1"
+                              className="fa fa-user-circle profile_tab-icons"
                               aria-hidden="true"
                             ></i>
                             <p className="mb-0 sidebar_texsize">
@@ -610,7 +610,7 @@ const ProfileMaster = () => {
                         >
                           <h6 className="link-tabs my-3">
                             <i
-                              className="fa fa-map-marker fs-1"
+                              className="fa fa-map-marker profile_tab-icons"
                               aria-hidden="true"
                             ></i>
                             <p className="mb-0 sidebar_texsize">
@@ -634,7 +634,7 @@ const ProfileMaster = () => {
                         >
                           <h6 className="link-tabs my-3">
                             <i
-                              className="fa fa-tags fs-1"
+                              className="fa fa-tags profile_tab-icons"
                               aria-hidden="true"
                             ></i>
                             <p className="mb-0 sidebar_texsize">
@@ -646,7 +646,7 @@ const ProfileMaster = () => {
                       </Link>
                     </li>
 
-                    <li className="nav-item col-lg-10 col-11">
+                    <li className="nav-item col-lg-10 col-12">
                       <Link href="#pay_faq" legacyBehavior>
                         <a
                           className={`nav-link profile_nav border tab_width ${
@@ -661,7 +661,7 @@ const ProfileMaster = () => {
                         >
                           <h6 className="link-tabs my-3 ">
                             <i
-                              className="fa fa-credit-card fs-1"
+                              className="fa fa-credit-card profile_tab-icons"
                               aria-hidden="true"
                             ></i>
                             <p className="mb-0 sidebar_texsize">
@@ -672,7 +672,7 @@ const ProfileMaster = () => {
                         </a>
                       </Link>
                     </li>
-                    <li className="nav-item col-lg-10 col-11">
+                    <li className="nav-item col-lg-10 col-12">
                       <Link href="#enqHist_faq" legacyBehavior>
                         <a
                           className="nav-link profile_nav border nav_tabs_list tab_width"
@@ -685,7 +685,7 @@ const ProfileMaster = () => {
                         >
                           <h6 className="link-tabs my-3 ">
                             <i
-                              className="fa fa-calendar-check-o fs-1"
+                              className="fa fa-calendar-check-o profile_tab-icons"
                               aria-hidden="true"
                             ></i>
                             <p className="mb-0 sidebar_texsize">

@@ -129,6 +129,10 @@ width: 82%;
 .cart_heading_bg {
     background-color: $primary-color-light;
 }
+
+.cart_heading_bg_none {
+    background-color: $white-color !important;
+}
 .norecord_container {
     margin-top: 80px;
 }
