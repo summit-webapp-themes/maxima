@@ -98,9 +98,9 @@ const DisplayTagMaster = (props: any) => {
                                 </Link>
                               </h4>
                               <div className="product-price">
-                                <ins className="new-price">₹{list?.price}</ins>
+                                <ins className="new-price">{list?.currency_symbol}{" "}{list?.price}</ins>
                                 <del className="old-price">
-                                  ₹{list?.mrp_price}
+                                  {list?.currency_symbol}{" "}{list?.mrp_price}
                                 </del>
                               </div>
                             </div>
