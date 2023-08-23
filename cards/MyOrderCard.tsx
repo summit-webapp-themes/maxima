@@ -40,7 +40,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                   {selectedMultiLangData?.price_on_request}
                 </p>
               ) : (
-                <p className="gray mb-0 myorder_p">
+                <p className="gray mb-0 myorder_p price_font_family">
                   {data?.currency_symbol} {data?.total}
                 </p>
               )}
@@ -173,7 +173,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                           >
                             <p className="text-capitalize black mb-0 myorder_p">
                               {detail?.prod_info[1]?.value !== 0 ? (
-                                <p className="mb-0">
+                                <p className="mb-0 price_font_family">
                                   {" "}
                                   : {data?.currency_symbol}{" "}
                                   {detail.prod_info[1]?.value}
@@ -261,7 +261,10 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
               {isDealer ? (
                 <div className="text-end col-lg-2 col-md-2 col-12">
                   <button className=" order_links mb-2 d-block text-uppercase">
-                    <Link  href={`${detail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`} legacyBehavior>
+                    <Link
+                      href={`${detail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                      legacyBehavior
+                    >
                       <a className="orderdetails_btn">
                         {" "}
                         {selectedMultiLangData?.view_product}
@@ -274,10 +277,10 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                   <div className=" col-lg-2"></div>
                   <div className="text-end col-lg-2 col-md-2 col-12">
                     <button className=" order_links mb-2 d-block text-uppercase">
-                      <Link 
-                       href={`${detail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
-                  
-                      legacyBehavior>
+                      <Link
+                        href={`${detail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                        legacyBehavior
+                      >
                         <a className="orderdetails_btn">
                           {" "}
                           {selectedMultiLangData?.view_product}

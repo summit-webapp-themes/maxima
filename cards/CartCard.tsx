@@ -36,7 +36,6 @@ const CartCard = ({
   const handleInputChange = (e: any, index: any) => {
     console.log("cart input", e.target.value, index);
     const numericValue = e.target.value.replace(/\D/g, "");
-    // setCartQty(numericValue);
   };
 
   // const UpdateCart = async (item_code: any) => {
@@ -86,10 +85,10 @@ const CartCard = ({
           <div className="col-lg-2 col-3">
             {orders?.details.length > 0 &&
               orders?.details !== null &&
-              (orders.details[1]?.value !== 0 ? (
-                <p className="text-center">
-                  {orders.currency_symbol}
-                  <span className="text-center">
+              (orders?.details[1]?.value !== 0 ? (
+                <p className="text-center price_font_family">
+                  {orders?.currency_symbol}
+                  <span className="text-center ">
                     <IndianNumber value={orders.details[1]?.value} />
                   </span>
                 </p>
@@ -105,7 +104,7 @@ const CartCard = ({
           <div className="col-2">
             <p>{orders.total_weight}</p>
           </div>
-          <div className="col-1">
+          <div className="col-1 price_font_family">
             <p>
               {orders.currency_symbol}
               {orders.tax}
@@ -121,7 +120,7 @@ const CartCard = ({
               }}
             />
           </div>
-          <div className="col-1">
+          <div className="col-1 price_font_family">
             <p>
               {orders.currency_symbol}
               {orders.amount}
@@ -189,7 +188,7 @@ const CartCard = ({
         </div>
         <div className="row">
           <div className="col-6 fs-4">{selectedMultiLangData?.tax} </div>:
-          <div className="col-5 text-start">
+          <div className="col-5 text-start price_font_family">
             {orders.currency_symbol}
             {orders.tax}
           </div>
@@ -220,7 +219,10 @@ const CartCard = ({
         </div>
         <div className="row">
           <div className="col-6 fs-4">{selectedMultiLangData?.total} </div>:
-          <div className="col-5 ">₹ {orders.amount}</div>
+          <div className="col-5 price_font_family">
+            {orders.currency_symbol}
+            {orders.amount}
+          </div>
         </div>
       </div>
     </>
