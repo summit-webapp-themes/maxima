@@ -168,7 +168,7 @@ const ProductListViewCard = (props: any) => {
                           className={`btn btn-link catalog-btn-size pt-2 fs-5`}
                           onClick={() => handleShow(product_data.name)}
                         >
-                          Add To Catalog
+                          {selectedMultiLangData?.add_to_catalog}
                         </button>
                       ) : (
                         ""
@@ -191,7 +191,7 @@ const ProductListViewCard = (props: any) => {
                           <Link href="/login">
                             <div className="text-center w-50">
                               <button className="btn standard_button">
-                                Add to cart
+                                {selectedMultiLangData?.add_to_cart}
                               </button>
                             </div>
                           </Link>
@@ -312,6 +312,7 @@ const ProductListViewCard = (props: any) => {
           handleAddProduct={handleAddProduct}
           handleSubmitCatalogName={handleSubmitCatalogName}
           handleChange={handleChange}
+          selectedMultiLangData={selectedMultiLangData}
         />
       </div>
     </>

@@ -558,7 +558,7 @@ const ProfileMaster = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container margin_from_nav">
         <section className="profile_section ">
           <div className="container">
             <h1 className="bold text-uppercase mb-3 profile_heading">

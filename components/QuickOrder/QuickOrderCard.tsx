@@ -18,17 +18,13 @@ const QuickOrderCard = (props: any) => {
   };
   let total: any;
 
-  const showValue = (qty_value:any) =>
-  {
-    if(qty_value === 0)
-    {
-      return 1
-    }
-    else
-    {
+  const showValue = (qty_value: any) => {
+    if (qty_value === 0) {
+      return 1;
+    } else {
       return qty_value;
     }
-  }
+  };
   return (
     <>
       <div className="mt-3">
@@ -47,16 +43,16 @@ const QuickOrderCard = (props: any) => {
             )
             .map((data: any, index: any) => (
               <>
-                <div className="row mt-3 mb-3">
-                  <div className="col-3 text-start">
+                <div className="row justify-content-center mt-3 mb-3 ">
+                  <div className="col-lg-2 text-center">
                     {data.image_url !== null ? (
                       <Image
                         loader={myLoader}
                         src={`${data.image_url}`}
                         // src={maximaCard}
                         alt="product-img"
-                        width={100}
-                        height={100}
+                        width={150}
+                        height={150}
                         className="img-fluid"
                       />
                     ) : (
@@ -65,13 +61,13 @@ const QuickOrderCard = (props: any) => {
                         src={`${data.brand_img}`}
                         // src={maximaCard}
                         alt="product-img"
-                        width={100}
-                        height={100}
+                        width={150}
+                        height={150}
                         className="img-fluid"
                       />
                     )}
                   </div>
-                  <div className="col-3 text-start">
+                  <div className="col-lg-3 text-start">
                     <p className="mb-0">
                       {selectedMultiLangData?.item_code}: {data.item_name}
                     </p>
@@ -90,7 +86,7 @@ const QuickOrderCard = (props: any) => {
                       </a>
                     </Link>
                   </div>
-                  <div className="col-2">
+                  <div className="col-lg-1 col-4 text-center">
                     <p>
                       {data.price !== 0 ? (
                         <IndianNumber value={data?.price} />
@@ -101,12 +97,12 @@ const QuickOrderCard = (props: any) => {
                       )}
                     </p>
                   </div>
-                  <div className="col-2">
+                  <div className="col-lg-1 col-4 text-center">
                     {
                       <>
                         <input
                           type="number"
-                          className="w-25 text-center mb-3"
+                          className="w-50  text-center mb-3"
                           value={showValue(data?.min_order_qty)}
                           onChange={(e) => handleInputChange(e, index)}
                         />
@@ -114,12 +110,12 @@ const QuickOrderCard = (props: any) => {
                       </>
                     }
                   </div>
-                  <div className="col-2">
-                    <p>
-                      <IndianNumber
-                        value={(total = data.price * showValue(data?.min_order_qty))}
-                      />
-                    </p>
+                  <div className="col-lg-1 col-4 text-center">
+                    <IndianNumber
+                      value={
+                        (total = data.price * showValue(data?.min_order_qty))
+                      }
+                    />
                   </div>
                 </div>
               </>

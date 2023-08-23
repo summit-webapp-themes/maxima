@@ -251,8 +251,8 @@ const WishlistMaster = () => {
           loader={myLoader}
           src={items?.image_url}
           alt="wishlist-product"
-          width={100}
-          height={100}
+          width={170}
+          height={170}
         />
       );
     } else if (items?.brand_img !== null && items?.brand_img !== "") {
@@ -261,8 +261,8 @@ const WishlistMaster = () => {
           loader={myLoader}
           src={items?.brand_img}
           alt="wishlist-product"
-          width={100}
-          height={100}
+          width={170}
+          height={170}
         />
       );
     } else {
@@ -271,8 +271,8 @@ const WishlistMaster = () => {
           src=""
           // src={maximaCard}
           alt="product-detail"
-          width={100}
-          height={100}
+          width={170}
+          height={170}
           className="img-fluid"
         />
       );
@@ -280,7 +280,7 @@ const WishlistMaster = () => {
   };
 
   return (
-    <>
+    <div className="margin_from_nav">
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (
@@ -410,7 +410,7 @@ const WishlistMaster = () => {
                           >
                             -
                           </span>
-                          <div className="pe-3 input-width ">
+                          <div className="pe-3 input-width">
                             <input
                               type="text"
                               // defaultValue={
@@ -428,7 +428,7 @@ const WishlistMaster = () => {
                                 productCounts[index] === item?.min_order_qty
                                   ? "text-danger"
                                   : ""
-                              } w-100 ml-2 text-center`}
+                              } w-100 ml-2 pb-lg-0 pb-1 text-center`}
                               onChange={(e: any) =>
                                 handleQuantityChange(
                                   +e?.target?.value,
@@ -489,7 +489,7 @@ const WishlistMaster = () => {
                           </button> */}
 
                           <button
-                            className="ml-1 text-dark btn px-3 mt-lg-0 mt-md-2"
+                            className="ml-1 text-dark btn px-3 mt-lg-0 mt-5 mb-lg-0 mb-2"
                             style={{
                               border: "1px solid #0071DC",
                               borderRadius: "7px",
@@ -591,7 +591,7 @@ const WishlistMaster = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

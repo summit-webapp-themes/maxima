@@ -45,15 +45,18 @@ const ProductDetail = ({
   doesSelectedVariantDoesNotExists,
   stockDoesNotExistsForSelectedVariants,
   selectedMultiLangData,
+  newobjectState,
+  setnewObjectState,
 }: any) => {
   const dispatch = useDispatch();
   const TokenFromStore: any = useSelector(get_access_token);
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   const router = useRouter();
 
-  const [newobjectState, setnewObjectState] = useState<any>([]);
+  // const [newobjectState, setnewObjectState] = useState<any>([]);
 
   const handleVariantsData: any = (newData: any) => {
+    console.log("input qty new", newData);
     setnewObjectState(newData);
   };
 
@@ -419,7 +422,7 @@ const ProductDetail = ({
 
               <div className="row button_sec">
                 {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
-                  <div className="col-lg-4 text-start">
+                  <div className="col-lg-4 col-6 align-self-lg-start">
                     <div className="mt-5">
                       <button
                         type="button"
@@ -432,7 +435,7 @@ const ProductDetail = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="col-lg-3">
+                  <div className="col-lg-4 col-6">
                     <div className="mt-5">
                       <Link
                         href="/login"
@@ -444,12 +447,12 @@ const ProductDetail = ({
                   </div>
                 )}
                 {isLoggedIn === "true" ? (
-                  <div className="col-md-6">
+                  <div className="col-lg-4 col-5 ml-lg-0 ml-3 align-self-lg-start">
                     <div className="mt-5">
                       <div className="row">
                         <button
                           type="button"
-                          className={`w-50 btn standard_button_filled cart_btn_gtag`}
+                          className={`w-75  btn standard_button_filled cart_btn_gtag`}
                           onClick={handleAddCart}
                           disabled={doesSelectedVariantDoesNotExists}
                         >
@@ -471,11 +474,11 @@ const ProductDetail = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="col-md-6 mx-auto">
+                  <div className="col-lg-4 col-4 text-start ">
                     <div className="mt-5">
                       <div className="row">
                         <button
-                          className={`w-75 btn standard_button_filled cart_btn_gtag `}
+                          className={`w-50 btn standard_button_filled cart_btn_gtag `}
                           onClick={handleRedirect}
                           disabled={doesSelectedVariantDoesNotExists}
                         >

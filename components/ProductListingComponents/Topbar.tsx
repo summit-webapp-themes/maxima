@@ -46,14 +46,14 @@ const Topbar = (props: any) => {
                       <div className="col-lg-6 col-4">
                         <div className="ms-3">
                           <i
-                            className="fa fa-list fa-lg"
+                            className="fa fa-list fa-lg cursor_pointer"
                             aria-hidden="true"
                             onClick={() =>
                               handleToggleProductsListingView("list-view")
                             }
                           ></i>
                           <i
-                            className="fa fa-th fa-lg ms-3"
+                            className="fa fa-th fa-lg ms-3 cursor_pointer"
                             aria-hidden="true"
                             onClick={() =>
                               handleToggleProductsListingView("grid-view")

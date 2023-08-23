@@ -28,7 +28,7 @@ const Index = ({ sales_order_id }: any) => {
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}/${src}?w=${width}&q=${quality || 75}`;
   };
- 
+
   let thankyou: any = router.asPath.split("/")[1];
   console.log("thank", thankyou);
   console.log("my orders get order detail data in order detail file", detail);
@@ -70,7 +70,7 @@ const Index = ({ sales_order_id }: any) => {
   }, [SelectedLangDataFromStore]);
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
-    <div>
+    <div className="margin_from_nav_l">
       {detail?.length > 0 &&
         detail !== null &&
         detail?.map((data: any) => (
@@ -302,7 +302,6 @@ const Index = ({ sales_order_id }: any) => {
                         <div className="flex-fill">
                           <h6 className="green text-capitalize bold mb-0 status"></h6>
                         </div>
-                       
                       </div>
                       <div className="d-flex align-items-center row">
                         <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4">
@@ -332,10 +331,10 @@ const Index = ({ sales_order_id }: any) => {
                         <div className="product_item_details col-lg-8 col-md-7 col-8">
                           <div className="d-flex orderdetail-name">
                             <div className="flex-fill">
-                              <Link 
+                              <Link
                                 href={`${oDetail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
-                             
-                              legacyBehavior>
+                                legacyBehavior
+                              >
                                 <a className="product_item_name">
                                   {oDetail?.item_name}
                                 </a>
@@ -415,10 +414,10 @@ const Index = ({ sales_order_id }: any) => {
                             ""
                           ) : (
                             <button className=" order_links mb-2 d-block text-uppercase">
-                              <Link 
+                              <Link
                                 href={`${oDetail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
-                          
-                              legacyBehavior>
+                                legacyBehavior
+                              >
                                 <a className="order_linkshover text-dark">
                                   {selectedMultiLangData?.view_product}
                                 </a>
