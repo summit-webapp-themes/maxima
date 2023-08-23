@@ -241,7 +241,7 @@ const ProductDetail = ({
           {selectedMultiLangData?.item_code}: {productDetailData?.name}
         </p>
 
-        <h3 className="p_price m-0">
+        <h3 className="p_price m-0 price_font_family">
           {productDetailData?.price !== 0 ? (
             <>
               {productDetailData?.currency_symbol} {productDetailData?.price}
@@ -255,7 +255,7 @@ const ProductDetail = ({
 
           {productDetailData?.mrp_price !== 0 ? (
             <>
-              <s className="old-price currency_symbol">
+              <s className="old-price currency_symbol price_font_family">
                 {productDetailData?.currency_symbol}{" "}
                 {productDetailData?.mrp_price}
                 {/* <IndianNumber value={productDetailData?.mrp_price} /> */}

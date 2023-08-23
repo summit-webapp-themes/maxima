@@ -21,7 +21,7 @@ const Topbar = (props: any) => {
             </p>
           </div>
         </div>
-        <div className="col-lg-9 text-end">
+        <div className="col-lg-9 text-end d-lg-block d-none">
           <div className="row">
             <div className="col-lg-3"></div>
             <div className="col-lg-3"></div>
