@@ -6,6 +6,7 @@ const HomeTopCategories = ({
   isLoading,
   selectedCurrencyVal,
 }: any) => {
+  console.log('display tag in home home top categories');
   // const { homeTopCategories, isLoading } = useHomeTopCategories();
   const imageLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}/${src}?w=${width}&q=${quality || 75}`;

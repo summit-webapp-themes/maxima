@@ -12,6 +12,7 @@ import useSearchHook from "../../../hooks/GeneralHooks/SearchHooks/search-hook";
 import { cart_listing_state } from "../../../store/slices/cart-listing-page-slice/cart-listing-slice";
 import useWishlist from "../../../hooks/WishListHooks/WishListHooks";
 import LogoutList from "../../../services/api/auth/logout_api";
+import LinguisticsAndForex from "./LinguisticsAndForex";
 const WebNavbar = ({
   navbarData,
   isLoading,
@@ -351,31 +352,7 @@ const WebNavbar = ({
                 </nav>
               </div>
             </div>
-            <div className="mx-3">
-              <select
-                onChange={(e) => handleLanguageChange(e?.target?.value)}
-                className="select-field cursor_pointer"
-              >
-                {multiLanguagesData?.length > 0 &&
-                  multiLanguagesData !== null &&
-                  multiLanguagesData.map((lang: any) => {
-                    return (
-                      <option value={lang?.lang_code}>{lang?.lang_name}</option>
-                    );
-                  })}
-              </select>
-            </div>
-            <div className="mx-3">
-              <select
-                className="select-field cursor_pointer"
-                // value={selectedLanguage}
-                onChange={(e) => handleCurrencyValueChange(e.target.value)}
-              >
-                <option value="INR">₹</option>
-                <option value="USD">$</option>
-                <option value="EUR">€</option>
-              </select>
-            </div>
+            <LinguisticsAndForex />
           </div>
         </div>
       </header>
