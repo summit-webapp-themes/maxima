@@ -107,7 +107,7 @@ const MobNavbar = ({
                                   <span className="">
                                     <i
                                       className="fa fa-arrow-right fs-5"
-                                      onClick={() => mobileHandle(i)}
+                                      onClick={() => arrowHandle(index)}
                                     ></i>
                                   </span>
                                   {/* <span

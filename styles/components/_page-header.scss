@@ -46,11 +46,20 @@ $page-header-background:$border-color !default;
     }
 }
 .dropdown-icon {
-    padding-top: 2px;
+    // padding-top: 2px;
+    margin-bottom: 20px !important;
     background: none;
     color: $white-color;
     border: none;
     box-shadow: none;
+}
+
+@media screen and (max-width:500px){
+    .dropdown-icon {
+        padding-top: 5px;
+        margin-bottom: 0px !important;
+   
+    }
 }
 .dropdown-toggle:hover {
     // color: $black-color !important;

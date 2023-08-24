@@ -211,7 +211,7 @@
   margin-top: 157px !important;
 }
 .margin_from_nav {
-  margin-top: 167px !important;
+  margin-top: 177px !important;
 }
 
 .margin_from_nav_quick_o {
@@ -749,6 +749,16 @@
   display: none;
   font-size: 2.4rem;
   line-height: 1;
+  margin-bottom: 1px !important;
+}
+
+.w-icon-account:before {
+  font-size: 25px !important;
+}
+
+.fa-user-o:before {
+  font-size: 25px !important;
+
 }
 
 .compare {
@@ -1209,4 +1219,8 @@ padding: 7px !important;
   border: none !important;
   border-radius: 3px !important;
   padding: 2px !important;
+}
+
+.dropdown-item:active {
+  background-color:#e9ecef !important;
 }
