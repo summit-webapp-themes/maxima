@@ -12,7 +12,7 @@ import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/
 const Footer = () => {
   const dispatch = useDispatch();
   const navbarData: any = [];
-  const [subScription, setSubscriptions] = useState<any>();
+  const [subScription, setSubscriptions] = useState<any>("");
   const handleSubscription = async (event: any) => {
     event?.preventDefault();
     console.log(subScription, "subScription");
@@ -20,6 +20,7 @@ const Footer = () => {
     console.log("subScriptionRes", subScriptionRes);
     if (subScriptionRes?.data?.message?.msg === "success") {
       dispatch(successmsg("subscribed successfully"));
+      setSubscriptions("");
 
       setTimeout(() => {
         dispatch(hideToast());
@@ -75,6 +76,7 @@ const Footer = () => {
               </div>
               <div className="col-xl-5 col-lg-5 col-md-9 mt-4 mt-lg-0 ">
                 <form
+                  onSubmit={handleSubscription}
                   method="get"
                   className="input-wrapper input-wrapper-inline input-wrapper-rounded"
                 >
@@ -90,7 +92,6 @@ const Footer = () => {
                   <button
                     className="btn btn-primary btn-rounded btn-left  footer-button"
                     type="submit"
-                    onClick={handleSubscription}
                   >
                     {selectLangData?.subscribe}
                     <i className="w-icon-long-arrow-right"></i>
