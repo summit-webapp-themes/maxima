@@ -6,8 +6,8 @@ import displayTagList from "../../services/api/home_page_api/home-display-tag-ap
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
-const HomeTopBrands = () => {
-  const { brandListing }: any = useHomeTopBrand();
+const HomeTopBrands = ({brandListing}:any) => {
+
   console.log(brandListing, "brandList");
 
   const SelectedLangDataFromStore: any = useSelector(

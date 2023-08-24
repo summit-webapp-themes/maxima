@@ -10,6 +10,7 @@ import HomeTopCategories from "./HomeTopCategories/HomeTopCategories";
 import HomeTopCategoriesBanner from "./HomeTopCategories/HomeTopCategoriesBanner";
 import DisplayTagMaster from "./DisplayTags/DisplayTagMaster";
 import { askForPermissionToReceiveNotifications } from "../push-notifications";
+import useHomeTopBrand from "../hooks/HomePageHooks/HomeTopBrandHook";
 
 const HomePage = () => {
   // useEffect(()=>
@@ -17,10 +18,10 @@ const HomePage = () => {
   //   askForPermissionToReceiveNotifications();
   // },[])
 
-  const { allTagsData }: any = useDisplayTagHooks();
-
   const { homeTopCategories, isLoading, selectedCurrencyVal }: any =
     useHomeTopCategories();
+  const { brandListing }: any = useHomeTopBrand();
+  const { allTagsData }: any = useDisplayTagHooks();
 
   const renderSectionComponent: any = (index: number) => {
     switch (index) {
@@ -32,7 +33,7 @@ const HomePage = () => {
           />
         );
       case 1:
-        return <HomeTopBrands />;
+        return <HomeTopBrands brandListing={brandListing} />;
       // Add more cases as needed for other section components
       default:
         return null;
