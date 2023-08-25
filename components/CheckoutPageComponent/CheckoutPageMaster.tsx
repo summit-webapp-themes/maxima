@@ -46,6 +46,7 @@ const CheckoutPageMaster = () => {
     handlePlaceOrder,
     storeCredit,
     quotationId,
+    currencySymbolForSummary,
   } = UseCheckoutPageHook();
 
   const useMediaQuery = (width: any) => {
@@ -99,7 +100,7 @@ const CheckoutPageMaster = () => {
     }
   }, [SelectedLangDataFromStore]);
 
-  console.log("visitor state", visitorState);
+  console.log("visitor state", currencySymbolForSummary);
   return (
     <div className="margin_from_nav mb-5">
       {isBreakpoint ? (
@@ -133,6 +134,7 @@ const CheckoutPageMaster = () => {
             textState={textState}
             transportersCharges={transportersCharges}
             orderSummary={orderSummary}
+            currencySymbolForSummary={currencySymbolForSummary}
             handleApplyCouponCode={handleApplyCouponCode}
             handleDeleteCouponCode={handleDeleteCouponCode}
             couponCode={couponCode}
@@ -157,6 +159,7 @@ const CheckoutPageMaster = () => {
               //setinitialShippingAddress={setInitialShippingAddress}
               setinitialBillingAddress={setInitialBillingAddress}
               orderSummary={orderSummary}
+              currencySymbolForSummary={currencySymbolForSummary}
               //quotationId={quotationId}
               handleChangeSameAsShipping={handleChangeSameAsShipping}
               billingCheckbox={billingCheckbox}

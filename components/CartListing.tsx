@@ -407,7 +407,6 @@ const CartListing = () => {
                       {!orderSummaryForCart ? null : (
                         <>
                           <div className="row justify-content-end">
-                            {/* <div className="col-lg-4 col-4 "></div> */}
                             <div className="col-lg-4 col-4 ">
                               {" "}
                               {selectedMultiLangData?.sub_total}{" "}
@@ -422,7 +421,6 @@ const CartListing = () => {
                             </div>
                           </div>
                           <div className="row justify-content-end">
-                            {/* <div className="col-md-4"></div> */}
                             <div className="col-lg-4 col-4 ">
                               {" "}
                               {selectedMultiLangData?.tax}{" "}
@@ -439,7 +437,6 @@ const CartListing = () => {
                             </div>
                           </div>
                           <div className="row justify-content-end">
-                            {/* <div className="col-md-4"></div> */}
                             <div className="col-lg-4 col-4 ">
                               {" "}
                               {selectedMultiLangData?.order_total_including_tax}

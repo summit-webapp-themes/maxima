@@ -17,6 +17,12 @@ import {
 } from "../../services/api/general_apis/customer-form-data-api";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
+import RegistrationApi from "../../services/api/auth/registration_api";
+import {
+  failmsg,
+  hideToast,
+  successmsg,
+} from "../../store/slices/general_slices/toast_notification_slice";
 
 const Registration = () => {
   const router = useRouter();
@@ -77,9 +83,21 @@ const Registration = () => {
     }
   };
 
-  const handlesubmit: any = (values: any, action: any) => {
-    console.log("form values", values);
-    dispatch(getRegistrationData(values));
+  const handlesubmit: any = async (values: any, action: any) => {
+    let RegistrationApiRes: any = await RegistrationApi(values);
+    // dispatch(getRegistrationData(values));
+    if (RegistrationApiRes?.data?.message?.msg === "success") {
+      dispatch(successmsg("Registerd sucessfully"));
+      router.push("/login");
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1200);
+    } else {
+      dispatch(failmsg(RegistrationApiRes?.data?.message?.error));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1200);
+    }
     action.resetForm();
   };
 

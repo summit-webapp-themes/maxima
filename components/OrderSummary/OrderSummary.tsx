@@ -11,12 +11,14 @@ const OrderSummary = ({
   orderSummary,
   couponError,
   selectedMultiLangData,
+  currencySymbolForSummary,
 }: any) => {
   const [cartListingItems, setcartListingItems] = useState<any>([]);
   const [show, setshow] = useState(false);
   const [initial, setInitial] = useState(false);
   const cartProducts: any = useSelector(cart_listing_state);
 
+  console.log("order Summary", currencySymbolForSummary);
   let order;
   useEffect(() => {
     setcartListingItems(cartProducts.data);
@@ -63,7 +65,7 @@ const OrderSummary = ({
                             </div>
                           ) : (
                             <div>
-                              <i className="fa fa-inr"></i>
+                              {currencySymbolForSummary}
 
                               <IndianNumber value={data?.value} />
                             </div>
