@@ -19,6 +19,7 @@ import {
 import { getAccessToken } from "../../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import getOtpFetchApi from "../../services/api/auth/get-otp-api";
+import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
 
 const Loginpage = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Loginpage = () => {
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
   useEffect(() => {
     if (
       Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0

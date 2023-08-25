@@ -23,6 +23,7 @@ import {
   hideToast,
   successmsg,
 } from "../../store/slices/general_slices/toast_notification_slice";
+import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
 
 const Registration = () => {
   const router = useRouter();
@@ -33,6 +34,7 @@ const Registration = () => {
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
+  const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
   const RegistrationDataFromStore: any = useSelector(registration_state);
   useEffect(() => {
     if (
@@ -194,6 +196,7 @@ const Registration = () => {
                                       onBlur={handleBlur}
                                       type={details?.type}
                                       name={details?.name}
+                                      placeholder={`Enter ${details?.label}`}
                                       className={`${
                                         details?.name === "address"
                                           ? "address_textarea"
