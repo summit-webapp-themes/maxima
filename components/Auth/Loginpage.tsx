@@ -40,7 +40,9 @@ const Loginpage = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
+
   let isLoggedIn: any;
+  let guestLogin: any;
   const router = useRouter();
   let obj = {
     isGoogleLogin: false,
@@ -48,6 +50,7 @@ const Loginpage = () => {
     isOtpLogin: false,
   };
   if (typeof window !== "undefined") {
+    guestLogin = localStorage.getItem("guest");
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
 
@@ -56,6 +59,7 @@ const Loginpage = () => {
 
     const user_params = {
       values: values,
+      guest: guestLogin,
       isOtpLogin: isOtpLoginState === true ? true : false,
     };
     console.log("userparams", user_params);

@@ -7,7 +7,10 @@ import { useRouter } from "next/router";
 import { RegistrationValidation } from "../../validation/registrationValidation";
 import Image from "next/image";
 import { register_details } from "../dataSets/registrationDataset";
-import { getRegistrationData } from "../../store/slices/auth/registration_slice";
+import {
+  getRegistrationData,
+  registration_state,
+} from "../../store/slices/auth/registration_slice";
 import {
   FetchCitiesForAddressForm,
   FetchStateForAddressForm,
@@ -20,10 +23,11 @@ const Registration = () => {
   const dispatch = useDispatch();
   const TokenFromStore: any = useSelector(get_access_token);
 
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
-  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  const RegistrationDataFromStore: any = useSelector(registration_state);
   useEffect(() => {
     if (
       Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
@@ -31,7 +35,7 @@ const Registration = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
-  console.log("register details", register_details);
+  console.log("register details", RegistrationDataFromStore);
   let [selectedCity, setSelectedCity] = useState<any>("");
   let [selectedStates, setSelectedStates] = useState<any>("");
 
