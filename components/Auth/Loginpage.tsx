@@ -18,6 +18,8 @@ import {
 } from "../../store/slices/auth/login_slice";
 import { getAccessToken } from "../../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import getOtpFetchApi from "../../services/api/auth/get-otp-api";
+import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
 
 const Loginpage = () => {
   const dispatch = useDispatch();
@@ -25,10 +27,14 @@ const Loginpage = () => {
   const [newState, setNewState] = useState<any>([]);
   const [loginStatus, setLoginStatus] = useState<any>("");
   const [newValues, setnewValue] = useState<any>("");
+  const [ShowAlertMsg, setShowAlertMsg] = useState<boolean>(false);
+  const [messageState, setMessageState] = useState<any>("");
+  const [isOtpLoginState, setIsOtpLoginState] = useState<boolean>(false);
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
   useEffect(() => {
     if (
       Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
@@ -36,7 +42,9 @@ const Loginpage = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
+
   let isLoggedIn: any;
+  let guestLogin: any;
   const router = useRouter();
   let obj = {
     isGoogleLogin: false,
@@ -44,20 +52,26 @@ const Loginpage = () => {
     isOtpLogin: false,
   };
   if (typeof window !== "undefined") {
+    guestLogin = localStorage.getItem("guest");
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
 
   const handlesubmit = (values: any) => {
     const val = Object.assign(obj, values);
+
     const user_params = {
       values: values,
+      guest: guestLogin,
+      isOtpLogin: isOtpLoginState === true ? true : false,
     };
-    // dispatch(fetchLoginUser(val));
+    console.log("userparams", user_params);
+
     dispatch(getAccessToken(user_params));
 
     setTimeout(() => {
       const loginStatusFromStorage: any = localStorage.getItem("isLoggedIn");
       setLoginStatus(loginStatusFromStorage);
+      setIsOtpLoginState(false);
     }, 2000);
   };
   useEffect(() => {
@@ -88,15 +102,29 @@ const Loginpage = () => {
     return null;
   };
 
-  const otpSubmit = async (e: any) => {
+  const HandleGetOtp = async (e: any) => {
     let newObj = {
-      // isGoogleLogin: false,
-      // visitor: false,
-      isOtpLogin: true,
       email: newValues?.email,
     };
     e.preventDefault();
-    dispatch(fetchLoginUser(newObj));
+    let GetOtpApiRes: any = await getOtpFetchApi(newObj);
+
+    if (GetOtpApiRes?.data?.message?.msg === "success") {
+      setShowAlertMsg(true);
+      setMessageState(GetOtpApiRes?.data?.message?.msg);
+      setIsOtpLoginState(true);
+      setTimeout(() => {
+        setShowAlertMsg(false);
+        setMessageState("");
+      }, 1000);
+    } else {
+      setShowAlertMsg(true);
+      setMessageState(GetOtpApiRes?.data?.message?.msg);
+      setTimeout(() => {
+        setShowAlertMsg(false);
+        setMessageState("");
+      }, 1500);
+    }
   };
   return (
     <>
@@ -159,11 +187,25 @@ const Loginpage = () => {
                                     <Link
                                       className="linkss"
                                       href="#"
-                                      onClick={(e) => otpSubmit(e)}
+                                      onClick={(e) => HandleGetOtp(e)}
                                     >
                                       {selectedMultiLangData?.get_otp}
                                     </Link>
                                   </div>
+                                  {ShowAlertMsg && (
+                                    <div
+                                      className={`alert ${
+                                        messageState === "success"
+                                          ? "alert-success"
+                                          : "alert-danger"
+                                      } otp_alertbox`}
+                                      role="alert"
+                                    >
+                                      {messageState === "success"
+                                        ? "OTP send sucessfully on registered email"
+                                        : "Please enter valid or registered email"}
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -210,20 +252,6 @@ const Loginpage = () => {
                             >
                               {selectedMultiLangData?.submit}
                             </button>
-                            {/* {isAlertVisible && (
-                                    <div
-                                      className={`alert ${
-                                        message === "success"
-                                          ? "alert-success"
-                                          : "alert-danger"
-                                      } otp_alertbox`}
-                                      role="alert"
-                                    >
-                                      {message === "success"
-                                        ? "OTP send sucessfully on registered email"
-                                        : "Please enter valid or registered email"}
-                                    </div>
-                                  )}                  */}
                           </div>
                         </div>
 

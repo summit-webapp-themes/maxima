@@ -7,23 +7,35 @@ import { useRouter } from "next/router";
 import { RegistrationValidation } from "../../validation/registrationValidation";
 import Image from "next/image";
 import { register_details } from "../dataSets/registrationDataset";
-import { getRegistrationData } from "../../store/slices/auth/registration_slice";
+import {
+  getRegistrationData,
+  registration_state,
+} from "../../store/slices/auth/registration_slice";
 import {
   FetchCitiesForAddressForm,
   FetchStateForAddressForm,
 } from "../../services/api/general_apis/customer-form-data-api";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
+import RegistrationApi from "../../services/api/auth/registration_api";
+import {
+  failmsg,
+  hideToast,
+  successmsg,
+} from "../../store/slices/general_slices/toast_notification_slice";
+import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
 
 const Registration = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const TokenFromStore: any = useSelector(get_access_token);
 
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
-  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
+  const RegistrationDataFromStore: any = useSelector(registration_state);
   useEffect(() => {
     if (
       Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
@@ -31,7 +43,7 @@ const Registration = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
-  console.log("register details", register_details);
+  console.log("register details", RegistrationDataFromStore);
   let [selectedCity, setSelectedCity] = useState<any>("");
   let [selectedStates, setSelectedStates] = useState<any>("");
 
@@ -73,9 +85,21 @@ const Registration = () => {
     }
   };
 
-  const handlesubmit: any = (values: any, action: any) => {
-    console.log("form values", values);
-    dispatch(getRegistrationData(values));
+  const handlesubmit: any = async (values: any, action: any) => {
+    let RegistrationApiRes: any = await RegistrationApi(values);
+    // dispatch(getRegistrationData(values));
+    if (RegistrationApiRes?.data?.message?.msg === "success") {
+      dispatch(successmsg("Registerd sucessfully"));
+      router.push("/login");
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1200);
+    } else {
+      dispatch(failmsg(RegistrationApiRes?.data?.message?.error));
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 1200);
+    }
     action.resetForm();
   };
 
@@ -146,6 +170,7 @@ const Registration = () => {
             validationSchema={RegistrationValidation}
             onSubmit={(values, action) => {
               handlesubmit(values, action);
+              action.resetForm();
             }}
           >
             {({ handleChange, handleBlur }) => (
@@ -171,6 +196,7 @@ const Registration = () => {
                                       onBlur={handleBlur}
                                       type={details?.type}
                                       name={details?.name}
+                                      placeholder={`Enter ${details?.label}`}
                                       className={`${
                                         details?.name === "address"
                                           ? "address_textarea"
