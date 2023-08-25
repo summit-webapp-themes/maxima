@@ -90,7 +90,7 @@ const ProductCard = (props: ProductCardProps) => {
         dispatch(hideToast());
       }, 1200);
     } else {
-      dispatch(failmsg("Failed to Add to cart"));
+      dispatch(failmsg(AddToCartRes?.error));
       setTimeout(() => {
         dispatch(hideToast());
       }, 1500);
@@ -135,7 +135,7 @@ const ProductCard = (props: ProductCardProps) => {
         );
       }, 1000);
     } else {
-      dispatch(failmsg(deleteProductFromCatalog.message.error));
+      dispatch(failmsg(deleteProductFromCatalog?.message?.error));
       setTimeout(() => {
         dispatch(hideToast());
       }, 1500);

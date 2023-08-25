@@ -19,6 +19,7 @@ import {
 import { getAccessToken } from "../../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import getOtpFetchApi from "../../services/api/auth/get-otp-api";
+import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
 
 const Loginpage = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Loginpage = () => {
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
   useEffect(() => {
     if (
       Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
@@ -40,7 +42,9 @@ const Loginpage = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
+
   let isLoggedIn: any;
+  let guestLogin: any;
   const router = useRouter();
   let obj = {
     isGoogleLogin: false,
@@ -48,6 +52,7 @@ const Loginpage = () => {
     isOtpLogin: false,
   };
   if (typeof window !== "undefined") {
+    guestLogin = localStorage.getItem("guest");
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
 
@@ -56,6 +61,7 @@ const Loginpage = () => {
 
     const user_params = {
       values: values,
+      guest: guestLogin,
       isOtpLogin: isOtpLoginState === true ? true : false,
     };
     console.log("userparams", user_params);
