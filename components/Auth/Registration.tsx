@@ -146,6 +146,7 @@ const Registration = () => {
             validationSchema={RegistrationValidation}
             onSubmit={(values, action) => {
               handlesubmit(values, action);
+              action.resetForm();
             }}
           >
             {({ handleChange, handleBlur }) => (
