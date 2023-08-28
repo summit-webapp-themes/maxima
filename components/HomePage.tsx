@@ -23,7 +23,7 @@ const HomePage = ({ default_currency_value, multi_lingual_values }: any) => {
 
   const dispatch = useDispatch();
 
-  dispatch(setDefaultCurrencyValue(default_currency_value));
+  // dispatch(setDefaultCurrencyValue(default_currency_value));
   dispatch(setMultiLingualData(multi_lingual_values));
 
   const { homeTopCategories, isLoading, selectedCurrencyVal }: any =
