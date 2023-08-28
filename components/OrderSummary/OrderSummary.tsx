@@ -8,22 +8,22 @@ import { CONSTANTS } from "../../services/config/app-config";
 import { cart_listing_state } from "../../store/slices/cart-listing-page-slice/cart-listing-slice";
 
 const OrderSummary = ({
+  currencySymbolForSummary,
   orderSummary,
   couponError,
   selectedMultiLangData,
-  currencySymbolForSummary,
 }: any) => {
   const [cartListingItems, setcartListingItems] = useState<any>([]);
   const [show, setshow] = useState(false);
   const [initial, setInitial] = useState(false);
   const cartProducts: any = useSelector(cart_listing_state);
 
-  console.log("order Summary", currencySymbolForSummary);
+  console.log("order Summary", currencySymbolForSummary, cartProducts);
   let order;
   useEffect(() => {
-    setcartListingItems(cartProducts.data);
+    setcartListingItems(cartProducts?.data);
     setInitial(true);
-  }, []);
+  }, [cartProducts]);
   const handleShow = () => {
     setshow(!show);
   };

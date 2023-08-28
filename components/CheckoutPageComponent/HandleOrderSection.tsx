@@ -18,6 +18,7 @@ const HandleOrderSection = (props: any) => {
     couponError,
     handlePlaceOrder,
     selectedMultiLangData,
+    currencySymbolForSummary,
   } = props;
 
   let isDealer: any = JSON.parse(localStorage.getItem("isDealer") as any);
@@ -189,6 +190,7 @@ const HandleOrderSection = (props: any) => {
           <OrderSummary
             orderSummary={orderSummary}
             couponError={couponError}
+            currencySymbolForSummary={currencySymbolForSummary}
             selectedMultiLangData={selectedMultiLangData}
           />
         </div>
