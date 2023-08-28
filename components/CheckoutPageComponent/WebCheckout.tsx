@@ -52,6 +52,7 @@ const WebCheckout = ({
   setStoreCredit,
   handleStoreCredit,
   selectedMultiLangData,
+  currencySymbolForSummary,
 }: CheckoutPageInterface) => {
   const TokenFromStore: any = useSelector(get_access_token);
   const [visitorState, setVisitorState] = useState<any>(null);
@@ -300,6 +301,7 @@ const WebCheckout = ({
                       <OrderSummary
                         orderSummary={orderSummary}
                         selectedMultiLangData={selectedMultiLangData}
+                        currencySymbolForSummary={currencySymbolForSummary}
                       />
                     </div>
                   </div>

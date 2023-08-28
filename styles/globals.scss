@@ -12,121 +12,120 @@
  */
 
 /* 1. Config */
-@import 'config/variables';
+@import "config/variables";
 
 /* 2. Mixins */
-@import 'mixins/breakpoint';
-@import 'mixins/core';
-@import 'mixins/buttons';
-@import 'mixins/direction';
+@import "mixins/breakpoint";
+@import "mixins/core";
+@import "mixins/buttons";
+@import "mixins/direction";
 
 /*Vendor*/
-@import 'bootstrap.min';
+@import "bootstrap.min";
 /*Vendor*/
 /* 3. Base */
-@import 'base/base';
-@import 'base/layout';
-@import 'base/grid';
-@import 'base/spacing';
-@import 'base/type';
-@import 'base/helper';
+@import "base/base";
+@import "base/layout";
+@import "base/grid";
+@import "base/spacing";
+@import "base/type";
+@import "base/helper";
 
 /* 4. Plugins */
-@import 'components/slider';
-@import 'components/nouislider';
+@import "components/slider";
+@import "components/nouislider";
 
 /* 5. Component */
 // @import 'components/accordion';
-@import 'components/alert';
-@import 'components/animation';
-@import 'components/banner';
+@import "components/alert";
+@import "components/animation";
+@import "components/banner";
 // @import 'components/breadcrumb';
-@import 'components/buttons';
-@import 'components/categories';
-@import 'components/comments';
-@import 'components/cta';
-@import 'components/element';
-@import 'components/font-icons';
-@import 'components/forms';
-@import 'components/icons';
-@import 'components/icon-boxes';
-@import 'components/magnific-popup';
-@import 'components/minipopup';
-@import 'components/page-header';
-@import 'components/pagination';
-@import 'components/popup';
-@import 'components/products';
-@import 'components/product-single';
-@import 'components/progress-bar';
-@import 'components/sidebar';
-@import 'components/social-icons';
-@import 'components/tab';
-@import 'components/testimonial';
-@import 'components/timeline';
-@import 'components/titles';
-@import 'components/tooltip';
-@import 'components/widget';
-@import 'components/vendor';
-@import 'components/code-popup';
-@import 'components/topcategories';
-@import 'components/breadcrumbCustom';
-@import 'components/filterCustom';
-@import 'components/productCard';
-@import 'components/productDetail';
-@import 'components/cartCustom';
-@import 'components/checkoutCustom';
-@import 'components/mobCheckoutCustom';
-@import 'components/orderDetailCustom';
-@import 'components/changepassword';
-@import 'components/productDetailCustom';
-@import './brandMarquee';
-@import './sliderkine.scss';
-@import 'components/login';
-@import 'components/forgotpassword';
-@import 'components/registered';
-@import 'components/cardsLoadingLayoutCustom';
-@import 'components/filtersLoadingLayoutCustom';
-@import 'components/listViewLoadingLayoutCustom';
-@import 'components/bannerLoaderCustom';
-@import 'components/profile';
-@import 'components/catalog';
+@import "components/buttons";
+@import "components/categories";
+@import "components/comments";
+@import "components/cta";
+@import "components/element";
+@import "components/font-icons";
+@import "components/forms";
+@import "components/icons";
+@import "components/icon-boxes";
+@import "components/magnific-popup";
+@import "components/minipopup";
+@import "components/page-header";
+@import "components/pagination";
+@import "components/popup";
+@import "components/products";
+@import "components/product-single";
+@import "components/progress-bar";
+@import "components/sidebar";
+@import "components/social-icons";
+@import "components/tab";
+@import "components/testimonial";
+@import "components/timeline";
+@import "components/titles";
+@import "components/tooltip";
+@import "components/widget";
+@import "components/vendor";
+@import "components/code-popup";
+@import "components/topcategories";
+@import "components/breadcrumbCustom";
+@import "components/filterCustom";
+@import "components/productCard";
+@import "components/productDetail";
+@import "components/cartCustom";
+@import "components/checkoutCustom";
+@import "components/mobCheckoutCustom";
+@import "components/orderDetailCustom";
+@import "components/changepassword";
+@import "components/productDetailCustom";
+@import "./brandMarquee";
+@import "./sliderkine.scss";
+@import "components/login";
+@import "components/forgotpassword";
+@import "components/registered";
+@import "components/cardsLoadingLayoutCustom";
+@import "components/filtersLoadingLayoutCustom";
+@import "components/listViewLoadingLayoutCustom";
+@import "components/bannerLoaderCustom";
+@import "components/profile";
+@import "components/catalog";
 
-@import 'components/norecord';
-@import 'components/variants';
-@import 'components/stockAvailabilityTable';
+@import "components/norecord";
+@import "components/variants";
+@import "components/stockAvailabilityTable";
 
 /* 6. Header */
-@import 'base/header/header';
-@import 'base/header/dropdown';
-@import 'base/header/menu';
+@import "base/header/header";
+@import "base/header/dropdown";
+@import "base/header/menu";
 
 /* 7. Footer */
-@import 'base/footer/footer';
-
+@import "base/footer/footer";
 
 /* 8. Pages */
-@import 'pages/about-us';
+@import "pages/about-us";
 // @import 'pages/accordion';
-@import 'pages/become-vendor';
-@import 'pages/buttons';
-@import 'pages/categories';
-@import 'pages/cart';
-@import 'pages/checkout';
-@import 'pages/contact-us';
-@import 'pages/coming-soon';
-@import 'pages/compare';
-@import 'pages/error-404';
-@import 'pages/faq';
-@import 'pages/icons';
-@import 'pages/my-account';
-@import 'pages/order';
-@import 'pages/products';
-@import 'pages/product-single';
-@import 'pages/wishlist';
-@import 'pages/vendor';
-@import 'pages/profile';
-@import 'pages/forgotpassword';
-@import 'demos/demo1/demo1.scss';
-@import 'pages/notfound';
-@import 'pages/dealerLedger';
-@import 'pages/resetPassword';
+@import "pages/become-vendor";
+@import "pages/buttons";
+@import "pages/categories";
+@import "pages/cart";
+@import "pages/checkout";
+@import "pages/contact-us";
+@import "pages/coming-soon";
+@import "pages/compare";
+@import "pages/error-404";
+@import "pages/faq";
+@import "pages/icons";
+@import "pages/my-account";
+@import "pages/order";
+@import "pages/products";
+@import "pages/product-single";
+@import "pages/wishlist";
+@import "pages/vendor";
+@import "pages/profile";
+@import "pages/forgotpassword";
+@import "demos/demo1/demo1.scss";
+@import "pages/notfound";
+@import "pages/dealerLedger";
+@import "pages/resetPassword";
