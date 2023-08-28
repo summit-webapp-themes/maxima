@@ -179,7 +179,7 @@ const OrderSummary = ({
                                             className={`text-capitalize mb-0 cart_p text-end`}
                                           >
                                             {detail.name === "Price" ? (
-                                              <i className="fa fa-inr"></i>
+                                              <>{currencySymbolForSummary}</>
                                             ) : (
                                               ""
                                             )}
@@ -218,7 +218,7 @@ const OrderSummary = ({
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p text-end`}>
-                                        <i className="fa fa-inr"></i>
+                                        {currencySymbolForSummary}
 
                                         <IndianNumber value={data?.amount} />
                                       </p>
@@ -233,7 +233,7 @@ const OrderSummary = ({
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
                                       <p className={`mb-0 cart_p text-end`}>
-                                        <i className="fa fa-inr"></i>
+                                        {currencySymbolForSummary}
 
                                         <IndianNumber value={data?.tax} />
                                       </p>

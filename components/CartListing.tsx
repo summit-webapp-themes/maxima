@@ -155,7 +155,7 @@ const CartListing = () => {
   console.log("selected array of cart", arrayofSelectedItems);
 
   return (
-    <div className="margin_from_nav_l">
+    <div className="margin_from_nav">
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (

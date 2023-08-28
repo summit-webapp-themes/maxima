@@ -22,8 +22,8 @@ const ThankYou = ({}: any) => {
 
   return (
     <>
-      <div className="container mt-5">
-        <div className="row">
+      <div className="container ">
+        <div className="row margin_from_nav">
           <div className="text-center mx-auto col-md-12">
             <Image
               src={Thankyouimg}
