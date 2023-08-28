@@ -20,15 +20,13 @@ import { setMultiLingualData } from "../store/slices/general_slices/multilang-sl
 import { display_tags } from "../store/slices/home_page_slice/home-display-tag-slice";
 
 const HomePage = ({ default_currency_value, multi_lingual_values }: any) => {
-  // console.log("multi currency in reducer in home page");
+  console.log("multi currency in reducer in home page");
   // useEffect(()=>
   // {
   //   askForPermissionToReceiveNotifications();
   // },[])
 
-  const dispatch = useDispatch();
-  dispatch(setDefaultCurrencyValue(default_currency_value));
-  dispatch(setMultiLingualData(multi_lingual_values));
+  // const dispatch = useDispatch();
 
   const { homeTopCategories, isLoading, selectedCurrencyVal }: any =
     useHomeTopCategories();
