@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import useDisplayTagHooks from "../hooks/HomePageHooks/DisplayTagHooks";
 import useHomeTopCategories from "../hooks/HomePageHooks/HomeTopCategoriesHook";
 import BestSeller from "./DisplayTags/BestSeller";
@@ -11,12 +12,19 @@ import HomeTopCategoriesBanner from "./HomeTopCategories/HomeTopCategoriesBanner
 import DisplayTagMaster from "./DisplayTags/DisplayTagMaster";
 import { askForPermissionToReceiveNotifications } from "../push-notifications";
 import useHomeTopBrand from "../hooks/HomePageHooks/HomeTopBrandHook";
+import { setDefaultCurrencyValue } from "../store/slices/general_slices/multi-currency-slice";
+import { setMultiLingualData } from "../store/slices/general_slices/multilang-slice";
 
-const HomePage = () => {
+const HomePage = ({ default_currency_value, multi_lingual_values }: any) => {
   // useEffect(()=>
   // {
   //   askForPermissionToReceiveNotifications();
   // },[])
+
+  const dispatch = useDispatch();
+
+  dispatch(setDefaultCurrencyValue(default_currency_value));
+  dispatch(setMultiLingualData(multi_lingual_values));
 
   const { homeTopCategories, isLoading, selectedCurrencyVal }: any =
     useHomeTopCategories();
@@ -40,7 +48,7 @@ const HomePage = () => {
     }
   };
 
-  console.log("display tag in home ", allTagsData);
+  // console.log("display tag in home ", allTagsData);
 
   return (
     <>
