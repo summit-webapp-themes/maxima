@@ -26,6 +26,7 @@ import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/
 import DeleteProductFromCart from "../services/api/cart-page-api/delete-cart-product";
 import { fetchOrderSummary } from "../store/slices/checkoutPage-slice/order-summary";
 import ListViewLoadingLayout from "./ProductListingComponents/products-data-view/ListViewLoadingLayout";
+import { showToast } from "./ToastNotificationNew";
 
 const CartListing = () => {
   const router = useRouter();
@@ -90,15 +91,9 @@ const CartListing = () => {
         };
         dispatch(fetchOrderSummary(params));
       }
-      dispatch(successmsg("Item delete from cart"));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
+      showToast("Item delete from cart", "success");
     } else {
-      dispatch(failmsg("Failed to delete from cart"));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
+      showToast("Failed to delete from cart", "error");
     }
   };
 
@@ -110,14 +105,10 @@ const CartListing = () => {
       TokenFromStore?.token
     ).then((res: any) => {
       if (res?.data?.message?.msg === "success") {
-        dispatch(
-          successmsg(
-            "Quotation Request has been Created. Please check your Profile"
-          )
+        showToast(
+          "Quotation Request has been Created. Please check your Profile",
+          "success"
         );
-        setTimeout(() => {
-          dispatch(hideToast());
-        }, 2000);
       }
     });
     return getQuotationInCart;
@@ -164,7 +155,7 @@ const CartListing = () => {
   console.log("selected array of cart", arrayofSelectedItems);
 
   return (
-    <div className="margin_from_nav_l">
+    <div className="margin_from_nav">
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (

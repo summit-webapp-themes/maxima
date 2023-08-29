@@ -6,11 +6,8 @@ import Link from "next/link";
 import useNavbar from "../../hooks/GeneralHooks/NavbarHooks/NavbarHook";
 
 const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
-
-  console.log("homeTopCategories",homeTopCategories)
-  const {
-    selectedCurrencyValue
-  } = useNavbar();
+  console.log("homeTopCategories", homeTopCategories);
+  const { selectedCurrencyValue } = useNavbar();
   const imageLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}/${src}?w=${width}&q=${quality || 75}`;
   };
@@ -25,7 +22,10 @@ const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
                   {homeTopCategories
                     ?.slice(3, 5)
                     ?.map((banner: any, index: any) => (
-                      <div className="col-lg-6 col-12" key={banner.name}>
+                      <div
+                        className="col-lg-6 col-12 text-center mb-lg-0 mb-2"
+                        key={banner.name}
+                      >
                         <>
                           <Image
                             loader={imageLoader}
@@ -34,7 +34,6 @@ const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
                             width={600}
                             height={150}
                             className="topcat_banner"
-                          
                           />
                         </>
                       </div>
@@ -42,28 +41,31 @@ const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
                 </>
               ) : (
                 <>
-                  <div className="col-lg-6">
-                    <Link href={`/product-category/juicer?page=1&currency=${selectedCurrencyValue}`}>
-                    <Image
-                      src="/assets/images/jucierBanner.png"
-                      alt="banner of Topcategory"
-                      width={600}
-                      height={350}
-                      className="hometopcat_banner"
-                    />
+                  <div className="col-lg-6 text-center">
+                    <Link
+                      href={`/product-category/juicer?page=1&currency=${selectedCurrencyValue}`}
+                    >
+                      <Image
+                        src="/assets/images/jucierBanner.png"
+                        alt="banner of Topcategory"
+                        width={600}
+                        height={350}
+                        className="hometopcat_banner"
+                      />
                     </Link>
                   </div>
                   <div className="col-lg-6">
-                  <Link href={`/product-category/moisturizers?page=1&currency=${selectedCurrencyValue}`}>
-                    <Image
-                      src="/assets/images/moisturizerBanner.png"
-                      alt="banner of Topcategory"
-                      width={600}
-                      height={350}
-                      className="hometopcat_banner"
-      
-                    />
-                     </Link>
+                    <Link
+                      href={`/product-category/moisturizers?page=1&currency=${selectedCurrencyValue}`}
+                    >
+                      <Image
+                        src="/assets/images/moisturizerBanner.png"
+                        alt="banner of Topcategory"
+                        width={600}
+                        height={350}
+                        className="hometopcat_banner"
+                      />
+                    </Link>
                   </div>
                 </>
               )}
