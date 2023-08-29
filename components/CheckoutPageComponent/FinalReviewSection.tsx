@@ -12,7 +12,7 @@ const FinalReviewSection = ({
   const handleAcceptTerms: any = () => {
     setAcceptedTerms(!acceptedTerms);
   };
-  console.log("acceptedTerms", acceptedTerms);
+  console.log("?.values", orderSummary);
   return (
     <>
       <div className="finalreview pb-3 pr-3">
@@ -29,7 +29,7 @@ const FinalReviewSection = ({
               </td>
               <td width="50%" className="px-0 py-0 pb-1">
                 <p className={`text-capitalize mb-0`}>
-                  <i className="fa fa-inr"></i>
+                  {}
                   {orderSummary
                     ?.filter(
                       (vals: any) => vals?.name === "Subtotal Excluding Tax"
@@ -49,7 +49,7 @@ const FinalReviewSection = ({
                 </p>
               </td>
               <td width="50%" className="px-0 py-0 ">
-                <i className="fa fa-inr"></i>
+                {}
                 {orderSummary
                   ?.filter(
                     (vals: any) => vals?.name === "Subtotal Including Tax"
