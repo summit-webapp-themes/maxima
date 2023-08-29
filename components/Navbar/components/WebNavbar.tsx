@@ -13,6 +13,7 @@ import { cart_listing_state } from "../../../store/slices/cart-listing-page-slic
 import useWishlist from "../../../hooks/WishListHooks/WishListHooks";
 import LogoutList from "../../../services/api/auth/logout_api";
 import LinguisticsAndForex from "./LinguisticsAndForex";
+import { currency_selector_state } from "../../../store/slices/general_slices/multi-currency-slice";
 const WebNavbar = ({
   navbarData,
   isLoading,
@@ -31,6 +32,8 @@ const WebNavbar = ({
   const { wishlistCount } = useWishlist();
   console.log("navmenu click", navMenuclick);
   const cartlisting_data: any = useSelector(cart_listing_state);
+  // const currency_state_from_redux: any = useSelector(currency_selector_state);
+  // const [selectedCurrencyValue, setSelectedCurrencyValue] = useState("");
   const [cartCount, setCartCount] = useState<number>();
   const [isShown, setIsShown] = useState<boolean>(false);
   const [isId, setId] = useState<any>();
@@ -45,6 +48,11 @@ const WebNavbar = ({
   useEffect(() => {
     setCartCount(cartlisting_data?.orderCount);
   }, [cartlisting_data]);
+  // useEffect(() => {
+  //   setSelectedCurrencyValue(
+  //     currency_state_from_redux?.selected_currency_value
+  //   );
+  // }, [currency_state_from_redux]);
 
   let isLoggedIn: any;
   if (typeof window !== "undefined") {

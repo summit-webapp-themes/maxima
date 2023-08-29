@@ -29,6 +29,7 @@ import {
   WorkplaceShareButton,
 } from "react-share";
 import { get_access_token } from "../../../store/slices/auth/token-login-slice";
+import { showToast } from "../../ToastNotificationNew";
 const ProductDetail = ({
   productDetailData,
   productVariants,
@@ -86,16 +87,11 @@ const ProductDetail = ({
       );
       console.log("dealer AddToCartRes", AddToCartRes);
       if (AddToCartRes?.msg === "success") {
-        dispatch(successmsg("Item Added to cart"));
+        showToast("Item Added to cart", "success");
+
         dispatch(fetchCartListing(TokenFromStore?.token));
-        setTimeout(() => {
-          dispatch(hideToast());
-        }, 1200);
       } else {
-        dispatch(failmsg("Failed to Add to cart"));
-        setTimeout(() => {
-          dispatch(hideToast());
-        }, 1500);
+        showToast("Failed to Add to cart", "error");
       }
     } else {
       let AddToCartRes: any = await AddToCartApi(
@@ -104,16 +100,11 @@ const ProductDetail = ({
         TokenFromStore?.token
       );
       if (AddToCartRes?.msg === "success") {
-        dispatch(successmsg("Item Added to cart"));
+        showToast("Item Added to cart", "success");
+
         dispatch(fetchCartListing(TokenFromStore?.token));
-        setTimeout(() => {
-          dispatch(hideToast());
-        }, 1200);
       } else {
-        dispatch(failmsg("Failed to Add to cart"));
-        setTimeout(() => {
-          dispatch(hideToast());
-        }, 1500);
+        showToast("Failed to Add to cart", "error");
       }
     }
 

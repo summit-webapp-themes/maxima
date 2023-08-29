@@ -5,8 +5,17 @@ import HomePage from "../components/HomePage";
 import Header from "../components/Header/Header";
 import { getMultiCurrencyValue } from "../services/api/general_apis/default-currency-api";
 import MultiLangApi from "../services/api/general_apis/multilanguage-api";
+import { useDispatch } from "react-redux";
+import { setDefaultCurrencyValue } from "../store/slices/general_slices/multi-currency-slice";
+import { setMultiLingualData } from "../store/slices/general_slices/multilang-slice";
 const Home: NextPage = (fetchedDataFromServer: any) => {
   console.log("check data of server obj", fetchedDataFromServer);
+  const dispatch = useDispatch();
+  dispatch(
+    setDefaultCurrencyValue(fetchedDataFromServer?.defaultCurrencyValue)
+  );
+  dispatch(setMultiLingualData(fetchedDataFromServer?.multiLingualValues));
+
   return (
     <>
       {CONSTANTS.ENABLE_META_TAGS && (

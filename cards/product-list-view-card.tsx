@@ -4,6 +4,7 @@ import { CONSTANTS } from "../services/config/app-config";
 import AddToCartApi from "../services/api/cart-page-api/add-to-cart-api";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartListing } from "../store/slices/cart-listing-page-slice/cart-listing-slice";
+import { showToast } from "../components/ToastNotificationNew";
 
 import { fetchWishlistUser } from "../store/slices/wishlist-slice/wishlist-slice";
 
@@ -63,16 +64,10 @@ const ProductListViewCard = (props: any) => {
       TokenFromStore?.token
     );
     if (AddToCartProductRes.msg === "success") {
-      dispatch(successmsg("Item Added to cart"));
+      showToast("Item Added to cart", "success");
       dispatch(fetchCartListing(TokenFromStore?.token));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
     } else {
-      dispatch(failmsg(AddToCartProductRes?.error));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
+      showToast(AddToCartProductRes?.error, "error");
     }
   };
 

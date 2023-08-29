@@ -19,6 +19,7 @@ import deleteItemFromCatalog from "../services/api/product-catalog-api/delete-it
 import { ProductListingThunk } from "../store/slices/product-listing-page-slices/product-listing-slice";
 import { filters_selector_state } from "../store/slices/product-listing-page-slices/filters-slice";
 import CatalogModal from "../components/Catalog/CatalogModal";
+import { showToast } from "../components/ToastNotificationNew";
 
 const ProductCard = (props: ProductCardProps) => {
   const {
@@ -84,16 +85,10 @@ const ProductCard = (props: ProductCardProps) => {
       tokens?.token
     );
     if (AddToCartRes.msg === "success") {
-      dispatch(successmsg("Item Added to cart"));
+      showToast("Item Added to cart", "success");
       dispatch(fetchCartListing());
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
     } else {
-      dispatch(failmsg(AddToCartRes?.error));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
+      showToast(AddToCartRes?.error, "error");
     }
   };
   const handleShow = (val: any) => {
@@ -114,7 +109,9 @@ const ProductCard = (props: ProductCardProps) => {
     );
     console.log(deleteProductFromCatalog, "deleteProductFromCatalog");
     if (deleteProductFromCatalog.message.msg === "success") {
-      dispatch(successmsg(deleteProductFromCatalog?.message?.data));
+      // dispatch(successmsg(deleteProductFromCatalog?.message?.data));
+      showToast(deleteProductFromCatalog?.message?.data, "success");
+
       setTimeout(() => {
         const storeUsefulParamsForFurtherProductListingApi = {
           router_origin: router.route.split("/")[1],
@@ -127,7 +124,7 @@ const ProductCard = (props: ProductCardProps) => {
           storeUsefulParamsForFurtherProductListingApi,
           "storeUsefulParamsForFurtherProductListingApi"
         );
-        dispatch(hideToast());
+
         dispatch(
           ProductListingThunk({
             storeUsefulParamsForFurtherProductListingApi,
@@ -135,10 +132,7 @@ const ProductCard = (props: ProductCardProps) => {
         );
       }, 1000);
     } else {
-      dispatch(failmsg(deleteProductFromCatalog?.message?.error));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
+      showToast(deleteProductFromCatalog?.message?.error, "error");
     }
   };
   return (

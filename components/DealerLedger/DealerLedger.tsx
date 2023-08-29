@@ -13,6 +13,7 @@ import {
   hideToast,
 } from "../../store/slices/general_slices/toast_notification_slice";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { showToast } from "../ToastNotificationNew";
 
 const DealerLedger = () => {
   const dispatch = useDispatch();
@@ -72,10 +73,7 @@ const DealerLedger = () => {
         setDlFromDate("");
         setDlToDate("");
       } else {
-        dispatch(failmsg("Please select a month or date range"));
-        setTimeout(() => {
-          dispatch(hideToast());
-        }, 800);
+        showToast("Please select a month or date range", "warning");
       }
     } catch (error) {
       console.log("Error occurred:", error);

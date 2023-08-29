@@ -23,7 +23,7 @@ const DisplayTagMaster = (props: any) => {
       <div className="container">
         <div className="row banner-product-wrapper pb-1">
           <h3 className="text-center mb-0 mt-5">{data?.tag_name}</h3>
-          <div className="banner-product col-xl-3 col-md-4 mb-4 mb-md-0">
+          <div className="banner-product col-lg-3 col-md-4 d-lg-block d-none mb-4 mb-md-0">
             <div className="banner banner-fixed overlay-zoom br-xs">
               <figure className="banner-media h-100 displaytag-container">
                 <Image
@@ -43,7 +43,7 @@ const DisplayTagMaster = (props: any) => {
               </figure>
             </div>
           </div>
-          <div className="product-wrapper col-xl-9 col-md-8">
+          <div className="product-wrapper col-lg-9 col-md-12">
             <div className="swiper-container swiper-theme" />
             <div className="row justify-content-center">
               {data?.value?.length > 0 ? (
@@ -98,9 +98,11 @@ const DisplayTagMaster = (props: any) => {
                                 </Link>
                               </h4>
                               <div className="product-price">
-                                <ins className="new-price">{list?.currency_symbol}{" "}{list?.price}</ins>
+                                <ins className="new-price">
+                                  {list?.currency_symbol} {list?.price}
+                                </ins>
                                 <del className="old-price">
-                                  {list?.currency_symbol}{" "}{list?.mrp_price}
+                                  {list?.currency_symbol} {list?.mrp_price}
                                 </del>
                               </div>
                             </div>

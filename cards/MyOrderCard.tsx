@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import IndianNumber from "../components/CheckoutPageComponent/IndianNumber";
 import { CONSTANTS } from "../services/config/app-config";
 import { currency_selector_state } from "../store/slices/general_slices/multi-currency-slice";
 import { useSelector } from "react-redux";
@@ -24,11 +23,12 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
           <div className="row">
             <div className="mb-3 mb-sm-0 col-md-2 col-6 order-div">
               <p className="text-uppercase gray mb-0 myorder_p">
-                {" "}
                 {selectedMultiLangData?.order_placed}
               </p>
 
-              <p className="gray mb-0 myorder_p">{data?.creation}</p>
+              <p className="gray mb-0 myorder_p">
+                {data?.transaction_date?.split("-")?.reverse()?.join("/")}
+              </p>
             </div>
             <div className="mb-3 col-md-2 col-6 order-div">
               <p className="text-uppercase gray mb-0 myorder_p">

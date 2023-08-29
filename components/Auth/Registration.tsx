@@ -18,12 +18,8 @@ import {
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
 import RegistrationApi from "../../services/api/auth/registration_api";
-import {
-  failmsg,
-  hideToast,
-  successmsg,
-} from "../../store/slices/general_slices/toast_notification_slice";
 import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
+import { showToast } from "../ToastNotificationNew";
 
 const Registration = () => {
   const router = useRouter();
@@ -87,18 +83,12 @@ const Registration = () => {
 
   const handlesubmit: any = async (values: any, action: any) => {
     let RegistrationApiRes: any = await RegistrationApi(values);
-    // dispatch(getRegistrationData(values));
+
     if (RegistrationApiRes?.data?.message?.msg === "success") {
-      dispatch(successmsg("Registerd sucessfully"));
+      showToast("Registerd sucessfully", "success");
       router.push("/login");
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
     } else {
-      dispatch(failmsg(RegistrationApiRes?.data?.message?.error));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
+      showToast(RegistrationApiRes?.data?.message?.error, "error");
     }
     action.resetForm();
   };

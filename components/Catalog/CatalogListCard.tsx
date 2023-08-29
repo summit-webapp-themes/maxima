@@ -26,7 +26,7 @@ const CatalogListCard = ({
           </h3>
           {catalogListItem?.length > 0 &&
             catalogListItem?.map((catalog: any, i: any) => (
-              <div className="col-md-7 col-lg-12 mt-4 " key={i}>
+              <div className="col-md-12 col-lg-12 mt-4 " key={i}>
                 <div className="card catalogListing-card rounded-3 mb-5">
                   <div className="card-header catalogListing-cardHeader d-flex justify-content-between">
                     <h5 className="text-uppercase catalog-heading">
@@ -42,7 +42,7 @@ const CatalogListCard = ({
                     </p>
                   </div>
                   <div className="row card-body ">
-                    <div className="col-lg-4">
+                    <div className="col-lg-4 col-md-4">
                       <Link
                         href={`/${catalog.url}?page=1&currency=${currency_state_from_redux?.selected_currency_value}`}
                         className="btn btn-catalogview btn-colors mr-2"
@@ -51,7 +51,7 @@ const CatalogListCard = ({
                         <i className="fa fa-eye ml-2" aria-hidden="true"></i>
                       </Link>
                     </div>
-                    <div className="col-lg-4 pl-lg-5 my-lg-0 my-3">
+                    <div className="col-lg-4 col-md-4 pl-lg-5 my-lg-0 my-md-0 my-3">
                       <Link
                         href={`/product-category/?page=1&currency=${currency_state_from_redux?.selected_currency_value}`}
                         className="btn btn-catalogAddProduct mr-2 text-dark "
@@ -60,7 +60,7 @@ const CatalogListCard = ({
                         <i className="fa fa-plus ml-2" aria-hidden="true"></i>
                       </Link>
                     </div>
-                    <div className="col-lg-4 pr-lg-5">
+                    <div className="col-lg-4 col-md-4 pr-lg-5">
                       <button
                         className="btn btn-catalogview btn-colors mr-lg-5"
                         onClick={() => handleDeleteCatalog(catalog?.name)}

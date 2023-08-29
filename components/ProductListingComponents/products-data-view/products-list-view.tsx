@@ -25,6 +25,10 @@ const ProductsListView = (props: ProductsProps) => {
   } = props;
 
   console.log("load moreee", productListTotalCount, product_data);
+
+  const isNextButtonDisabled: any =
+    productListTotalCount > product_data ||
+    productListTotalCount === product_data;
   return (
     <div
       className={`${
@@ -80,8 +84,11 @@ const ProductsListView = (props: ProductsProps) => {
                 onPageChange={handlePageClick}
                 containerClassName={"paginationBttns"}
                 previousLinkClassName={"previousBttn"}
-                nextLinkClassName={"nextBttn"}
+                // nextLinkClassName={"nextBttn"}
                 disabledClassName={"paginationDisabled"}
+                nextLinkClassName={
+                  isNextButtonDisabled ? "paginationDisabled" : "nextBttn"
+                }
                 activeClassName={"paginationActive"}
                 forcePage={pageOffset}
               />

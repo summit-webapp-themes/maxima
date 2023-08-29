@@ -4,12 +4,8 @@ import React, { useEffect, useState } from "react";
 import { ForgotValidation } from "../validation/forgotValidation";
 import ResetPasswordLink from "../services/api/auth/reset-password-link-api";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  failmsg,
-  hideToast,
-  successmsg,
-} from "../store/slices/general_slices/toast_notification_slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
+import { showToast } from "./ToastNotificationNew";
 
 interface FormValues {
   email: any;
@@ -43,19 +39,13 @@ const ForgotPassword = () => {
   const HandleSubmit = async (values: any) => {
     const hostName = window?.location?.hostname;
     console.log("hostname in tsx", hostName);
-    // let
+
     let resetApi = await ResetPasswordLink(values, hostName);
     console.log("forgot pswd api res", resetApi);
     if (resetApi?.data?.message?.msg === "success") {
-      dispatch(successmsg("Reset link send"));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 2000);
+      showToast("Reset link send", "success");
     } else {
-      dispatch(failmsg("User With this email Does Not Exists"));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 2000);
+      showToast("User With this email Does Not Exists", "error");
     }
   };
 
