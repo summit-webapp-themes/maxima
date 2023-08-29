@@ -102,7 +102,7 @@ const WebNavbar = ({
                 ></a>
               </Link>
             </div>
-            <div className="mx-2 my-2 logo_containers">
+            <div className="mx-2  logo_containers">
               <Link href="/" legacyBehavior>
                 <Image
                   src="/assets/images/maxima_b2b.png"
@@ -143,9 +143,9 @@ const WebNavbar = ({
                         {wishlistCount || 0}
                       </span>
                     </i>
-                    <span className="wishlist-label d-lg-show">
+                    {/* <span className="wishlist-label d-lg-show">
                       {selectedMultiLangData?.wishlist}
-                    </span>
+                    </span> */}
                   </a>
                 </Link>
               </div>
@@ -157,9 +157,9 @@ const WebNavbar = ({
                         {cartCount || 0}
                       </span>
                     </i>
-                    <span className="cart-label">
+                    {/* <span className="cart-label">
                       {selectedMultiLangData?.cart}
-                    </span>
+                    </span> */}
                   </a>
                 </Link>
               </div>
