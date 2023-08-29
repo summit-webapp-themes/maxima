@@ -15,6 +15,7 @@ type PropsType = {
 
 const Index = ({ sales_order_id }: any) => {
   let { id, detail }: any = UseThankyou();
+
   console.log("detail", detail);
   const dispatch = useDispatch();
 
@@ -24,7 +25,8 @@ const Index = ({ sales_order_id }: any) => {
   const [newData, setData] = useState<any>();
   let years: any;
 
-  const router = useRouter();
+  const router: any = useRouter();
+  console.log("router", router);
 
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}/${src}?w=${width}&q=${quality || 75}`;
@@ -71,7 +73,12 @@ const Index = ({ sales_order_id }: any) => {
   }, [SelectedLangDataFromStore]);
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
-    <div className="margin_from_nav_l">
+    // <div className="margin_from_nav_l">
+    <div
+      className={`${
+        router?.pathname?.includes("/myOrder") ? "margin_from_nav_l" : ""
+      }`}
+    >
       {detail?.length === 0 ? (
         <>
           <div className="row justify-content-center mt-5">

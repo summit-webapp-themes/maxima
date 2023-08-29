@@ -264,7 +264,11 @@ const CheckoutPageMaster = () => {
                 <h5 className="my-3  bold text-uppercase">
                   {selectedMultiLangData?.order_summary}
                 </h5>
-                <OrderSummary selectedMultiLangData={selectedMultiLangData} />
+                <OrderSummary
+                  selectedMultiLangData={selectedMultiLangData}
+                  orderSummary={orderSummary}
+                  currencySymbolForSummary={currencySymbolForSummary}
+                />
               </div>
             </div>
           )}

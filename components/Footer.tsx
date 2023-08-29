@@ -8,6 +8,7 @@ import {
   successmsg,
 } from "../store/slices/general_slices/toast_notification_slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
+import { showToast } from "./ToastNotificationNew";
 
 const Footer = () => {
   const dispatch = useDispatch();
@@ -19,12 +20,9 @@ const Footer = () => {
     let subScriptionRes = await getSubscriber(subScription);
     console.log("subScriptionRes", subScriptionRes);
     if (subScriptionRes?.data?.message?.msg === "success") {
-      dispatch(successmsg("subscribed successfully"));
-      setSubscriptions("");
+      showToast("subscribed successfully", "success");
 
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
+      setSubscriptions("");
     }
   };
   console.log("nav footer", navbarData);

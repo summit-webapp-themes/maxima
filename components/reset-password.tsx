@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form as FormikForm, Field, ErrorMessage } from "formik";
-
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import ResetPasswordApi from "../services/api/auth/reset-password";
 import ResetpasswordValidation from "../validation/resetPasswordValidation";
-import {
-  failmsg,
-  hideToast,
-  successmsg,
-} from "../store/slices/general_slices/toast_notification_slice";
+
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
+import { showToast } from "./ToastNotificationNew";
 
 interface FormValues {
   email: any;
@@ -47,17 +43,10 @@ const ResetPassword: any = () => {
     let resetPasswordApiRes: any = await ResetPasswordApi(values);
     console.log("resetPasswordApiRes", resetPasswordApiRes);
     if (resetPasswordApiRes?.data?.message?.msg === "success") {
-      dispatch(successmsg("Password Changed sucessfully"));
+      showToast("Password Changed sucessfully", "success");
       router.push("/login");
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 2000);
     } else {
-      dispatch(failmsg("User With this email Does Not Exists"));
-
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 2000);
+      showToast("User With this email Does Not Exists", "error");
     }
   };
 

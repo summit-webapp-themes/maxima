@@ -26,6 +26,8 @@ import {
   get_access_token,
   updateAccessToken,
 } from "../../store/slices/auth/token-login-slice";
+import { showToast } from "../ToastNotificationNew";
+
 const WishlistMaster = () => {
   const { productQuantity, stockAvailability } = useProductDetail();
   console.log("stock check", stockAvailability);
@@ -37,7 +39,7 @@ const WishlistMaster = () => {
 
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   const TokenFromStore: any = useSelector(get_access_token);
-  const [showToast, setshowToast] = useState<boolean>(false);
+
   const [productCounts, setProductCounts] = useState<any>({});
   const [alertMinQty, setAlertMinQty] = useState<boolean>(false);
   const [showAvailabilityModal, setshowAvailabilityModal] =
@@ -154,7 +156,7 @@ const WishlistMaster = () => {
       );
 
       if (AddToCartProductRes?.msg === "success") {
-        dispatch(successmsg("Item Added to cart"));
+        showToast("Item Added to cart", "success");
 
         if (AddToCartProductRes?.data?.access_token !== null) {
           dispatch(updateAccessToken(AddToCartProductRes?.data?.access_token));
@@ -169,15 +171,9 @@ const WishlistMaster = () => {
         } else {
           dispatch(fetchCartListing(TokenFromStore?.token));
         }
-        setTimeout(() => {
-          dispatch(hideToast());
-        }, 1200);
       }
     } else {
-      dispatch(failmsg("Failed to Add to cart"));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
+      showToast("Failed to Add to cart", "error");
     }
   };
 

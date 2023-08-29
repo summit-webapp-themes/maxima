@@ -1,12 +1,28 @@
 import Image from "next/image";
 import { CONSTANTS } from "../../services/config/app-config";
 import Link from "next/link";
+import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 const HomeTopCategories = ({
   homeTopCategories,
   isLoading,
   selectedCurrencyVal,
 }: any) => {
-  console.log('display tag in home home top categories');
+  console.log("display tag in home home top categories");
+
+  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore]);
   // const { homeTopCategories, isLoading } = useHomeTopCategories();
   const imageLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}/${src}?w=${width}&q=${quality || 75}`;
@@ -19,7 +35,7 @@ const HomeTopCategories = ({
         <div>
           <div className="intro-wrapper text-center container">
             <div className="row topcategory_row">
-              <div className="col-md-6">
+              <div className="col-lg-6 col-md-6">
                 <Link
                   href={`/product-category/nail-polish?page=1&currency=${selectedCurrencyVal}`}
                   className="banner-title text-white text-capitalize ls-25 homecategory_btnlink"
@@ -33,16 +49,12 @@ const HomeTopCategories = ({
                       height={1000}
                       className="topcat_banner"
                     />
-                    {/* <div className="banner-content homecategory_btn3">
-                         View All
-               
-                </div> */}
                   </div>
                 </Link>
               </div>
-              <div className="col-md-4">
+              <div className="col-lg-4 col-md-4">
                 <div className="row">
-                  <div className="col-12 mb-4">
+                  <div className="col-lg-12 mb-4">
                     <Link
                       href={`/product-category/juicer?page=1&currency=${selectedCurrencyVal}`}
                       className="banner-title text-white text-capitalize ls-25 homecategory_btnlink"
@@ -60,7 +72,7 @@ const HomeTopCategories = ({
                       </div>
                     </Link>
                   </div>
-                  <div className="col-12  mb-4">
+                  <div className="col-lg-12  mb-4">
                     <Link
                       href={`/product-category/t-shirt?page=1&currency=${selectedCurrencyVal}`}
                       className="banner-title text-white text-capitalize ls-25 mb-3 homecategory_btnlink"
@@ -75,11 +87,6 @@ const HomeTopCategories = ({
                             height={100}
                           />
                         </figure>
-                        {/* <div className="banner-content homecategory_btn2">
-                      
-                        View All
-                 
-                      </div> */}
                       </div>
                     </Link>
                   </div>
@@ -104,7 +111,9 @@ const HomeTopCategories = ({
   return (
     <div className="top_categories_section mt-5">
       <div>
-        <h3 className="text-center">Our Handpicked Categories for You</h3>
+        <h3 className="text-center">
+          {selectedMultiLangData?.our_handpicked_categories_for_you}
+        </h3>
       </div>
       <div>{handleRenderingOfTopCategories()}</div>
     </div>

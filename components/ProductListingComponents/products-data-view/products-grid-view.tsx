@@ -23,7 +23,10 @@ const ProductsGridView = (props: ProductsViewProps) => {
     pageOffset,
   } = props;
 
-  console.log("productListTotalCount", productListTotalCount);
+  console.log("productListTotalCount", productListTotalCount, listItems);
+
+  const isNextButtonDisabled: any =
+    productListTotalCount > listItems || productListTotalCount === listItems;
   return (
     <div
       className={`${
@@ -87,8 +90,11 @@ const ProductsGridView = (props: ProductsViewProps) => {
             onPageChange={handlePageClick}
             containerClassName={"paginationBttns"}
             previousLinkClassName={"previousBttn"}
-            nextLinkClassName={"nextBttn"}
+            // nextLinkClassName={"nextBttn"}
             disabledClassName={"paginationDisabled"}
+            nextLinkClassName={
+              isNextButtonDisabled ? "paginationDisabled" : "nextBttn"
+            }
             activeClassName={"paginationActive"}
             forcePage={pageOffset}
           />
