@@ -14,7 +14,7 @@
         product: (
             font-family: $font-family,
             font-size: 1rem,
-            color: #020101,
+            // color: #020101,
             body: (
                 // padding-top: 1.7rem,
                 background-color: #fff
@@ -106,9 +106,9 @@
     )
 );
 
-.list-view-img {
-    height: 200px !important;
-}
+// .list-view-img {
+//     height: 200px !important;
+// }
 
 .handle_display_mob_filter {
     display: none !important;
@@ -155,6 +155,7 @@
         overflow: hidden;
         white-space: nowrap;
     }
+    
 }
 
 // Product Media
@@ -819,7 +820,7 @@
 .product-list {
     display: flex;
     // align-items: center;
-    padding-bottom: 2rem;
+    // padding-bottom: 2rem;
     .product-media {
         flex: 0 0 26rem;
         max-width: 26rem;
