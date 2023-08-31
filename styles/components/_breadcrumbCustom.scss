@@ -2,7 +2,7 @@
 
 .breadcrumb_section .breadcrumb {
     margin: 0;
-    padding: 5px 0;
+    // padding: 5px 0;
   }
   
   .breadcrumb_section .breadcrumb li i{
@@ -22,7 +22,6 @@
   .breadcrumb_section .breadcrumb a{
   text-decoration: none;
   color: $light-color;
-  text-transform: uppercase;
   }
   
   .breadcrumb_section .breadcrumb a::after{

@@ -280,25 +280,41 @@ const ProductCard = (props: ProductCardProps) => {
                 {mrp_price}
               </del>
             </div>
-            {router.route !== "/catalog/[category]" ? (
-              <button
-                type="button"
-                className={`btn btn-link catalog-btn-size`}
-                onClick={handleShow}
-              >
-                {selectedMultiLangData?.add_to_catalog}
-              </button>
-            ) : (
-              ""
+            {isLoggedIn === "true" && (
+              <>
+                {router.route !== "/catalog/[category]" ? (
+                  <button
+                    type="button"
+                    className={`btn btn-link catalog-btn-size`}
+                    onClick={handleShow}
+                  >
+                    {selectedMultiLangData?.add_to_catalog}
+                  </button>
+                ) : (
+                  ""
+                )}
+              </>
             )}
-            <button
-              type="button"
-              className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
-              onClick={handleAddCart}
-            >
-              <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-              {/* {multilingualData?.add_to_cart} */}
-            </button>
+
+            {isLoggedIn === "true" ? (
+              <>
+                <button
+                  type="button"
+                  className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
+                  onClick={handleAddCart}
+                >
+                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                </button>
+              </>
+            ) : (
+              <button
+                className="btn  standard_button py-3"
+                onClick={handleAddCart}
+              >
+                {selectedMultiLangData?.add_to_cart}
+              </button>
+            )}
+
             {router.route === "/catalog/[category]" ? (
               <button
                 type="button"
@@ -306,7 +322,6 @@ const ProductCard = (props: ProductCardProps) => {
                 onClick={handleDeleteCatalogProduct}
               >
                 <i className="fa fa-trash-o" aria-hidden="true"></i>
-                {/* {multilingualData?.add_to_cart} */}
               </button>
             ) : (
               ""

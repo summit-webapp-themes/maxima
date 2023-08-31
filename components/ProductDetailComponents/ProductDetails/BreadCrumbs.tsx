@@ -21,7 +21,7 @@ const BreadCrumbs = () => {
       console.log(sub_sub_cat);
     });
   return (
-    <section className="breadcrumb_section mb-3 mt-3">
+    <section className="breadcrumb_section">
       <div className="container p-0">
         <div className="row">
           <div className="col-12">

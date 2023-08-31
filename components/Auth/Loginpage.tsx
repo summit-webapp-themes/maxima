@@ -203,7 +203,7 @@ const Loginpage = () => {
                                     >
                                       {messageState === "success"
                                         ? "OTP send sucessfully on registered email"
-                                        : "Please enter valid or registered email"}
+                                        : "Please enter valid mobile number or registered email"}
                                     </div>
                                   )}
                                 </div>

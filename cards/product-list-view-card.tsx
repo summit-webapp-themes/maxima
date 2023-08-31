@@ -76,7 +76,7 @@ const ProductListViewCard = (props: any) => {
       <div className="container">
         <div className=" col-lg-12">
           <div className="product-wrapper ">
-            <div className="row w-100 product product-list border rounded py-3">
+            <div className="row w-100 product product-list border rounded">
               <div className="col-md-4 my-auto">
                 <div className="product-tags col-md-4">
                   <p className="product_tag text-lg-center my-0">
@@ -113,7 +113,7 @@ const ProductListViewCard = (props: any) => {
                   </h4>
                   <div className="d-flex justify-content-between">
                     <div>
-                      <div className="fs-5 text-gray">
+                      <div className="fs-5">
                         {product_data?.short_description ===
                         product_data?.item_name
                           ? ""
@@ -156,17 +156,20 @@ const ProductListViewCard = (props: any) => {
                           )}
                         </>
                       )}
-
-                      {router.route !== "/catalog/[category]" ? (
-                        <button
-                          type="button"
-                          className={`btn btn-link catalog-btn-size pt-2 fs-5`}
-                          onClick={() => handleShow(product_data.name)}
-                        >
-                          {selectedMultiLangData?.add_to_catalog}
-                        </button>
-                      ) : (
-                        ""
+                      {isLoggedIn === "true" && (
+                        <>
+                          {router.route !== "/catalog/[category]" ? (
+                            <button
+                              type="button"
+                              className={`btn btn-link catalog-btn-size pt-2 fs-5`}
+                              onClick={() => handleShow(product_data.name)}
+                            >
+                              {selectedMultiLangData?.add_to_catalog}
+                            </button>
+                          ) : (
+                            ""
+                          )}
+                        </>
                       )}
                     </div>
                     <div className="row mt-lg-5 mt-2 ps-5">
