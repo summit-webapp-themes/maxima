@@ -37,7 +37,7 @@ const ForgotPassword = () => {
   }, [message]);
 
   const HandleSubmit = async (values: any) => {
-    const hostName = window?.location?.hostname;
+    const hostName = window?.location?.host;
     console.log("hostname in tsx", hostName);
 
     let resetApi = await ResetPasswordLink(values, hostName);

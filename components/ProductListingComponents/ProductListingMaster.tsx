@@ -153,7 +153,7 @@ const ProductListingMaster = () => {
   return (
     <>
       <div className="margin_from_nav">
-        <section className="listing-page mt-3">
+        <section className="listing-page ">
           <div className="container">
             <div className="mt-3">
               <Topbar

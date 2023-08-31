@@ -34,8 +34,8 @@
       // Header Middle
       middle:
         (
-          padding-top: 1.5rem,
-          padding-bottom: 1.5rem,
+          // padding-top: 1.5rem,
+          // padding-bottom: 1.5rem,
           color: $dark-color,
           // background: #fff,
           background: $primary-color,
@@ -134,7 +134,7 @@
           margin-right: false,
           color: $dark-color,
           icon: (
-            font-size: 2.6rem,
+            font-size: 2.3rem,
             color: inherit,
           ),
         ),
@@ -208,26 +208,26 @@
 }
 
 .margin_from_nav_l {
-  margin-top: 157px !important;
+  margin-top: 107px !important;
 }
 .margin_from_nav {
-  margin-top: 177px !important;
+  margin-top: 123px !important;
 }
 
 .margin_from_nav_quick_o {
-  margin-top: 198px !important;
+  margin-top: 168px !important;
 }
 
 @media only screen and (max-width:560px){
 
 .margin_from_nav_l {
-  margin-top: 117px !important;
+  margin-top: 97px !important;
 }
 .margin_from_nav {
-  margin-top: 117px !important;
+  margin-top: 87px !important;
 }
 .margin_from_nav_quick_o {
-  margin-top: 117px !important;
+  margin-top: 107px !important;
 }
 }
 
@@ -465,7 +465,7 @@
   input.form-control {
     flex: 1;
     min-width: 40px;
-    padding: 0.9rem;
+    // padding: 0.9rem;
     border-#{$right}: 0;
     font-size: 1.2rem;
     letter-spacing: 0;
@@ -980,7 +980,7 @@
 .megamenu {
   display: grid !important;
   grid-template-columns: 200px 200px 200px 200px !important;
-  padding: 10px !important;
+  // padding: 10px !important;
 }
 
 .nav-sublists {
@@ -1069,7 +1069,7 @@ header.header.fixed {
 }
 
 .wishlist_count {
-  right: -4px !important;
+  right: -9px !important;
 }
 
 // Homepage 4

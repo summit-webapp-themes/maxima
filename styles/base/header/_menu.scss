@@ -149,7 +149,7 @@
     }
 
     .menu-title {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         @include print_css(menu, megamenu, title);
     }
 
@@ -169,7 +169,7 @@
         @include css(line-height, menu, submenu, line-height);
 
         a {
-            padding: side-values(0.7rem 0 .8rem 0);
+            padding: side-values(0.2rem 0 .8rem 0);
         }
 
         ul,
@@ -329,7 +329,7 @@
 
     >li {
         flex: 1;
-        padding: side-values(2.7rem 1rem 0);
+        padding: side-values(0.7rem 1rem 0);
 
         &.row:last-child {
             padding: side-values(0 2rem 2rem 0);
@@ -344,7 +344,7 @@
         letter-spacing: 0;
 
         &:last-child {
-            margin-bottom: 1rem;
+            // margin-bottom: 1rem;
         }
     }
 }

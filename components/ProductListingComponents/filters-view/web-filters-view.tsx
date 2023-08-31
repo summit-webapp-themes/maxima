@@ -33,7 +33,7 @@ const WebFilters = (props: FiltersViewProps) => {
   }, [languageData]);
   return (
     <div className=" ">
-      <div className=" col-12 mt-2">
+      <div className=" col-12 ">
         {CONSTANTS.ENABLE_MISSING_PARTS && productListingData.length > 0 && (
           <>
             <span>{selectedMultiLangData?.looking_for_something_specific}</span>
