@@ -5,6 +5,7 @@ import FiltersLoadingLayout from "./FiltersLoadingLayout";
 import { CONSTANTS } from "../../../services/config/app-config";
 import MissingPartsModal from "../MissingPartsModal";
 import Link from "next/link";
+import Topbar from "../Topbar";
 
 const WebFilters = (props: FiltersViewProps) => {
   const {
@@ -33,10 +34,10 @@ const WebFilters = (props: FiltersViewProps) => {
   }, [languageData]);
   return (
     <div className=" ">
-      <div className=" col-12 ">
+      <div className=" col-12 " >
         {CONSTANTS.ENABLE_MISSING_PARTS && productListingData.length > 0 && (
           <>
-            <span>{selectedMultiLangData?.looking_for_something_specific}</span>
+            <span className="text-color-black">{selectedMultiLangData?.looking_for_something_specific}</span>
             <button
               onClick={() => {
                 setShowMissingPartsModal(true);
@@ -47,6 +48,9 @@ const WebFilters = (props: FiltersViewProps) => {
             </button>
           </>
         )}
+
+
+
       </div>
 
       {/* <div
@@ -64,7 +68,7 @@ const WebFilters = (props: FiltersViewProps) => {
           </a>
         </Link>
       </div> */}
-
+      <Topbar/>
       <div className="filter_section">
         <div className="filter_block">
           <div className="accordion accordion_custom" id="myAccordion">
@@ -86,7 +90,7 @@ const WebFilters = (props: FiltersViewProps) => {
                     key={index}
                   >
                     <h2
-                      className="accordion-header bold filter_heading"
+                      className="accordion-header bold filter_heading pe-3"
                       id={"heading" + index}
                     >
                       <button

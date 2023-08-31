@@ -211,7 +211,7 @@
   margin-top: 107px !important;
 }
 .margin_from_nav {
-  margin-top: 123px !important;
+  margin-top: 116px !important;
 }
 
 .margin_from_nav_quick_o {
@@ -1223,4 +1223,8 @@ padding: 7px !important;
 
 .dropdown-item:active {
   background-color:#e9ecef !important;
+}
+
+.dropdown-toggle::after{
+  display: none !important;
 }
