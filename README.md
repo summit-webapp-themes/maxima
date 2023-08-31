@@ -1,21 +1,44 @@
-To setup project on server
-1. Take clone of sns-nextjs
-2. cd  sns-nextjs
-3. sudo mkdir themes
-4. cd themes
-5. take clone of theme
-6. cd <theme>
-7. /bin/bash install-theme.sh
+# Theme Setup and Management Guide
 
+This guide provides instructions for setting up the `maxima` theme.
 
-DO NOT MANUALLY UPDATE ANY FILE IN THEMES FOLDER MANUALLY
+## Table of Contents
 
+1. [Project Setup](#project-setup)
+2. [Updating a Theme](#updating-a-theme)
 
+## Project Setup
 
-To update a theme
+To get started with the project, follow these steps:
 
-1. Make changes in file in sns-nextjs  eg:  sns-nextjs/styles/About.module.css
-2. cd themes/elite
-3. /bin/bash update-theme.sh
-4. git add / git commit / git push  (theme repository)
+1. Fork the `maxima` repository:
 
+   ```bash
+   git clone <your forked github repo url>
+   ```
+
+2. Go to folder `maxima`
+   ```bash
+   cd maxima
+   ```
+3. Install this theme
+   ```bash
+   /bin/bash install-theme.sh
+   ```
+
+## Updating a Theme
+
+If you made any changes to your theme make sure to update it.
+
+1.  To update the theme, go to `maxima` folder
+
+    ```bash
+    cd maxima
+    ```
+
+2.  Run the following command.
+    ```bash
+    /bin/bash update-theme.sh
+    ```
+
+NOTE - DO NOT MANUALLY UPDATE ANY FILE IN THEMES FOLDER MANUALLY
