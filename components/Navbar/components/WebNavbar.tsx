@@ -110,11 +110,11 @@ const WebNavbar = ({
                 ></a>
               </Link>
             </div>
-            <div className="mx-2  logo_containers">
+            <div className="mx-2  logo_containers my-2">
               <Link href="/" legacyBehavior>
                 <Image
-                  src="/assets/images/maxima_b2b.png"
-                  width={150}
+                  src="/assets/images/progearhub_logo.png"
+                  width={270}
                   height={60}
                   alt="logo"
                   className="mob-logo-img1"
@@ -142,11 +142,11 @@ const WebNavbar = ({
               </button>
             </div>
 
-            <div className="navbar-left-icon1">
-              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 ">
+            <div className="navbar-left-icon1 d-flex align-items-center text-center" >
+              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">
-                    <i className="w-icon-heart wish_iconn">
+                    <i className="w-icon-heart wish_iconn ">
                       <span className="cart-count wishlist_count text-white">
                         {wishlistCount || 0}
                       </span>
@@ -157,10 +157,10 @@ const WebNavbar = ({
                   </a>
                 </Link>
               </div>
-              <div className="dropdown cart-dropdown cart-offcanvas text-white mx-lg-4 ml-3">
+              <div className="dropdown cart-dropdown cart-offcanvas text-white mx-lg-4 ml-3  d-flex align-items-center">
                 <Link href="/cart" legacyBehavior>
                   <a className="cart-toggle label-down link">
-                    <i className="w-icon-cart cart_iconn">
+                    <i className="w-icon-cart cart_iconn ">
                       <span className="cart-count text-white">
                         {cartCount || 0}
                       </span>
@@ -171,15 +171,15 @@ const WebNavbar = ({
                   </a>
                 </Link>
               </div>
-              <div className="nav_custom_dropdown">
-                <Dropdown>
+              <div className="nav_custom_dropdown  d-flex align-items-center" >
+                <Dropdown className="login-icon-margin">
                   {isLoggedIn === "true" ? (
                     <Dropdown.Toggle
                       id="dropdown-basic"
                       className="dropdown-icon dropdown_active_icon"
                     >
                       <i
-                        className=" fa fa-user-o mt-5 mb-2 fs-1 logout-icon"
+                        className=" fa fa-user-o d-flex align-items-center mt-5 mb-2 logout-icon"
                         aria-hidden="true"
                       ></i>
                     </Dropdown.Toggle>
