@@ -31,7 +31,7 @@ const ProductsGridView = (props: ProductsViewProps) => {
     <div
       className={`${
         filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
-      }`}
+      }`} 
     >
       <div className="row">
         {loading ? (
@@ -46,7 +46,7 @@ const ProductsGridView = (props: ProductsViewProps) => {
           </div>
         ) : listItems.length > 0 ? (
           listItems?.map((items: any, index: number) => (
-            <div className="col-md-3 mt-3 my-2" key={index}>
+            <div className="col-md-3 mt-3 my-2" key={index} >
               <ProductCard
                 key={index}
                 name={items?.name}

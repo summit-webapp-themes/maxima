@@ -138,7 +138,7 @@ const SecondaryThemeWebNavbar = ({
                   })}
               </select>
             </div>
-            <div className="mx-3">
+            <div className="mx-3" >
               <div className={`custom_dropdown`}>
                 <Dropdown>
                   {LoggedIn === true ? (
