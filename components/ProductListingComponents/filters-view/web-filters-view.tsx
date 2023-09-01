@@ -130,7 +130,7 @@ const WebFilters = (props: FiltersViewProps) => {
                                 onChange={handleApplyFilters} 
                               />
                               <label
-                                className="form-check-label filter-label accordion-checkbox "
+                                className="form-check-label filter-label accordion-checkbox checkbox-margin"
                                 htmlFor="flexCheckDefault" 
                               >
                                 {filterValue}

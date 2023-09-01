@@ -172,7 +172,7 @@ const WebNavbar = ({
                 </Link>
               </div>
               <div className="nav_custom_dropdown  d-flex align-items-center" >
-                <Dropdown className="login-icon-margin">
+                <Dropdown >
                   {isLoggedIn === "true" ? (
                     <Dropdown.Toggle
                       id="dropdown-basic"
@@ -189,7 +189,7 @@ const WebNavbar = ({
                       className="dropdown-icon dropdown_active_icon"
                     >
                       <i
-                        className="w-icon-account mt-2 fs-1 logout-icon"
+                         className=" fa fa-user-o d-flex align-items-center mt-5 mb-2 logout-icon"
                         aria-hidden="true"
                       ></i>
                     </Dropdown.Toggle>

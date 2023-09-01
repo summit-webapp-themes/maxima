@@ -213,7 +213,7 @@ const ProductDetail = ({
   };
   return (
     <div>
-      <div className="product-info pt-3">
+      <div className="product-info mt-3" >
         <b className="product_name products-name products-name-font">{productDetailData?.item_name}</b>
         <p className=" text-dark mt-1 products-name " >
           <span>
