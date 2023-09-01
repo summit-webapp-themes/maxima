@@ -136,12 +136,12 @@ const ProductCard = (props: ProductCardProps) => {
     }
   };
   return (
-    <div key={key} className="border p-3 rounded-3  ">
-      <div className="d-flex justify-content-between mb-1">
+    <div key={key} className="border p-3 rounded-3 ps-0 ms-0">
+      <div className="d-flex justify-content-between mb-1" >
         <div
-          className={`badge text-bg-primary fs-5 display_tag_badge ${
+          className={`badge text-bg-primary fs-5 display_tag_badge ms-3  ${
             display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
-          }`}
+          }`} 
         >
           {display_tag.length > 0 && display_tag[0]}
         </div>
@@ -262,20 +262,20 @@ const ProductCard = (props: ProductCardProps) => {
               </>
             )}
           </div>
-          <div className="product-details">
-            <h4 className="product-name truncate-overflow">
+          <div className="product-details" >
+            <h4 className="product-name truncate-overflow products-name products-name-font">
               <Link
-                href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`} className="products-name products-name-font"
               >
                 {item_name}
               </Link>
             </h4>
-            <div className="product-price">
+            <div className="product-price products-name">
               <ins className="new-price price_font_family">
                 {currency_symbol}
                 {price}
               </ins>
-              <del className="old-price price_font_family">
+              <del className="old-price price_font_family product-font-family">
                 {currency_symbol}
                 {mrp_price}
               </del>
@@ -285,7 +285,7 @@ const ProductCard = (props: ProductCardProps) => {
                 {router.route !== "/catalog/[category]" ? (
                   <button
                     type="button"
-                    className={`btn btn-link catalog-btn-size`}
+                    className={`btn btn-link catalog-btn-size products-name add-to-catlog-btn`}
                     onClick={handleShow}
                   >
                     {selectedMultiLangData?.add_to_catalog}

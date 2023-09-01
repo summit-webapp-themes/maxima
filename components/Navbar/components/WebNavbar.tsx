@@ -196,7 +196,7 @@ const WebNavbar = ({
                   )}
 
                   {isLoggedIn === "true" ? (
-                    <Dropdown.Menu className="fs-4">
+                    <Dropdown.Menu className="fs-4" >
                       <Dropdown.Item className="nav_dropdown">
                         <Link href="/quick-order" className="text-dark">
                           {selectedMultiLangData?.quick_order}
@@ -231,7 +231,7 @@ const WebNavbar = ({
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   ) : (
-                    <Dropdown.Menu className="fs-3">
+                    <Dropdown.Menu className="fs-3" >
                       <Dropdown.Item className="nav_dropdown">
                         {" "}
                         <Link href="/login" className="text-dark ">
@@ -250,7 +250,7 @@ const WebNavbar = ({
           <div className="container">
             <div className="inner-wrap d-flex justify-content-between">
               <div className="header-left">
-                <div className="dropdown category-dropdown nav-dropdown">
+                <div className="dropdown category-dropdown nav-dropdown" >
                   <Link href="#" legacyBehavior>
                     <a
                       className="category-toggle text-white bg-primary text-capitalize"
@@ -313,7 +313,7 @@ const WebNavbar = ({
                     </ul>
                   </div>
                 </div>
-                <nav className="main-nav">
+                <nav className="main-nav" >
                   <ul className="menu active-underline">
                     {navbarData?.length > 0 &&
                       navbarData.map((items: any, i: any) => (
@@ -324,7 +324,7 @@ const WebNavbar = ({
                           key={i}
                         >
                           <a className="menu_titlee">{items.name}</a>
-                          <ul className="megamenu">
+                          <ul className="megamenu ms-3 py-3">
                             {items?.values.map((items_val: any, index: any) => (
                               <li key={index}>
                                 <Link
