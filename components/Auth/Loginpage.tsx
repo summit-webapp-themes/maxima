@@ -132,9 +132,9 @@ const Loginpage = () => {
         <div className="logo mt-3">
           <Link href="/" className="navbar-brand">
             <Image
-              src="/assets/images/maxima_b2b_b.png"
+              src="/assets/images/progearhub.png"
               alt="logo"
-              width={150}
+              width={200}
               height={55}
             />
           </Link>
