@@ -41,16 +41,16 @@ const Footer = () => {
   }, [SelectedLangDataFromStore?.selectedLanguageData]);
   return (
     <>
-      <footer className="footer footer-dark footer-section">
+      <footer className="footer footer-dark footer-section" >
         <div className="container ">
           <div className="footer-newsletter">
             <div className="row justify-content-center align-items-center ">
               <div className="col-xl-3 col-lg-2">
                 <Link href="" legacyBehavior>
                   <Image
-                    src="/assets/images/maxima_b2b.png"
+                    src="/assets/images/progearhub_logo.png"
                     alt="logo-footer"
-                    width={150}
+                    width={250}
                     height={55}
                   />
                 </Link>

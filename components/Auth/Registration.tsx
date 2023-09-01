@@ -128,8 +128,8 @@ const Registration = () => {
               <Link href="/" legacyBehavior>
                 <a>
                   <Image
-                    src="/assets/images/maxima_b2b_b.png"
-                    width={130}
+                    src="/assets/images/progearhub.png"
+                    width={180}
                     height={40}
                     alt="logo"
                   />

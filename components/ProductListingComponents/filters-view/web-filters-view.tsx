@@ -42,7 +42,7 @@ const WebFilters = (props: FiltersViewProps) => {
               onClick={() => {
                 setShowMissingPartsModal(true);
               }}
-              className="missing_parts_btn ps-0 "
+              className="missing_parts_btn ps-2 "
             >
               {selectedMultiLangData?.let_us_know}
             </button>
@@ -69,7 +69,7 @@ const WebFilters = (props: FiltersViewProps) => {
         </Link>
       </div> */}
       <Topbar/>
-      <div className="filter_section">
+      <div className="filter_section" >
         <div className="filter_block">
           <div className="accordion accordion_custom" id="myAccordion">
             {loading ? (
@@ -91,7 +91,7 @@ const WebFilters = (props: FiltersViewProps) => {
                   >
                     <h2
                       className="accordion-header bold filter_heading pe-3"
-                      id={"heading" + index}
+                      id={"heading" + index} 
                     >
                       <button
                         type="button"
@@ -112,12 +112,12 @@ const WebFilters = (props: FiltersViewProps) => {
                           ? "accordion-collapse collapse custom_collapse_css show "
                           : "accordion-collapse custom_collapse_css collapsed"
                       }
-                      aria-labelledby={"heading" + index}
+                      aria-labelledby={"heading" + index} 
                     >
-                      <div className="card-body p-0">
+                      <div className="card-body p-0 checkbox-wrapper">
                         {filter.values.map(
                           (filterValue: any, innerIndex: any) => (
-                            <div className="form_check_filter" key={innerIndex}>
+                            <div className="form_check_filter checkbox-line-height" key={innerIndex} >
                               <input
                                 type="checkbox"
                                 name={filter.section}
@@ -127,11 +127,11 @@ const WebFilters = (props: FiltersViewProps) => {
                                     selectedFilter.name === filter.section &&
                                     selectedFilter.value.includes(filterValue)
                                 )}
-                                onChange={handleApplyFilters}
+                                onChange={handleApplyFilters} 
                               />
                               <label
-                                className="form-check-label filter-label accordion-checkbox"
-                                htmlFor="flexCheckDefault"
+                                className="form-check-label filter-label accordion-checkbox checkbox-margin"
+                                htmlFor="flexCheckDefault" 
                               >
                                 {filterValue}
                               </label>

@@ -51,7 +51,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <div className="container my-5 margin_from_nav">
+      <div className="container my-5 margin_from_nav pt-5 padding-top-forget">
         <div className={`col-lg-6 col-sm-9 col-12  mx-auto form_wrap`}>
           <div className="page_heading text-center">
             <h4 className="forgot_passwordh4">
@@ -111,7 +111,7 @@ const ForgotPassword = () => {
                       </div>
                     </div>
 
-                    <div className={`custom_btn my-4`}>
+                    <div className={`custom_btn my-4 btn-forget-mb`}>
                       <Link
                         href="/login"
                         legacyBehavior
@@ -126,7 +126,7 @@ const ForgotPassword = () => {
                       </Link>
                       <button
                         type="submit"
-                        className={`btn button_color btn_forgotpassword`}
+                        className={`btn button_color btn_forgotpassword ms-3`}
                       >
                         {selectedMultiLangData?.submit}
                       </button>
