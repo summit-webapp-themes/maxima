@@ -114,10 +114,10 @@ const WebFilters = (props: FiltersViewProps) => {
                       }
                       aria-labelledby={"heading" + index} 
                     >
-                      <div className="card-body p-0 checkbox-wrapper">
+                      <div className="card-body p-0 checkbox-wrapper" >
                         {filter.values.map(
                           (filterValue: any, innerIndex: any) => (
-                            <div className="form_check_filter checkbox-line-height" key={innerIndex} >
+                            <div className="form_check_filter checkbox-line-height d-flex align-items-center" key={innerIndex}>
                               <input
                                 type="checkbox"
                                 name={filter.section}

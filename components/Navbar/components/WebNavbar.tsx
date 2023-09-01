@@ -110,7 +110,7 @@ const WebNavbar = ({
                 ></a>
               </Link>
             </div>
-            <div className="mx-2  logo_containers my-2">
+            <div className="mx-0  logo_containers my-2">
               <Link href="/" legacyBehavior>
                 <Image
                   src="/assets/images/progearhub_logo.png"

@@ -213,9 +213,9 @@ const ProductDetail = ({
   };
   return (
     <div>
-      <div className="product-info mt-3" >
+      <div className="product-info mt-2" >
         <b className="product_name products-name products-name-font">{productDetailData?.item_name}</b>
-        <p className=" text-dark mt-1 products-name " >
+        <p className=" text-dark  products-name " >
           <span>
             {" "}
             {productDetailData?.short_description ===
@@ -225,17 +225,17 @@ const ProductDetail = ({
               : productDetailData?.short_description}
           </span>
         </p>
-        <div style={{ marginTop: "-12px" }} className="products-name product-line-height" >
+        <div  className="products-name product-line-height rating-container" >
           <StarRating rating={productDetailData?.rating} className="product_brand_name"/>
         </div>
         <p className="mt-3 text-dark p-tagfont product_item_name products-name product-line-height">
           {selectedMultiLangData?.item_code}: {productDetailData?.name}
         </p>
 
-        <h3 className="p_price m-0 price_font_family ">
+        <h3 className="p_price m-0 price_font_family rating-container" >
           {productDetailData?.price !== 0 ? (
             <>
-            <span className="products-name">  {productDetailData?.currency_symbol} {productDetailData?.price}</span>
+            <span className="products-name bold">  {productDetailData?.currency_symbol} {productDetailData?.price}</span>
               {/* <IndianNumber value={productDetailData?.price} /> */}
             </>
           ) : (

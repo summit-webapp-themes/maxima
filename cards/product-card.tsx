@@ -137,12 +137,12 @@ const ProductCard = (props: ProductCardProps) => {
   };
   return (
     <div className="mt-0 pt-0" >
-  <div key={key} className="border p-3 rounded-3 ps-0 ms-0 mt-2" >
-      <div className="d-flex justify-content-between mb-1" >
+  <div key={key} className="border  rounded-3 ps-0 ms-0 mt-2  product-border-pd">
+      <div className="d-flex justify-content-between icon-container-ps "  >
         <div
-          className={`badge text-bg-primary fs-5 display_tag_badge ms-3  ${
+          className={`badge text-bg-primary fs-5 display_tag_badge ms-0 ${
             display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
-          }`}  
+          }`}   
         >
           {display_tag.length > 0 && display_tag[0]}
         </div>
@@ -235,7 +235,7 @@ const ProductCard = (props: ProductCardProps) => {
       </div>
       <div className="product-wrap " >
         <div className="product text-center ">
-          <div className="product-media product_card_h pt-0 pb-0 mt-0 mb-0 d-flex justify-content-center">
+          <div className="product-media product_card_h pt-0 pb-0 mt-0 mb-0 d-flex justify-content-center product-main-container">
             {img_url !== "" ? (
               <>
                 <Link
@@ -280,9 +280,35 @@ const ProductCard = (props: ProductCardProps) => {
                 {currency_symbol}
                 {mrp_price}
               </del>
+
+              {isLoggedIn === "true" ? (
+              <>
+                <button
+                  type="button"
+                  className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn `}
+                  onClick={handleAddCart}
+                >
+                  <i className="fa fa-shopping-cart d-flex justify-content-center" aria-hidden="true"></i>
+                </button>
+                {/* <button
+                className="btn  standard_button py-3 add-cart-btns"
+                onClick={handleAddCart} style={{border:"2px solid red"}}
+              >
+                {selectedMultiLangData?.add_to_cart}
+              </button> */}
+             
+              </>
+            ) : (
+              <button
+                className="btn  standard_button py-3 add-cart-btns"
+                onClick={handleAddCart}
+              >
+                {selectedMultiLangData?.add_to_cart}
+              </button>
+            )} 
             </div>
             
-            {isLoggedIn === "true" && (
+            {/* {isLoggedIn === "true" && (
               <>
                 {router.route !== "/catalog/[category]" ? (
                   <button
@@ -296,9 +322,9 @@ const ProductCard = (props: ProductCardProps) => {
                   ""
                 )}
               </>
-            )}
+            )} */}
 
-            {isLoggedIn === "true" ? (
+            {/* {isLoggedIn === "true" ? (
               <>
                 <button
                   type="button"
@@ -307,6 +333,7 @@ const ProductCard = (props: ProductCardProps) => {
                 >
                   <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                 </button>
+             
               </>
             ) : (
               <button
@@ -315,7 +342,7 @@ const ProductCard = (props: ProductCardProps) => {
               >
                 {selectedMultiLangData?.add_to_cart}
               </button>
-            )}
+            )} */}
 
             {router.route === "/catalog/[category]" ? (
               <button
