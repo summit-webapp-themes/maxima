@@ -1057,8 +1057,9 @@
 .heart-icon-wrapper{
     // border: 2px solid red;
     display: flex !important;
-    justify-content: end !important;
-    margin-top: 8px !important;
+    justify-content: center !important;
+    // margin-top: 8px !important;
+    // padding-right: 15px !important;
 }
 .products-name-font{
     font-weight: 800 !important;
@@ -1068,6 +1069,7 @@
 }
 .best-seller-wrapper{
     position: absolute;
+    margin-left: 13px !important;
     // padding-top: .5rem !important;
 }
 .best-seller-tag{
@@ -1076,3 +1078,20 @@
 .text-color-black{
     color: black !important;
 }
+
+.product-price .new-price {
+    color: black;
+    
+}
+.checkbox-line-height{
+    margin-top: 10px;
+    
+}
+.checkbox-wrapper{
+   margin-top: 5px;
+   margin-bottom: 20px;
+}
+
+// .product-grid-name{
+//     line-height: 1;
+// }
