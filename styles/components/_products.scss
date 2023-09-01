@@ -1031,3 +1031,48 @@
         color: gray;
       
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+.products-name{
+    color: black !important;
+    font-family: 'Nunito' !important
+}
+.product-font-family{
+    font-family: 'Nunito' !important
+}
+ .product-desc {
+    font-size: 1.3rem;
+    line-height: 1.5 !important
+}
+.add_cart_btn{  
+    padding-left: 4rem !important;
+    padding-right: 4rem !important;
+}
+.add-to-catlog-btn{
+    text-transform: capitalize !important;
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+.heart-icon-wrapper{
+    // border: 2px solid red;
+    display: flex !important;
+    justify-content: end !important;
+    margin-top: 8px !important;
+}
+.products-name-font{
+    font-weight: 800 !important;
+}
+.product-wrapper-main{
+    position: relative;
+}
+.best-seller-wrapper{
+    position: absolute;
+    // padding-top: .5rem !important;
+}
+.best-seller-tag{
+    padding: .8rem 1.4rem !important;
+}
+.text-color-black{
+    color: black !important;
+}

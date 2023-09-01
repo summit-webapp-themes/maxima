@@ -71,17 +71,21 @@ const ProductListViewCard = (props: any) => {
     }
   };
 
+console.log(" selectedMultiLangData",  selectedMultiLangData)
+
+
+
   return (
     <>
-      <div className="container">
-        <div className=" col-lg-12">
-          <div className="product-wrapper ">
+      <div className="container-fuild" >
+        <div className=" col-lg-12 px-3">
+          <div className="product-wrapper product-wrapper-main">
             <div className="row w-100 product product-list border rounded">
               <div className="col-md-4 my-auto">
                 <div className="product-tags col-md-4">
-                  <p className="product_tag text-lg-center my-0">
+                  <p className="product_tag text-lg-center my-0 mt-2 best-seller-wrapper" >
                     {product_data?.display_tag.length > 0 && (
-                      <span className="badge text-bg-primary p-2 fs-5">
+                      <span className="badge text-bg-primary p-2 fs-5 best-seller-tag">
                         {product_data?.display_tag.length > 0 &&
                           product_data?.display_tag[0]}
                       </span>
@@ -102,24 +106,24 @@ const ProductListViewCard = (props: any) => {
               </div>
 
               <div className="col-md-7 col-lg-7 my-auto">
-                <div className="product-details">
-                  <h4 className="product-name product-listviewname">
+                <div className="product-details products-name">
+                  <h4 className="product-name product-listviewname products-name  ">
                     <Link
                       href={`${product_data?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
                       legacyBehavior
                     >
-                      <a>{product_data?.item_name}</a>
+                      <a className="products-name products-name-font">{product_data?.item_name}</a>
                     </Link>
                   </h4>
-                  <div className="d-flex justify-content-between">
+                  <div className="d-flex">
                     <div>
-                      <div className="fs-5">
+                      <div className="fs-5 products-name">
                         {product_data?.short_description ===
                         product_data?.item_name
                           ? ""
                           : product_data?.short_description}
                       </div>
-                      <div className="product-desc text-gray">
+                      <div className="product-desc text-gray products-name ">
                         {selectedMultiLangData?.item_code}: {product_data?.name}
                       </div>
 
@@ -134,7 +138,7 @@ const ProductListViewCard = (props: any) => {
                         </div>
                       )}
                       {product_data?.brand !== null && (
-                        <div className="sold-by product-desc">
+                        <div className="sold-by product-desc products-name">
                           {selectedMultiLangData?.brand}: {product_data?.brand}
                         </div>
                       )}
@@ -145,10 +149,10 @@ const ProductListViewCard = (props: any) => {
                       ) : (
                         <>
                           {CONSTANTS.DISPLAY_PRODUCT_PRICE_ON_PRODUCT_LISTING_CARD && (
-                            <div className="product-price price_font_family">
+                            <div className="product-price price_font_family products-name">
                               {product_data?.currency_symbol}{" "}
                               {product_data?.price}{" "}
-                              <del className="old-price fs-3 pl-1 price_font_family">
+                              <del className="old-price fs-3 pl-1 price_font_family product-font-family">
                                 <span>{product_data?.currency_symbol}</span>{" "}
                                 {product_data?.mrp_price}
                               </del>
@@ -156,28 +160,11 @@ const ProductListViewCard = (props: any) => {
                           )}
                         </>
                       )}
-                      {isLoggedIn === "true" && (
-                        <>
-                          {router.route !== "/catalog/[category]" ? (
-                            <button
-                              type="button"
-                              className={`btn btn-link catalog-btn-size pt-2 fs-5`}
-                              onClick={() => handleShow(product_data.name)}
-                            >
-                              {selectedMultiLangData?.add_to_catalog}
-                            </button>
-                          ) : (
-                            ""
-                          )}
-                        </>
-                      )}
-                    </div>
-                    <div className="row mt-lg-5 mt-2 ps-5">
-                      <div className="col-lg-6">
-                        {isLoggedIn === "true" ? (
+                      <div className="d-flex justify-content-between">
+                      {isLoggedIn === "true" ? (
                           <div className="text-center w-50">
                             <button
-                              className="btn  standard_button"
+                              className="btn  standard_button add_cart_btn"
                               onClick={() =>
                                 AddToCartProduct(product_data.name)
                               }
@@ -194,6 +181,28 @@ const ProductListViewCard = (props: any) => {
                             </div>
                           </Link>
                         )}
+                      {isLoggedIn === "true" && (
+                        <>
+                          {router.route !== "/catalog/[category]" ? (
+                            <button
+                              type="button"
+                              className={`btn btn-link catalog-btn-size pt-2 fs-5 products-name add-to-catlog-btn ms-5`}
+                              onClick={() => handleShow(product_data.name)}
+                            >
+                              {selectedMultiLangData?.add_to_catalog}
+                            </button>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      )}
+                      </div>
+
+
+                    </div>
+                    <div className="row mt-lg-5 mt-2 ps-5">
+                      <div className="col-lg-6">
+                     
                       </div>
                       {/* <div className="col-lg-6">
                         {router.route !== "/catalog/[category]" ? (
@@ -214,7 +223,7 @@ const ProductListViewCard = (props: any) => {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-1 col-md-1 mt-1 text-en">
+              <div className="col-lg-1 col-md-1 mt-1 text-en heart-icon-wrapper">
                 {wishlistData?.map((values: any) => {
                   if (values.name === product_data?.name) {
                     wishproducts = values?.name;
@@ -247,17 +256,17 @@ const ProductListViewCard = (props: any) => {
                         }}
                       >
                         <i
-                          className="fa fa-heart-o text-danger fs-1 "
+                          className="fa fa-heart-o text-danger fs-1"
                           aria-hidden="true"
                           data-bs-toggle="tooltip"
-                          title="Add to Wishlist"
+                          title="Add to Wishlist" 
                         ></i>
                       </a>
                     ) : (
                       <Link href="/login" legacyBehavior>
                         <a style={{ cursor: "pointer" }}>
                           <i
-                            className="fa fa-heart-o text-danger fs-1 "
+                            className="fa fa-heart-o text-danger fs-1"
                             aria-hidden="true"
                             data-bs-toggle="tooltip"
                             title="Add to Wishlist"
