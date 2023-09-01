@@ -136,17 +136,18 @@ const ProductCard = (props: ProductCardProps) => {
     }
   };
   return (
-    <div key={key} className="border p-3 rounded-3 ps-0 ms-0">
+    <div className="mt-0 pt-0" >
+  <div key={key} className="border p-3 rounded-3 ps-0 ms-0 mt-2" >
       <div className="d-flex justify-content-between mb-1" >
         <div
           className={`badge text-bg-primary fs-5 display_tag_badge ms-3  ${
             display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
-          }`} 
+          }`}  
         >
           {display_tag.length > 0 && display_tag[0]}
         </div>
 
-        <div>
+        <div className="mb-0 mt-0 pb-0 pt-0">
           {wishlistData?.map((values: any) => {
             if (values.name === name) {
               wishproducts = values?.name;
@@ -232,9 +233,9 @@ const ProductCard = (props: ProductCardProps) => {
           )}
         </div>
       </div>
-      <div className="product-wrap">
+      <div className="product-wrap " >
         <div className="product text-center ">
-          <div className="product-media product_card_h">
+          <div className="product-media product_card_h pt-0 pb-0 mt-0 mb-0 d-flex justify-content-center">
             {img_url !== "" ? (
               <>
                 <Link
@@ -245,7 +246,7 @@ const ProductCard = (props: ProductCardProps) => {
                     src={`${CONSTANTS.API_BASE_URL}${img_url}`}
                     alt="product-detail"
                     width={200}
-                    height={200}
+                    height={200} 
                   />
                 </Link>
               </>
@@ -256,22 +257,22 @@ const ProductCard = (props: ProductCardProps) => {
                     src={"/assets/images/maximaCard.jpg"}
                     alt="Product"
                     width="200"
-                    height="200"
+                    height="200"  
                   />
                 </Link>
               </>
             )}
           </div>
-          <div className="product-details" >
-            <h4 className="product-name truncate-overflow products-name products-name-font">
+          <div className="product-details pt-0" >
+            <h4 className="product-name truncate-overflow products-name products-name-font pt-0">
               <Link
                 href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`} className="products-name products-name-font"
               >
                 {item_name}
               </Link>
             </h4>
-            <div className="product-price products-name">
-              <ins className="new-price price_font_family">
+            <div className="product-price products-name pt-0 mt-0 product-grid-name pb-0 mb-0">
+              <ins className="new-price price_font_family pt-0">
                 {currency_symbol}
                 {price}
               </ins>
@@ -280,6 +281,7 @@ const ProductCard = (props: ProductCardProps) => {
                 {mrp_price}
               </del>
             </div>
+            
             {isLoggedIn === "true" && (
               <>
                 {router.route !== "/catalog/[category]" ? (
@@ -341,6 +343,8 @@ const ProductCard = (props: ProductCardProps) => {
         selectedMultiLangData={selectedMultiLangData}
       />
     </div>
+    </div>
+  
   );
 };
 

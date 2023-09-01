@@ -77,11 +77,11 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
 
   return (
     <>
-      <div className="container-fuild" >
-        <div className=" col-lg-12 px-3">
+      <div className="container-fuild px-3" >
+        <div className=" col-lg-12 ">
           <div className="product-wrapper product-wrapper-main">
-            <div className="row w-100 product product-list border rounded">
-              <div className="col-md-4 my-auto">
+            <div className="row w-100 product product-list border rounded py-4 " >
+              <div className="col-md-4">
                 <div className="product-tags col-md-4">
                   <p className="product_tag text-lg-center my-0 mt-2 best-seller-wrapper" >
                     {product_data?.display_tag.length > 0 && (
@@ -96,7 +96,7 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
                   href={`${product_data?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
                 >
                   {" "}
-                  <div className="product-img list-view-img text-center">
+                  <div className="product-img list-view-img text-center ">
                     {handleRenderingOfImages(
                       product_data?.image_url,
                       product_data?.brand_img
@@ -160,9 +160,9 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
                           )}
                         </>
                       )}
-                      <div className="d-flex justify-content-between">
+                      <div className="p-0 m-0 d-flex ">
                       {isLoggedIn === "true" ? (
-                          <div className="text-center w-50">
+                          <div className="text-center w-0">
                             <button
                               className="btn  standard_button add_cart_btn"
                               onClick={() =>

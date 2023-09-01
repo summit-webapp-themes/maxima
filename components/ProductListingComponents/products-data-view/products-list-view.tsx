@@ -50,7 +50,7 @@ const ProductsListView = (props: ProductsProps) => {
           {product_data && product_data.length > 0 ? (
             product_data.map((product: any, index: number) => {
               return (
-                <div key={index} className="p-0 my-1 ">
+                <div key={index} className="p-0 mt-0 my-2 ">
                   <ProductListViewCard
                     currency_state_from_redux={currency_state_from_redux}
                     product_data={product}

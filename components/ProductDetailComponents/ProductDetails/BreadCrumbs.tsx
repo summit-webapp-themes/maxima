@@ -34,7 +34,7 @@ const handleMissingPartsModalClose: any = () => {
       console.log(sub_sub_cat);
     });
   return (
-    <section className="breadcrumb_section pt-2 " >
+    <section className="breadcrumb_section pt-5 " >
       <div className="container pt-0">
         <div className="row">
           <div className="col-lg-9">
@@ -70,12 +70,12 @@ const handleMissingPartsModalClose: any = () => {
             </nav>
             </div>
             
-            <div className="col-lg-3 pe-0">
+            <div className="col-lg-3 pe-0" >
               <div className="row">
                 {CONSTANTS.ENABLE_TOGGLE_PRODUCT_LISTING_VIEW ? (
                   <>
                   
-                      <div className="col-lg-6 col-8">
+                      <div className="col-lg-6 col-8" >
                         {/* Price :-{" "}
                         <select
                           className={`${styles.form_select}`}
