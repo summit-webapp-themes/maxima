@@ -413,7 +413,7 @@ const ProductDetail = ({
 
               <div className="row button_sec">
                 {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
-                  <div className="col-lg-4 col-6 align-self-lg-start products-name" >
+                  <div className="col-lg-4 col-6 align-self-lg-start products-name btn-wrapper" >
                     <div className="mt-5">
                       <button
                         type="button"
@@ -426,7 +426,7 @@ const ProductDetail = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="col-lg-4 col-6">
+                  <div className="col-lg-4 col-6 btn-wrapper">
                     <div className="mt-5">
                       <Link
                         href="/login"
@@ -440,7 +440,7 @@ const ProductDetail = ({
                 {isLoggedIn === "true" ? (
                   <div className="col-lg-4 col-5 ml-lg-0 ml-3 align-self-lg-start">
                     <div className="mt-5">
-                      <div className="row">
+                      <div className="row btn-wrapper">
                         <button
                           type="button"
                           className={`w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
@@ -467,7 +467,7 @@ const ProductDetail = ({
                 ) : (
                   <div className="col-lg-4 col-4 text-start ">
                     <div className="mt-5">
-                      <div className="row">
+                      <div className="row btn-wrapper">
                         <button
                           className={`w-50 btn standard_button_filled cart_btn_gtag product-font-family`}
                           onClick={handleRedirect}

@@ -110,7 +110,7 @@ const WebNavbar = ({
                 ></a>
               </Link>
             </div>
-            <div className="mx-0  logo_containers my-2">
+            <div className="mx-0  logo_containers my-2" >
               <Link href="/" legacyBehavior>
                 <Image
                   src="/assets/images/progearhub_logo.png"
@@ -189,7 +189,7 @@ const WebNavbar = ({
                       className="dropdown-icon dropdown_active_icon"
                     >
                       <i
-                         className=" fa fa-user-o d-flex align-items-center mt-5 mb-2 logout-icon"
+                        className=" fa fa-user-o d-flex align-items-center mt-5 mb-2 logout-icon"
                         aria-hidden="true"
                       ></i>
                     </Dropdown.Toggle>

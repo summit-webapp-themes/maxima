@@ -136,7 +136,7 @@ const ProductCard = (props: ProductCardProps) => {
     }
   };
   return (
-    <div className="mt-0 pt-0" >
+    <div className="mt-0 pt-0"  >
   <div key={key} className="border  rounded-3 ps-0 ms-0 mt-2  product-border-pd">
       <div className="d-flex justify-content-between icon-container-ps "  >
         <div
