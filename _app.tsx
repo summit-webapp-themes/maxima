@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import Layout from "../components/Layout";
 import "../styles/globals.scss";
 import { ToastContainer } from "react-toastify";
-
+import { initializeFirebase } from "../push-notifications";
 import { useEffect, useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import Scrolltop from "../components/ScrollTop";
