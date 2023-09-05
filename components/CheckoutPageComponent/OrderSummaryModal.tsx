@@ -22,7 +22,7 @@ const OrderSummaryModal = ({
         </Modal.Header>
 
         <Modal.Body className="modals_body">
-          <div className="checkout-item">
+          <div className="checkout-item" >
             {cartListingItems?.categories?.length > 0 &&
               cartListingItems?.categories.map((value: any, index: any) => {
                 return (

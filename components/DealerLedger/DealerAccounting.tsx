@@ -6,9 +6,10 @@ const DealerAccounting = ({
 }: any) => {
   return (
     <>
-      <div className="container my-5">
+      <div className="container my-5 delaer-leader-container" >
         <div className="row justify-content-center">
-          <div className="col-lg-3 card border-dark mx-2 px-0 mb-2">
+          <h2 className="dealer-heading">Dealer Ledger</h2>
+          <div className="col-lg-3 card border-dark mx-2 mt-3 px-0 mb-2">
             <div className="card-header  text-center fs-3">
               {selectedMultiLangData?.remaining_credit_balance}
             </div>

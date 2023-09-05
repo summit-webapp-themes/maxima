@@ -24,15 +24,15 @@ const ShippingMethod = ({
 
   return (
     <>
-      <h4 className="mb-3 shippingmethod-heading ">
+      <h4 className="mb-1 mt-5 shippingmethod-heading shipping-method-margin " >
         {" "}
         {selectedMultiLangData?.shipping_method}
       </h4>
-      <table width="100%" className="mb-0 mt-1 table table-borderless">
-        <tbody>
+      <table width="100%" className="mb-0 mt-0 table table-borderless " >
+        <tbody className="table-margin">
           <tr className="item_options">
             <td width="50%" className="px-0 py-0 pb-1 ">
-              <p className={`text-capitalize mb-0 fs-5 `}>
+              <p className={`text-capitalize mb-0 fs-5  `}>
                 {selectedMultiLangData?.preferred_transport}:
               </p>
             </td>
@@ -127,7 +127,7 @@ const ShippingMethod = ({
           <tr className="item_options ">
             <td width="50%" className="px-0 py-0 ">
               <p className={`mb-0  fs-5`}>
-                {selectedMultiLangData?.special_remark_if_any}: :{" "}
+                {selectedMultiLangData?.special_remark_if_any} :{" "}
               </p>
             </td>
             <td width="50%" className="px-0 py-0 ">

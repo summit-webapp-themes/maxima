@@ -48,10 +48,10 @@ const BillingAddressCard = ({
 
   return (
     <>
-      <div className=" d-flex ">
-        <h4 className="mb-1">{selectedMultiLangData?.billing_addresses}</h4>
-        <div className="d-flex align-items-center ml-2">
-          <input
+      <div className=" " >
+        <h4 className="mb-1" >{selectedMultiLangData?.billing_addresses}</h4>
+        <div className="d-flex align-items-center ml-0 ms-0 ps-0 mb-2" >
+          <input 
             className="form-check-input fs-5 bill_checkbox"
             type="checkbox"
             // defaultChecked={true}
@@ -70,13 +70,13 @@ const BillingAddressCard = ({
         </div>
       </div>
 
-      <h5>
+      {/* <h5>
         {changeAddress
           ? selectedbillAddress
           : initialShippingAddress || selectedAddress}
-      </h5>
+      </h5> */}
       <select
-        className="form-select form-select-lg w-50 mb-2"
+        className="form-select form-select-lg w-50 mb-3"
         aria-label="Default select example"
         onChange={handleBilling}
       >
@@ -96,7 +96,7 @@ const BillingAddressCard = ({
               .map((detail: any, index: any) => (
                 <div
                   className="border px-1 addresscard-width"
-                  key={detail?.address_id}
+                  key={detail?.address_id} 
                 >
                   <div className="">
                     <p className={`mb-0 addresscard-p`}>{detail.name}</p>
@@ -145,7 +145,7 @@ const BillingAddressCard = ({
                         ? "Address Selected"
                         : "Bill to this address"}
                     </button>
-                    <div className="mt-2 text-center ">
+                    <div className="mt-2 text-center " >
                       <button
                         type="button"
                         onClick={() => {
@@ -189,7 +189,7 @@ const BillingAddressCard = ({
                   className="border px-1 addresscard-width"
                   key={detail?.contact_info}
                 >
-                  <div className="">
+                  <div className="ps-3 pt-1  " >
                     {/* <p>{detail.address_id}</p> */}
                     <p className={`mb-0 addresscard-p`}>{detail?.name}</p>
                     {/* <p className="mb-0">{detail.phone}</p> */}
@@ -221,7 +221,7 @@ const BillingAddressCard = ({
                     </p>
                   </div>
                   <div className="">
-                    <button
+                    {/* <button
                       type="button"
                       onChange={() =>
                         setInitialBillingAddress(detail?.address_id)
@@ -238,8 +238,8 @@ const BillingAddressCard = ({
                       initialShippingAddress === detail?.address_id
                         ? "Address Selected"
                         : "Deliver to this address"}
-                    </button>
-                    <div className="mt-2 text-center ">
+                    </button> */}
+                    <div className="mt-2 text-center mb-2">
                       {/* <ShippingAddressForm address_type="Shipping" address_id={editId} default_data={defaultData}/> */}
 
                       <button
@@ -249,7 +249,7 @@ const BillingAddressCard = ({
                           // setEditId(shippingAddress[index].address_id)
                           // setDefaultData(shippingAddress[index])
                         }}
-                        className="showmodal_button"
+                        className="showmodal_button" 
                       >
                         {selectedMultiLangData?.edit}
                       </button>

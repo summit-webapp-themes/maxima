@@ -47,7 +47,7 @@ const DealerLedgerTable = ({
   };
   return (
     <>
-      <div className="table-responsive dealer-ledger-table">
+      <div className="table-responsive dealer-ledger-table ">
         <table className="table table-bordered ">
           <thead className="">
             <tr className="table-info">
