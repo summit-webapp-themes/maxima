@@ -1084,12 +1084,12 @@
     
 }
 .checkbox-line-height{
-    margin-top: 4px;
+    margin-top: 3.5px !important;
     
 }
 .checkbox-wrapper{
-   margin-top: 15px;
-   margin-bottom: 20px;
+   margin-top: 6px !important;
+   margin-bottom: 20px !important;
 }
 // .checkbox-margin{
 //     padding-top: -20px !important;
@@ -1106,3 +1106,29 @@
 //     text-align: center !important;
 //     margin-left: 35px;
 // }
+
+
+.product-main-container{
+    position: relative
+}
+
+.icon-container-ps{
+    position: absolute;
+   z-index: 2;
+   width: 82%;
+   
+}
+
+.add-cart-btns{
+    font-size: 10px !important;
+    padding: 15px 6px !important;
+}
+.product-mg-r{
+    margin-right: .02px !important;
+    margin-top: -10px !important;
+}
+.product-border-pd{
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding: 10px !important;
+}

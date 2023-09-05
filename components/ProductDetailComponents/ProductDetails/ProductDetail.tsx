@@ -213,9 +213,9 @@ const ProductDetail = ({
   };
   return (
     <div>
-      <div className="product-info mt-3" >
+      <div className="product-info mt-2" >
         <b className="product_name products-name products-name-font">{productDetailData?.item_name}</b>
-        <p className=" text-dark mt-1 products-name " >
+        <p className=" text-dark  products-name " >
           <span>
             {" "}
             {productDetailData?.short_description ===
@@ -225,17 +225,17 @@ const ProductDetail = ({
               : productDetailData?.short_description}
           </span>
         </p>
-        <div style={{ marginTop: "-12px" }} className="products-name product-line-height" >
+        <div  className="products-name product-line-height rating-container" >
           <StarRating rating={productDetailData?.rating} className="product_brand_name"/>
         </div>
         <p className="mt-3 text-dark p-tagfont product_item_name products-name product-line-height">
           {selectedMultiLangData?.item_code}: {productDetailData?.name}
         </p>
 
-        <h3 className="p_price m-0 price_font_family ">
+        <h3 className="p_price m-0 price_font_family rating-container" >
           {productDetailData?.price !== 0 ? (
             <>
-            <span className="products-name">  {productDetailData?.currency_symbol} {productDetailData?.price}</span>
+            <span className="products-name bold">  {productDetailData?.currency_symbol} {productDetailData?.price}</span>
               {/* <IndianNumber value={productDetailData?.price} /> */}
             </>
           ) : (
@@ -413,7 +413,7 @@ const ProductDetail = ({
 
               <div className="row button_sec">
                 {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
-                  <div className="col-lg-4 col-6 align-self-lg-start products-name" >
+                  <div className="col-lg-4 col-6 align-self-lg-start products-name btn-wrapper" >
                     <div className="mt-5">
                       <button
                         type="button"
@@ -426,7 +426,7 @@ const ProductDetail = ({
                     </div>
                   </div>
                 ) : (
-                  <div className="col-lg-4 col-6">
+                  <div className="col-lg-4 col-6 btn-wrapper">
                     <div className="mt-5">
                       <Link
                         href="/login"
@@ -440,7 +440,7 @@ const ProductDetail = ({
                 {isLoggedIn === "true" ? (
                   <div className="col-lg-4 col-5 ml-lg-0 ml-3 align-self-lg-start">
                     <div className="mt-5">
-                      <div className="row">
+                      <div className="row btn-wrapper">
                         <button
                           type="button"
                           className={`w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
@@ -467,7 +467,7 @@ const ProductDetail = ({
                 ) : (
                   <div className="col-lg-4 col-4 text-start ">
                     <div className="mt-5">
-                      <div className="row">
+                      <div className="row btn-wrapper">
                         <button
                           className={`w-50 btn standard_button_filled cart_btn_gtag product-font-family`}
                           onClick={handleRedirect}

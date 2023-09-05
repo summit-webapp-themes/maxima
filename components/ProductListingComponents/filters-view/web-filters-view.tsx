@@ -37,12 +37,12 @@ const WebFilters = (props: FiltersViewProps) => {
       <div className=" col-12 " >
         {CONSTANTS.ENABLE_MISSING_PARTS && productListingData.length > 0 && (
           <>
-            <span className="text-color-black">{selectedMultiLangData?.looking_for_something_specific}</span>
+            <span className="text-color-black product-font-family">{selectedMultiLangData?.looking_for_something_specific}</span>
             <button
               onClick={() => {
                 setShowMissingPartsModal(true);
               }}
-              className="missing_parts_btn ps-2 "
+              className="missing_parts_btn ps-2 product-font-family"
             >
               {selectedMultiLangData?.let_us_know}
             </button>
@@ -114,10 +114,10 @@ const WebFilters = (props: FiltersViewProps) => {
                       }
                       aria-labelledby={"heading" + index} 
                     >
-                      <div className="card-body p-0 checkbox-wrapper">
+                      <div className="card-body p-0 checkbox-wrapper product-font-family" >
                         {filter.values.map(
                           (filterValue: any, innerIndex: any) => (
-                            <div className="form_check_filter checkbox-line-height" key={innerIndex} >
+                            <div className="form_check_filter checkbox-line-height d-flex align-items-center" key={innerIndex}>
                               <input
                                 type="checkbox"
                                 name={filter.section}
