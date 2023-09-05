@@ -155,7 +155,7 @@ const CartListing = () => {
   console.log("selected array of cart", arrayofSelectedItems);
 
   return (
-    <div className="margin_from_nav">
+    <div className="container margin_from_nav mb-0 cart-margin-top" >
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (
@@ -169,33 +169,50 @@ const CartListing = () => {
       ) : (
         <>
           {Object.keys(cartListingItems).length > 0 ? (
-            <div className="container py-5">
-              <div className="cart_heading mb-3">
-                <h2 className="text-uppercase">
+            <div className="cart-ps-container">
+              <div className="row">
+                <div className="col-9">
+                <div className="cart_heading mb-3">
+                <h2 className="text-uppercase shopping-cart-heading products-name">
                   {selectedMultiLangData?.shopping_cart}
                 </h2>
               </div>
-
-              <div className="row">
-                <div className="col-md-6">
-                  <h5>
-                    {" "}
-                    {selectedMultiLangData?.customer_name}:{" "}
-                    {cartListingItems?.party_name}{" "}
-                  </h5>
                 </div>
-                <div className="col-md-6 d-flex justify-content-end">
-                  <div className="me-5">
-                    <p className="checkbox-cursor">
+
+<div className="col-3 d-flex justify-content-end">
+                    <p className="checkbox-cursor product-font-family">
                       <a
-                        className="clear_cart"
+                        className="clear_cart bold"
                         onClick={() => ClearCartHandle(cartListingItems.name)}
                       >
                         {selectedMultiLangData?.clear_cart}
                       </a>
                     </p>
                   </div>
-                  <div>
+              </div>
+              
+           
+
+              {/* <div className="row">
+                <div className="col-md-6"> */}
+                  {/* <h5>
+                    {" "}
+                    {selectedMultiLangData?.customer_name}:{" "}
+                    {cartListingItems?.party_name}{" "}
+                  </h5> */}
+                {/* </div> */}
+                {/* <div className="col-md-6 d-flex justify-content-end " >
+                  <div className="me-5">
+                    <p className="checkbox-cursor product-font-family">
+                      <a
+                        className="clear_cart bold"
+                        onClick={() => ClearCartHandle(cartListingItems.name)}
+                      >
+                        {selectedMultiLangData?.clear_cart}
+                      </a>
+                    </p>
+                  </div> */}
+                  {/* <div>
                     <p className="checkbox-cursor">
                       <a
                         className="clear_cart"
@@ -204,14 +221,14 @@ const CartListing = () => {
                         {selectedMultiLangData?.update_cart}
                       </a>
                     </p>
-                  </div>
-                </div>
-              </div>
+                  </div> */}
+                {/* </div>
+              </div> */}
 
-              <div className="row cart_wrapper">
-                <div className="col-12">
-                  <div className="row justify-content-between">
-                    <div className="col-md-4 text-center">
+              <div className="row cart_wrapper ">
+                {/* <div className="col-12">
+                  <div className="row justify-content-between"> */}
+                    {/* <div className="col-md-4 text-center">
                       <button
                         type="button"
                         className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
@@ -220,8 +237,8 @@ const CartListing = () => {
                       >
                         {selectedMultiLangData?.continue_shopping}
                       </button>
-                    </div>
-                    <div className="col-md-4 text-center">
+                    </div> */}
+                    {/* <div className="col-md-4 text-center" >
                       <Link href="">
                         <button
                           type="button"
@@ -234,8 +251,8 @@ const CartListing = () => {
                           {selectedMultiLangData?.request_for_quotation}
                         </button>
                       </Link>
-                    </div>
-                    <div className="col-md-4 text-center">
+                    </div> */}
+                    {/* <div className="col-md-4 text-center " >
                       <Link href="/checkout">
                         <button
                           type="button"
@@ -250,10 +267,10 @@ const CartListing = () => {
                           {selectedMultiLangData?.order_checkout}
                         </button>
                       </Link>
-                    </div>
-                  </div>
-                </div>
-                <hr />
+                    </div> */}
+                  {/* </div>
+                </div> */}
+                {/* <hr />
                 <div className="col-12 text-end">
                   <h5 className="mb-0 sub-total-h5">
                     {selectedMultiLangData?.sub_total} (
@@ -268,54 +285,41 @@ const CartListing = () => {
                     </span>
                   </h5>
                 </div>
-                <hr />
+                <hr /> */}
 
-                <div className="col-12 ">
+                <div className="col-12 " >
                   {cartListingItems?.categories?.length > 0 &&
                     cartListingItems?.categories !== null &&
                     cartListingItems?.categories.map(
                       (category: any, index: any) => {
                         return (
                           <>
-                            <div key={index}>
-                              <h3 className="mt-1 text-decoration-underline">
+                            <div key={index} className="border ">
+                            <div className="container">
+                              <h3 className="mt-2 text-decoration-underline products-name category-name-font" >
                                 {category.category}
                               </h3>
-                              <div className="col-12">
-                                <div className="row cart_heading_bg my-auto">
-                                  <div className="col-md-3 col-12">
+                            
+                              <div className="col-12 " > 
+                                <div className="row cart_heading_bg my-auto products-name ">
+                                  <div className="col-md-2 col-12">
                                     <h6 className="mt-4">
                                       {" "}
-                                      {selectedMultiLangData?.image}
+                                      {/* {selectedMultiLangData?.image} */}
                                     </h6>
                                   </div>
-                                  <div className="col-md-9 col-12 d-lg-block d-none">
-                                    <div className="row text-center ">
-                                      <div className="col-3 text-start my-0">
-                                        <h6 className="mt-4">
+                                  <div className="col-md-10 col-12 d-lg-block d-none products-name">
+                                    <div className="row text-center products-name product-captilise ">
+                                      <div className="col-5 text-start my-0 products-name" >
+                                        <h6 className="mt-4" >
                                           {
                                             selectedMultiLangData?.item_with_desc
                                           }
                                         </h6>
                                       </div>
-                                      <div className="col-2 my-0">
+                                      <div className="col-2 my-0 ">
                                         <h6 className="mt-4">
                                           {selectedMultiLangData?.price}
-                                        </h6>
-                                      </div>
-                                      <div className="col-2">
-                                        <h6 className="mt-4">
-                                          {selectedMultiLangData?.unit_weight}
-                                        </h6>
-                                      </div>
-                                      <div className="col-2">
-                                        <h6 className="mt-4">
-                                          {selectedMultiLangData?.total_weight}
-                                        </h6>
-                                      </div>
-                                      <div className="col-1">
-                                        <h6 className="mt-4">
-                                          {selectedMultiLangData?.tax}
                                         </h6>
                                       </div>
                                       <div className="col-1">
@@ -324,6 +328,26 @@ const CartListing = () => {
                                         </h6>
                                       </div>
                                       <div className="col-1">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.unit_weight}
+                                        </h6>
+                                      </div>
+                                      <div className="col-1">
+                                        <h6 className="mt-4 ms-2" >
+                                          {selectedMultiLangData?.total_weight}
+                                        </h6>
+                                      </div>
+                                      {/* <div className="col-1">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.tax}
+                                        </h6>
+                                      </div> */}
+                                      {/* <div className="col-1">
+                                        <h6 className="mt-4">
+                                          {selectedMultiLangData?.quantity_c}
+                                        </h6>
+                                      </div> */}
+                                      <div className="col-2">
                                         <h6 className="mt-4">
                                           {selectedMultiLangData?.total}
                                         </h6>
@@ -339,13 +363,13 @@ const CartListing = () => {
                                     (orders: any, i: any) => {
                                       return (
                                         <div key={i}>
-                                          <div className="row">
-                                            <div className="col-lg-3 text-center">
+                                          <div className="row products-name " >
+                                            <div className="col-lg-2  text-center products-name cart-image pb-3">
                                               {handleRenderingOfCartImages(
                                                 orders
                                               )}
                                             </div>
-                                            <div className="col-lg-9  ">
+                                            <div className="col-lg-10  products-name">
                                               <CartCard
                                                 orders={orders}
                                                 index={i}
@@ -370,6 +394,8 @@ const CartListing = () => {
                                     }
                                   )}
                               </div>
+                              </div>
+                             
                             </div>
                           </>
                         );
@@ -378,12 +404,13 @@ const CartListing = () => {
                 </div>
 
                 <hr />
-                <div className="col-12">
-                  <div className="row justify-content-end">
-                    <div className="col-md-6">
+                <div className="container mb-0 pb-0">
+                <div className="col-12" >
+                  <div className="row justify-content-start product-font">
+                    <div className="col-md-6 note-line-height" >
                       <h5>{selectedMultiLangData?.note}:-</h5>
-                      <p>{selectedMultiLangData?.note_1}</p>
-                      <p>
+                      <p className="note-line-height">{selectedMultiLangData?.note_1}</p>
+                      <p className="note-line-height">
                         {selectedMultiLangData?.note_2}{" "}
                         <button
                           onClick={handlemodalOpen}
@@ -394,16 +421,16 @@ const CartListing = () => {
                         {selectedMultiLangData?.to_mail_us}{" "}
                       </p>
                     </div>
-                    <div className="col-md-6 text-end cart-total">
+                    <div className="col-md-6 text-start  cart-total">
                       {!orderSummaryForCart ? null : (
                         <>
                           <div className="row justify-content-end">
-                            <div className="col-lg-4 col-4 ">
+                            <div className="col-lg-4 col-4 bold products-name ">
                               {" "}
                               {selectedMultiLangData?.sub_total}{" "}
                             </div>
                             :
-                            <div className="col-lg-3 col-6 text-end price_font_family">
+                            <div className="col-lg-3 col-6 text-end price_font_family products-name bold">
                               {
                                 cartListingItems?.categories[0]?.orders[0]
                                   ?.currency_symbol
@@ -411,29 +438,29 @@ const CartListing = () => {
                               {orderSummaryForCart[0]?.value}{" "}
                             </div>
                           </div>
-                          <div className="row justify-content-end">
-                            <div className="col-lg-4 col-4 ">
+                          <div className="row justify-content-end products-name bold">
+                            <div className="col-lg-4 col-4 tax-captilise" >
                               {" "}
-                              {selectedMultiLangData?.tax}{" "}
+                            {/* <span className="tax-captilise">{selectedMultiLangData?.tax}{" "}</span>   */}
                             </div>
-                            :
-                            <div className="col-lg-3 col-6 text-end price_font_family">
+                            {/* : */}
+                            <div className="col-lg-3 col-6 text-end price_font_family products-name bold">
                               {
-                                cartListingItems?.categories[0]?.orders[0]
-                                  ?.currency_symbol
+                                // cartListingItems?.categories[0]?.orders[0]
+                                //   ?.currency_symbol
                               }
-                              <IndianNumber
+                              {/* <IndianNumber
                                 value={orderSummaryForCart[1]?.value}
-                              />
+                              /> */}
                             </div>
                           </div>
                           <div className="row justify-content-end">
-                            <div className="col-lg-4 col-4 ">
+                            <div className="col-lg-4 col-4 products-name bold">
                               {" "}
                               {selectedMultiLangData?.order_total_including_tax}
                             </div>
                             :
-                            <div className="col-lg-3 col-6 text-end">
+                            <div className="col-lg-3 col-6 text-end products-name bold">
                               {
                                 cartListingItems?.categories[0]?.orders[0]
                                   ?.currency_symbol
@@ -442,12 +469,71 @@ const CartListing = () => {
                                 value={orderSummaryForCart[10]?.value}
                               />
                             </div>
+
+
+<div className="col-6">
+<div className="row">
+  <div className="col-12 mt-4">
+  <div className="text-center" >
+                      <Link href="">
+                        <button
+                          type="button"
+                          className=" checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns checkout-btn-link product-font-family"
+                         
+                          onClick={(e: any) =>
+                            handleQuotation(e, cartListingItems.name)
+                          }
+                        >
+                          {selectedMultiLangData?.request_for_quotation}
+                        </button>
+                      </Link>
+                    </div>
+  </div>
+
+
+<div className="col-12">
+<div className=" text-center " >
+                      <Link href="/checkout">
+                        <button
+                          type="button"
+                          className="w-100 checkout_button mb-3 text-uppercase  px-1 product-font-family py-3"
+                          style={{
+                            backgroundColor: "#0071DC",
+                            color: "#fff",
+                            borderRadius: "7px",
+                          }}
+                          onClick={goToCheckout}
+                        >
+                          {selectedMultiLangData?.order_checkout}
+                        </button>
+                      </Link>
+                    </div>
+</div>
+
+
+</div>
+</div>
+                       
+             
                           </div>
                         </>
                       )}
-                    </div>
+                    
+               
+ 
+
+
+
+
                   </div>
                 </div>
+                
+                </div>
+                </div>
+              
+
+               
+
                 <hr />
               </div>
             </div>
