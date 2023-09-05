@@ -54,6 +54,7 @@ const WebCheckout = ({
   selectedMultiLangData,
   currencySymbolForSummary,
 }: CheckoutPageInterface) => {
+  console.log("currencySymbolForSummary in web", currencySymbolForSummary);
   const TokenFromStore: any = useSelector(get_access_token);
   const [visitorState, setVisitorState] = useState<any>(null);
   let [selectedCity, setSelectedCity] = useState<any>("");
@@ -112,7 +113,7 @@ const WebCheckout = ({
 
   return (
     <>
-      <div className="container mt-4">
+      <div className="web-checkout-wrapper mt-4">
         <div>
           {visitorState !== null ? (
             <>
@@ -208,13 +209,14 @@ const WebCheckout = ({
                     handleStoreCredit={handleStoreCredit}
                     handlePlaceOrder={handlePlaceOrder}
                     selectedMultiLangData={selectedMultiLangData}
+                    currencySymbolForSummary={currencySymbolForSummary}
                   />
                 </div>
               </div>
             </>
           ) : (
             <>
-              <div className=" container row mb-4 mx-auto">
+              <div className=" px-2 row mb-4 mx-auto">
                 <div className="col-lg-12 ">
                   <h4 className="text-uppercase bold mt-3">
                     {" "}
@@ -298,10 +300,11 @@ const WebCheckout = ({
                       <h5 className=" bold text-uppercase">
                         {selectedMultiLangData?.order_summary}
                       </h5>
+
                       <OrderSummary
+                        currencySymbolForSummary={currencySymbolForSummary}
                         orderSummary={orderSummary}
                         selectedMultiLangData={selectedMultiLangData}
-                        currencySymbolForSummary={currencySymbolForSummary}
                       />
                     </div>
                   </div>

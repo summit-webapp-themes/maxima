@@ -36,7 +36,7 @@ const ProductItemsOptions: any = ({
   return (
     <>
       <>
-        <div className="navigation-wrapper">
+        <div className="navigation-wrapper" >
           <div className="recommended_title mb-4">
             <h2
               className="title justify-content-center pt-2 pb-2 ls-normal mb-5"

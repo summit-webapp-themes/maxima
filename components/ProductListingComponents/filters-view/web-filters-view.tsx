@@ -5,6 +5,7 @@ import FiltersLoadingLayout from "./FiltersLoadingLayout";
 import { CONSTANTS } from "../../../services/config/app-config";
 import MissingPartsModal from "../MissingPartsModal";
 import Link from "next/link";
+import Topbar from "../Topbar";
 
 const WebFilters = (props: FiltersViewProps) => {
   const {
@@ -33,20 +34,23 @@ const WebFilters = (props: FiltersViewProps) => {
   }, [languageData]);
   return (
     <div className=" ">
-      <div className=" col-12 mt-2">
+      <div className=" col-12 " >
         {CONSTANTS.ENABLE_MISSING_PARTS && productListingData.length > 0 && (
           <>
-            <span>{selectedMultiLangData?.looking_for_something_specific}</span>
+            <span className="text-color-black product-font-family">{selectedMultiLangData?.looking_for_something_specific}</span>
             <button
               onClick={() => {
                 setShowMissingPartsModal(true);
               }}
-              className="missing_parts_btn ps-0 "
+              className="missing_parts_btn ps-2 product-font-family"
             >
               {selectedMultiLangData?.let_us_know}
             </button>
           </>
         )}
+
+
+
       </div>
 
       {/* <div
@@ -64,8 +68,8 @@ const WebFilters = (props: FiltersViewProps) => {
           </a>
         </Link>
       </div> */}
-
-      <div className="filter_section">
+      <Topbar/>
+      <div className="filter_section" >
         <div className="filter_block">
           <div className="accordion accordion_custom" id="myAccordion">
             {loading ? (
@@ -86,8 +90,8 @@ const WebFilters = (props: FiltersViewProps) => {
                     key={index}
                   >
                     <h2
-                      className="accordion-header bold filter_heading"
-                      id={"heading" + index}
+                      className="accordion-header bold filter_heading pe-3"
+                      id={"heading" + index} 
                     >
                       <button
                         type="button"
@@ -108,12 +112,12 @@ const WebFilters = (props: FiltersViewProps) => {
                           ? "accordion-collapse collapse custom_collapse_css show "
                           : "accordion-collapse custom_collapse_css collapsed"
                       }
-                      aria-labelledby={"heading" + index}
+                      aria-labelledby={"heading" + index} 
                     >
-                      <div className="card-body p-0">
+                      <div className="card-body p-0 checkbox-wrapper product-font-family" >
                         {filter.values.map(
                           (filterValue: any, innerIndex: any) => (
-                            <div className="form_check_filter" key={innerIndex}>
+                            <div className="form_check_filter checkbox-line-height d-flex align-items-center" key={innerIndex}>
                               <input
                                 type="checkbox"
                                 name={filter.section}
@@ -123,11 +127,11 @@ const WebFilters = (props: FiltersViewProps) => {
                                     selectedFilter.name === filter.section &&
                                     selectedFilter.value.includes(filterValue)
                                 )}
-                                onChange={handleApplyFilters}
+                                onChange={handleApplyFilters} 
                               />
                               <label
-                                className="form-check-label filter-label accordion-checkbox"
-                                htmlFor="flexCheckDefault"
+                                className="form-check-label filter-label accordion-checkbox checkbox-margin"
+                                htmlFor="flexCheckDefault" 
                               >
                                 {filterValue}
                               </label>

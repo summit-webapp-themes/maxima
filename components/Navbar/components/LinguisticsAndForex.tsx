@@ -22,10 +22,11 @@ const LinguisticsAndForex = () => {
       <div className="mx-3">
         <select
           className="select-field cursor_pointer"
-          // value={selectedLanguage}
           onChange={(e) => handleCurrencyValueChange(e.target.value)}
         >
-          <option value="INR">₹</option>
+          <option value="INR" className="price_font_family">
+            ₹
+          </option>
           <option value="USD">$</option>
           <option value="EUR">€</option>
         </select>

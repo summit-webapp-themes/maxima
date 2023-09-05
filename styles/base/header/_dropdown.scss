@@ -182,7 +182,7 @@
         font-style: normal;
         z-index: 1;
         #{$right}: -8px;
-        top: -5px;
+        top: -8px;
         font-family: $font-family;
         @include print_css(header, cart, count);
     }

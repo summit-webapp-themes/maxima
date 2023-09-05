@@ -19,6 +19,7 @@ import deleteItemFromCatalog from "../services/api/product-catalog-api/delete-it
 import { ProductListingThunk } from "../store/slices/product-listing-page-slices/product-listing-slice";
 import { filters_selector_state } from "../store/slices/product-listing-page-slices/filters-slice";
 import CatalogModal from "../components/Catalog/CatalogModal";
+import { showToast } from "../components/ToastNotificationNew";
 
 const ProductCard = (props: ProductCardProps) => {
   const {
@@ -84,16 +85,10 @@ const ProductCard = (props: ProductCardProps) => {
       tokens?.token
     );
     if (AddToCartRes.msg === "success") {
-      dispatch(successmsg("Item Added to cart"));
+      showToast("Item Added to cart", "success");
       dispatch(fetchCartListing());
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1200);
     } else {
-      dispatch(failmsg(AddToCartRes?.error));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
+      showToast(AddToCartRes?.error, "error");
     }
   };
   const handleShow = (val: any) => {
@@ -114,7 +109,9 @@ const ProductCard = (props: ProductCardProps) => {
     );
     console.log(deleteProductFromCatalog, "deleteProductFromCatalog");
     if (deleteProductFromCatalog.message.msg === "success") {
-      dispatch(successmsg(deleteProductFromCatalog?.message?.data));
+      // dispatch(successmsg(deleteProductFromCatalog?.message?.data));
+      showToast(deleteProductFromCatalog?.message?.data, "success");
+
       setTimeout(() => {
         const storeUsefulParamsForFurtherProductListingApi = {
           router_origin: router.route.split("/")[1],
@@ -127,7 +124,7 @@ const ProductCard = (props: ProductCardProps) => {
           storeUsefulParamsForFurtherProductListingApi,
           "storeUsefulParamsForFurtherProductListingApi"
         );
-        dispatch(hideToast());
+
         dispatch(
           ProductListingThunk({
             storeUsefulParamsForFurtherProductListingApi,
@@ -135,24 +132,22 @@ const ProductCard = (props: ProductCardProps) => {
         );
       }, 1000);
     } else {
-      dispatch(failmsg(deleteProductFromCatalog?.message?.error));
-      setTimeout(() => {
-        dispatch(hideToast());
-      }, 1500);
+      showToast(deleteProductFromCatalog?.message?.error, "error");
     }
   };
   return (
-    <div key={key} className="border p-3 rounded-3  ">
-      <div className="d-flex justify-content-between mb-1">
+    <div className="mt-0 pt-0"  >
+  <div key={key} className="border  rounded-3 ps-0 ms-0 mt-2  product-border-pd">
+      <div className="d-flex justify-content-between icon-container-ps "  >
         <div
-          className={`badge text-bg-primary fs-5 display_tag_badge ${
+          className={`badge text-bg-primary fs-5 display_tag_badge ms-0 ${
             display_tag.length > 0 && display_tag[0] ? "visible" : "invisible"
-          }`}
+          }`}   
         >
           {display_tag.length > 0 && display_tag[0]}
         </div>
 
-        <div>
+        <div className="mb-0 mt-0 pb-0 pt-0">
           {wishlistData?.map((values: any) => {
             if (values.name === name) {
               wishproducts = values?.name;
@@ -238,9 +233,9 @@ const ProductCard = (props: ProductCardProps) => {
           )}
         </div>
       </div>
-      <div className="product-wrap">
+      <div className="product-wrap " >
         <div className="product text-center ">
-          <div className="product-media product_card_h">
+          <div className="product-media product_card_h pt-0 pb-0 mt-0 mb-0 d-flex justify-content-center product-main-container">
             {img_url !== "" ? (
               <>
                 <Link
@@ -251,7 +246,7 @@ const ProductCard = (props: ProductCardProps) => {
                     src={`${CONSTANTS.API_BASE_URL}${img_url}`}
                     alt="product-detail"
                     width={200}
-                    height={200}
+                    height={200} 
                   />
                 </Link>
               </>
@@ -262,49 +257,93 @@ const ProductCard = (props: ProductCardProps) => {
                     src={"/assets/images/maximaCard.jpg"}
                     alt="Product"
                     width="200"
-                    height="200"
+                    height="200"  
                   />
                 </Link>
               </>
             )}
           </div>
-          <div className="product-details">
-            <h4 className="product-name truncate-overflow">
+          <div className="product-details pt-0" >
+            <h4 className="product-name truncate-overflow products-name products-name-font pt-0">
               <Link
-                href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`} className="products-name products-name-font"
               >
                 {item_name}
               </Link>
             </h4>
-            <div className="product-price">
-              <ins className="new-price price_font_family">
+            <div className="product-price products-name pt-0 mt-0 product-grid-name pb-0 mb-0">
+              <ins className="new-price price_font_family pt-0">
                 {currency_symbol}
                 {price}
               </ins>
-              <del className="old-price price_font_family">
+              <del className="old-price price_font_family product-font-family">
                 {currency_symbol}
                 {mrp_price}
               </del>
-            </div>
-            {router.route !== "/catalog/[category]" ? (
-              <button
-                type="button"
-                className={`btn btn-link catalog-btn-size`}
-                onClick={handleShow}
+
+              {isLoggedIn === "true" ? (
+              <>
+                <button
+                  type="button"
+                  className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn `}
+                  onClick={handleAddCart}
+                >
+                  <i className="fa fa-shopping-cart d-flex justify-content-center" aria-hidden="true"></i>
+                </button>
+                {/* <button
+                className="btn  standard_button py-3 add-cart-btns"
+                onClick={handleAddCart} style={{border:"2px solid red"}}
               >
-                {selectedMultiLangData?.add_to_catalog}
-              </button>
+                {selectedMultiLangData?.add_to_cart}
+              </button> */}
+             
+              </>
             ) : (
-              ""
-            )}
-            <button
-              type="button"
-              className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
-              onClick={handleAddCart}
-            >
-              <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-              {/* {multilingualData?.add_to_cart} */}
-            </button>
+              <button
+                className="btn  standard_button py-3 add-cart-btns"
+                onClick={handleAddCart}
+              >
+                {selectedMultiLangData?.add_to_cart}
+              </button>
+            )} 
+            </div>
+            
+            {/* {isLoggedIn === "true" && (
+              <>
+                {router.route !== "/catalog/[category]" ? (
+                  <button
+                    type="button"
+                    className={`btn btn-link catalog-btn-size products-name add-to-catlog-btn`}
+                    onClick={handleShow}
+                  >
+                    {selectedMultiLangData?.add_to_catalog}
+                  </button>
+                ) : (
+                  ""
+                )}
+              </>
+            )} */}
+
+            {/* {isLoggedIn === "true" ? (
+              <>
+                <button
+                  type="button"
+                  className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
+                  onClick={handleAddCart}
+                >
+                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                </button>
+             
+              </>
+            ) : (
+              <button
+                className="btn  standard_button py-3"
+                onClick={handleAddCart}
+              >
+                {selectedMultiLangData?.add_to_cart}
+              </button>
+            )} */}
+
             {router.route === "/catalog/[category]" ? (
               <button
                 type="button"
@@ -312,7 +351,6 @@ const ProductCard = (props: ProductCardProps) => {
                 onClick={handleDeleteCatalogProduct}
               >
                 <i className="fa fa-trash-o" aria-hidden="true"></i>
-                {/* {multilingualData?.add_to_cart} */}
               </button>
             ) : (
               ""
@@ -332,6 +370,8 @@ const ProductCard = (props: ProductCardProps) => {
         selectedMultiLangData={selectedMultiLangData}
       />
     </div>
+    </div>
+  
   );
 };
 

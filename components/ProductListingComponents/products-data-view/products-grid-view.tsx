@@ -23,14 +23,17 @@ const ProductsGridView = (props: ProductsViewProps) => {
     pageOffset,
   } = props;
 
-  console.log("productListTotalCount", productListTotalCount);
+  console.log("productListTotalCount", productListTotalCount, listItems);
+
+  const isNextButtonDisabled: any =
+    productListTotalCount > listItems || productListTotalCount === listItems;
   return (
     <div
       className={`${
         filtersData && filtersData?.length > 0 ? "col-lg-9" : "col-lg-12"
-      }`}
+      }`} 
     >
-      <div className="row">
+      <div className="row product-mg-r">
         {loading ? (
           <div className="row justify-content-center">
             {[...Array(10)].map(() => (
@@ -43,8 +46,8 @@ const ProductsGridView = (props: ProductsViewProps) => {
           </div>
         ) : listItems.length > 0 ? (
           listItems?.map((items: any, index: number) => (
-            <div className="col-md-3 mt-3 my-2" key={index}>
-              <ProductCard
+            <div className="col-md-3 mt-0 product-grid-view" key={index}  >
+              <ProductCard 
                 key={index}
                 name={items?.name}
                 item_name={items?.item_name}
@@ -87,8 +90,11 @@ const ProductsGridView = (props: ProductsViewProps) => {
             onPageChange={handlePageClick}
             containerClassName={"paginationBttns"}
             previousLinkClassName={"previousBttn"}
-            nextLinkClassName={"nextBttn"}
+            // nextLinkClassName={"nextBttn"}
             disabledClassName={"paginationDisabled"}
+            nextLinkClassName={
+              isNextButtonDisabled ? "paginationDisabled" : "nextBttn"
+            }
             activeClassName={"paginationActive"}
             forcePage={pageOffset}
           />

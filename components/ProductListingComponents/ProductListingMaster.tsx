@@ -153,20 +153,24 @@ const ProductListingMaster = () => {
   return (
     <>
       <div className="margin_from_nav">
-        <section className="listing-page mt-3">
-          <div className="container">
-            <div className="mt-3">
-              <Topbar
-                listItems={productListingData}
-                handleToggleProductsListingView={
-                  handleToggleProductsListingView
-                }
-                selectedMultiLangData={selectedMultiLangData}
-              />
-            </div>
-            <BreadCrumbs />
-            <div className="row mt-2 ">
+        <section className="listing-page ">
+          <div className="container" >
+
+            <BreadCrumbs
+              handleToggleProductsListingView={
+                handleToggleProductsListingView
+              } />
+            <div className="row mt-2 ms-3">
               <span className="col-lg-3 handle_display_web_filter">
+                <div className="">
+                  <Topbar
+                    listItems={productListingData}
+                    handleToggleProductsListingView={
+                      handleToggleProductsListingView
+                    }
+                    selectedMultiLangData={selectedMultiLangData}
+                  />
+                </div>
                 <WebFilters
                   filtersData={filtersData}
                   loading={filtersLoading}
@@ -176,6 +180,7 @@ const ProductListingMaster = () => {
                   selectedMultiLangData={selectedMultiLangData}
                 />
               </span>
+
               {handleDisplayOfProductsList()}
             </div>
           </div>

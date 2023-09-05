@@ -5,11 +5,10 @@ import { persistor, store } from "../store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import Layout from "../components/Layout";
 import "../styles/globals.scss";
-import ToastNotification from "../components/ToastNotification";
-import { initializeFirebase } from "../push-notifications";
-// import { initializeFirebase } from '../public/service-worker';
+import { ToastContainer } from "react-toastify";
+
 import { useEffect, useRef } from "react";
-import LogoutList from "../services/api/auth/logout_api";
+import "react-toastify/dist/ReactToastify.css";
 import Scrolltop from "../components/ScrollTop";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -46,20 +45,23 @@ function MyApp({ Component, pageProps }: AppProps) {
   // }, []);
 
   return (
-    // <div>
-    //   <Layout>
-    //     <Component {...pageProps} />
-    //     {/* <Scrolltop articleRef={articleRef}/> */}
-    //   </Layout>
-    // </div>
-
     <div>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           {() => (
             <div ref={articleRef}>
               <Layout>
-                <ToastNotification />
+                {/* <ToastNotification /> */}
+                <ToastContainer
+                  position="top-right"
+                  autoClose={8000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  draggable={false}
+                  // pauseOnVisibilityChange
+                  closeOnClick
+                  pauseOnHover
+                />
                 <Component {...pageProps} />
                 <Scrolltop articleRef={articleRef} />
               </Layout>
