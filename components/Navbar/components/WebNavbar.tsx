@@ -113,7 +113,7 @@ const WebNavbar = ({
             <div className="mx-2 my-2 logo_containers">
               <Link href="/" legacyBehavior>
                 <Image
-                  src="/assets/images/maxima_b2b.png"
+                  src="/assets/images/maxima-logo.png"
                   width={150}
                   height={60}
                   alt="logo"
