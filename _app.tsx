@@ -6,31 +6,30 @@ import { PersistGate } from "redux-persist/integration/react";
 import Layout from "../components/Layout";
 import "../styles/globals.scss";
 import { ToastContainer } from "react-toastify";
-
+import { initializeFirebase } from "../push-notifications";
 import { useEffect, useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import Scrolltop from "../components/ScrollTop";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const articleRef = useRef<null | HTMLParagraphElement>(null);
-  // initializeFirebase();
-  // useEffect(()=>
-  // {
-  //   if ('serviceWorker' in navigator) {
-  //     navigator.serviceWorker
-  //       .register('/service-worker.js')
-  //       .then((registration) => {
-  //         console.log('Service Worker registered: ', registration);
-  //         // registration.pushManager.subscribe({
-  //         //   userVisibleOnly: true,
-  //         //   // applicationServerKey,
-  //         // })
-  //       })
-  //       .catch((error) => {
-  //         console.error('Service Worker registration failed: ', error);
-  //       });
-  //   }
-  // },[])
+  initializeFirebase();
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          console.log("Service Worker registered: ", registration);
+          // registration.pushManager.subscribe({
+          //   userVisibleOnly: true,
+          //   // applicationServerKey,
+          // })
+        })
+        .catch((error) => {
+          console.error("Service Worker registration failed: ", error);
+        });
+    }
+  }, []);
 
   // useEffect(() => {
   //   const handleBeforeUnload = async () => {
