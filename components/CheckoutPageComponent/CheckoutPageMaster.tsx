@@ -102,10 +102,10 @@ const CheckoutPageMaster = () => {
 
   console.log("visitor state", currencySymbolForSummary);
   return (
-    <div className="margin_from_nav mb-5">
+    <div className="container margin_from_nav_checkout mb-5">
       {isBreakpoint ? (
         <>
-          <div className="container">
+          <div className="ps-4 checkout_web_heading">
             <h3>{selectedMultiLangData?.checkout_page}</h3>
             <hr />
           </div>

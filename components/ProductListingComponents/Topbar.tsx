@@ -16,7 +16,7 @@ const Topbar = (props: any) => {
       <div className="row">
         <div className="col-lg-12">
           <div className="total_result">
-            <p className="mb-0 pt-0 text-color-black">
+            <p className="mb-0 pt-0 text-color-black product-font-family">
               {listItems?.length} {selectedMultiLangData?.products}
             </p>
           </div>

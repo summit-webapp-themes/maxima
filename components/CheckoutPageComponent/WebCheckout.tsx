@@ -113,7 +113,7 @@ const WebCheckout = ({
 
   return (
     <>
-      <div className="container mt-4">
+      <div className="web-checkout-wrapper mt-4">
         <div>
           {visitorState !== null ? (
             <>
@@ -216,7 +216,7 @@ const WebCheckout = ({
             </>
           ) : (
             <>
-              <div className=" container row mb-4 mx-auto">
+              <div className=" px-2 row mb-4 mx-auto">
                 <div className="col-lg-12 ">
                   <h4 className="text-uppercase bold mt-3">
                     {" "}
