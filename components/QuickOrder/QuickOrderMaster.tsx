@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import AddToCartApi from "../../services/api/cart-page-api/add-to-cart-api";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { currency_selector_state } from "../../store/slices/general_slices/multi-currency-slice";
+import { fetchCartListing } from "../../store/slices/cart-listing-page-slice/cart-listing-slice";
+import { get_access_token } from "../../store/slices/auth/token-login-slice";
 
 const QuickOrder = () => {
   const {
@@ -32,6 +34,8 @@ const QuickOrder = () => {
   const dispatch = useDispatch();
   const [ItemCodename, setItemCodename] = useState<any>();
   const [ItemCodeMinQty, setItemCodeMinQty] = useState<any>();
+
+  const TokenFromStore: any = useSelector(get_access_token);
 
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   const SelectedLangDataFromStore: any = useSelector(
@@ -94,8 +98,9 @@ const QuickOrder = () => {
     );
     // dispatch(dealerAddCartApi(addCartData));
     handleClearReduxStore();
+    dispatch(fetchCartListing(TokenFromStore?.token));
 
-    router.push("/cart");
+    // router.push("/cart");
   };
   const showMinQty: any = (wholeProductData: any) => {
     const productData = minQty.find(

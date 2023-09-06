@@ -110,14 +110,16 @@ const WebNavbar = ({
                 ></a>
               </Link>
             </div>
-            <div className="mx-0  logo_containers my-2">
+
+
+            <div className="mx-0  logo_containers my-2 logo_container_mob" >
               <Link href="/" legacyBehavior>
                 <Image
                   src="/assets/images/progearhub_logo.png"
                   width={270}
                   height={60}
                   alt="logo"
-                  className="mob-logo-img1"
+                  className="mob-logo-img1 "
                 />
               </Link>
             </div>
@@ -142,8 +144,8 @@ const WebNavbar = ({
               </button>
             </div>
 
-            <div className="navbar-left-icon1 d-flex align-items-center text-center">
-              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin">
+            <div className="navbar-left-icon1 d-flex align-items-center text-center mob-icon-wrapper" >
+              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">
                     <i className="w-icon-heart wish_iconn ">
@@ -171,7 +173,7 @@ const WebNavbar = ({
                   </a>
                 </Link>
               </div>
-              <div className="nav_custom_dropdown  d-flex align-items-center">
+              <div className="nav_custom_dropdown  d-flex align-items-center login-mob-margin" >
                 <Dropdown>
                   {isLoggedIn === "true" ? (
                     <Dropdown.Toggle

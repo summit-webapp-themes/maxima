@@ -24,23 +24,23 @@ const ShippingMethod = ({
 
   return (
     <>
-      <h4 className="mb-3 shippingmethod-heading ">
+      <h4 className="mb-1 mt-5 shippingmethod-heading shipping-method-margin products-name " >
         {" "}
         {selectedMultiLangData?.shipping_method}
       </h4>
-      <table width="100%" className="mb-0 mt-1 table table-borderless">
-        <tbody>
+      <table width="100%" className="mb-0 mt-0 table table-borderless " >
+        <tbody className="table-margin products-name">
           <tr className="item_options">
             <td width="50%" className="px-0 py-0 pb-1 ">
-              <p className={`text-capitalize mb-0 fs-5 `}>
+              <p className={`text-capitalize mb-0 fs-5  `}>
                 {selectedMultiLangData?.preferred_transport}:
               </p>
             </td>
             <td width="50%" className="px-0 py-0 pb-1">
               <div className="d-flex">
-                <p className={`text-capitalize mb-0`}>
+                <p className={`text-capitalize mb-0 products-name`}>
                   <select
-                    className="form-select form-select-lg"
+                    className="form-select form-select-lg products-name"
                     aria-label="Default select example"
                     onChange={transportHandle}
                   >
@@ -51,7 +51,7 @@ const ShippingMethod = ({
                       <option key={i}>{list}</option>
                     ))}
                   </select>
-                  <p className="mb-0 ms-3 mt-1 shipping-ptag">
+                  <p className="mb-0 ms-3 mt-1 shipping-ptag products-name">
                     {
                       selectedMultiLangData?.transport_will_be_subject_to_availability
                     }
@@ -61,18 +61,18 @@ const ShippingMethod = ({
             </td>
           </tr>
 
-          <tr className="item_options ">
-            <td width="50%" className="px-0 py-0 ">
+          <tr className="item_options products-name ">
+            <td width="50%" className="px-0 py-0 products-name">
               <p className={`mb-0 fs-5 `}>
                 <label
-                  className="form-check-label text-left"
+                  className="form-check-label text-left products-name"
                   htmlFor="flexRadioDefault1"
                 >
                   {selectedMultiLangData?.door_delivery}
                 </label>
               </p>
             </td>
-            <td width="50%" className="px-0 py-0 ">
+            <td width="50%" className="px-0 py-0 products-name">
               <input
                 className="form-check-input"
                 type="radio"
@@ -84,20 +84,20 @@ const ShippingMethod = ({
               />
             </td>
           </tr>
-          <tr className="item_options ">
-            <td width="50%" className="px-0 py-0 ">
+          <tr className="item_options products-name">
+            <td width="50%" className="px-0 py-0 products-name">
               <p className={`mb-0 fs-5 `}>
                 <label
-                  className="form-check-label text-left"
+                  className="form-check-label text-left products-name"
                   htmlFor="flexRadioDefault2"
                 >
                   {selectedMultiLangData?.godown_delivery}
                 </label>
               </p>
             </td>
-            <td width="50%" className="px-0 py-0 ">
+            <td width="50%" className="px-0 py-0 products-name ">
               <input
-                className="form-check-input"
+                className="form-check-input products-name"
                 type="radio"
                 name="flexRadioDefault"
                 id="flexRadioDefault2"
@@ -107,13 +107,13 @@ const ShippingMethod = ({
               />
             </td>
           </tr>
-          <tr className={`item_options ${radioVal ? "" : "d-none"}`}>
+          <tr className={`item_options ${radioVal ? "" : "d-none"} products-name`}>
             <td width="50%" className="px-0 py-0 ">
-              <p className={`mb-0 fs-5`}>
+              <p className={`mb-0 fs-5 products-name`}>
                 {selectedMultiLangData?.Location_godown_tranporter}
               </p>
             </td>
-            <td width="50%" className="px-0 py-0 ">
+            <td width="50%" className="px-0 py-0 products-name ">
               <input
                 type="text"
                 className="form-control"
@@ -124,16 +124,16 @@ const ShippingMethod = ({
               />
             </td>
           </tr>
-          <tr className="item_options ">
+          <tr className="item_options products-name">
             <td width="50%" className="px-0 py-0 ">
-              <p className={`mb-0  fs-5`}>
-                {selectedMultiLangData?.special_remark_if_any}: :{" "}
+              <p className={`mb-0  fs-5 products-name`}>
+                {selectedMultiLangData?.special_remark_if_any} :{" "}
               </p>
             </td>
-            <td width="50%" className="px-0 py-0 ">
+            <td width="50%" className="px-0 py-0 products-name">
               <input
                 type="text"
-                className="form-control"
+                className="form-control products-name"
                 id="query"
                 value={textState}
                 placeholder="Remark if any"

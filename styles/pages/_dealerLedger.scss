@@ -25,9 +25,17 @@
 .dealer-ledger-td-r {
     padding-right: 10px !important;
 }
+.dealer-heading{
+    font-size: 19px !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+}
 
 @media screen and (min-width: 580px) {
 .dealer-ledger-table {
     overflow-x: hidden !important; 
 }
   }
+
+
+  
