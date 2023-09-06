@@ -58,8 +58,8 @@ const CartCard = ({
 
   return (
     <>
-      <div className="d-lg-block d-none cart_wrapper-detail" >
-        <div className="row text-center ">
+      <div className="d-lg-block d-none " >
+        <div className="row text-center cart_wrapper-detail">
           <div className="col-lg-7 text-start">
             <Link
               href={`${orders.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
@@ -68,7 +68,7 @@ const CartCard = ({
               <a className="prod_name products-name">{orders.item_name}</a>
             </Link>
             <br />
-            <b className="products-name item-code-line-height">Item code : {orders.item_code}</b>
+            <b className="products-name item-code-line-height ">Item code : {orders.item_code}</b>
             <p>
               <button
                 className="astext product-font-family line-height"
@@ -140,7 +140,7 @@ const CartCard = ({
       </div>
 
       {/* For mobile responsive */}
-      <div className="d-lg-none d-block">
+      <div className="d-lg-none d-block cart_wrapper-detail">
         <div className="row">
           <div className="col-6 fs-4 products-name">
             {" "}
@@ -150,7 +150,7 @@ const CartCard = ({
           <div className="col-5">
             <Link href={`${orders.product_url}`} legacyBehavior>
               <a className="prod_name products-name">{orders.item_name}</a>
-            </Link>
+            </Link><br/>
             <b>{orders.item_code}</b>
             <p className="my-0">
               <button

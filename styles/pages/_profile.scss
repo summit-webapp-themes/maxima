@@ -29,9 +29,48 @@
     margin-bottom: 4px !important;
 }
 
-@media only screen and (max-width:500px){
-.profile_tab-icons {
-    font-size: 40px !important;
-    margin-bottom: 4px !important;
+
+
+// @media only screen and (max-width:500px){
+// .profile_tab-icons {
+//     font-size: 40px !important;
+//     margin-bottom: 4px !important;
+// }
+// }
+
+.mob-userdetail-containers {
+    // border: 2px solid green;
+    display: flex !important;
+  }
+  
+//   @media only screen and (max-width: 600px) {
+//     .persons-data-mob {
+//       margin-left: 10px;
+//       margin-top: 2px;
+//     }
+//     // .text-center-mob {
+//     //     text-align: center;
+//     //     margin-left: 0px !important;
+//     // }
+//   }
+  
+
+  .my-order-container-pd{
+    // border:2px solid green;
+    padding-left: 38px !important;
+    padding-right: 30px !important;
 }
-}
+
+
+@media only screen and (max-width: 600px) {
+    .persons-data-mob {
+      margin-left: 10px;
+      margin-top: 2px;
+     
+    }
+    .my-order-container-pd{
+        // border:2px solid green;
+        padding-left: 10px !important;
+        padding-right: 0px !important;
+    }
+  }

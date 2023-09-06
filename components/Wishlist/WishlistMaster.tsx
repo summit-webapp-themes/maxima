@@ -289,7 +289,7 @@ const WishlistMaster = () => {
         </div>
       ) : (
         <>
-          <div className="container wishlist-container">
+          <div className="container wishlist-container products-name">
             {wishlistCount > 0 ? (
               <>
                 <h3 className="wishlist-title">

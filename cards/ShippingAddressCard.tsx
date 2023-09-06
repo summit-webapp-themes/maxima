@@ -43,8 +43,8 @@ const ShippingAddressCard = ({
   };
 
   return (
-    <div className="mt-0 pt-0 shipping-margin-t">
-      <h4 className="mb-0">{selectedMultiLangData?.shipping_addresses}</h4>
+    <div className="mt-0 pt-0 shipping-margin-t " >
+      <h4 className="mb-0 shipping-margin-t-mob">{selectedMultiLangData?.shipping_addresses}</h4>
       {/* <h5>{selectedAddress || initialShippingAddress}</h5> */}
       <div className="d-flex align-items-center mb-0  mt-0 pt-0 cart-checkbox-mg mb-2"  >
         <button className="ms-0 ps-0 address_icon" onClick={() => handleShow("Shipping")}>
