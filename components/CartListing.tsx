@@ -454,7 +454,7 @@ const CartListing = () => {
                               /> */}
                               </div>
                             </div>
-                            <div className="row justify-content-end">
+                            <div className="row justify-content-end ">
                               <div className="col-lg-4 col-4 products-name bold">
                                 {" "}
                                 {selectedMultiLangData?.order_total_including_tax}
@@ -471,14 +471,15 @@ const CartListing = () => {
                               </div>
 
 
-                              <div className="col-6">
+
+                              <div className="col-6 " >
                                 <div className="row">
                                   <div className="col-12 mt-4">
                                     <div className="text-center" >
                                       <Link href="">
                                         <button
                                           type="button"
-                                          className=" checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns checkout-btn-link product-font-family"
+                                          className=" checkout_button mb-3 requets-mob text-uppercase py-2 px-1 cart-new-btns checkout-btn-link product-font-family"
 
                                           onClick={(e: any) =>
                                             handleQuotation(e, cartListingItems.name)
@@ -491,12 +492,12 @@ const CartListing = () => {
                                   </div>
 
 
-                                  <div className="col-12 d-flex justify-content-between align-items-center">
+                                  <div className="col-12  cart-btn-lower-web cart-btn-lower-mob">
 
                                   <div>
                     <p className="checkbox-cursor">
                       <a
-                        className="clear_cart bold"
+                        className="clear_cart bold update-cart-mob"
                         onClick={() => callUpdateCartAPI()}
                       >
                         {selectedMultiLangData?.update_cart}

@@ -106,33 +106,45 @@ const ProfileMaster = () => {
 
   const personalDetails: any = () => {
     return (
-      <>
-        <div className="col-lg-3 bold fs-3">
+      <div className="ms-2">
+       <div className="mob-userdetail-containers">
+       <div className="col-lg-3 bold fs-3 products-name">
           {selectedMultiLangData?.user_name}:
         </div>
-        <div className="col-lg-9 fs-4">
+        <div className="col-lg-9 fs-4 persons-data-mob products-name">
           {profileList && profileList?.profile_details?.customer_name}
         </div>
-        <div className="col-lg-3 bold fs-3">
+       </div>
+      
+       <div className="mob-userdetail-containers">
+        <div className="col-lg-3 bold fs-3 products-name">
           {selectedMultiLangData?.company_name} :
         </div>
-        <div className="col-lg-9 fs-4">
+        <div className="col-lg-9 fs-4 persons-data-mob products-name">
           {profileList && profileList?.profile_details?.company_name}
         </div>
-        <div className="col-lg-3 bold fs-3">
+</div>
+
+<div className="mob-userdetail-containers">
+        <div className="col-lg-3 bold fs-3 products-name">
           {selectedMultiLangData?.mobile_number} :
         </div>
-        <div className="col-lg-9 fs-4">
+        <div className="col-lg-9 fs-4 persons-data-mob products-name">
           {profileList && profileList?.profile_details?.contact_no}
         </div>
-        <div className="col-lg-3 bold fs-3">
+</div>
+
+<div className="mob-userdetail-containers">
+<div className="col-lg-3 bold fs-3 products-name">
           {" "}
           {selectedMultiLangData?.email} :
         </div>
-        <div className="col-lg-9 fs-4">
+        <div className="col-lg-9 fs-4 persons-data-mob products-name">
           {profileList && profileList?.profile_details?.email}
         </div>
-      </>
+</div>
+      
+      </div>
     );
   };
 
@@ -561,7 +573,7 @@ const ProfileMaster = () => {
       <div className="container margin_from_nav">
         <section className="profile_section ">
           <div className="container">
-            <h1 className="bold text-uppercase mb-3 profile_heading">
+            <h1 className="bold text-uppercase mb-3 ms-1 text-center-mob profile_heading">
               {selectedMultiLangData?.my_account}
             </h1>
             <div className="row">
