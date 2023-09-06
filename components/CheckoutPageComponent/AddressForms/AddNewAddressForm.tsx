@@ -46,7 +46,7 @@ const AddNewAddressForm = ({
           </Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body >
           <Formik
             initialValues={initialValues}
             validationSchema={ShippingValidation}
@@ -69,7 +69,7 @@ const AddNewAddressForm = ({
             {({ handleChange, isSubmitting, handleBlur }) => (
               // <>
               <Form>
-                <div className="container mb-3 ">
+                <div className="container mb-3 " >
                   <div className="billing-form form-wrap  border-dark  p-lg-2 p-md-3 p-2 ">
                     <div className="flex-lg-row row">
                       <div className="col-lg-12">

@@ -155,7 +155,7 @@ const CartListing = () => {
   console.log("selected array of cart", arrayofSelectedItems);
 
   return (
-    <div className="container margin_from_nav mb-0 cart-margin-top" >
+    <div className="container margin_from_nav margin_from_nav_cart mb-0 cart-margin-top" >
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (
@@ -172,36 +172,36 @@ const CartListing = () => {
             <div className="cart-ps-container">
               <div className="row">
                 <div className="col-9">
-                <div className="cart_heading mb-3">
-                <h2 className="text-uppercase shopping-cart-heading products-name">
-                  {selectedMultiLangData?.shopping_cart}
-                </h2>
-              </div>
+                  <div className="cart_heading mb-3">
+                    <h2 className="text-uppercase shopping-cart-heading products-name">
+                      {selectedMultiLangData?.shopping_cart}
+                    </h2>
+                  </div>
                 </div>
 
-<div className="col-3 d-flex justify-content-end">
-                    <p className="checkbox-cursor product-font-family">
-                      <a
-                        className="clear_cart bold"
-                        onClick={() => ClearCartHandle(cartListingItems.name)}
-                      >
-                        {selectedMultiLangData?.clear_cart}
-                      </a>
-                    </p>
-                  </div>
+                <div className="col-3 d-flex justify-content-end">
+                  <p className="checkbox-cursor product-font-family">
+                    <a
+                      className="clear_cart bold"
+                      onClick={() => ClearCartHandle(cartListingItems.name)}
+                    >
+                      {selectedMultiLangData?.clear_cart}
+                    </a>
+                  </p>
+                </div>
               </div>
-              
-           
+
+
 
               {/* <div className="row">
                 <div className="col-md-6"> */}
-                  {/* <h5>
+              {/* <h5>
                     {" "}
                     {selectedMultiLangData?.customer_name}:{" "}
                     {cartListingItems?.party_name}{" "}
                   </h5> */}
-                {/* </div> */}
-                {/* <div className="col-md-6 d-flex justify-content-end " >
+              {/* </div> */}
+              {/* <div className="col-md-6 d-flex justify-content-end " >
                   <div className="me-5">
                     <p className="checkbox-cursor product-font-family">
                       <a
@@ -212,7 +212,7 @@ const CartListing = () => {
                       </a>
                     </p>
                   </div> */}
-                  {/* <div>
+              {/* <div>
                     <p className="checkbox-cursor">
                       <a
                         className="clear_cart"
@@ -222,13 +222,13 @@ const CartListing = () => {
                       </a>
                     </p>
                   </div> */}
-                {/* </div>
+              {/* </div>
               </div> */}
 
               <div className="row cart_wrapper ">
                 {/* <div className="col-12">
                   <div className="row justify-content-between"> */}
-                    {/* <div className="col-md-4 text-center">
+                {/* <div className="col-md-4 text-center">
                       <button
                         type="button"
                         className="w-75 checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns"
@@ -238,7 +238,7 @@ const CartListing = () => {
                         {selectedMultiLangData?.continue_shopping}
                       </button>
                     </div> */}
-                    {/* <div className="col-md-4 text-center" >
+                {/* <div className="col-md-4 text-center" >
                       <Link href="">
                         <button
                           type="button"
@@ -252,7 +252,7 @@ const CartListing = () => {
                         </button>
                       </Link>
                     </div> */}
-                    {/* <div className="col-md-4 text-center " >
+                {/* <div className="col-md-4 text-center " >
                       <Link href="/checkout">
                         <button
                           type="button"
@@ -268,7 +268,7 @@ const CartListing = () => {
                         </button>
                       </Link>
                     </div> */}
-                  {/* </div>
+                {/* </div>
                 </div> */}
                 {/* <hr />
                 <div className="col-12 text-end">
@@ -295,39 +295,39 @@ const CartListing = () => {
                         return (
                           <>
                             <div key={index} className="border ">
-                            <div className="container">
-                              <h3 className="mt-2 text-decoration-underline products-name category-name-font" >
-                                {category.category}
-                              </h3>
-                            
-                              <div className="col-12 " > 
-                                <div className="row cart_heading_bg my-auto products-name ">
-                                  <div className="col-md-2 col-12">
-                                    <h6 className="mt-4">
-                                      {" "}
-                                      {/* {selectedMultiLangData?.image} */}
-                                    </h6>
-                                  </div>
-                                  <div className="col-md-10 col-12 d-lg-block d-none products-name">
-                                    <div className="row text-center products-name product-captilise ">
-                                      <div className="col-5 text-start my-0 products-name" >
-                                        <h6 className="mt-4" >
-                                          {
-                                            selectedMultiLangData?.item_with_desc
-                                          }
-                                        </h6>
-                                      </div>
-                                      <div className="col-2 my-0 ">
-                                        <h6 className="mt-4">
-                                          {selectedMultiLangData?.price}
-                                        </h6>
-                                      </div>
-                                      <div className="col-1">
-                                        <h6 className="mt-4">
-                                          {selectedMultiLangData?.quantity_c}
-                                        </h6>
-                                      </div>
-                                      <div className="col-1">
+                              <div className="container">
+                                <h3 className="mt-2 text-decoration-underline products-name category-name-font" >
+                                  {category.category}
+                                </h3>
+
+                                <div className="col-12 " >
+                                  <div className="row cart_heading_bg my-auto products-name ">
+                                    <div className="col-md-2 col-12">
+                                      <h6 className="mt-4">
+                                        {" "}
+                                        {/* {selectedMultiLangData?.image} */}
+                                      </h6>
+                                    </div>
+                                    <div className="col-md-10 col-12 d-lg-block d-none products-name">
+                                      <div className="row text-center products-name product-captilise ">
+                                        <div className="col-7 text-start my-0 products-name" >
+                                          <h6 className="mt-4" >
+                                            {
+                                              selectedMultiLangData?.item_with_desc
+                                            }
+                                          </h6>
+                                        </div>
+                                        <div className="col-2 my-0 ">
+                                          <h6 className="mt-4">
+                                            {selectedMultiLangData?.price}
+                                          </h6>
+                                        </div>
+                                        <div className="col-1">
+                                          <h6 className="mt-4">
+                                            {selectedMultiLangData?.quantity_c}
+                                          </h6>
+                                        </div>
+                                        {/* <div className="col-1">
                                         <h6 className="mt-4">
                                           {selectedMultiLangData?.unit_weight}
                                         </h6>
@@ -336,66 +336,66 @@ const CartListing = () => {
                                         <h6 className="mt-4 ms-2" >
                                           {selectedMultiLangData?.total_weight}
                                         </h6>
-                                      </div>
-                                      {/* <div className="col-1">
+                                      </div> */}
+                                        {/* <div className="col-1">
                                         <h6 className="mt-4">
                                           {selectedMultiLangData?.tax}
                                         </h6>
                                       </div> */}
-                                      {/* <div className="col-1">
+                                        {/* <div className="col-1">
                                         <h6 className="mt-4">
                                           {selectedMultiLangData?.quantity_c}
                                         </h6>
                                       </div> */}
-                                      <div className="col-2">
-                                        <h6 className="mt-4">
-                                          {selectedMultiLangData?.total}
-                                        </h6>
+                                        <div className="col-2">
+                                          <h6 className="mt-4">
+                                            {selectedMultiLangData?.total}
+                                          </h6>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                                <hr />
-                                {/* </div> */}
-                                {category?.orders?.length > 0 &&
-                                  category?.orders !== null &&
-                                  category?.orders.map(
-                                    (orders: any, i: any) => {
-                                      return (
-                                        <div key={i}>
-                                          <div className="row products-name " >
-                                            <div className="col-lg-2  text-center products-name cart-image pb-3">
-                                              {handleRenderingOfCartImages(
-                                                orders
-                                              )}
-                                            </div>
-                                            <div className="col-lg-10  products-name">
-                                              <CartCard
-                                                orders={orders}
-                                                index={i}
-                                                selectedMultiLangData={
-                                                  selectedMultiLangData
-                                                }
-                                                arrayofSelectedItems={
-                                                  arrayofSelectedItems
-                                                }
-                                                updateCart={updateCart}
-                                                cartListingItems={
-                                                  cartListingItems
-                                                }
-                                                HandleDeleteCart={
-                                                  HandleDeleteCart
-                                                }
-                                              />
+                                  <hr />
+                                  {/* </div> */}
+                                  {category?.orders?.length > 0 &&
+                                    category?.orders !== null &&
+                                    category?.orders.map(
+                                      (orders: any, i: any) => {
+                                        return (
+                                          <div key={i}>
+                                            <div className="row products-name " >
+                                              <div className="col-lg-2  text-center products-name cart-image pb-3">
+                                                {handleRenderingOfCartImages(
+                                                  orders
+                                                )}
+                                              </div>
+                                              <div className="col-lg-10  products-name">
+                                                <CartCard
+                                                  orders={orders}
+                                                  index={i}
+                                                  selectedMultiLangData={
+                                                    selectedMultiLangData
+                                                  }
+                                                  arrayofSelectedItems={
+                                                    arrayofSelectedItems
+                                                  }
+                                                  updateCart={updateCart}
+                                                  cartListingItems={
+                                                    cartListingItems
+                                                  }
+                                                  HandleDeleteCart={
+                                                    HandleDeleteCart
+                                                  }
+                                                />
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
-                                      );
-                                    }
-                                  )}
+                                        );
+                                      }
+                                    )}
+                                </div>
                               </div>
-                              </div>
-                             
+
                             </div>
                           </>
                         );
@@ -405,134 +405,145 @@ const CartListing = () => {
 
                 <hr />
                 <div className="container mb-0 pb-0">
-                <div className="col-12" >
-                  <div className="row justify-content-start product-font">
-                    <div className="col-md-6 note-line-height" >
-                      <h5>{selectedMultiLangData?.note}:-</h5>
-                      <p className="note-line-height">{selectedMultiLangData?.note_1}</p>
-                      <p className="note-line-height">
-                        {selectedMultiLangData?.note_2}{" "}
-                        <button
-                          onClick={handlemodalOpen}
-                          className="missing_parts_btn ps-0"
-                        >
-                          {selectedMultiLangData?.let_us_now}
-                        </button>{" "}
-                        {selectedMultiLangData?.to_mail_us}{" "}
-                      </p>
-                    </div>
-                    <div className="col-md-6 text-start  cart-total">
-                      {!orderSummaryForCart ? null : (
-                        <>
-                          <div className="row justify-content-end">
-                            <div className="col-lg-4 col-4 bold products-name ">
-                              {" "}
-                              {selectedMultiLangData?.sub_total}{" "}
+                  <div className="col-12" >
+                    <div className="row justify-content-start product-font">
+                      <div className="col-md-6 note-line-height" >
+                        <h5>{selectedMultiLangData?.note}:-</h5>
+                        <p className="note-line-height">{selectedMultiLangData?.note_1}</p>
+                        <p className="note-line-height">
+                          {selectedMultiLangData?.note_2}{" "}
+                          <button
+                            onClick={handlemodalOpen}
+                            className="missing_parts_btn ps-0"
+                          >
+                            {selectedMultiLangData?.let_us_now}
+                          </button>{" "}
+                          {selectedMultiLangData?.to_mail_us}{" "}
+                        </p>
+                      </div>
+                      <div className="col-md-6 text-start  cart-total">
+                        {!orderSummaryForCart ? null : (
+                          <>
+                            <div className="row justify-content-end">
+                              <div className="col-lg-4 col-4 bold products-name ">
+                                {" "}
+                                {selectedMultiLangData?.sub_total}{" "}
+                              </div>
+                              :
+                              <div className="col-lg-3 col-6 text-end price_font_family products-name bold">
+                                {
+                                  cartListingItems?.categories[0]?.orders[0]
+                                    ?.currency_symbol
+                                }{" "}
+                                {orderSummaryForCart[0]?.value}{" "}
+                              </div>
                             </div>
-                            :
-                            <div className="col-lg-3 col-6 text-end price_font_family products-name bold">
-                              {
-                                cartListingItems?.categories[0]?.orders[0]
-                                  ?.currency_symbol
-                              }{" "}
-                              {orderSummaryForCart[0]?.value}{" "}
-                            </div>
-                          </div>
-                          <div className="row justify-content-end products-name bold">
-                            <div className="col-lg-4 col-4 tax-captilise" >
-                              {" "}
-                            {/* <span className="tax-captilise">{selectedMultiLangData?.tax}{" "}</span>   */}
-                            </div>
-                            {/* : */}
-                            <div className="col-lg-3 col-6 text-end price_font_family products-name bold">
-                              {
-                                // cartListingItems?.categories[0]?.orders[0]
-                                //   ?.currency_symbol
-                              }
-                              {/* <IndianNumber
+                            <div className="row justify-content-end products-name bold">
+                              <div className="col-lg-4 col-4 tax-captilise" >
+                                {" "}
+                                {/* <span className="tax-captilise">{selectedMultiLangData?.tax}{" "}</span>   */}
+                              </div>
+                              {/* : */}
+                              <div className="col-lg-3 col-6 text-end price_font_family products-name bold">
+                                {
+                                  // cartListingItems?.categories[0]?.orders[0]
+                                  //   ?.currency_symbol
+                                }
+                                {/* <IndianNumber
                                 value={orderSummaryForCart[1]?.value}
                               /> */}
+                              </div>
                             </div>
-                          </div>
-                          <div className="row justify-content-end">
-                            <div className="col-lg-4 col-4 products-name bold">
-                              {" "}
-                              {selectedMultiLangData?.order_total_including_tax}
-                            </div>
-                            :
-                            <div className="col-lg-3 col-6 text-end products-name bold">
-                              {
-                                cartListingItems?.categories[0]?.orders[0]
-                                  ?.currency_symbol
-                              }
-                              <IndianNumber
-                                value={orderSummaryForCart[10]?.value}
-                              />
-                            </div>
+                            <div className="row justify-content-end">
+                              <div className="col-lg-4 col-4 products-name bold">
+                                {" "}
+                                {selectedMultiLangData?.order_total_including_tax}
+                              </div>
+                              :
+                              <div className="col-lg-3 col-6 text-end products-name bold">
+                                {
+                                  cartListingItems?.categories[0]?.orders[0]
+                                    ?.currency_symbol
+                                }
+                                <IndianNumber
+                                  value={orderSummaryForCart[10]?.value}
+                                />
+                              </div>
 
 
-<div className="col-6">
-<div className="row">
-  <div className="col-12 mt-4">
-  <div className="text-center" >
-                      <Link href="">
-                        <button
-                          type="button"
-                          className=" checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns checkout-btn-link product-font-family"
-                         
-                          onClick={(e: any) =>
-                            handleQuotation(e, cartListingItems.name)
-                          }
-                        >
-                          {selectedMultiLangData?.request_for_quotation}
-                        </button>
-                      </Link>
+                              <div className="col-6">
+                                <div className="row">
+                                  <div className="col-12 mt-4">
+                                    <div className="text-center" >
+                                      <Link href="">
+                                        <button
+                                          type="button"
+                                          className=" checkout_button mb-3 text-uppercase py-2 px-1 cart-new-btns checkout-btn-link product-font-family"
+
+                                          onClick={(e: any) =>
+                                            handleQuotation(e, cartListingItems.name)
+                                          }
+                                        >
+                                          {selectedMultiLangData?.request_for_quotation}
+                                        </button>
+                                      </Link>
+                                    </div>
+                                  </div>
+
+
+                                  <div className="col-12 d-flex justify-content-between align-items-center">
+
+                                  <div>
+                    <p className="checkbox-cursor">
+                      <a
+                        className="clear_cart bold"
+                        onClick={() => callUpdateCartAPI()}
+                      >
+                        {selectedMultiLangData?.update_cart}
+                      </a>
+                    </p>
+                  </div>
+                                    <div className=" text-center " >
+                                      <Link href="/checkout">
+                                        <button
+                                          type="button"
+                                          className="w-100 checkout_button mb-3 text-uppercase  px-1 product-font-family py-3"
+                                          style={{
+                                            backgroundColor: "#0071DC",
+                                            color: "#fff",
+                                            borderRadius: "7px",
+                                          }}
+                                          onClick={goToCheckout}
+                                        >
+                                          {selectedMultiLangData?.order_checkout}
+                                        </button>
+                                      </Link>
+                                    </div>
+                                  </div>
+
+
+                                </div>
+                              </div>
+
+
+                            </div>
+                          </>
+                        )}
+
+
+
+
+
+
+
+                      </div>
                     </div>
-  </div>
-
-
-<div className="col-12">
-<div className=" text-center " >
-                      <Link href="/checkout">
-                        <button
-                          type="button"
-                          className="w-100 checkout_button mb-3 text-uppercase  px-1 product-font-family py-3"
-                          style={{
-                            backgroundColor: "#0071DC",
-                            color: "#fff",
-                            borderRadius: "7px",
-                          }}
-                          onClick={goToCheckout}
-                        >
-                          {selectedMultiLangData?.order_checkout}
-                        </button>
-                      </Link>
-                    </div>
-</div>
-
-
-</div>
-</div>
-                       
-             
-                          </div>
-                        </>
-                      )}
-                    
-               
- 
-
-
-
 
                   </div>
                 </div>
-                
-                </div>
-                </div>
-              
 
-               
+
+
 
                 <hr />
               </div>

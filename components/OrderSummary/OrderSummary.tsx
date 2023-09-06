@@ -39,17 +39,17 @@ const OrderSummary = ({
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
   return (
-    <div>
-      <div>
+    <div >
+      <div >
         {!orderSummary ? null : (
           <div>
             {couponError === false
               ? orderSummary?.map((data: any, index: number) => (
                   <div
-                    className="order-summery px-2 px-sm-0 px-xm-0"
-                    key={index}
+                    className="order-summery px-2 px-sm-0 px-xm-0 mx-3 products-name"
+                    key={index}   
                   >
-                    <div className="row mb-1 ">
+                    <div className="row mb-1 " >
                       <div className="col-6">
                         {data?.name === "Total" ? (
                           <strong className="mb-0 p-0">{data?.name}</strong>
@@ -88,15 +88,15 @@ const OrderSummary = ({
                       className="order-summery px-2 px-sm-0 px-xm-0"
                       key={index}
                     >
-                      <div className="row mb-1 ">
-                        <div className="col-6">
+                      <div className="row mb-1 " >
+                        <div className="col-6 products-name" >
                           {data.name === "Total" ? (
-                            <strong className="mb-0 p-0">{data?.name}</strong>
+                            <strong className="mb-0 p-0 products-name " >{data?.name}</strong>
                           ) : (
-                            <p className={`mb-0 p-0 summary_p`}>{data?.name}</p>
+                            <p className={`mb-0 p-0 summary_p `} >{data?.name}</p>
                           )}
                         </div>
-                        <div className="col-6 text-end">
+                        <div className="col-6 text-end ">
                           <p className={`mb-0 summary_p`}>
                             {data.name === "Coupon Code" ? (
                               <div>
@@ -120,7 +120,7 @@ const OrderSummary = ({
         )}
       </div>
 
-      <div className="checkout-item mt-5">
+      <div className="checkout-item mt-5" >
         {cartListingItems?.categories?.length > 0 &&
           cartListingItems?.categories.map((value: any, index: any) => {
             return (
@@ -142,25 +142,25 @@ const OrderSummary = ({
                               />
                             </div>
                           </div>
-                          <div className="col-8 ">
-                            <div className="checkout_item_details ">
+                          <div className="col-8 products-name">
+                            <div className="checkout_item_details products-name" >
                               <h6 className="mb-0 product_item_name ">
                                 {data.item_name}
                               </h6>
                               <table
                                 width="100%"
-                                className="mb-0 mt-1 table table-borderless"
+                                className="mb-1 mt-1 table table-borderless"
                               >
-                                <tbody>
+                                <tbody className="checkout-cart-card-font products-name">
                                   {data.details.map(
                                     (detail: any, index: number) => (
                                       <tr
-                                        className="item_options   "
+                                        className="item_options   products-name"
                                         key={index}
                                       >
                                         <td
                                           width="50%"
-                                          className="px-0 py-0 pb-1 "
+                                          className="px-0 py-0 pb-0 products-name"
                                         >
                                           <p
                                             className={`text-capitalize mb-0 cart_p`}
@@ -196,7 +196,7 @@ const OrderSummary = ({
                                     )
                                   )}
                                   <tr className="item_options ">
-                                    <td width="50%" className="px-0 py-0 ">
+                                    <td width="50%" className="px-0 py-0 pb-1">
                                       <p className={`mb-0 cart_p`}>
                                         {selectedMultiLangData?.quantity_c}:
                                       </p>
@@ -208,7 +208,7 @@ const OrderSummary = ({
                                     </td>
                                   </tr>
                                   <tr className="item_options ">
-                                    <td width="50%" className="px-0 py-0 ">
+                                    <td width="50%" className="px-0 py-0 pb-1">
                                       <p className={`mb-0 cart_p`}>
                                         {
                                           selectedMultiLangData?.total_item_price
@@ -225,7 +225,7 @@ const OrderSummary = ({
                                     </td>
                                   </tr>
                                   <tr className="item_options ">
-                                    <td width="50%" className="px-0 py-0 ">
+                                    <td width="50%" className="px-0 py-0">
                                       <p className={`mb-0 cart_p`}>
                                         {selectedMultiLangData?.total_item_tax}:
                                         :
@@ -258,8 +258,8 @@ const OrderSummary = ({
                             (value: any, index: any) => (
                               <div key={index}>
                                 {value?.orders?.length > 3 && (
-                                  <div>
-                                    {selectedMultiLangData?.view_all_items}:
+                                  <div className="text-center mt-3">
+                                    {selectedMultiLangData?.view_all_items}
                                   </div>
                                 )}
                               </div>

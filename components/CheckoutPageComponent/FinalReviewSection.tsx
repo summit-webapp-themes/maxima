@@ -16,10 +16,10 @@ const FinalReviewSection = ({
   return (
     <>
       <div className="finalreview pb-3 pr-3">
-        <h4 className="mb-3 finalreview-heading ">
+        <h4 className="mb-2 finalreview-heading mt-1  ">
           {selectedMultiLangData?.final_review}
         </h4>
-        <table width="100%" className="mb-0 mt-1 table table-borderless">
+        <table width="100%" className="mb-0 mt-1 table table-borderless mt-0 pt-0" >
           <tbody>
             <tr className="item_options">
               <td width="50%" className="px-0 py-0 pb-1 ">
@@ -61,7 +61,7 @@ const FinalReviewSection = ({
             </tr>
           </tbody>
         </table>
-        <div className="form-check mt-4">
+        <div className="form-check mt-2 mb-3">
           <input
             className="form-check-input checkbox-cursor"
             type="checkbox"

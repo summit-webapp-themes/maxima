@@ -211,6 +211,9 @@
   margin-top: 107px !important;
 }
 .margin_from_nav {
+  margin-top: 170px !important;
+}
+.margin_from_nav_cart {
   margin-top: 116px !important;
 }
 
@@ -1204,10 +1207,7 @@ padding: 7px !important;
   color: #fff !important;
 }
 @media (max-width: 576px) {
-  .mob-logo-img1 {
-    width: 120px;
-    
-  }
+
 }
 
 .cursor_pointer {
@@ -1241,4 +1241,25 @@ padding: 7px !important;
 }
 .btn-forget-mb{
   padding-bottom: 20px !important;
+}
+
+
+@media only screen and (max-width: 600px) {
+ .login-mob-margin{
+  // border: 2px solid red;
+  margin-bottom: 7.1px !important
+ }
+ .heart-icon-mob{
+  margin-right: 10px !important;
+ }
+  .mob-icon-wrapper{
+      display: flex !important;
+      justify-content: space-between !important;
+      // border: 2px solid red
+  }
+  // .mob-logo-img1 {
+  //   width: 500px !important;
+  //   height: 30px !important;
+    
+  // }
 }
