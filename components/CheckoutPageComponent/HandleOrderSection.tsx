@@ -50,7 +50,7 @@ const HandleOrderSection = (props: any) => {
                   <div className="accordion-item border-0">
                     <h2 className="accordion-header" id="headingOne" >
                       <button
-                        className="accordion-button collapsed pt-4 px-2 pb-2 fs-4"
+                        className="accordion-button collapsed pt-4 px-2 pb-2 fs-4 ms-1 accorder-btn-plus"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseOne"
@@ -129,7 +129,7 @@ const HandleOrderSection = (props: any) => {
                   <div className="accordion-item border-0" >
                     <h2 className="accordion-header" id="headingTwo">
                       <button
-                        className="accordion-button collapsed pt-4 fs-4 px-2"
+                        className="accordion-button collapsed pt-4 fs-4 px-2 ms-1 accorder-btn-plus"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo"

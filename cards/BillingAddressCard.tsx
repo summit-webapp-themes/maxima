@@ -76,7 +76,7 @@ const BillingAddressCard = ({
           : initialShippingAddress || selectedAddress}
       </h5> */}
       <select
-        className="form-select form-select-lg w-50 mb-3"
+        className="form-select form-select-lg w-50 mb-3 products-name"
         aria-label="Default select example"
         onChange={handleBilling}
       >
@@ -189,7 +189,7 @@ const BillingAddressCard = ({
                   className="border px-1 addresscard-width"
                   key={detail?.contact_info}
                 >
-                  <div className="ps-3 pt-1  " >
+                  <div className="ps-3 pt-1  products-name" >
                     {/* <p>{detail.address_id}</p> */}
                     <p className={`mb-0 addresscard-p`}>{detail?.name}</p>
                     {/* <p className="mb-0">{detail.phone}</p> */}
@@ -204,7 +204,7 @@ const BillingAddressCard = ({
                         href={`mailto:${detail?.email}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-dark"
+                        className="text-dark products-name"
                       >
                         {detail.email}
                       </a>
@@ -214,7 +214,7 @@ const BillingAddressCard = ({
                         href={`tel:${detail?.contact}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-dark"
+                        className="text-dark products-name"
                       >
                         {detail?.contact}
                       </a>

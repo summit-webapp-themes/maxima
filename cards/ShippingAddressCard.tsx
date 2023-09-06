@@ -59,7 +59,7 @@ const ShippingAddressCard = ({
         </div>
       </div>
       <select
-        className="form-select form-select-lg w-50 mb-3"
+        className="form-select form-select-lg w-50 mb-3 products-name"
         aria-label="Default select example"
         onChange={handleShipping}
       >
@@ -83,7 +83,7 @@ const ShippingAddressCard = ({
                 className="border px-1 addresscard-width pb-2" 
                 key={detail?.address_id}
               >
-                <div className="ps-3 mt-1 mb-1">
+                <div className="ps-3 mt-1 mb-1 products-name">
                   <p className={`mb-0 addresscard-p`} >{detail?.name}</p>
 
                   <p className="mb-0 card_p">{detail?.address_1}</p>
@@ -94,7 +94,7 @@ const ShippingAddressCard = ({
                   <p className="mb-0 card_p">{detail?.country}</p>
                   <p className="mb-0 card_p ">
                     <a
-                      className="text-dark"
+                      className="text-dark products-name"
                       href={`mailto:${detail?.email}`}
                       target="_blank"
                       rel="noreferrer"
@@ -104,7 +104,7 @@ const ShippingAddressCard = ({
                   </p>
                   <p className="mb-0 card_p ">
                     <a
-                      className="text-dark"
+                      className="text-dark products-name"
                       href={`tel:${detail?.contact}`}
                       target="_blank"
                       rel="noreferrer"

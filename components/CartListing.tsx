@@ -491,7 +491,18 @@ const CartListing = () => {
                                   </div>
 
 
-                                  <div className="col-12">
+                                  <div className="col-12 d-flex justify-content-between align-items-center">
+
+                                  <div>
+                    <p className="checkbox-cursor">
+                      <a
+                        className="clear_cart bold"
+                        onClick={() => callUpdateCartAPI()}
+                      >
+                        {selectedMultiLangData?.update_cart}
+                      </a>
+                    </p>
+                  </div>
                                     <div className=" text-center " >
                                       <Link href="/checkout">
                                         <button
