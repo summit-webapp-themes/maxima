@@ -82,7 +82,7 @@ const DealerLedger = () => {
 
   return (
     <>
-      <div className="container margin_from_nav">
+      <div className="container margin_from_nav ">
         <DealerAccounting
           dealerLedgerSummary={dealerLedgerSummary}
           selectedMultiLangData={selectedMultiLangData}

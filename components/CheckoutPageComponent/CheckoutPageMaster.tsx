@@ -259,9 +259,9 @@ const CheckoutPageMaster = () => {
                 </div>
               </div>
               <div
-                className={`col-lg-4 mx-auto mt-2 border rounded-1 ordersummary-width `}
+                className={`col-lg-4 mx-auto mt-2 border rounded-1 ordersummary-width mb-0 pb-0`}
               >
-                <h5 className="my-3  bold text-uppercase">
+                <h5 className="mt-3  bold text-uppercase mb-0 pb-0">
                   {selectedMultiLangData?.order_summary}
                 </h5>
                 <OrderSummary

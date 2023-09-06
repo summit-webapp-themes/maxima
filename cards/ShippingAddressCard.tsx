@@ -43,11 +43,23 @@ const ShippingAddressCard = ({
   };
 
   return (
-    <>
-      <h4 className="mb-1">{selectedMultiLangData?.shipping_addresses}</h4>
-      <h5>{selectedAddress || initialShippingAddress}</h5>
+    <div className="mt-0 pt-0 shipping-margin-t">
+      <h4 className="mb-0">{selectedMultiLangData?.shipping_addresses}</h4>
+      {/* <h5>{selectedAddress || initialShippingAddress}</h5> */}
+      <div className="d-flex align-items-center mb-0  mt-0 pt-0 cart-checkbox-mg mb-2"  >
+        <button className="ms-0 ps-0 address_icon" onClick={() => handleShow("Shipping")}>
+          <i className="fa fa-edit text-primary fs-2 ship_edit"></i>
+        </button>
+
+        <div
+          className="fs-4 mt-1 ms-0 ps-0 ship_heading"
+          onClick={() => handleShow("Shipping")}
+        >
+          {selectedMultiLangData?.create_new_shipping_address}
+        </div>
+      </div>
       <select
-        className="form-select form-select-lg w-50 mb-2"
+        className="form-select form-select-lg w-50 mb-3 products-name"
         aria-label="Default select example"
         onChange={handleShipping}
       >
@@ -68,11 +80,11 @@ const ShippingAddressCard = ({
           ?.map((detail: any) => (
             <>
               <div
-                className="border px-1 addresscard-width"
+                className="border px-1 addresscard-width pb-2" 
                 key={detail?.address_id}
               >
-                <div className="">
-                  <p className={`mb-0 addresscard-p`}>{detail?.name}</p>
+                <div className="ps-3 mt-1 mb-1 products-name">
+                  <p className={`mb-0 addresscard-p`} >{detail?.name}</p>
 
                   <p className="mb-0 card_p">{detail?.address_1}</p>
                   <p className="mb-0 card_p">{detail?.address_2}</p>
@@ -82,7 +94,7 @@ const ShippingAddressCard = ({
                   <p className="mb-0 card_p">{detail?.country}</p>
                   <p className="mb-0 card_p ">
                     <a
-                      className="text-dark"
+                      className="text-dark products-name"
                       href={`mailto:${detail?.email}`}
                       target="_blank"
                       rel="noreferrer"
@@ -90,9 +102,9 @@ const ShippingAddressCard = ({
                       {detail?.email}
                     </a>
                   </p>
-                  <p className="mb-0 card_p">
+                  <p className="mb-0 card_p ">
                     <a
-                      className="text-dark"
+                      className="text-dark products-name"
                       href={`tel:${detail?.contact}`}
                       target="_blank"
                       rel="noreferrer"
@@ -101,8 +113,8 @@ const ShippingAddressCard = ({
                     </a>
                   </p>
                 </div>
-                <div className="">
-                  <button
+                <div className="" >
+                  {/* <button
                     type="button"
                     onChange={() =>
                       setInitialBillingAddress(detail?.address_id)
@@ -121,7 +133,7 @@ const ShippingAddressCard = ({
                     initialShippingAddress === detail?.address_id
                       ? "Address Selected"
                       : "Deliver to this address"}
-                  </button>
+                  </button> */}
                   <div className="mt-2 text-center ">
                     <button
                       type="button"
@@ -138,7 +150,7 @@ const ShippingAddressCard = ({
             </>
           ))}
 
-      <div className="d-flex align-items-center mb-5">
+      {/* <div className="d-flex align-items-center mb-0 shipping-margin-top"  >
         <button className="address_icon" onClick={() => handleShow("Shipping")}>
           <i className="fa fa-edit text-primary fs-2 ship_edit"></i>
         </button>
@@ -149,7 +161,7 @@ const ShippingAddressCard = ({
         >
           {selectedMultiLangData?.create_new_shipping_address}
         </div>
-      </div>
+      </div> */}
 
       {show ? (
         <AddNewAddressForm
@@ -168,7 +180,7 @@ const ShippingAddressCard = ({
       ) : null}
 
       {showEditModal ? (
-        <EditAddressForm
+        <EditAddressForm 
           show={showEditModal}
           toHide={handleEditModal}
           detailData={detailData}
@@ -181,7 +193,7 @@ const ShippingAddressCard = ({
           selectedMultiLangData={selectedMultiLangData}
         />
       ) : null}
-    </>
+    </div>
   );
 };
 

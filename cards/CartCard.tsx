@@ -60,7 +60,7 @@ const CartCard = ({
     <>
       <div className="d-lg-block d-none cart_wrapper-detail" >
         <div className="row text-center ">
-          <div className="col-lg-5 text-start">
+          <div className="col-lg-7 text-start">
             <Link
               href={`${orders.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
               legacyBehavior
@@ -108,12 +108,12 @@ const CartCard = ({
               }}
             />
           </div>
-          <div className="col-1 ">
+          {/* <div className="col-1 ">
             <p className="products-name">{orders.weight_per_unit}</p>
           </div>
           <div className="col-1">
             <p className="products-name">{orders.total_weight}</p>
-          </div>
+          </div> */}
           {/* <div className="col-1 price_font_family">
             <p className="products-name">
               {orders.currency_symbol}

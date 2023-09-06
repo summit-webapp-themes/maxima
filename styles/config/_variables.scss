@@ -34,9 +34,12 @@ $secondaryTheme-secondarycolor: #f77c29 !default;
 
 
 // 2. Font-families
-$alt-font-family: 'Nunito', sans-serif;
-$font-family:'Nunito', sans-serif;
-$second-font-family: 'Open Sans', $alt-font-family !default;
+$alt-font-family: 'Nunito' !important ;
+$font-family:'Nunito' !important;
+$second-font-family: 'Nunito', $alt-font-family !default;
+// $alt-font-family: 'Nunito', sans-serif;
+// $font-family:'Nunito', sans-serif;
+// $second-font-family: 'Open Sans', $alt-font-family !default;
 
 // 3. Breakpoints
 $breakpoints: (

@@ -113,13 +113,13 @@ const WebCheckout = ({
 
   return (
     <>
-      <div className="web-checkout-wrapper mt-4">
+      <div className="web-checkout-wrapper mt-0"  >
         <div>
           {visitorState !== null ? (
             <>
               <div className="row flex-lg-row flex-column-reverse ">
                 <div className="col-lg-8">
-                  <div className="row flex-lg-row flex-column-reverse ">
+                  <div className="row flex-lg-row flex-column-reverse " >
                     <div className="col-lg-6">
                       <ShippingAddressCard
                         shippingAddresses={shippingAddresses}
@@ -195,7 +195,7 @@ const WebCheckout = ({
                   )}
                 </div>
 
-                <div className="col-lg-4">
+                <div className="col-lg-4" >
                   <HandleOrderSection
                     orderSummary={orderSummary}
                     handleApplyCouponCode={handleApplyCouponCode}
@@ -223,7 +223,7 @@ const WebCheckout = ({
                     {selectedMultiLangData?.checkout_details}
                   </h4>
                   <div className="d-flex align-items-center">
-                    <button className="btn btn-warning btn-sm rounded-0 bold button_color">
+                    <button className="btn btn-warning btn-sm rounded-0 bold button_color" >
                       <Link href={"/login"} legacyBehavior>
                         <a>{selectedMultiLangData?.login}</a>
                       </Link>
@@ -296,12 +296,12 @@ const WebCheckout = ({
                         )}
                       </div>
                     </div>
-                    <div className="col-lg-4 mt-2 border">
-                      <h5 className=" bold text-uppercase">
+                    <div className="col-lg-4 mt-2 border" >
+                      <h5 className=" bold text-uppercase ms-1 " >
                         {selectedMultiLangData?.order_summary}
                       </h5>
 
-                      <OrderSummary
+                      <OrderSummary  
                         currencySymbolForSummary={currencySymbolForSummary}
                         orderSummary={orderSummary}
                         selectedMultiLangData={selectedMultiLangData}
