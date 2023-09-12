@@ -109,14 +109,24 @@ const MobCheckout = ({
   return (
     <>
       <div className="container mt-4">
+          {/* <div className="mt-0">
+        <button
+       type="button"
+          onClick={handlePlaceOrder}
+          className=" d-block w-100 mx-auto blue_btn p-3 text-white  bold rounded  place_order_button"
+       >
+          {deleteCoupon}
+         Place Order
+        </button>
+     </div>  */}
         <div>
           {visitorState !== null ? (
             <>
-              <div className="row flex-lg-row flex-column-reverse ">
+              <div className="row flex-lg-row flex-column-reverse " >
                 <div className="col-lg-8">
                   <div className="row flex-lg-row flex-column-reverse ">
                     <div className="col-lg-6">
-                      <ShippingAddressCard
+                      <ShippingAddressCard 
                         shippingAddresses={shippingAddresses}
                         initialShippingAddress={initialShippingAddress}
                         setInitialShippingAddress={setInitialShippingAddress}

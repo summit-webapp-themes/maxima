@@ -49,7 +49,7 @@ const BillingAddressCard = ({
   return (
     <>
       <div className=" " >
-        <h4 className="mb-1" >{selectedMultiLangData?.billing_addresses}</h4>
+        <h4 className="mb-1 shipping-margin-t-mob" >{selectedMultiLangData?.billing_addresses}</h4>
         <div className="d-flex align-items-center ml-0 ms-0 ps-0 mb-2" >
           <input 
             className="form-check-input fs-5 bill_checkbox"
@@ -153,7 +153,7 @@ const BillingAddressCard = ({
                         }}
                         className="showmodal_button"
                       >
-                        {selectedMultiLangData?.edit}
+                       <span className="edit_btn_web">{selectedMultiLangData?.edit}</span> 
                       </button>
                     </div>
                   </div>
@@ -251,7 +251,7 @@ const BillingAddressCard = ({
                         }}
                         className="showmodal_button" 
                       >
-                        {selectedMultiLangData?.edit}
+                      <span className="edit_btn_web">{selectedMultiLangData?.edit}</span>  
                       </button>
                     </div>
                   </div>
