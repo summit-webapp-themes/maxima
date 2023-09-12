@@ -20,7 +20,7 @@ const SecondaryThemeSpecialOffers = ({ specialOfferTagListingOfProducts }: any) 
         {specialOfferTagListingOfProducts?.length > 0 &&
         specialOfferTagListingOfProducts !== null ? (
           <>
-            <div className="container">
+            <div className="container" >
               <div className="row justify-content-center">
                 {specialOfferTagListingOfProducts.map(
                   (specialItems: any, index: any) => {
@@ -91,7 +91,7 @@ const SecondaryThemeSpecialOffers = ({ specialOfferTagListingOfProducts }: any) 
 
   return (
     <>
-    <div className="newArrival3">
+    <div className="newArrival3" >
       <div className="container">
         <h3 className="text-center category_heading">Special Offers</h3>
         {DisplaySpecialOffers() as any}

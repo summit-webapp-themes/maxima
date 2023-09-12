@@ -20,7 +20,7 @@ const SecondaryThemeDisplayTag = (props: any) => {
   //   useDisplayTagHooks();
   return (
     <div className="">
-      <div className="container">
+      <div className="container" >
         <div className="row banner-product-wrapper pb-5 ">
           <h3 className="text-center category_heading">{data?.tag_name}</h3>
           <div className="product-wrapper col-xl-12 col-md-12">

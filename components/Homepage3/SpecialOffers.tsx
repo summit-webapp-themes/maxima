@@ -20,7 +20,7 @@ const SpecialOffers = ({ specialOfferTagListingOfProducts }: any) => {
         {specialOfferTagListingOfProducts?.length > 0 &&
         specialOfferTagListingOfProducts !== null ? (
           <>
-            <div className="container">
+            <div className="container" >
               <div className="row justify-content-center">
                 {specialOfferTagListingOfProducts.map(
                   (specialItems: any, index: any) => {

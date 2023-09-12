@@ -170,6 +170,7 @@ const WishlistMaster = () => {
           }
         } else {
           dispatch(fetchCartListing(TokenFromStore?.token));
+          // showToast("Failed to Add to cart", "error");
         }
       }
     } else {
@@ -276,7 +277,7 @@ const WishlistMaster = () => {
   };
 
   return (
-    <div className="margin_from_nav">
+    <div className="margin_from_nav ml-5 pl-3">
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (
@@ -348,7 +349,7 @@ const WishlistMaster = () => {
                               ></button>
                             </div>
                           </div>
-                          <div className="col-lg-7 col-12">
+                          <div className="col-lg-7 col-12 py-2" >
                             <p className="mb-0 fs-5 ">
                               <span className="bold">
                                 {selectedMultiLangData?.item_code}:
@@ -361,10 +362,10 @@ const WishlistMaster = () => {
                             >
                               {item?.item_name}
                             </a>
-                            <p className="mb-0 fs-6 ">
+                            <p className="mb-0 fs-6 mb-0 pb-0"  >
                               {item?.short_description}
                             </p>
-                            <p className="mb-0 fs-5 ">
+                            <p className="mb-0 fs-5 mb-0 pb-0 mt-0 pt-0" >
                               <span className="bold">
                                 {selectedMultiLangData?.brand}:{" "}
                               </span>

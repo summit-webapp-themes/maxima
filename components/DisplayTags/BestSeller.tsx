@@ -9,7 +9,7 @@ const BestSeller = ({ bestSellerListing }: any) => {
   };
 
   return (
-    <div className="top_categories">
+    <div className="top_categories products-name">
       <div className="container">
         <div className="row banner-product-wrapper pb-1">
           <h3 className="text-center category_heading">Best Sellers</h3>
@@ -106,7 +106,7 @@ const BestSeller = ({ bestSellerListing }: any) => {
                       </div> */}
                           </figure>
                           <div className="product-details">
-                            <h4 className="product-name truncate-overflow">
+                            <h4 className="product-name truncate-overflow products-name">
                               <Link href={list.url}>{list.item_name}</Link>
                             </h4>
                             <div className="product-price">

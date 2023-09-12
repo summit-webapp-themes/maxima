@@ -142,7 +142,7 @@ const ShippingAddressCard = ({
                       }}
                       className="showmodal_button"
                     >
-                      {selectedMultiLangData?.edit}
+                    <span className="edit_btn_web">{selectedMultiLangData?.edit}</span>  
                     </button>
                   </div>
                 </div>
