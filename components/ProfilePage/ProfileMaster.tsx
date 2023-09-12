@@ -106,7 +106,7 @@ const ProfileMaster = () => {
 
   const personalDetails: any = () => {
     return (
-      <div className="ms-2">
+      <div className="ms-2" >
        <div className="mob-userdetail-containers">
        <div className="col-lg-3 bold fs-3 products-name">
           {selectedMultiLangData?.user_name}:
@@ -151,7 +151,7 @@ const ProfileMaster = () => {
   const availableCoupons: any = () => {
     return (
       <>
-        <div className="mb-2 row">
+        <div className="mb-2 row" >
           <div className="col-lg-2 fs-3 bold">
             {selectedMultiLangData?.coupons}:
           </div>
@@ -184,7 +184,7 @@ const ProfileMaster = () => {
     if (ageingReport.length > 0) {
       return (
         <>
-          <div className="row mt-5">
+          <div className="row mt-5" >
             <div className="col-lg-12">
               <div className="">
                 <div className="profile">
@@ -195,7 +195,7 @@ const ProfileMaster = () => {
               </div>
             </div>
           </div>
-          <div className="shadow-sm card table-responsive ageing_report">
+          <div className="shadow-sm card table-responsive ageing_report" >
             {/* <div className="card-body"></div> */}
             <table className="w-100 ageingreport-table">
               <tr>
@@ -234,7 +234,7 @@ const ProfileMaster = () => {
   const showBillingAddresses: any = () => {
     return (
       <>
-        <div className="shadow-sm card">
+        <div className="shadow-sm card" >
           <div className="card-body">
             <div className="row align-items-center">
               <div className="col-lg-8">
@@ -337,8 +337,8 @@ const ProfileMaster = () => {
   const showShippigAddresses: any = () => {
     return (
       <>
-        <div className="shadow-sm card">
-          <div className="card-body">
+        <div className="shadow-sm card" >
+          <div className="card-body" style={{border:"2px solid red"}}>
             <div className="row align-items-center">
               <div className="col-lg-8">
                 <h5 className="fw-bolder pt-1">
@@ -438,7 +438,7 @@ const ProfileMaster = () => {
 
   const paymentTerms: any = () => {
     return (
-      <div className="row m-0">
+      <div className="row m-0" >
         <div className="shadow-sm card mt-4 ">
           <div className="card-body">
             <div className="mb-2 row">
@@ -461,7 +461,7 @@ const ProfileMaster = () => {
   const creditLimit: any = () => {
     return (
       <>
-        <div className="row m-0">
+        <div className="row m-0" >
           <div className="shadow-sm card mt-4 ">
             <div className="card-body">
               <div className="mb-2 row">
@@ -505,7 +505,7 @@ const ProfileMaster = () => {
           </div>
         </div>
         <div className="shadow-sm card table-responsive ageing_report">
-          <table className="w-100 table table-striped ageingreport-table ">
+          <table className="w-100 table table-striped ageingreport-table " >
             <thead>
               <tr>
                 <th>{selectedMultiLangData?.quotation_id}</th>
@@ -573,7 +573,7 @@ const ProfileMaster = () => {
       <div className="container margin_from_nav">
         <section className="profile_section ">
           <div className="container">
-            <h1 className="bold text-uppercase mb-3 ms-1 text-center-mob profile_heading">
+            <h1 className="bold text-captilize mb-3 ms-1 text-center-mob profile_heading products-name mb-5" >
               {selectedMultiLangData?.my_account}
             </h1>
             <div className="row">

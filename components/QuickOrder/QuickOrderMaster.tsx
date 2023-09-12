@@ -122,14 +122,14 @@ const QuickOrder = () => {
 
   return (
     <div className="container  margin_from_nav_quick_o quickorder-main-conatainer-mob products-name" >
-      <div className="row  mx-0 mt-5  ">
+      <div className="row  mx-0 mt-5  " >
         <div className="col-lg-12  ">
           <div className="row" >
             {/* <div className="col-lg-2"></div> */}
-            <div className="col-lg-12 ">
-              <h3>{selectedMultiLangData?.quick_order}</h3>
+            <div className="col-lg-12 " >
+              <h3 className="products-name">{selectedMultiLangData?.quick_order}</h3>
               <div className="row" >
-                <div className="col-lg-7 my-lg-2">
+                <div className="col-lg-7 my-lg-2 mt-3" >
                   {
                     selectedMultiLangData?.you_can_add_upto_25_valid_item_code_oem_part_no_below
                   }
@@ -139,7 +139,7 @@ const QuickOrder = () => {
                     <div className="col-lg-7 col-6 text-end ">
                       <button
                         type="button"
-                        className=" mb-3 text-uppercase py-2 px-lg-4 px-5 "
+                        className=" mb-3 text-uppercase py-2 px-lg-4 px-5 mt-2"
                         style={{
                           border: "1px solid #0071DC",
                           borderRadius: "7px",
@@ -154,7 +154,7 @@ const QuickOrder = () => {
                     <div className="col-lg-5 col-6 text-end">
                       <button
                         type="button"
-                        className=" text-white mb-3 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn "
+                        className=" text-white mb-3 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn mt-2 "
                         style={{
                           border: "1px solid #0071DC",
                           borderRadius: "7px",
@@ -176,15 +176,15 @@ const QuickOrder = () => {
 
       <div className="row  mx-0 mt-5  table-heading-quick-order-mob products-name ms-3 me-1" >
         <div className="col-lg-12 text-center cart_heading_bg">
-          <div className="row">
+          <div className="row products_title_quick">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
             <div className="col-lg-2 ">
               <h5 className="mb-0 pt-2 text-start ps-lg-4">
                 {/* {selectedMultiLangData?.image} */}
               </h5>
             </div>
-            <div className="col-lg-6  products-name">
-              <h5 className="mb-0 pt-2 text-start ps-lg-5">
+            <div className="col-lg-6  products-name ">
+              <h5 className="mb-0 pt-2 text-start ps-lg-5" >
                 {selectedMultiLangData?.details}
               </h5>
             </div>

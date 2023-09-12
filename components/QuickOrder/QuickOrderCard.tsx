@@ -40,7 +40,7 @@ const QuickOrderCard = (props: any) => {
           .map((data: any, index: any) => (
             <>
               {/* <div className="col-lg-2 col-2"></div> */}
-              <div className="col-lg-2 col-12 text-start ps-lg-0 products-name"  >
+              <div className="col-lg-2 col-12 text-start ps-lg-0 products-name cart-image "  >
                 {data.image_url !== null ? (
                   <Image
                     loader={myLoader}
@@ -49,7 +49,7 @@ const QuickOrderCard = (props: any) => {
                     alt="product-img"
                     width={150}
                     height={150}
-                    className="img-fluid"
+                    className="img-fluid "
                   />
                 ) : (
                   <Image
@@ -59,20 +59,21 @@ const QuickOrderCard = (props: any) => {
                     alt="product-img"
                     width={150}
                     height={150}
-                    className="img-fluid"
+                    className="img-fluid "
                   />
                 )}
               </div>
-              <div className="col-lg-7 col-12 mb-5 products-name">
-                <p className="mb-0">
-                  {selectedMultiLangData?.item_code}: {data.name}
-                </p>
-                <p className="mb-0">
+              <div className="col-lg-7 col-12 mb-5 products-name ">
+               
+                <p className="mb-0 quick-detail-lh">
                   {" "}
                   {selectedMultiLangData?.item_name}
                   {data.item_name}
                 </p>
-                <p className=" mb-0">
+                <p className="mb-0 bold">
+                  {selectedMultiLangData?.item_code}: {data.name}
+                </p>
+                <p className=" mb-0 quick-detail-lh">
                   {selectedMultiLangData?.brand}: {data.brand}
                 </p>
 
@@ -81,13 +82,13 @@ const QuickOrderCard = (props: any) => {
                     onClick={() => {
                       handleRemove(data);
                     }}
-                    className="delete-link"
+                    className="delete-link delete-blue"
                   >
                     {selectedMultiLangData?.delete}
                   </a>
                 </Link>
               </div>
-              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name">
+              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name ">
                 <p>
                   {data.price !== 0 ? (
                     <>
@@ -114,7 +115,7 @@ const QuickOrderCard = (props: any) => {
                   </>
                 }
               </div>
-              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name">
+              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name mb-3">
                 {data.currency_symbol}
                 <IndianNumber
                   value={(total = data.price * showValue(data?.min_order_qty))}

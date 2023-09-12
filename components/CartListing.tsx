@@ -155,7 +155,7 @@ const CartListing = () => {
   console.log("selected array of cart", arrayofSelectedItems);
 
   return (
-    <div className="container margin_from_nav margin_from_nav_cart mb-0 cart-margin-top" >
+    <div className="container margin_from_nav  mb-0 " >
       {Loadings === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(10)].map(() => (
@@ -169,11 +169,11 @@ const CartListing = () => {
       ) : (
         <>
           {Object.keys(cartListingItems).length > 0 ? (
-            <div className="cart-ps-container">
+            <div className="cart-ps-container" >
               <div className="row">
                 <div className="col-9">
-                  <div className="cart_heading mb-3">
-                    <h2 className="text-uppercase shopping-cart-heading products-name">
+                  <div className="cart_heading mb-3" >
+                    <h2 className=" shopping-cart-heading products-name pb-4">
                       {selectedMultiLangData?.shopping_cart}
                     </h2>
                   </div>

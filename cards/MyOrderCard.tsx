@@ -19,9 +19,9 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
   return (
     <>
       <div key={data.id}>
-        <div className="card-header">
-          <div className="row">
-            <div className="mb-3 mb-sm-0 col-md-2 col-6 order-div">
+        <div className="card-header pb-1 " >
+          <div className="row pb-0" >
+            <div className=" mb-sm-0 col-md-2 col-6 order-div">
               <p className="text-uppercase gray mb-0 myorder_p">
                 {selectedMultiLangData?.order_placed}
               </p>
@@ -30,7 +30,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                 {data?.transaction_date?.split("-")?.reverse()?.join("/")}
               </p>
             </div>
-            <div className="mb-3 col-md-2 col-6 order-div">
+            <div className=" col-md-2 col-6 order-div">
               <p className="text-uppercase gray mb-0 myorder_p">
                 {" "}
                 {selectedMultiLangData?.total_price}
@@ -114,7 +114,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
             className="cart_item card-body order_cartdetails"
             key={detail?.item_name}
           >
-            <div className="d-flex mb-2">
+            <div className="d-flex mb-0">
               <div className="flex-fill">
                 <h6 className="green text-capitalize bold mb-0 mt-2 order-ptag ">
                   {selectedMultiLangData?.status} : {data?.payment_status}
