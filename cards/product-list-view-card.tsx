@@ -78,7 +78,7 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
   return (
     <>
       <div className="container-fuild px-3" >
-        <div className=" col-lg-12 ">
+        <div className=" col-lg-12 product-grid-view-mobs">
           <div className="product-wrapper product-wrapper-main">
             <div className="row w-100 product product-list border rounded py-4 " >
               <div className="col-md-4">
@@ -223,7 +223,7 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
                   </div>
                 </div>
               </div>
-              <div className="col-lg-1 col-md-1 mt-1 text-en heart-icon-wrapper">
+              <div className="col-lg-1 col-md-1 mt-1 text-en heart-icon-wrapper heart-icon-wrapper-mob">
                 {wishlistData?.map((values: any) => {
                   if (values.name === product_data?.name) {
                     wishproducts = values?.name;

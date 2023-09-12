@@ -89,7 +89,7 @@ const handleMissingPartsModalClose: any = () => {
                        */}
                       </div>
                       <div className="col-lg-6 col-4 d-flex justify-content-end">
-                        <div className="ms-3">
+                        <div className="ms-3 mob-breadcrum-icon">
                           <i
                             className="fa fa-list fa-lg cursor_pointer"
                             aria-hidden="true"

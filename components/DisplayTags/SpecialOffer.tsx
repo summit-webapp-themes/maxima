@@ -12,7 +12,7 @@ const SpecialOffer = ({ specialTagListing }: any) => {
     <>
       <div className="">
         <div className="container">
-          <div className="row banner-product-wrapper pb-1">
+          <div className="row banner-product-wrapper pb-1 products-name">
             <h3 className="text-center category_heading">Special Offer</h3>
             <div className="banner-product col-xl-3 col-md-4 mb-4 mb-md-0">
               <div className="banner banner-fixed overlay-zoom br-xs">
@@ -83,8 +83,8 @@ const SpecialOffer = ({ specialTagListing }: any) => {
                                 </>
                               )}
                             </figure>
-                            <div className="product-details">
-                              <h4 className="product-name truncate-overflow">
+                            <div className="product-details products-name">
+                              <h4 className="product-name truncate-overflow products-name">
                                 <Link href={list.url}>{list.item_name}</Link>
                               </h4>
                               <div className="product-price">

@@ -20,8 +20,8 @@ const DisplayTagMaster = (props: any) => {
   //   useDisplayTagHooks();
   return (
     <div className="">
-      <div className="container">
-        <div className="row banner-product-wrapper pb-1">
+      <div className="container" >
+        <div className="row banner-product-wrapper pb-1 products-name">
           <h3 className="text-center mb-0 mt-5">{data?.tag_name}</h3>
           <div className="banner-product col-lg-3 col-md-4 d-lg-block d-none mb-4 mb-md-0">
             <div className="banner banner-fixed overlay-zoom br-xs">

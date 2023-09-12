@@ -389,3 +389,23 @@
 .accorder-btn-plus {
     padding-right: 10px !important;
 }
+.blue_btn{
+    background-color: #0071dc !important ;
+    border: none !important;
+}
+
+.edit_btn_web{
+    color: #0071dc !important;
+    text-decoration: underline;
+    // font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+    .shipping-margin-t-mob{
+        // border: 2px solid red;
+        margin-top: 30px !important;
+        // padding-top: 20px !important;
+    }
+  }
+
+ 
