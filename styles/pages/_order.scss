@@ -216,3 +216,17 @@
 .orderDetail-card {
     height: 78%px; 
 }
+.quickorder-main-conatainer-mob{
+    // border: 2px solid red;
+    padding-left: 28px !important;
+}
+.addtoart-btn{
+    margin-right: -5px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .table-heading-quick-order-mob{
+      display: none !important;
+    }
+   
+  }

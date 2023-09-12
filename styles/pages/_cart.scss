@@ -389,3 +389,34 @@
   margin-left: -10px !important;
   margin-top: -22px !important;
 }
+
+.cart-btn-lower-web{
+  // border: 2px solid red;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important; 
+}
+
+
+@media only screen and (max-width: 600px) {
+  .cart_wrapper-detail {
+    line-height: -4 !important;
+    // margin-top: 1rem;
+    padding-bottom:  25px !important;
+  }
+  .cart-btn-lower-mob{
+    // border:2px solid green;
+    display: block !important;
+    
+  }
+  .update-cart-mob{
+    // border: 2px solid red;
+    margin-left: 16px;
+    
+    
+  }
+  .requets-mob{
+    font-size: 11px !important;
+    font-weight: bold;
+  }
+}

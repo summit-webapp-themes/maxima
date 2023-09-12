@@ -204,3 +204,25 @@
 .price_font_family {
     font-family: 'Nunito', sans-serif !important;
 }
+
+@media only screen and (max-width: 600px) {
+//    .product-grid-view-mobs{
+//     border: 2px solid green;
+//     position: relative;
+//    }
+//    .heart-icon-wrapper-mob{
+//     position: absolute;
+//     border: 2px solid red;
+//     margin-top: -340px !important;
+//    }
+.heart-icon-wrapper-mob{
+    display: flex !important;
+    justify-content: end !important;
+    padding-right: 2rem !important;
+    font-size: 24px !important;
+}
+.mob-breadcrum-icon{
+    // border: 2px solid red !important;
+    margin-right: 7px !important;
+}
+  }
