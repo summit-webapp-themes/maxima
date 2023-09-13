@@ -19,9 +19,9 @@ const CatalogListCard = ({
   console.log(catalogListItem, "catalogListItem");
   return (
     <>
-      <div className="row mb-5 d-flex justify-content-center mt-1">
+      <div className="row mb-5 d-flex justify-content-center ">
         <div className="col-lg-7 catalog-wrapper text-center">
-          <h3 className="text-center text-uppercase">
+          <h3 className="text-center text-captilize pb-2 products-name">
             {selectedMultiLangData?.catalog_list}
           </h3>
           {catalogListItem?.length > 0 &&

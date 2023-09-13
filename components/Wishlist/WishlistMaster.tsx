@@ -14,11 +14,7 @@ import AddToCartApi from "../../services/api/cart-page-api/add-to-cart-api";
 import { Norecord } from "../../components/NoRecord";
 import { fetchStockAvailability } from "../../store/slices/product-detail-page-slices/product-stock-availability-slice";
 import { useRouter } from "next/router";
-import {
-  successmsg,
-  failmsg,
-  hideToast,
-} from "../../store/slices/general_slices/toast_notification_slice";
+
 import ListViewLoadingLayout from "../ProductListingComponents/products-data-view/ListViewLoadingLayout";
 import { currency_selector_state } from "../../store/slices/general_slices/multi-currency-slice";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
@@ -215,18 +211,18 @@ const WishlistMaster = () => {
                       {" "}
                       {stockData?.incoming_date !== ""
                         ? stockData?.incoming_date
-                            ?.split("-")
-                            .reverse()
-                            .join("-")
+                          ?.split("-")
+                          .reverse()
+                          .join("-")
                         : stockData?.incoming_date === ""}
                     </td>
                     <td className="text-center">{stockData?.additional_qty}</td>
                     <td className="text-center">
                       {stockData?.available_on !== ""
                         ? stockData?.available_on
-                            ?.split("-")
-                            .reverse()
-                            .join("-")
+                          ?.split("-")
+                          .reverse()
+                          .join("-")
                         : stockData?.available_on === ""}
                     </td>
                   </tr>
@@ -349,7 +345,7 @@ const WishlistMaster = () => {
                               ></button>
                             </div>
                           </div>
-                          <div className="col-lg-7 col-12 py-2" >
+                          <div className="col-lg-7 col-12 py-2">
                             <p className="mb-0 fs-5 ">
                               <span className="bold">
                                 {selectedMultiLangData?.item_code}:
@@ -362,10 +358,10 @@ const WishlistMaster = () => {
                             >
                               {item?.item_name}
                             </a>
-                            <p className="mb-0 fs-6 mb-0 pb-0"  >
+                            <p className="mb-0 fs-6 mb-0 pb-0">
                               {item?.short_description}
                             </p>
-                            <p className="mb-0 fs-5 mb-0 pb-0 mt-0 pt-0" >
+                            <p className="mb-0 fs-5 mb-0 pb-0 mt-0 pt-0">
                               <span className="bold">
                                 {selectedMultiLangData?.brand}:{" "}
                               </span>
@@ -381,7 +377,7 @@ const WishlistMaster = () => {
                             {item?.price?.toLocaleString("en-IN")}
                           </ins>
                         ) : (
-                          <p className="border price_request">
+                          <p className="border price_request button_color ">
                             {selectedMultiLangData?.price_on_request}
                           </p>
                         )}
@@ -413,12 +409,11 @@ const WishlistMaster = () => {
                                   : item?.min_order_qty
                               }
                               value={productCounts[index]}
-                              className={`${
-                                alertMinQty === true &&
-                                productCounts[index] === item?.min_order_qty
+                              className={`${alertMinQty === true &&
+                                  productCounts[index] === item?.min_order_qty
                                   ? "text-danger"
                                   : ""
-                              } w-100 ml-2 pb-lg-0 pb-1 text-center`}
+                                } w-100 ml-2 pb-lg-0 pb-1 text-center`}
                               onChange={(e: any) =>
                                 handleQuantityChange(
                                   +e?.target?.value,
@@ -441,12 +436,11 @@ const WishlistMaster = () => {
                         </div>
                         {item?.min_order_qty !== 0 ? (
                           <div
-                            className={`${
-                              alertMinQty === true &&
-                              productCounts[index] === item?.min_order_qty
+                            className={`${alertMinQty === true &&
+                                productCounts[index] === item?.min_order_qty
                                 ? "text-danger"
                                 : "text-dark"
-                            } fs-6 mt-1 text-uppercase bold`}
+                              } fs-6 mt-1 text-uppercase bold`}
                           >
                             {selectedMultiLangData?.minimum_order_qty}:{" "}
                             {item?.min_order_qty}

@@ -105,8 +105,8 @@ const CheckoutPageMaster = () => {
     <div className="container margin_from_nav_checkout mb-5">
       {isBreakpoint ? (
         <>
-          <div className="ps-4 checkout_web_heading">
-            <h3>{selectedMultiLangData?.checkout_page}</h3>
+          <div className="ps-4 checkout_web_heading ">
+            <h3 className="products-name">{selectedMultiLangData?.checkout_page}</h3>
             <hr />
           </div>
           <WebCheckout

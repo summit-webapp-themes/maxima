@@ -3,33 +3,30 @@ import Image from "next/image";
 import Link from "next/link";
 import getSubscriber from "../services/api/general_apis/newsletter-subscription-api";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  hideToast,
-  successmsg,
-} from "../store/slices/general_slices/toast_notification_slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
 import { showToast } from "./ToastNotificationNew";
 
 const Footer = () => {
-  const dispatch = useDispatch();
   const navbarData: any = [];
   const [subScription, setSubscriptions] = useState<any>("");
+
+  const handleSubscriptionInput = (e: any) => {
+    setSubscriptions(e?.target?.value);
+  };
+
   const handleSubscription = async (event: any) => {
     event?.preventDefault();
-    console.log(subScription, "subScription");
     let subScriptionRes = await getSubscriber(subScription);
-    console.log("subScriptionRes", subScriptionRes);
     if (subScriptionRes?.data?.message?.msg === "success") {
       showToast("subscribed successfully", "success");
-
       setSubscriptions("");
     }
   };
-  console.log("nav footer", navbarData);
+
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
-  console.log("SelectedLangDataFromStore", SelectedLangDataFromStore);
+
   const [selectLangData, setLangData] = useState<any>();
 
   useEffect(() => {
@@ -41,7 +38,7 @@ const Footer = () => {
   }, [SelectedLangDataFromStore?.selectedLanguageData]);
   return (
     <>
-      <footer className="footer footer-dark footer-section" >
+      <footer className="footer footer-dark footer-section">
         <div className="container ">
           <div className="footer-newsletter">
             <div className="row justify-content-center align-items-center ">
@@ -81,9 +78,11 @@ const Footer = () => {
                   <input
                     type="email"
                     className="form-control mr-2 bg-white text-default"
-                    name="email"
-                    id="email"
-                    onChange={(e: any) => setSubscriptions(e?.target?.value)}
+                    // name="email"
+                    // id="email"
+                    value={subScription}
+                    onChange={handleSubscriptionInput}
+                    // onChange={(e: any) => setSubscriptions(e?.target?.value)}
                     placeholder="Your E-mail Address"
                     required
                   />

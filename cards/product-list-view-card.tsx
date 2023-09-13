@@ -40,6 +40,7 @@ const ProductListViewCard = (props: any) => {
   const TokenFromStore: any = useSelector(get_access_token);
   const [showEditModal, setshowEditModal] = useState(false);
   const [show, setshow] = useState(false);
+  const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
   let isLoggedIn: any;
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -53,6 +54,7 @@ const ProductListViewCard = (props: any) => {
   };
 
   const AddToCartProduct = async (name: any) => {
+    setAddToCartButtonDisabled(true);
     const addCartData = [];
     addCartData.push({
       item_code: name,
@@ -66,24 +68,24 @@ const ProductListViewCard = (props: any) => {
     if (AddToCartProductRes.msg === "success") {
       showToast("Item Added to cart", "success");
       dispatch(fetchCartListing(TokenFromStore?.token));
+      setAddToCartButtonDisabled(false);
     } else {
       showToast(AddToCartProductRes?.error, "error");
+      setAddToCartButtonDisabled(false);
     }
   };
 
-console.log(" selectedMultiLangData",  selectedMultiLangData)
-
-
+  console.log(" selectedMultiLangData", selectedMultiLangData);
 
   return (
     <>
-      <div className="container-fuild px-3" >
+      <div className="container-fuild px-3">
         <div className=" col-lg-12 product-grid-view-mobs">
           <div className="product-wrapper product-wrapper-main">
-            <div className="row w-100 product product-list border rounded py-4 " >
+            <div className="row w-100 product product-list border rounded py-4 ">
               <div className="col-md-4">
                 <div className="product-tags col-md-4">
-                  <p className="product_tag text-lg-center my-0 mt-2 best-seller-wrapper" >
+                  <p className="product_tag text-lg-center my-0 mt-2 best-seller-wrapper">
                     {product_data?.display_tag.length > 0 && (
                       <span className="badge text-bg-primary p-2 fs-5 best-seller-tag">
                         {product_data?.display_tag.length > 0 &&
@@ -112,7 +114,9 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
                       href={`${product_data?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
                       legacyBehavior
                     >
-                      <a className="products-name products-name-font">{product_data?.item_name}</a>
+                      <a className="products-name products-name-font">
+                        {product_data?.item_name}
+                      </a>
                     </Link>
                   </h4>
                   <div className="d-flex">
@@ -161,10 +165,14 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
                         </>
                       )}
                       <div className="p-0 m-0 d-flex ">
-                      {isLoggedIn === "true" ? (
+                        {isLoggedIn === "true" ? (
                           <div className="text-center w-0">
                             <button
-                              className="btn  standard_button add_cart_btn"
+                              className={` ${
+                                addToCartButtonDisabled === true
+                                  ? "disabled"
+                                  : ""
+                              } btn standard_button add_cart_btn`}
                               onClick={() =>
                                 AddToCartProduct(product_data.name)
                               }
@@ -181,29 +189,27 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
                             </div>
                           </Link>
                         )}
-                      {isLoggedIn === "true" && (
-                        <>
-                          {router.route !== "/catalog/[category]" ? (
-                            <button
-                              type="button"
-                              className={`btn btn-link catalog-btn-size pt-2 fs-5 products-name add-to-catlog-btn ms-5`}
-                              onClick={() => handleShow(product_data.name)}
-                            >
-                              {selectedMultiLangData?.add_to_catalog}
-                            </button>
-                          ) : (
-                            ""
-                          )}
-                        </>
-                      )}
+                        {isLoggedIn === "true" && (
+                          <>
+                            {router.route !== "/catalog/[category]" ? (
+                              <button
+                                type="button"
+                                className={`btn btn-link catalog-btn-size pt-2 fs-5 products-name add-to-catlog-btn ms-5`}
+                                onClick={() => handleShow(product_data.name)}
+                              >
+                                <span className="bold">
+                                  {selectedMultiLangData?.add_to_catalog}
+                                </span>
+                              </button>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        )}
                       </div>
-
-
                     </div>
                     <div className="row mt-lg-5 mt-2 ps-5">
-                      <div className="col-lg-6">
-                     
-                      </div>
+                      <div className="col-lg-6"></div>
                       {/* <div className="col-lg-6">
                         {router.route !== "/catalog/[category]" ? (
                           <div className="text-center w-50">
@@ -259,7 +265,7 @@ console.log(" selectedMultiLangData",  selectedMultiLangData)
                           className="fa fa-heart-o text-danger fs-1"
                           aria-hidden="true"
                           data-bs-toggle="tooltip"
-                          title="Add to Wishlist" 
+                          title="Add to Wishlist"
                         ></i>
                       </a>
                     ) : (
