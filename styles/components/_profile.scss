@@ -3,7 +3,12 @@
         width: 200px;
     }
 }
-
+.profile_heading {
+    font-size: 24px  !important;
+}
+.text-captilize {
+    text-transform: capitalize !important;
+}
 @media only screen and (max-width:500px){
     .profile_section {
         .tab_width{

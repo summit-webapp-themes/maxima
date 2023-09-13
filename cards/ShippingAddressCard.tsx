@@ -44,7 +44,7 @@ const ShippingAddressCard = ({
 
   return (
     <div className="mt-0 pt-0 shipping-margin-t ">
-      <h4 className="mb-0 shipping-margin-t-mob">
+      <h4 className="mb-0 shipping-margin-t-mob products-name">
         {selectedMultiLangData?.shipping_addresses}
       </h4>
       {/* <h5>{selectedAddress || initialShippingAddress}</h5> */}

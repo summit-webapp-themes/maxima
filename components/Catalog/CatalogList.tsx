@@ -30,7 +30,7 @@ const CatalogList = () => {
   }, [SelectedLangDataFromStore]);
 
   return (
-    <div className="margin_from_nav_l">
+    <div className="margin_from_nav">
       {loading === "pending" ? (
         <div className="row justify-content-center">
           {[...Array(6)].map(() => (
@@ -42,7 +42,7 @@ const CatalogList = () => {
           ))}
         </div>
       ) : (
-        <div className="container">
+        <div className="container" >
           <CreateCatalog
             handleSubmitCatalogName={handleSubmitCatalogName}
             handleChange={handleChange}

@@ -49,7 +49,7 @@ const BillingAddressCard = ({
   return (
     <>
       <div className=" ">
-        <h4 className="mb-1 shipping-margin-t-mob">
+        <h4 className="mb-1 shipping-margin-t-mob products-name">
           {selectedMultiLangData?.billing_addresses}
         </h4>
         <div className="d-flex align-items-center ml-0 ms-0 ps-0 mb-2">
