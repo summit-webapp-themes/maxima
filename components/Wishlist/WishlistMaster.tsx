@@ -14,11 +14,7 @@ import AddToCartApi from "../../services/api/cart-page-api/add-to-cart-api";
 import { Norecord } from "../../components/NoRecord";
 import { fetchStockAvailability } from "../../store/slices/product-detail-page-slices/product-stock-availability-slice";
 import { useRouter } from "next/router";
-import {
-  successmsg,
-  failmsg,
-  hideToast,
-} from "../../store/slices/general_slices/toast_notification_slice";
+
 import ListViewLoadingLayout from "../ProductListingComponents/products-data-view/ListViewLoadingLayout";
 import { currency_selector_state } from "../../store/slices/general_slices/multi-currency-slice";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
@@ -349,7 +345,7 @@ const WishlistMaster = () => {
                               ></button>
                             </div>
                           </div>
-                          <div className="col-lg-7 col-12 py-2" >
+                          <div className="col-lg-7 col-12 py-2">
                             <p className="mb-0 fs-5 ">
                               <span className="bold">
                                 {selectedMultiLangData?.item_code}:
@@ -362,10 +358,10 @@ const WishlistMaster = () => {
                             >
                               {item?.item_name}
                             </a>
-                            <p className="mb-0 fs-6 mb-0 pb-0"  >
+                            <p className="mb-0 fs-6 mb-0 pb-0">
                               {item?.short_description}
                             </p>
-                            <p className="mb-0 fs-5 mb-0 pb-0 mt-0 pt-0" >
+                            <p className="mb-0 fs-5 mb-0 pb-0 mt-0 pt-0">
                               <span className="bold">
                                 {selectedMultiLangData?.brand}:{" "}
                               </span>
@@ -381,7 +377,7 @@ const WishlistMaster = () => {
                             {item?.price?.toLocaleString("en-IN")}
                           </ins>
                         ) : (
-                          <p className="border price_request">
+                          <p className="border price_request button_color ">
                             {selectedMultiLangData?.price_on_request}
                           </p>
                         )}

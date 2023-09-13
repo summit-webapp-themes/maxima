@@ -29,7 +29,7 @@ const BillingAddressCard = ({
   const [selectedbillAddress, setselectedbillAddress] = useState();
   const [changeAddress, setChangeaddress] = useState(false);
 
-  console.log("bill data", billingAddresses);
+  console.log("bill data", initialBillingAddress, initialShippingAddress);
 
   const handleShow = (val: any) => {
     setshow(!show);
@@ -48,10 +48,12 @@ const BillingAddressCard = ({
 
   return (
     <>
-      <div className=" " >
-        <h4 className="mb-1 shipping-margin-t-mob products-name" >{selectedMultiLangData?.billing_addresses}</h4>
-        <div className="d-flex align-items-center ml-0 ms-0 ps-0 mb-2" >
-          <input 
+      <div className=" ">
+        <h4 className="mb-1 shipping-margin-t-mob products-name">
+          {selectedMultiLangData?.billing_addresses}
+        </h4>
+        <div className="d-flex align-items-center ml-0 ms-0 ps-0 mb-2">
+          <input
             className="form-check-input fs-5 bill_checkbox"
             type="checkbox"
             // defaultChecked={true}
@@ -79,11 +81,9 @@ const BillingAddressCard = ({
         className="form-select form-select-lg w-50 mb-3 products-name"
         aria-label="Default select example"
         onChange={handleBilling}
+        // defaultValue={initialShippingAddress}
       >
-        <option value="">
-          {" "}
-          {selectedMultiLangData?.select_billing_address}
-        </option>
+        <option value=""> {initialShippingAddress}</option>
         {billingAddresses.map((billing_ad: any, i: any) => (
           <option key={i}>{billing_ad?.address_id}</option>
         ))}
@@ -96,7 +96,7 @@ const BillingAddressCard = ({
               .map((detail: any, index: any) => (
                 <div
                   className="border px-1 addresscard-width"
-                  key={detail?.address_id} 
+                  key={detail?.address_id}
                 >
                   <div className="">
                     <p className={`mb-0 addresscard-p`}>{detail.name}</p>
@@ -145,7 +145,7 @@ const BillingAddressCard = ({
                         ? "Address Selected"
                         : "Bill to this address"}
                     </button>
-                    <div className="mt-2 text-center " >
+                    <div className="mt-2 text-center ">
                       <button
                         type="button"
                         onClick={() => {
@@ -153,7 +153,9 @@ const BillingAddressCard = ({
                         }}
                         className="showmodal_button"
                       >
-                       <span className="edit_btn_web">{selectedMultiLangData?.edit}</span> 
+                        <span className="edit_btn_web">
+                          {selectedMultiLangData?.edit}
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -189,7 +191,7 @@ const BillingAddressCard = ({
                   className="border px-1 addresscard-width"
                   key={detail?.contact_info}
                 >
-                  <div className="ps-3 pt-1  products-name" >
+                  <div className="ps-3 pt-1  products-name">
                     {/* <p>{detail.address_id}</p> */}
                     <p className={`mb-0 addresscard-p`}>{detail?.name}</p>
                     {/* <p className="mb-0">{detail.phone}</p> */}
@@ -249,9 +251,11 @@ const BillingAddressCard = ({
                           // setEditId(shippingAddress[index].address_id)
                           // setDefaultData(shippingAddress[index])
                         }}
-                        className="showmodal_button" 
+                        className="showmodal_button"
                       >
-                      <span className="edit_btn_web">{selectedMultiLangData?.edit}</span>  
+                        <span className="edit_btn_web">
+                          {selectedMultiLangData?.edit}
+                        </span>
                       </button>
                     </div>
                   </div>

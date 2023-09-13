@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MissingPartsAPI } from "../../services/api/product-listing-page-api/missing-parts-api";
 import { get_access_token } from "../../store/slices/auth/token-login-slice";
+import { showToast } from "../ToastNotificationNew";
 
 const MissingPartsModal = ({
   show,
@@ -13,7 +14,6 @@ const MissingPartsModal = ({
   const [descriptionVal, setdescriptionval] = useState<any>("");
   const TokenFromStore: any = useSelector(get_access_token);
 
-  const [showToast, setshowToast] = useState<boolean>(false);
   const [messageNew, setmessageNew] = useState<any>("");
   const dispatch = useDispatch();
 
@@ -30,10 +30,11 @@ const MissingPartsModal = ({
         missingPartsApiRes?.data?.message?.msg === "success"
       ) {
         setdescriptionval("");
+        showToast("Enquiry Submitted", "success");
       }
       handlemodalclose();
     } else {
-      setmessageNew("*Please fill one of the field");
+      setmessageNew("*This field is required");
     }
   };
   return (

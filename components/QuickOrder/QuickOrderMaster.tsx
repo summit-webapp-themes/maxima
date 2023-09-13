@@ -66,6 +66,10 @@ const QuickOrder = () => {
     });
   };
 
+  const handleAddToQuickOrder = () => {
+    console.log("click");
+  };
+
   let handleRemove: any = (item: any) => {
     console.log("enter name", item);
     const data = partNumbersData.filter(
@@ -121,20 +125,22 @@ const QuickOrder = () => {
   };
 
   return (
-    <div className="container  margin_from_nav_quick_o quickorder-main-conatainer-mob products-name" >
-      <div className="row  mx-0 mt-5  " >
+    <div className="container  margin_from_nav_quick_o quickorder-main-conatainer-mob products-name">
+      <div className="row  mx-0 mt-5  ">
         <div className="col-lg-12  ">
-          <div className="row" >
+          <div className="row">
             {/* <div className="col-lg-2"></div> */}
-            <div className="col-lg-12 " >
-              <h3 className="products-name">{selectedMultiLangData?.quick_order}</h3>
-              <div className="row" >
-                <div className="col-lg-7 my-lg-2 mt-3" >
+            <div className="col-lg-12 ">
+              <h3 className="products-name">
+                {selectedMultiLangData?.quick_order}
+              </h3>
+              <div className="row">
+                <div className="col-lg-7 my-lg-2 mt-3">
                   {
                     selectedMultiLangData?.you_can_add_upto_25_valid_item_code_oem_part_no_below
                   }
                 </div>
-                <div className="col-lg-5" >
+                <div className="col-lg-5">
                   <div className="row mt-lg-0 mt-4 btn-quick-margin">
                     <div className="col-lg-7 col-6 text-end ">
                       <button
@@ -174,9 +180,9 @@ const QuickOrder = () => {
         </div>
       </div>
 
-      <div className="row  mt-5  table-heading-quick-order-mob products-name  ms-3 me-1 " >
+      <div className="row  mt-5  table-heading-quick-order-mob products-name  ms-3 me-1 ">
         <div className="col-lg-12 text-center cart_heading_bg">
-          <div className="row products_title_quick py-3 " >
+          <div className="row products_title_quick py-3 ">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
             <div className="col-lg-2 ">
               <h5 className="mb-0 pt-2 text-start ps-lg-4 ">
@@ -184,7 +190,7 @@ const QuickOrder = () => {
               </h5>
             </div>
             <div className="col-lg-6  products-name ">
-              <h6 className="mb-0 pt-2 text-start ps-lg-5 font-size-quick" >
+              <h6 className="mb-0 pt-2 text-start ps-lg-5 font-size-quick">
                 {selectedMultiLangData?.details}
               </h6>
             </div>
@@ -257,7 +263,7 @@ const QuickOrder = () => {
               <input type="text" name="inputValue" value="" disabled />
             </>
           ) : (
-            <div className="">
+            <div className="d-flex ">
               <input
                 type="text"
                 name="inputValue"
@@ -265,8 +271,15 @@ const QuickOrder = () => {
                 onChange={(e: any) => setPartNumberInputField(e.target.value)}
                 onKeyDown={(e: any) => handleKeyDown(e)}
                 placeholder={selectedMultiLangData?.item_code}
-                
               />
+              <div className="d-lg-none d-block ms-5">
+                <button
+                  className="btn btn-primary"
+                  onClick={(e: any) => handleKeyDown(e)}
+                >
+                  Add Product
+                </button>
+              </div>
             </div>
           )}
         </div>
