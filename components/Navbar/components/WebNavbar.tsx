@@ -28,6 +28,7 @@ const WebNavbar = ({
   handleKeyDown,
   multiLanguagesData,
   selectedMultiLangData,
+  handleSearchIputValue,
 }: any) => {
   const { wishlistCount } = useWishlist();
   console.log("navmenu click", navMenuclick);
@@ -46,24 +47,17 @@ const WebNavbar = ({
   };
 
   useEffect(() => {
-    setCartCount(cartlisting_data?.orderCount);
+    if (Object?.keys(cartlisting_data?.data)?.length > 0) {
+      setCartCount(cartlisting_data?.data?.total_qty);
+    } else {
+      setCartCount(0);
+    }
   }, [cartlisting_data]);
-  // useEffect(() => {
-  //   setSelectedCurrencyValue(
-  //     currency_state_from_redux?.selected_currency_value
-  //   );
-  // }, [currency_state_from_redux]);
 
   let isLoggedIn: any;
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
-
-  // useEffect(() => {
-  //   if (isLoggedIn.user === "LoggedIn") {
-  //     setLoggedIn(true);
-  //   }
-  // }, [login_state]);
 
   const router = useRouter();
   console.log("isLoggedIn12", LoggedIn);
@@ -111,8 +105,7 @@ const WebNavbar = ({
               </Link>
             </div>
 
-
-            <div className="mx-0  logo_containers my-2 logo_container_mob" >
+            <div className="mx-0  logo_containers my-2 logo_container_mob">
               <Link href="/" legacyBehavior>
                 <Image
                   src="/assets/images/progearhub_logo.png"
@@ -131,7 +124,8 @@ const WebNavbar = ({
                 id="search"
                 placeholder={selectedMultiLangData?.search_in}
                 value={searchValue}
-                onChange={(e: any) => setSearchValue(e.target.value)}
+                onChange={handleSearchIputValue}
+                // onChange={(e: any) => setSearchValue(e.target.value)}
                 onKeyDown={handleKeyDown}
                 required
               />
@@ -144,7 +138,7 @@ const WebNavbar = ({
               </button>
             </div>
 
-            <div className="navbar-left-icon1 d-flex align-items-center text-center mob-icon-wrapper" >
+            <div className="navbar-left-icon1 d-flex align-items-center text-center mob-icon-wrapper">
               <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">
@@ -173,7 +167,7 @@ const WebNavbar = ({
                   </a>
                 </Link>
               </div>
-              <div className="nav_custom_dropdown  d-flex align-items-center login-mob-margin" >
+              <div className="nav_custom_dropdown  d-flex align-items-center login-mob-margin">
                 <Dropdown>
                   {isLoggedIn === "true" ? (
                     <Dropdown.Toggle

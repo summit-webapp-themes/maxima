@@ -41,14 +41,14 @@ const HandleOrderSection = (props: any) => {
         </div>
       )} */}
 
-      <div className="shadow-sm card" >
-        <div className="card-body py-0 px-1" >
+      <div className="shadow-sm card">
+        <div className="card-body py-0 px-1">
           {isDealer ? null : (
             <div className="accordion" id="accordionExample">
               {CONSTANTS.ENABLE_APPLY_COUPON_CODE ? (
                 <>
                   <div className="accordion-item border-0">
-                    <h2 className="accordion-header" id="headingOne" >
+                    <h2 className="accordion-header" id="headingOne">
                       <button
                         className="accordion-button collapsed pt-4 px-2 pb-2 fs-4 ms-1 accorder-btn-plus"
                         type="button"
@@ -67,7 +67,7 @@ const HandleOrderSection = (props: any) => {
                       aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample"
                     >
-                      <div className="accordion-body py-0 pt-2" >
+                      <div className="accordion-body py-0 pt-2">
                         <form className=" fields-group-md">
                           <div className="form-group">
                             <input
@@ -126,7 +126,7 @@ const HandleOrderSection = (props: any) => {
 
               {CONSTANTS.ENABLE_STORE_CREDIT ? (
                 <>
-                  <div className="accordion-item border-0" >
+                  <div className="accordion-item border-0">
                     <h2 className="accordion-header" id="headingTwo">
                       <button
                         className="accordion-button collapsed pt-4 fs-4 px-2 ms-1 accorder-btn-plus"
@@ -182,12 +182,12 @@ const HandleOrderSection = (props: any) => {
             </div>
           )}
 
-          <h5 className="px-2 pt-2 text-uppercase ms-1" >
+          <h5 className="px-2 pt-2 text-uppercase ms-1">
             {" "}
             {selectedMultiLangData?.order_summary}
           </h5>
 
-          <OrderSummary 
+          <OrderSummary
             orderSummary={orderSummary}
             couponError={couponError}
             currencySymbolForSummary={currencySymbolForSummary}

@@ -9,8 +9,8 @@ const CreateCatalog = ({
     <>
       <div className="d-flex justify-content-center">
         <div className="col-lg-7 text-center">
-          <div className="row catalogCreate-wrapper mx-auto">
-            <h3 className="text-center text-uppercase">
+          <div className="row mx-auto">
+            <h3 className="text-center text-captilize pb-4">
               {selectedMultiLangData?.create_catalog}
             </h3>
             <div className="col-lg-8 col-12 px-0  d-flex justify-content-center">
