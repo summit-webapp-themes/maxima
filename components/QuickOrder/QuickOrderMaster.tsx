@@ -135,11 +135,11 @@ const QuickOrder = () => {
                   }
                 </div>
                 <div className="col-lg-5" >
-                  <div className="row mt-lg-0 mt-4">
+                  <div className="row mt-lg-0 mt-4 btn-quick-margin">
                     <div className="col-lg-7 col-6 text-end ">
                       <button
                         type="button"
-                        className=" mb-3 text-uppercase py-2 px-lg-4 px-5 mt-2"
+                        className=" mb-3 text-uppercase py-2 px-lg-4 px-5 mt-2 reset-btn-mob"
                         style={{
                           border: "1px solid #0071DC",
                           borderRadius: "7px",
@@ -151,10 +151,10 @@ const QuickOrder = () => {
                         {selectedMultiLangData?.reset_form}
                       </button>
                     </div>
-                    <div className="col-lg-5 col-6 text-end">
+                    <div className="col-lg-5 col-6 text-end ">
                       <button
                         type="button"
-                        className=" text-white mb-3 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn mt-2 "
+                        className=" text-white mb-3 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn mt-2 reset-btn-mob "
                         style={{
                           border: "1px solid #0071DC",
                           borderRadius: "7px",
@@ -174,34 +174,34 @@ const QuickOrder = () => {
         </div>
       </div>
 
-      <div className="row  mx-0 mt-5  table-heading-quick-order-mob products-name ms-3 me-1" >
+      <div className="row  mt-5  table-heading-quick-order-mob products-name  ms-3 me-1 " >
         <div className="col-lg-12 text-center cart_heading_bg">
-          <div className="row products_title_quick">
+          <div className="row products_title_quick py-3 " >
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
             <div className="col-lg-2 ">
-              <h5 className="mb-0 pt-2 text-start ps-lg-4">
+              <h5 className="mb-0 pt-2 text-start ps-lg-4 ">
                 {/* {selectedMultiLangData?.image} */}
               </h5>
             </div>
             <div className="col-lg-6  products-name ">
-              <h5 className="mb-0 pt-2 text-start ps-lg-5" >
+              <h6 className="mb-0 pt-2 text-start ps-lg-5 font-size-quick" >
                 {selectedMultiLangData?.details}
-              </h5>
+              </h6>
             </div>
-            <div className="col-lg-1  mx-lg-5">
-              <h5 className="mb-0 pt-2 text-end ps-lg-5">
+            <div className="col-lg-1  mx-lg-5 ms-5 ps-5 price-title-margin">
+              <h6 className="mb-0 pt-2 text-end ps-lg-5 font-size-quick">
                 {selectedMultiLangData?.price}
-              </h5>
+              </h6>
             </div>
-            <div className="col-lg-1 col-1 text-start">
-              <h5 className="mb-0 pt-2 ps-lg-2">
+            <div className="col-lg-1 col-1 text-start ms-1 ps-5 qty-title-margin">
+              <h6 className="mb-0 pt-2 ps-lg-2 font-size-quick">
                 {selectedMultiLangData?.quantity_c}
-              </h5>
+              </h6>
             </div>
-            <div className="col-lg-1 col-1 text-start">
-              <h5 className="mb-2 pt-2 ps-lg-3">
+            <div className="col-lg-1 col-1 text-start ms-3 total-tiltle-margin">
+              <h6 className="mb-2 pt-2 ps-lg-3 font-size-quick">
                 {selectedMultiLangData?.total}
-              </h5>
+              </h6>
             </div>
           </div>
         </div>
@@ -257,7 +257,7 @@ const QuickOrder = () => {
               <input type="text" name="inputValue" value="" disabled />
             </>
           ) : (
-            <div>
+            <div className="">
               <input
                 type="text"
                 name="inputValue"
@@ -265,6 +265,7 @@ const QuickOrder = () => {
                 onChange={(e: any) => setPartNumberInputField(e.target.value)}
                 onKeyDown={(e: any) => handleKeyDown(e)}
                 placeholder={selectedMultiLangData?.item_code}
+                
               />
             </div>
           )}

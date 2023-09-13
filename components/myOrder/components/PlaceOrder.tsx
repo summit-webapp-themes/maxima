@@ -23,7 +23,7 @@ const PlaceOrder = ({
     <>
       <div role="tabpanel" aria-hidden="false">
         <div className="row mb-5 products-name">
-          <div className="col-lg-12" > 
+          <div className="col-lg-12" >
             <div className="row">
               <div className="col-lg-2 col-sm-4 col-6">
                 <select

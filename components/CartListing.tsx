@@ -171,7 +171,7 @@ const CartListing = () => {
           {Object.keys(cartListingItems).length > 0 ? (
             <div className="cart-ps-container" >
               <div className="row">
-                <div className="col-9">
+                <div className="col-9" >
                   <div className="cart_heading mb-3" >
                     <h2 className=" shopping-cart-heading products-name pb-4">
                       {selectedMultiLangData?.shopping_cart}
@@ -179,7 +179,7 @@ const CartListing = () => {
                   </div>
                 </div>
 
-                <div className="col-3 d-flex justify-content-end">
+                <div className="col-3 d-flex justify-content-end" >
                   <p className="checkbox-cursor product-font-family">
                     <a
                       className="clear_cart bold"
@@ -225,7 +225,7 @@ const CartListing = () => {
               {/* </div>
               </div> */}
 
-              <div className="row cart_wrapper ">
+              <div className="row cart_wrapper " >
                 {/* <div className="col-12">
                   <div className="row justify-content-between"> */}
                 {/* <div className="col-md-4 text-center">
@@ -295,21 +295,21 @@ const CartListing = () => {
                         return (
                           <>
                             <div key={index} className="border ">
-                              <div className="container">
+                              <div className="container" >
                                 <h3 className="mt-2 text-decoration-underline products-name category-name-font" >
                                   {category.category}
                                 </h3>
 
                                 <div className="col-12 " >
                                   <div className="row cart_heading_bg my-auto products-name ">
-                                    <div className="col-md-2 col-12">
-                                      <h6 className="mt-4">
+                                    <div className="col-md-2 col-12" >
+                                      <h6 className="mt-4" >
                                         {" "}
                                         {/* {selectedMultiLangData?.image} */}
                                       </h6>
                                     </div>
-                                    <div className="col-md-10 col-12 d-lg-block d-none products-name">
-                                      <div className="row text-center products-name product-captilise ">
+                                    <div className="col-md-10 col-12 d-lg-block d-none products-name" >
+                                      <div className="row text-center products-name product-captilise " >
                                         <div className="col-7 text-start my-0 products-name" >
                                           <h6 className="mt-4" >
                                             {
@@ -363,7 +363,7 @@ const CartListing = () => {
                                       (orders: any, i: any) => {
                                         return (
                                           <div key={i}>
-                                            <div className="row products-name " >
+                                            <div className="row products-name pt-2" >
                                               <div className="col-lg-2  text-center products-name cart-image pb-3">
                                                 {handleRenderingOfCartImages(
                                                   orders
@@ -404,7 +404,7 @@ const CartListing = () => {
                 </div>
 
                 <hr />
-                <div className="container mb-0 pb-0">
+                <div className="container mb-0 pb-0" >
                   <div className="col-12" >
                     <div className="row justify-content-start product-font">
                       <div className="col-md-6 note-line-height" >
@@ -494,21 +494,21 @@ const CartListing = () => {
 
                                   <div className="col-12  cart-btn-lower-web cart-btn-lower-mob">
 
-                                  <div>
-                    <p className="checkbox-cursor">
-                      <a
-                        className="clear_cart bold update-cart-mob"
-                        onClick={() => callUpdateCartAPI()}
-                      >
-                        {selectedMultiLangData?.update_cart}
-                      </a>
-                    </p>
-                  </div>
+                                    <div>
+                                      <p className="checkbox-cursor">
+                                        <a
+                                          className="clear_cart bold update-cart-mob"
+                                          onClick={() => callUpdateCartAPI()}
+                                        >
+                                          {selectedMultiLangData?.update_cart}
+                                        </a>
+                                      </p>
+                                    </div>
                                     <div className=" text-center " >
                                       <Link href="/checkout">
                                         <button
                                           type="button"
-                                          className="w-100 checkout_button mb-3 text-uppercase  px-1 product-font-family py-3"
+                                          className="w-100 checkout_button mb-3 text-uppercase  px-3 product-font-family py-3"
                                           style={{
                                             backgroundColor: "#0071DC",
                                             color: "#fff",
