@@ -87,7 +87,7 @@ const DealerLedger = () => {
           dealerLedgerSummary={dealerLedgerSummary}
           selectedMultiLangData={selectedMultiLangData}
         />
-        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 products-name dealer-account-container">
+        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 products-name dealer-account-container"  >
           <div className="col-lg-8">
             <div className="row m-lg-5">
               <div className="col-lg-4 col-6 mt-0 pt-0 mb-0 pb-0">
@@ -137,7 +137,7 @@ const DealerLedger = () => {
                 </select>
               </div>
             </div>
-            <div className="row mx-lg-5 my-5 products-name">
+            <div className="row mx-lg-5 my-2 products-name">
               <div className="col-lg-4 col-4 mt-lg-2">
                 <input
                   type="radio"
@@ -188,10 +188,10 @@ const DealerLedger = () => {
             <div className="row">
               <div className="col-lg-8 text-center mb-3">
                 <button
-                  className="btn btn-outline-primary ledger-submit-button rounded-3 my-3 w-25 products-name"
+                  className="btn btn-outline-primary ledger-submit-button rounded-3 mt-5 w-25 products-name"
                   onClick={HandleLedgerData}
                 >
-                  {selectedMultiLangData?.submit}
+                  <span className="products-name">{selectedMultiLangData?.submit}</span>
                 </button>
               </div>
             </div>

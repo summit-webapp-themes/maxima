@@ -215,18 +215,18 @@ const WishlistMaster = () => {
                       {" "}
                       {stockData?.incoming_date !== ""
                         ? stockData?.incoming_date
-                            ?.split("-")
-                            .reverse()
-                            .join("-")
+                          ?.split("-")
+                          .reverse()
+                          .join("-")
                         : stockData?.incoming_date === ""}
                     </td>
                     <td className="text-center">{stockData?.additional_qty}</td>
                     <td className="text-center">
                       {stockData?.available_on !== ""
                         ? stockData?.available_on
-                            ?.split("-")
-                            .reverse()
-                            .join("-")
+                          ?.split("-")
+                          .reverse()
+                          .join("-")
                         : stockData?.available_on === ""}
                     </td>
                   </tr>
@@ -413,12 +413,11 @@ const WishlistMaster = () => {
                                   : item?.min_order_qty
                               }
                               value={productCounts[index]}
-                              className={`${
-                                alertMinQty === true &&
-                                productCounts[index] === item?.min_order_qty
+                              className={`${alertMinQty === true &&
+                                  productCounts[index] === item?.min_order_qty
                                   ? "text-danger"
                                   : ""
-                              } w-100 ml-2 pb-lg-0 pb-1 text-center`}
+                                } w-100 ml-2 pb-lg-0 pb-1 text-center`}
                               onChange={(e: any) =>
                                 handleQuantityChange(
                                   +e?.target?.value,
@@ -441,12 +440,11 @@ const WishlistMaster = () => {
                         </div>
                         {item?.min_order_qty !== 0 ? (
                           <div
-                            className={`${
-                              alertMinQty === true &&
-                              productCounts[index] === item?.min_order_qty
+                            className={`${alertMinQty === true &&
+                                productCounts[index] === item?.min_order_qty
                                 ? "text-danger"
                                 : "text-dark"
-                            } fs-6 mt-1 text-uppercase bold`}
+                              } fs-6 mt-1 text-uppercase bold`}
                           >
                             {selectedMultiLangData?.minimum_order_qty}:{" "}
                             {item?.min_order_qty}
