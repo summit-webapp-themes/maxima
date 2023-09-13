@@ -52,9 +52,8 @@ const ProductDetail = ({
   const dispatch = useDispatch();
   const TokenFromStore: any = useSelector(get_access_token);
   const currency_state_from_redux: any = useSelector(currency_selector_state);
+  const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
   const router = useRouter();
-
-  // const [newobjectState, setnewObjectState] = useState<any>([]);
 
   const handleVariantsData: any = (newData: any) => {
     console.log("input qty new", newData);
@@ -69,6 +68,7 @@ const ProductDetail = ({
   }
 
   const handleAddCart: any = async () => {
+    setAddToCartButtonDisabled(true);
     let DealerCartNewObjects: any =
       newobjectState &&
       newobjectState?.filter((newitems: any) => newitems.quantity !== "");
@@ -88,10 +88,11 @@ const ProductDetail = ({
       console.log("dealer AddToCartRes", AddToCartRes);
       if (AddToCartRes?.msg === "success") {
         showToast("Item Added to cart", "success");
-
+        setAddToCartButtonDisabled(false);
         dispatch(fetchCartListing(TokenFromStore?.token));
       } else {
-        showToast("Failed to Add to cart", "error");
+        showToast(AddToCartRes?.error, "error");
+        setAddToCartButtonDisabled(false);
       }
     } else {
       let AddToCartRes: any = await AddToCartApi(
@@ -104,7 +105,7 @@ const ProductDetail = ({
 
         dispatch(fetchCartListing(TokenFromStore?.token));
       } else {
-        showToast("Failed to Add to cart", "error");
+        showToast(AddToCartRes?.error, "error");
       }
     }
 
@@ -213,9 +214,11 @@ const ProductDetail = ({
   };
   return (
     <div>
-      <div className="product-info mt-2" >
-        <b className="product_name products-name products-name-font">{productDetailData?.item_name}</b>
-        <p className=" text-dark  products-name " >
+      <div className="product-info mt-2">
+        <b className="product_name products-name products-name-font">
+          {productDetailData?.item_name}
+        </b>
+        <p className=" text-dark  products-name ">
           <span>
             {" "}
             {productDetailData?.short_description ===
@@ -225,17 +228,23 @@ const ProductDetail = ({
               : productDetailData?.short_description}
           </span>
         </p>
-        <div  className="products-name product-line-height rating-container" >
-          <StarRating rating={productDetailData?.rating} className="product_brand_name"/>
+        <div className="products-name product-line-height rating-container">
+          <StarRating
+            rating={productDetailData?.rating}
+            className="product_brand_name"
+          />
         </div>
         <p className="mt-3 text-dark p-tagfont product_item_name products-name product-line-height">
           {selectedMultiLangData?.item_code}: {productDetailData?.name}
         </p>
 
-        <h3 className="p_price m-0 price_font_family rating-container" >
+        <h3 className="p_price m-0 price_font_family rating-container">
           {productDetailData?.price !== 0 ? (
             <>
-            <span className="products-name bold">  {productDetailData?.currency_symbol} {productDetailData?.price}</span>
+              <span className="products-name bold">
+                {" "}
+                {productDetailData?.currency_symbol} {productDetailData?.price}
+              </span>
               {/* <IndianNumber value={productDetailData?.price} /> */}
             </>
           ) : (
@@ -246,7 +255,7 @@ const ProductDetail = ({
 
           {productDetailData?.mrp_price !== 0 ? (
             <>
-              <s className="old-price currency_symbol price_font_family product-font-family" >
+              <s className="old-price currency_symbol price_font_family product-font-family">
                 {productDetailData?.currency_symbol}{" "}
                 {productDetailData?.mrp_price}
                 {/* <IndianNumber value={productDetailData?.mrp_price} /> */}
@@ -284,7 +293,9 @@ const ProductDetail = ({
                       (featureL: any, index: any) => {
                         return (
                           <li key={index} className="d-flex">
-                            <span className="feature_list products-name product-line-height"> </span>
+                            <span className="feature_list products-name product-line-height">
+                              {" "}
+                            </span>
                             <span className="fs-5 products-name ">
                               {featureL.description}
                             </span>
@@ -413,7 +424,7 @@ const ProductDetail = ({
 
               <div className="row button_sec">
                 {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
-                  <div className="col-lg-4 col-6 align-self-lg-start products-name btn-wrapper" >
+                  <div className="col-lg-4 col-6 align-self-lg-start products-name btn-wrapper">
                     <div className="mt-5">
                       <button
                         type="button"
@@ -443,7 +454,9 @@ const ProductDetail = ({
                       <div className="row btn-wrapper">
                         <button
                           type="button"
-                          className={`w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
+                          className={`${
+                            addToCartButtonDisabled === true ? "disabled" : ""
+                          } w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
                           onClick={handleAddCart}
                           disabled={doesSelectedVariantDoesNotExists}
                         >

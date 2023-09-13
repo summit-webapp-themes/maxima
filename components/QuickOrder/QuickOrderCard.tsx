@@ -40,7 +40,7 @@ const QuickOrderCard = (props: any) => {
           .map((data: any, index: any) => (
             <>
               {/* <div className="col-lg-2 col-2"></div> */}
-              <div className="col-lg-2 col-12 text-start ps-lg-0 products-name"  >
+              <div className="col-lg-2 col-12 text-start ps-lg-0 products-name">
                 {data.image_url !== null ? (
                   <Image
                     loader={myLoader}
@@ -87,7 +87,7 @@ const QuickOrderCard = (props: any) => {
                   </a>
                 </Link>
               </div>
-              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name">
+              <div className="col-lg-1 col-12 mx-lg-0 mx-4 ps-0 price_font_family products-name">
                 <p>
                   {data.price !== 0 ? (
                     <>
@@ -101,7 +101,7 @@ const QuickOrderCard = (props: any) => {
                   )}
                 </p>
               </div>
-              <div className="col-lg-1 col-6 mx-lg-0 mx-4 products-name">
+              <div className="col-lg-1 col-6 mx-lg-0 ps-0 mx-4 products-name">
                 {
                   <>
                     <input
@@ -114,7 +114,7 @@ const QuickOrderCard = (props: any) => {
                   </>
                 }
               </div>
-              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name">
+              <div className="col-lg-1 col-12 mx-lg-0 ps-0 mx-4 price_font_family products-name">
                 {data.currency_symbol}
                 <IndianNumber
                   value={(total = data.price * showValue(data?.min_order_qty))}

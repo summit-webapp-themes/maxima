@@ -18,7 +18,7 @@ const OrderSummary = ({
   const [initial, setInitial] = useState(false);
   const cartProducts: any = useSelector(cart_listing_state);
 
-  console.log("order Summary", currencySymbolForSummary, cartProducts);
+  console.log("order Summary", currencySymbolForSummary, orderSummary);
   let order;
   useEffect(() => {
     setcartListingItems(cartProducts?.data);
@@ -39,41 +39,71 @@ const OrderSummary = ({
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
   return (
-    <div >
-      <div >
+    <div>
+      <div>
         {!orderSummary ? null : (
           <div>
             {couponError === false
               ? orderSummary?.map((data: any, index: number) => (
-                  <div
-                    className="order-summery px-2 px-sm-0 px-xm-0 mx-3 products-name"
-                    key={index}   
-                  >
-                    <div className="row mb-1 " >
-                      <div className="col-6">
-                        {data?.name === "Total" ? (
-                          <strong className="mb-0 p-0">{data?.name}</strong>
-                        ) : (
-                          <p className={`mb-0 p-0 summary_p`}>{data?.name}</p>
-                        )}
-                      </div>
-                      <div className="col-6 text-end">
-                        <p className={`mb-0 summary_p`}>
-                          {data?.name === "Coupon Code" ? (
-                            <div>
-                              <IndianNumber value={data?.value} />
+                  <>
+                    {data?.name === "Tax" && (
+                      <>
+                        <div
+                          className="order-summery px-2 px-sm-0 px-xm-0 mx-3 products-name"
+                          key={index}
+                        >
+                          <div className="row mb-1 ">
+                            <div className="col-6">{data?.name}</div>
+                            <div className="col-6 text-end">
+                              <p className={`mb-0 summary_p`}>
+                                <div>
+                                  {currencySymbolForSummary}
+                                  <IndianNumber value={data?.value} />
+                                </div>
+                              </p>
                             </div>
-                          ) : (
-                            <div>
-                              {currencySymbolForSummary}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                    {data?.value !== 0 && data?.value !== null && (
+                      <>
+                        <div
+                          className="order-summery px-2 px-sm-0 px-xm-0 mx-3 products-name"
+                          key={index}
+                        >
+                          <div className="row mb-1 ">
+                            <div className="col-6">
+                              {data?.name === "Total" ? (
+                                <strong className="mb-0 p-0">
+                                  {data?.name}
+                                </strong>
+                              ) : (
+                                <p className={`mb-0 p-0 summary_p`}>
+                                  {data?.name}
+                                </p>
+                              )}
+                            </div>
+                            <div className="col-6 text-end">
+                              <p className={`mb-0 summary_p`}>
+                                {data?.name === "Coupon Code" ? (
+                                  <div>
+                                    <IndianNumber value={data?.value} />
+                                  </div>
+                                ) : (
+                                  <div>
+                                    {currencySymbolForSummary}
 
-                              <IndianNumber value={data?.value} />
+                                    <IndianNumber value={data?.value} />
+                                  </div>
+                                )}
+                              </p>
                             </div>
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </>
                 ))
               : orderSummary
                   .filter(
@@ -88,12 +118,16 @@ const OrderSummary = ({
                       className="order-summery px-2 px-sm-0 px-xm-0"
                       key={index}
                     >
-                      <div className="row mb-1 " >
-                        <div className="col-6 products-name" >
+                      <div className="row mb-1 ">
+                        <div className="col-6 products-name">
                           {data.name === "Total" ? (
-                            <strong className="mb-0 p-0 products-name " >{data?.name}</strong>
+                            <strong className="mb-0 p-0 products-name ">
+                              {data?.name}
+                            </strong>
                           ) : (
-                            <p className={`mb-0 p-0 summary_p `} >{data?.name}</p>
+                            <p className={`mb-0 p-0 summary_p `}>
+                              {data?.name}
+                            </p>
                           )}
                         </div>
                         <div className="col-6 text-end ">
@@ -120,7 +154,7 @@ const OrderSummary = ({
         )}
       </div>
 
-      <div className="checkout-item mt-5" >
+      <div className="checkout-item mt-5">
         {cartListingItems?.categories?.length > 0 &&
           cartListingItems?.categories.map((value: any, index: any) => {
             return (
@@ -143,7 +177,7 @@ const OrderSummary = ({
                             </div>
                           </div>
                           <div className="col-8 products-name">
-                            <div className="checkout_item_details products-name" >
+                            <div className="checkout_item_details products-name">
                               <h6 className="mb-0 product_item_name ">
                                 {data.item_name}
                               </h6>

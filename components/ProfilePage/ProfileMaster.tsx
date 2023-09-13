@@ -107,43 +107,42 @@ const ProfileMaster = () => {
   const personalDetails: any = () => {
     return (
       <div className="ms-2">
-       <div className="mob-userdetail-containers">
-       <div className="col-lg-3 bold fs-3 products-name">
-          {selectedMultiLangData?.user_name}:
+        <div className="mob-userdetail-containers">
+          <div className="col-lg-3 bold fs-3 products-name">
+            {selectedMultiLangData?.user_name}:
+          </div>
+          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+            {profileList && profileList?.profile_details?.customer_name}
+          </div>
         </div>
-        <div className="col-lg-9 fs-4 persons-data-mob products-name">
-          {profileList && profileList?.profile_details?.customer_name}
-        </div>
-       </div>
-      
-       <div className="mob-userdetail-containers">
-        <div className="col-lg-3 bold fs-3 products-name">
-          {selectedMultiLangData?.company_name} :
-        </div>
-        <div className="col-lg-9 fs-4 persons-data-mob products-name">
-          {profileList && profileList?.profile_details?.company_name}
-        </div>
-</div>
 
-<div className="mob-userdetail-containers">
-        <div className="col-lg-3 bold fs-3 products-name">
-          {selectedMultiLangData?.mobile_number} :
+        <div className="mob-userdetail-containers">
+          <div className="col-lg-3 bold fs-3 products-name">
+            {selectedMultiLangData?.company_name} :
+          </div>
+          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+            {profileList && profileList?.profile_details?.company_name}
+          </div>
         </div>
-        <div className="col-lg-9 fs-4 persons-data-mob products-name">
-          {profileList && profileList?.profile_details?.contact_no}
-        </div>
-</div>
 
-<div className="mob-userdetail-containers">
-<div className="col-lg-3 bold fs-3 products-name">
-          {" "}
-          {selectedMultiLangData?.email} :
+        <div className="mob-userdetail-containers">
+          <div className="col-lg-3 bold fs-3 products-name">
+            {selectedMultiLangData?.mobile_number} :
+          </div>
+          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+            {profileList && profileList?.profile_details?.contact_no}
+          </div>
         </div>
-        <div className="col-lg-9 fs-4 persons-data-mob products-name">
-          {profileList && profileList?.profile_details?.email}
+
+        <div className="mob-userdetail-containers">
+          <div className="col-lg-3 bold fs-3 products-name">
+            {" "}
+            {selectedMultiLangData?.email} :
+          </div>
+          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+            {profileList && profileList?.profile_details?.email}
+          </div>
         </div>
-</div>
-      
       </div>
     );
   };
