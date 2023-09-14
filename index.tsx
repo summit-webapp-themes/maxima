@@ -55,14 +55,14 @@ export async function getServerSideProps(context: any) {
       fetchedDataFromServer = {};
     }
   }
-  let get_default_currency_value = await getMultiCurrencyValue();
+  let get_default_currency_value:any = await getMultiCurrencyValue();
   if (get_default_currency_value?.status === 200) {
     fetchedDataFromServer.defaultCurrencyValue =
       get_default_currency_value?.data?.message;
   } else {
     fetchedDataFromServer.defaultCurrencyValue = {};
   }
-  let get_multi_lingual_data_value = await MultiLangApi();
+  let get_multi_lingual_data_value:any = await MultiLangApi();
   if (get_multi_lingual_data_value?.length > 0) {
     fetchedDataFromServer.multiLingualValues = get_multi_lingual_data_value;
   } else {
