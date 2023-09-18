@@ -30,6 +30,7 @@ import {
 } from "react-share";
 import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 import { showToast } from "../../ToastNotificationNew";
+import ReactGA from "react-ga";
 const ProductDetail = ({
   productDetailData,
   productVariants,
@@ -89,6 +90,12 @@ const ProductDetail = ({
       if (AddToCartRes?.msg === "success") {
         showToast("Item Added to cart", "success");
         setAddToCartButtonDisabled(false);
+        ReactGA.event({
+          category: productDetailData?.item_name,
+          action: "Add Cart",
+          label: `${productDetailData?.item_name} is added to cart`,
+          value: productDetailData.price,
+        });
         dispatch(fetchCartListing(TokenFromStore?.token));
       } else {
         showToast(AddToCartRes?.error, "error");
@@ -102,7 +109,12 @@ const ProductDetail = ({
       );
       if (AddToCartRes?.msg === "success") {
         showToast("Item Added to cart", "success");
-
+        ReactGA.event({
+          category: productDetailData?.item_name,
+          action: "Add Cart",
+          label: `${productDetailData?.item_name} is added to cart`,
+          value: productDetailData.price,
+        });
         dispatch(fetchCartListing(TokenFromStore?.token));
       } else {
         showToast(AddToCartRes?.error, "error");
