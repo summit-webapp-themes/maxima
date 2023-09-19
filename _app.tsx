@@ -10,6 +10,8 @@ import { initializeFirebase } from "../push-notifications";
 import { useEffect, useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import Scrolltop from "../components/ScrollTop";
+import Script from "next/script";
+import ReactGA from "react-ga";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const articleRef = useRef<null | HTMLParagraphElement>(null);
@@ -29,23 +31,23 @@ function MyApp({ Component, pageProps }: AppProps) {
           console.error("Service Worker registration failed: ", error);
         });
     }
+    const TRACKING_ID = "G-JEKLX6CZRT";
+    ReactGA.initialize(TRACKING_ID);
   }, []);
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = async () => {
-  //     localStorage.clear();
-  //     const logoutAPI = await LogoutList();
-  //   };
-
-  //   window.addEventListener('beforeunload', handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener('beforeunload', handleBeforeUnload);
-  //   };
-  // }, []);
 
   return (
     <div>
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-JEKLX6CZRT"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {` window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JEKLX6CZRT');
+        `}
+      </Script>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           {() => (
