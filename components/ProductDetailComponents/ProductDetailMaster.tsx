@@ -10,6 +10,7 @@ import ProductEnlargeImage from "./ProductEnlargeImage";
 import ProductSpecificationMaster from "./ProductSpecifications/ProductSpecificationMaster";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { useEffect, useState } from "react";
+import ReactGA from "react-ga";
 const ProductDetailMaster = () => {
   const {
     productDetailData,
@@ -49,6 +50,10 @@ const ProductDetailMaster = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   return (
     <div className="margin_from_nav_lp">
       <div className="container product_detail_container">

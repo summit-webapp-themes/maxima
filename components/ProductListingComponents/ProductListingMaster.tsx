@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
 import { useSelector } from "react-redux";
 import useCatalogHook from "../../hooks/CatalogHooks/catalogHook";
+import ReactGA from "react-ga";
 
 const ProductListingMaster = () => {
   const {
@@ -28,7 +29,6 @@ const ProductListingMaster = () => {
     currency_state_from_redux,
     handlePaginationBtn,
   } = useProductListing();
-  console.log("cube ", productListingData);
   const { wishlistData }: any = useWishlist();
   const {
     catalogListItem,
@@ -56,6 +56,10 @@ const ProductListingMaster = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
   const myLoader = ({ src, width, quality }: any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
@@ -149,17 +153,15 @@ const ProductListingMaster = () => {
     }
   };
 
-  console.log("filters product listing in master", filtersData);
+  // console.log("filters product listing in master", filtersData);
   return (
     <>
       <div className="margin_from_nav_cart">
         <section className="listing-page ">
-          <div className="container" >
-
+          <div className="container">
             <BreadCrumbs
-              handleToggleProductsListingView={
-                handleToggleProductsListingView
-              } />
+              handleToggleProductsListingView={handleToggleProductsListingView}
+            />
             <div className="row mt-2 ms-3">
               <span className="col-lg-3 handle_display_web_filter">
                 <div className="">
