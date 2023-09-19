@@ -90,6 +90,14 @@ const WebNavbar = ({
     const logoutAPI = await LogoutList();
   };
 
+  const HandleLangToggle = (event: any) => {
+    console.log("handletoggle", event?.target?.checked);
+    if (event?.target?.checked === true) {
+      document.documentElement.dir = "rtl";
+    } else {
+      document.documentElement.dir = "ltr";
+    }
+  };
   return (
     <div>
       <header className="header fixed-header">
@@ -139,6 +147,21 @@ const WebNavbar = ({
             </div>
 
             <div className="navbar-left-icon1 d-flex align-items-center text-center mob-icon-wrapper">
+              <div className="form-check form-switch pe-5 fs-3 ">
+                <input
+                  className="form-check-input cursor_pointer"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                  onChange={HandleLangToggle}
+                />
+                <label
+                  className="form-check-label text-white"
+                  htmlFor="flexSwitchCheckDefault"
+                >
+                  Arabic
+                </label>
+              </div>
               <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">

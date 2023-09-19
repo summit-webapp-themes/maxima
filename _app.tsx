@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 // import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { persistor, store } from "../store/store";

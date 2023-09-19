@@ -5,11 +5,12 @@ import HomePage from "../components/HomePage";
 import Header from "../components/Header/Header";
 import { getMultiCurrencyValue } from "../services/api/general_apis/default-currency-api";
 import MultiLangApi from "../services/api/general_apis/multilanguage-api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setDefaultCurrencyValue } from "../store/slices/general_slices/multi-currency-slice";
 import { setMultiLingualData } from "../store/slices/general_slices/multilang-slice";
 import { setRevalidationTime } from "../store/slices/general_slices/cache-slice";
 import { askForPermissionToReceiveNotifications } from "../push-notifications";
+
 const Home: NextPage = (fetchedDataFromServer: any) => {
   askForPermissionToReceiveNotifications();
   console.log("check data of server obj", fetchedDataFromServer);
@@ -55,14 +56,14 @@ export async function getServerSideProps(context: any) {
       fetchedDataFromServer = {};
     }
   }
-  let get_default_currency_value:any = await getMultiCurrencyValue();
+  let get_default_currency_value: any = await getMultiCurrencyValue();
   if (get_default_currency_value?.status === 200) {
     fetchedDataFromServer.defaultCurrencyValue =
       get_default_currency_value?.data?.message;
   } else {
     fetchedDataFromServer.defaultCurrencyValue = {};
   }
-  let get_multi_lingual_data_value:any = await MultiLangApi();
+  let get_multi_lingual_data_value: any = await MultiLangApi();
   if (get_multi_lingual_data_value?.length > 0) {
     fetchedDataFromServer.multiLingualValues = get_multi_lingual_data_value;
   } else {
