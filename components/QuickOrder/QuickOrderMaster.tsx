@@ -125,7 +125,7 @@ const QuickOrder = () => {
   };
 
   return (
-    <div className="container  margin_from_nav_quick_o quickorder-main-conatainer-mob products-name">
+    <div className="container  margin_from_nav quickorder-main-conatainer-mob products-name">
       <div className="row  mx-0 mt-5  ">
         <div className="col-lg-12  ">
           <div className="row">

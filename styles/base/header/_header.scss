@@ -210,9 +210,10 @@
 .margin_from_nav_l {
   margin-top: 107px !important;
 }
-.margin_from_nav {
-  margin-top: 170px !important;
-}
+// .margin_from_nav {
+//   margin-top: 150px !important;
+//   margin-bottom: 15px !important
+// }
 .margin_from_nav_cart {
   margin-top: 116px !important;
 }
@@ -1175,7 +1176,9 @@ header.header.fixed {
     background-color: $primary-color !important;
   }
 }
-
+.color-black{
+  color: black;
+}
 // navbar
 .navbar-left-icon1 {
   // border:2px solid red;
