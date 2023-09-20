@@ -125,7 +125,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
 
             <div className="d-flex align-items-center row">
               <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4 mt-2">
-                <div className="product-img">
+                <div className="product-img cart-image  mt-2">
                   <img
                     src={`${CONSTANTS.API_BASE_URL}/${detail?.img !== null ? detail?.img : detail?.brand_img
                       }`}
