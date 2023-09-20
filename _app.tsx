@@ -36,10 +36,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   useEffect(() => {
     const isRTL: any = document.documentElement.dir === "rtl";
-
     // Load the appropriate global CSS file based on text direction
     if (isRTL) {
-      import("../styles/pages/homepage-rtl.scss");
+      import("../styles/pages/CssLayout-rtl.scss");
     }
   }, []);
   return (

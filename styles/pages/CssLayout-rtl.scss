@@ -1,0 +1,27 @@
+html[dir="rtl"] {
+    .navbar-left-icon1{
+    margin-left: 0px;    
+    }
+    .rtl-toggle-section {
+        margin-left: 18px;
+    }
+    .menu > li:last-child {
+        margin-right: 3rem;
+    }
+    .category-menu > li:last-child {
+        margin-right: 0.6rem;
+    }
+    .category-menu > li:last-child > a i {
+    font-size: 1.7rem;
+    font-weight: 400;
+    }
+    .browse-cat-label {
+        padding-right: 10px;
+    }
+    .tab-content > .active {
+        visibility: hidden;
+    }
+    .browse-cat-list-span {
+        padding-right: 10px;
+    }
+}

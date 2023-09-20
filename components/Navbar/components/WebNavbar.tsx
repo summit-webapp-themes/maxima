@@ -147,7 +147,7 @@ const WebNavbar = ({
             </div>
 
             <div className="navbar-left-icon1 d-flex align-items-center text-center mob-icon-wrapper">
-              <div className="form-check form-switch pe-5 fs-3 ">
+              <div className="form-check form-switch pe-5 fs-3 rtl-toggle-section">
                 <input
                   className="form-check-input cursor_pointer"
                   type="checkbox"
@@ -281,7 +281,7 @@ const WebNavbar = ({
                       title="Browse Categories"
                     >
                       <i className="w-icon-category"></i>
-                      <span>{selectedMultiLangData?.browse_categories}</span>
+                      <span className="browse-cat-label">{selectedMultiLangData?.browse_categories}</span>
                     </a>
                   </Link>
 
@@ -293,7 +293,9 @@ const WebNavbar = ({
                           <li key={index}>
                             <a>
                               <i className="w-icon-tshirt2"></i>
+                              <span className="browse-cat-list-span">
                               {items.label}
+                              </span>
                             </a>
                             <ul className="megamenu">
                               {items?.values?.length > 0 &&
