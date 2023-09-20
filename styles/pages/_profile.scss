@@ -1,35 +1,32 @@
 .ageingreport-table {
-    border-collapse: "collapse"; 
-    width: 100%;
-
+  border-collapse: "collapse";
+  width: 100%;
 }
 .showmodal_button {
-    background: none;
-    border: none;
+  background: none;
+  border: none;
 }
 .download-link {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 .profile_heading {
-    font-weight: 1000;
-    font-size: 20px;
+  font-weight: 1000;
+  font-size: 20px;
 }
 
-.tab_width.active{
-    background-color: #3e9df6 !important;
+.tab_width.active {
+  background-color: #3e9df6 !important;
 }
 
-.nav_tabs_list.active h6{
-    color: $white-color!important;
+.nav_tabs_list.active h6 {
+  color: $white-color !important;
 }
 
 .profile_tab-icons {
-    font-size: 30px !important;
-    margin-bottom: 4px !important;
+  font-size: 30px !important;
+  margin-bottom: 4px !important;
 }
-
-
 
 // @media only screen and (max-width:500px){
 // .profile_tab-icons {
@@ -39,10 +36,10 @@
 // }
 
 .mob-userdetail-containers {
-    // border: 2px solid green;
-    display: flex !important;
-  }
-  
+  // border: 2px solid green;
+  display: flex !important;
+}
+
 //   @media only screen and (max-width: 600px) {
 //     .persons-data-mob {
 //       margin-left: 10px;
@@ -53,24 +50,24 @@
 //     //     margin-left: 0px !important;
 //     // }
 //   }
-  
 
-  .my-order-container-pd{
-    // border:2px solid green;
-    padding-left: 38px !important;
-    padding-right: 30px !important;
+.my-order-container-pd {
+  // border:2px solid green;
+  padding-left: 38px !important;
+  padding-right: 30px !important;
 }
 
-
 @media only screen and (max-width: 600px) {
-    .persons-data-mob {
-      margin-left: 10px;
-      margin-top: 2px;
-     
-    }
-    .my-order-container-pd{
-        // border:2px solid green;
-        padding-left: 10px !important;
-        padding-right: 0px !important;
-    }
+  .persons-data-mob {
+    margin-left: 10px;
+    margin-top: 2px;
   }
+  .my-order-container-pd {
+    // border:2px solid green;
+    padding-left: 10px !important;
+    padding-right: 0px !important;
+  }
+  .myacc-margin-mob {
+    margin-top: 12px;
+  }
+}

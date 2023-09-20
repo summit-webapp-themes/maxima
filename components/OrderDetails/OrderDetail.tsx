@@ -96,9 +96,9 @@ const Index = ({ sales_order_id }: any) => {
           {detail?.length > 0 &&
             detail !== null &&
             detail?.map((data: any) => (
-              <div className="container products-name" key={data?.name}>
+              <div className="container color-black" key={data?.name}>
                 <div className="row"></div>
-                <div className="row products-name">
+                <div className="row color-black">
                   <div className="col-md-6 ">
                     <div className="page_heading">
                       <h4 className="p-0 m-0">
@@ -107,7 +107,7 @@ const Index = ({ sales_order_id }: any) => {
                     </div>
                   </div>
                 </div>
-                <div className="order_detail_head row products-name pb-2" >
+                <div className="order_detail_head row color-black pb-2" >
                   <div className="col-12">
                     <div className="item_action d-flex ">
                       <div className="item_action_link me-3 ">
@@ -123,7 +123,7 @@ const Index = ({ sales_order_id }: any) => {
                 </div>
 
                 
-                <div id="printableArea" className="row products-name" >
+                <div id="printableArea" className="row color-black" >
                   <div className="col-lg-12">
                     <div className="order_card mb-3 card">
                       <div className="card-body" >

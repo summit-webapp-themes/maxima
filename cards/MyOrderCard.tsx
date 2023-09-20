@@ -18,8 +18,8 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
     <>
-      <div key={data.id}>
-        <div className="card-header pb-1 " >
+      <div key={data.id} >
+        <div className="card-header myorder-card-header " >
           <div className="row pb-0" >
             <div className=" mb-sm-0 col-md-2 col-6 order-div">
               <p className="text-uppercase gray mb-0 myorder_p">
@@ -31,13 +31,13 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
               </p>
             </div>
             <div className=" col-md-2 col-6 order-div">
-              <p className="text-uppercase gray mb-0 myorder_p">
+              <p className="text-uppercase gray mb-0 myorder_p" >
                 {" "}
                 {selectedMultiLangData?.total_price}
               </p>
               {data?.total === 0 ? (
-                <p className="border price_request">
-                  {selectedMultiLangData?.price_on_request}
+                <p className="border price_request" >
+                  {selectedMultiLangData?.price_on_request} 
                 </p>
               ) : (
                 <p className="gray mb-0 myorder_p price_font_family">
@@ -45,7 +45,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                 </p>
               )}
             </div>
-            <div className="col-md-2 col-4 order-cards">
+            <div className="col-md-2 col-4 order-cards" >
               <p className="text-uppercase gray mb-0 myorder_p">
                 {selectedMultiLangData?.ship_to}
               </p>
@@ -111,10 +111,10 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
         </div>
         {data?.order_details?.map((detail: any) => (
           <div
-            className="cart_item card-body order_cartdetails"
-            key={detail?.item_name}
+            className="cart_item cart_item-myorder-m card-body order_cartdetails" 
+            key={detail?.item_name} 
           >
-            <div className="d-flex mb-0">
+            <div className="d-flex mb-0 pb-0" >
               <div className="flex-fill">
                 <h6 className="green text-capitalize bold mb-0 mt-2 order-ptag ">
                   {selectedMultiLangData?.status} : {data?.payment_status}
@@ -123,9 +123,9 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
               <div className="justify-content-end d-none d-sm-block align-items-end"></div>
             </div>
 
-            <div className="d-flex align-items-center row">
-              <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4 mt-2">
-                <div className="product-img cart-image  mt-2">
+            <div className="d-flex align-items-center row" >
+              <div className="mb-0 mb-sm-0 col-lg-2 col-md-2 col-4 mt-2">
+                <div className="product-img cart-image  mt-2 mb-4">
                   <img
                     src={`${CONSTANTS.API_BASE_URL}/${detail?.img !== null ? detail?.img : detail?.brand_img
                       }`}
@@ -134,15 +134,15 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                   />
                 </div>
               </div>
-              <div className="product_item_details col-lg-6 col-md-7 col-8">
+              <div className="product_item_details col-lg-6 col-md-7 col-8" >
                 <div className="d-flex orderDetail-card">
-                  <div className="flex-fill">
+                  <div className="flex-fill" >
                     <Link href="#" legacyBehavior>
                       <a className="product_item_name bold">
                         {detail?.item_name}
                       </a>
                     </Link>
-                    <table width="100%" className="mt-2 table table-borderless">
+                    <table width="100%" className="mt-1 table table-borderless" > 
                       <tbody>
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
@@ -162,8 +162,8 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
 
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
-                            <p className="text-capitalize black mb-0 myorder_p">
-                              {selectedMultiLangData?.price}
+                            <p className="text-capitalize black mb-0 myorder_p" >
+                              {selectedMultiLangData?.price} 
                             </p>
                           </td>
                           <td
@@ -290,10 +290,10 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                 </>
               )}
             </div>
-            <div className="row">
-              <div className="mt-3 col-sm-12"></div>
+            <div className="row" >
+              <div className="mt-0 col-sm-12" ></div>
             </div>
-            <hr className="d-block hr_orderdetail" />
+            <hr className="d-block hr_orderdetail"  />
           </div>
         ))}
       </div>
