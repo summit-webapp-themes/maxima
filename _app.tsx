@@ -34,7 +34,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     const TRACKING_ID = "G-JEKLX6CZRT";
     ReactGA.initialize(TRACKING_ID);
   }, []);
+  useEffect(() => {
+    const isRTL: any = document.documentElement.dir === "rtl";
 
+    // Load the appropriate global CSS file based on text direction
+    if (isRTL) {
+      import("../styles/pages/homepage-rtl.scss");
+    }
+  }, []);
   return (
     <div>
       <Script

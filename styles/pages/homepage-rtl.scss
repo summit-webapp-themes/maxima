@@ -1,4 +1,6 @@
-.password_field::placeholder {
-    color:#666 !important;
-    font-size: 14px;  
+html[dir="rtl"] {
+    .logo_containers{
+        background-color: red !important;
+    }
+    
 }
