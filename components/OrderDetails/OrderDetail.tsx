@@ -76,15 +76,15 @@ const Index = ({ sales_order_id }: any) => {
     // <div className="margin_from_nav_l">
     <div
       className={`${
-        router?.pathname?.includes("/myOrder") ? "margin_from_nav_l" : ""
-      }`}
+        router?.pathname?.includes("/myOrder") ? "margin_from_nav" : ""
+      } container`}
     >
       {detail?.length === 0 ? (
         <>
           <div className="row justify-content-center mt-5">
             {[...Array(4)].map(() => (
               <>
-                <div className="col-lg-12 mx-3">
+                <div className="col-lg-12 mx-3 mt-2">
                   <ListViewLoadingLayout />
                 </div>
               </>
@@ -96,52 +96,54 @@ const Index = ({ sales_order_id }: any) => {
           {detail?.length > 0 &&
             detail !== null &&
             detail?.map((data: any) => (
-              <div className="container products-name" key={data?.name}>
+              <div className="container color-black" key={data?.name}>
                 <div className="row"></div>
-                <div className="row products-name">
-                  <div className="col-md-6">
+                <div className="row color-black">
+                  <div className="col-md-6 ">
                     <div className="page_heading">
-                      <h5 className="bold text-uppercase black mb-2 mt-8 orderDetail-heading">
+                      <h4 className="p-0 m-0">
                         {selectedMultiLangData?.order_details}
-                      </h5>
+                      </h4>
                     </div>
                   </div>
                 </div>
-                <div className="order_detail_head row products-name ">
+                <div className="order_detail_head row color-black pb-2" >
                   <div className="col-12">
                     <div className="item_action d-flex ">
                       <div className="item_action_link me-3 ">
                         {data.creation}
                       </div>
-                      <div className="item_action_link order-pipe">
+                      <div className="item_action_link order-pipe color-black">
                         <span>
-                          | {selectedMultiLangData?.orders} # {data?.name}
+                           {selectedMultiLangData?.orders} # {data?.name}
                         </span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div id="printableArea" className="row products-name">
+
+                
+                <div id="printableArea" className="row color-black" >
                   <div className="col-lg-12">
                     <div className="order_card mb-3 card">
-                      <div className="card-body">
+                      <div className="card-body" >
                         <div className="row">
                           {data?.addresses?.map((addr: any, index: any) => (
-                            <div className="mb-3 mb-sm-0 col-md-3" key={index}>
+                            <div className="mb-0 mb-sm-0 col-md-3" key={index}>
                               <div>
                                 <h5 className="data_heading mb-1">
                                   {addr?.name}
                                 </h5>
                                 {addr?.values &&
                                   addr?.values.map((addrValue: any, i: any) => (
-                                    <div className="myorders" key={i}>
-                                      <p className="mb-0 address_tiitles">
+                                    <div className="myorders" key={i} >
+                                      <p className="my-0 py-0 address_tiitles">
                                         {addrValue?.address_title}
                                       </p>
-                                      <p className="mb-0">
+                                      <p className="my-0 py-0 line-height">
                                         {addrValue?.address_1}
                                       </p>
-                                      <p className="mb-0">
+                                      <p className="mb-0 my-0 py-0 line-height">
                                         {addrValue?.postal_code}
                                       </p>
                                       <p className="mb-0">
@@ -206,19 +208,19 @@ const Index = ({ sales_order_id }: any) => {
                             </div>
                           </div>
 
-                          <div className="col-md-4 myorders">
+                          <div className="col-md-4 myorders" >
                             <h5 className="data_heading mb-1">
                               {" "}
                               {selectedMultiLangData?.order_summary}
                             </h5>
                             <div className="mb-1 row">
                               <div className="col-6">
-                                <p className="mb-0 order_summary_p">
+                                <p className="mb-0 ">
                                   {selectedMultiLangData?.sub_total_excl_tax}
                                 </p>
                               </div>
                               <div className="text-right col-6">
-                                <p className="mb-0 order_summary_p price_font_family">
+                                <p className="mb-0 price_font_family">
                                   {data?.currency_symbol}{" "}
                                   {data?.subtotal_exclude_tax}
                                 </p>
@@ -226,7 +228,7 @@ const Index = ({ sales_order_id }: any) => {
                             </div>
                             <div className="mb-1 row">
                               <div className="col-6">
-                                <p className="mb-0 order_summary_p">
+                                <p className="mb-0 ">
                                   {" "}
                                   {selectedMultiLangData?.tax}
                                 </p>
@@ -237,7 +239,7 @@ const Index = ({ sales_order_id }: any) => {
                                 </p>
                               </div>
                             </div>
-                            <div className="mb-1 row">
+                            <div className="mb-0 row" >
                               {data?.coupon_code !== null ? (
                                 <>
                                   <div className="col-6">
@@ -255,7 +257,7 @@ const Index = ({ sales_order_id }: any) => {
                                 ""
                               )}
                             </div>
-                            <div className="mb-1 row">
+                            <div className="mb-0 row" >
                               {data?.coupon_amount !== 0 ? (
                                 <>
                                   <div className="col-6">
@@ -278,7 +280,7 @@ const Index = ({ sales_order_id }: any) => {
                               )}
                             </div>
 
-                            <div className="mb-1 row">
+                            <div className="mb-1 row" >
                               <div className="col-6">
                                 <p className="mb-0 order_summary_p">
                                   {selectedMultiLangData?.sub_total_incl_tax}
@@ -291,8 +293,8 @@ const Index = ({ sales_order_id }: any) => {
                                 </p>
                               </div>
                             </div>
-                            <hr className="mt-1 mb-1" />
-                            <div className="row">
+                            {/* <hr className="mt-1 mb-1" /> */}
+                            <div className="mb-1 row" >
                               <div className="col-6">
                                 <p className="mb-0 bold order_summary_p">
                                   {selectedMultiLangData?.order_total}
@@ -304,7 +306,7 @@ const Index = ({ sales_order_id }: any) => {
                                 </p>
                               </div>
                             </div>
-                            <hr className="mt-1 mb-1" />
+                            {/* <hr className="mt-1 mb-1" /> */}
                             <div className="row">
                               <div className="col-6">
                                 <p className="mb-0 bold order_summary_p">
@@ -322,20 +324,20 @@ const Index = ({ sales_order_id }: any) => {
                         </div>
                       </div>
                     </div>
-                    <div className="order_card cart_table mb-3 card">
+                    <div className="order_card cart_table mb-0 card" >
                       {data?.order_details.map((oDetail: any, index: any) => (
                         <div
-                          className="cart_item card-body border-bottom"
+                          className=" card-body "
                           key={index}
                         >
-                          <div className="d-flex mb-2">
+                          <div className="d-flex mb-0">
                             <div className="flex-fill">
                               <h6 className="green text-capitalize bold mb-0 status"></h6>
                             </div>
                           </div>
                           <div className="d-flex align-items-center row">
-                            <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4">
-                              <div className="product-image">
+                            <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4" >
+                              <div className="product-image cart-image ">
                                 {oDetail?.img === null ||
                                 oDetail?.img?.length === 0 ? (
                                   <Image
@@ -358,26 +360,26 @@ const Index = ({ sales_order_id }: any) => {
                                 )}
                               </div>
                             </div>
-                            <div className="product_item_details col-lg-8 col-md-7 col-8">
+                            <div className="product_item_details col-lg-8 col-md-7 col-8" >
                               <div className="d-flex orderdetail-name">
                                 <div className="flex-fill">
                                   <Link
                                     href={`${oDetail?.product_url}?currency=${currency_state_from_redux?.selected_currency_value}`}
                                     legacyBehavior
                                   >
-                                    <a className="product_item_name">
+                                    <a className="product_item_name bold">
                                       {oDetail?.item_name}
                                     </a>
                                   </Link>
 
                                   <table
                                     width="100%"
-                                    className="mt-2 table table-borderless"
-                                  >
+                                    className="mt-0 table table-borderless"
+                                     >
                                     <tbody>
                                       <tr className="item_options myorder_tr">
                                         <td className="px-0 py-0 pb-0 myorder_td">
-                                          <p className="text-capitalize black mb-0 myorder_p">
+                                          <p className="text-capitalize black mb-1 myorder_p">
                                             {selectedMultiLangData?.item_code}
                                           </p>
                                         </td>
@@ -385,7 +387,7 @@ const Index = ({ sales_order_id }: any) => {
                                           width="85%"
                                           className="px-0 py-0 pb-0 myorder_width"
                                         >
-                                          <p className="text-capitalize black mb-0 myorder_p">
+                                          <p className="text-capitalize black mb-1 myorder_p">
                                             : {oDetail?.name}
                                           </p>
                                         </td>
@@ -393,7 +395,7 @@ const Index = ({ sales_order_id }: any) => {
 
                                       <tr className="item_options myorder_tr">
                                         <td className="px-0 py-0 pb-0 myorder_td">
-                                          <p className="text-capitalize black mb-0 myorder_p">
+                                          <p className="text-capitalize black mb-1 myorder_p">
                                             {selectedMultiLangData?.price}
                                           </p>
                                         </td>
@@ -401,7 +403,7 @@ const Index = ({ sales_order_id }: any) => {
                                           width="85%"
                                           className="px-0 py-0 pb-0 myorder_width"
                                         >
-                                          <p className="text-capitalize black mb-0 myorder_p">
+                                          <p className="text-capitalize black mb-1 myorder_p">
                                             {oDetail?.prod_info[1].value !==
                                             0 ? (
                                               <p className="mb-0 price_font_family">
@@ -422,7 +424,7 @@ const Index = ({ sales_order_id }: any) => {
 
                                       <tr className="item_options myorder_tr">
                                         <td className="px-0 py-0 pb-0 myorder_td">
-                                          <p className="text-capitalize black mb-0 myorder_p">
+                                          <p className="text-capitalize black mb-1 myorder_p">
                                             {selectedMultiLangData?.quantity}
                                           </p>
                                         </td>
@@ -430,7 +432,7 @@ const Index = ({ sales_order_id }: any) => {
                                           width="85%"
                                           className="px-0 py-0 pb-0 myorder_width"
                                         >
-                                          <p className="text-capitalize black mb-0 myorder_p">
+                                          <p className="text-capitalize black mb-1 myorder_p">
                                             : {oDetail?.prod_info[2].value}
                                           </p>
                                         </td>
@@ -621,6 +623,8 @@ const Index = ({ sales_order_id }: any) => {
                     </div>
                   </div>
                 </div>
+
+
               </div>
             ))}
         </>

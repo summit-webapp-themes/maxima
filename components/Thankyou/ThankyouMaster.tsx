@@ -22,8 +22,8 @@ const ThankYou = ({}: any) => {
 
   return (
     <>
-      <div className="container ">
-        <div className="row margin_from_nav products-name">
+      <div className=" margin_from_nav ">
+        <div className="row color-black">
           <div className="text-center mx-auto col-md-12">
             <Image
               src={Thankyouimg}
@@ -32,7 +32,7 @@ const ThankYou = ({}: any) => {
               height={100}
               alt="success_img"
             />
-            <h3 className="black bold">{selectedMultiLangData?.thank_you}</h3>
+            <h3 className="black bold mb-0 pb-1">{selectedMultiLangData?.thank_you}</h3>
             <h5 className="black mb-8">
               {" "}
               {selectedMultiLangData?.your_order_has_been_received}

@@ -237,7 +237,10 @@
     padding-left: 45px !important;
 }
 
-
+.or-margin-top{
+  margin-top: -5px !important;
+  // border: 2px solid red
+}
 
 @media only screen and (max-width: 1024px) {
     .price-title-margin{
@@ -263,12 +266,21 @@
 
 @media only screen and (max-width: 600px) {
     .reset-btn-mob {
-      font-size: 12px !important;
+      font-size: 11px !important;
       
     }
     .btn-quick-margin{
         margin-left: -31px !important;
+        padding-left: -10px !important;
+        padding-top: 15px;
         // border: 2px solid red
     }
+    .reset-btn-mobs{
+      margin-left: -10px ;
+      // background-color: red !important;
+    }
   }
+
+
+
 

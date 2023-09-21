@@ -87,32 +87,32 @@ const DealerLedger = () => {
           dealerLedgerSummary={dealerLedgerSummary}
           selectedMultiLangData={selectedMultiLangData}
         />
-        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 products-name dealer-account-container"  >
-          <div className="col-lg-8">
-            <div className="row m-lg-5">
+        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 color-black dealer-account-container dealer-account-container-mob "  >
+          <div className="col-lg-8 ml-3" >
+            <div className="row m-lg-5" >
               <div className="col-lg-4 col-6 mt-0 pt-0 mb-0 pb-0">
-                <div className="fs-3 products-name ">
+                <div className="fs-3 color-black ">
                   {selectedMultiLangData?.account_name} :
                 </div>
               </div>
-              <div className="col-lg-6 col-6">
-                <div className="fs-3 bold products-name" >
+              <div className="col-lg-6 col-6" >
+                <div className="fs-3 bold color-black" >
                   {dealerLedgerSummary?.party_name}
                 </div>
               </div>
             </div>
-            <div className="row mx-lg-5 mt-0 products-name">
-              <div className="col-lg-4 col-4 mb-0 pb-0 mt-0 pt-0">
+            <div className="row mx-lg-5 mt-0 color-black" >
+              <div className="col-lg-4 col-4 mb-0 pb-0 mt-0 pt-0" >
                 <input
                   type="radio"
-                  className="form-check-input products-name"
+                  className="form-check-input color-black"
                   id="radio1"
                   name="optradio"
                   value="option1"
                   onClick={() => setFieldDisable(false)}
                   defaultChecked
                 />
-                <label className="form-check-label ms-4 products-name" htmlFor="radio1">
+                <label className="form-check-label ms-4 color-black" htmlFor="radio1">
                   {selectedMultiLangData?.month}
                 </label>
               </div>
@@ -120,7 +120,7 @@ const DealerLedger = () => {
                 <select
                   className={`${
                     fieldDisable ? "" : "disabled"
-                  } form-select fs-5 products-name`}
+                  } form-select fs-5 color-black`}
                   disabled={fieldDisable}
                   onChange={(e) => setDlSelectedMonth(e.target.value)}
                 >
@@ -137,26 +137,26 @@ const DealerLedger = () => {
                 </select>
               </div>
             </div>
-            <div className="row mx-lg-5 my-2 products-name">
+            <div className="row mx-lg-5 my-2 color-black"  >
               <div className="col-lg-4 col-4 mt-lg-2">
                 <input
                   type="radio"
-                  className="form-check-input products-name"
+                  className="form-check-input color-black"
                   id="radio2"
                   name="optradio"
                   value="option1"
                   onClick={() => setFieldDisable(true)}
                 />
                 <label
-                  className="form-check-label ms-lg-4 ms-1 text-start products-name"
+                  className="form-check-label ms-lg-4 ms-1 text-start color-black"
                   htmlFor="radio1"
                 >
                   {selectedMultiLangData?.date_range}
                 </label>
               </div>
               <div className="col-lg-6 col-12 ">
-                <div className="row">
-                  <div className="col-lg-6 col-7">
+                <div className="row" >
+                  <div className="col-lg-5 col-7" >
                     <input
                       type="date"
                       id="FromDate"
@@ -165,11 +165,11 @@ const DealerLedger = () => {
                       onChange={(e) => setDlFromDate(e.target.value)}
                       className={`${
                         fieldDisable ? "" : "disabled"
-                      } mt-lg-2 px-1 products-name`}
-                      disabled={!fieldDisable}
+                      } mt-lg-2 px-1 color-black `}
+                      disabled={!fieldDisable} 
                     />
                   </div>
-                  <div className="col-lg-4 col-5">
+                  <div className="col-lg-4 col-5" >
                     <input
                       type="date"
                       id="toDate"
@@ -178,7 +178,7 @@ const DealerLedger = () => {
                       onChange={(e) => setDlToDate(e.target.value)}
                       className={`${
                         fieldDisable ? "" : "disabled"
-                      } mt-lg-2 px-1 products-name`}
+                      } mt-lg-2 px-1 color-black dealer-todate-mob`}
                       disabled={!fieldDisable}
                     />
                   </div>
@@ -186,12 +186,12 @@ const DealerLedger = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-8 text-center mb-3">
+              <div className="col-lg-8 text-center mb-0">
                 <button
-                  className="btn btn-outline-primary ledger-submit-button rounded-3 mt-5 w-25 products-name"
+                  className="btn btn-outline-primary ledger-submit-button rounded-3 mt-2 w-25 color-black"
                   onClick={HandleLedgerData}
                 >
-                  <span className="products-name">{selectedMultiLangData?.submit}</span>
+                  <span className="">{selectedMultiLangData?.submit}</span>
                 </button>
               </div>
             </div>

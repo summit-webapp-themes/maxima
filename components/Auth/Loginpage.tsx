@@ -163,7 +163,7 @@ const Loginpage = () => {
                           <Form.Group controlId="formName">
                             <div className="row mt-3">
                               <div className="col-md-4">
-                                <Form.Label className="login-label">
+                                <Form.Label className="login-label color-black ">
                                   {selectedMultiLangData?.mobile_number} /{" "}
                                   {selectedMultiLangData?.email}:
                                 </Form.Label>
@@ -214,7 +214,7 @@ const Loginpage = () => {
                           <Form.Group controlId="formPassword">
                             <div className="row mt-3">
                               <div className="col-md-4">
-                                <Form.Label className="login-label">
+                                <Form.Label className="login-label color-black">
                                   {selectedMultiLangData?.password_otp}:
                                 </Form.Label>
                               </div>
@@ -267,9 +267,9 @@ const Loginpage = () => {
                             <div
                               className={`col-12 text-lg-start register_account`}
                             >
-                              <div className="register ms-2 account-margin">
+                              <div className="register ms-2 account-margin not-acc-margin">
                                 <span className="not_an_account">
-                                  {selectedMultiLangData?.not_an_account}?{" "}
+                                 <span className="color-black">{selectedMultiLangData?.not_an_account}?{" "}</span> 
                                   <Link className={`linkss`} href="/register">
                                     {selectedMultiLangData?.register}
                                   </Link>
