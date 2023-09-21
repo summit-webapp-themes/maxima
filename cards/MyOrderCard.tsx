@@ -22,16 +22,16 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
         <div className="card-header myorder-card-header " >
           <div className="row pb-0" >
             <div className=" mb-sm-0 col-md-2 col-6 order-div">
-              <p className="text-uppercase gray mb-0 myorder_p">
+              <p className="text-uppercase gray  myorder_p">
                 {selectedMultiLangData?.order_placed}
               </p>
 
-              <p className="gray mb-0 myorder_p">
+              <p className="gray  myorder_p">
                 {data?.transaction_date?.split("-")?.reverse()?.join("/")}
               </p>
             </div>
             <div className=" col-md-2 col-6 order-div">
-              <p className="text-uppercase gray mb-0 myorder_p" >
+              <p className="text-uppercase gray  myorder_p" >
                 {" "}
                 {selectedMultiLangData?.total_price}
               </p>
@@ -40,13 +40,13 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                   {selectedMultiLangData?.price_on_request} 
                 </p>
               ) : (
-                <p className="gray mb-0 myorder_p price_font_family">
+                <p className="gray  myorder_p price_font_family">
                   {data?.currency_symbol} {data?.total}
                 </p>
               )}
             </div>
             <div className="col-md-2 col-4 order-cards" >
-              <p className="text-uppercase gray mb-0 myorder_p">
+              <p className="text-uppercase gray  myorder_p">
                 {selectedMultiLangData?.ship_to}
               </p>
               {data?.addresses?.map((personAddress: any, index: number) => (
@@ -68,20 +68,20 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                           className="dropdown-menu"
                           aria-labelledby="ship_to"
                         >
-                          <li className="ps-1 pe-1 mb-0 ">
+                          <li className="ps-1 pe-1  ">
                             {addr?.address_title}
                           </li>
-                          <li className="ps-1 pe-1 mb-0 ">
+                          <li className="ps-1 pe-1  ">
                             {addr?.address_1}
                           </li>
-                          <li className="ps-1 pe-1 mb-0">
+                          <li className="ps-1 pe-1 ">
                             {addr?.address_2}
                           </li>
-                          <li className="ps-1 pe-1 mb-0">
+                          <li className="ps-1 pe-1 ">
                             {addr?.city} - {addr?.postal_code}
                           </li>
-                          <li className="ps-1 pe-1 mb-0">{addr?.country}</li>
-                          <li className="ps-1 pe-1 mb-0">
+                          <li className="ps-1 pe-1 ">{addr?.country}</li>
+                          <li className="ps-1 pe-1 ">
                             {selectedMultiLangData?.mobile_number}:{" "}
                             {addr?.contact}
                           </li>
@@ -93,7 +93,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
               ))}
             </div>
             <div className="text-end col-md-6 col-8 order-cards">
-              <p className="mb-0 myorder_p">
+              <p className=" myorder_p">
                 {selectedMultiLangData?.orders} # {data?.name}
               </p>
 
@@ -114,9 +114,9 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
             className="cart_item cart_item-myorder-m card-body order_cartdetails" 
             key={detail?.item_name} 
           >
-            <div className="d-flex mb-0 pb-0" >
+            <div className="d-flex  pb-0" >
               <div className="flex-fill">
-                <h6 className="green text-capitalize bold mb-0 mt-2 order-ptag ">
+                <h6 className="green text-capitalize bold  mt-2 order-ptag ">
                   {selectedMultiLangData?.status} : {data?.payment_status}
                 </h6>
               </div>
@@ -124,7 +124,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
             </div>
 
             <div className="d-flex align-items-center row" >
-              <div className="mb-0 mb-sm-0 col-lg-2 col-md-2 col-4 mt-2">
+              <div className=" mb-sm-0 col-lg-2 col-md-2 col-4 mt-2">
                 <div className="product-img cart-image  mt-2 mb-4">
                   <img
                     src={`${CONSTANTS.API_BASE_URL}/${detail?.img !== null ? detail?.img : detail?.brand_img
@@ -146,7 +146,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                       <tbody>
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
-                            <p className="text-capitalize black mb-0 myorder_p">
+                            <p className="text-capitalize black  myorder_p">
                               {selectedMultiLangData?.item_code}
                             </p>
                           </td>
@@ -154,7 +154,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                             width="85%"
                             className="px-0 py-0 pb-0 myorder_width"
                           >
-                            <p className="text-capitalize black mb-0 myorder_p">
+                            <p className="text-capitalize black  myorder_p">
                               : {detail?.name}
                             </p>
                           </td>
@@ -162,7 +162,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
 
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
-                            <p className="text-capitalize black mb-0 myorder_p" >
+                            <p className="text-capitalize black  myorder_p" >
                               {selectedMultiLangData?.price} 
                             </p>
                           </td>
@@ -170,9 +170,9 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                             width="85%"
                             className="px-0 py-0 pb-0 myorder_width"
                           >
-                            <p className="text-capitalize black mb-0 myorder_p">
+                            <p className="text-capitalize black  myorder_p">
                               {detail?.prod_info[1]?.value !== 0 ? (
-                                <p className="mb-0 price_font_family">
+                                <p className=" price_font_family">
                                   {" "}
                                   : {data?.currency_symbol}{" "}
                                   {detail.prod_info[1]?.value}
@@ -188,7 +188,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
 
                         <tr className="item_options myorder_tr">
                           <td className="px-0 py-0 pb-0 myorder_td">
-                            <p className="text-capitalize black mb-0 myorder_p">
+                            <p className="text-capitalize black  myorder_p">
                               {selectedMultiLangData?.quantity}
                             </p>
                           </td>
@@ -196,7 +196,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                             width="85%"
                             className="px-0 py-0 pb-0 myorder_width"
                           >
-                            <p className="text-capitalize black mb-0 myorder_p">
+                            <p className="text-capitalize black  myorder_p">
                               : {detail?.prod_info[2]?.value}
                             </p>
                           </td>
@@ -213,14 +213,14 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                     {selectedMultiLangData?.shipping_method}
                   </h5>
                   <div>
-                    <p className="mb-0">
+                    <p className="">
                       {selectedMultiLangData?.transporter}:{" "}
                       {data?.shipping_method?.transporter}
                     </p>
 
                     {data?.shipping_method.door_delivery === 0 &&
                       data?.shipping_method?.godown_delivery === 0 ? (
-                      <p className="mb-0">
+                      <p className="">
                         {selectedMultiLangData?.door_delivery_yes}
                       </p>
                     ) : (
@@ -229,13 +229,13 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                     {data?.shipping_method?.door_delivery === 0 &&
                       data?.shipping_method?.godown_delivery !== 0 ? (
                       <>
-                        <p className="mb-0">
+                        <p className="">
                           {selectedMultiLangData?.godown_delivery_yes}
                         </p>
                         {data?.shipping_method?.location === null ? (
                           ""
                         ) : (
-                          <p className="mb-0">
+                          <p className="">
                             {selectedMultiLangData?.location} :{" "}
                             {data?.shipping_method?.location}
                           </p>
@@ -248,7 +248,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                     {data?.shipping_method?.remarks === null ? (
                       ""
                     ) : (
-                      <p className="mb-0">
+                      <p className="">
                         {selectedMultiLangData?.remark} :{" "}
                         {data?.shipping_method?.remarks}
                       </p>
