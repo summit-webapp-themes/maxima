@@ -113,6 +113,28 @@ width: 15%
 line-height: 1.4;
 
 }   
+
+.nav-tabs-myorder{
+  margin-top: -12px !important;
+}
+
+.select-myorder-margin{
+  margin-top:-24px 
+}
+.order-myorder-margin{
+  margin-top: 8px;
+}
+.myorder-card-header{
+  padding-top: 10px;
+  padding-bottom: 7px !important;
+}
+.myorder-wrapper-pd{
+  padding-left: 40px !important;
+  padding-right: 28px !important;
+}
+.qty-title-margin{
+  padding-left: 22px !important;
+}
 @media (max-width:768px) {
   .orderdetail_img {
     min-width: 100px;
@@ -126,4 +148,26 @@ line-height: 1.4;
     .myorder_width {
       width: 65%
     }
+    .qt-margins{
+      padding-left: 0px !important;
+      
+    }
+}
+
+@media (max-width:1024px) {
+  .qt-margins{
+    margin-left: 8px !important;
+    
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .quick-order-mg{
+    // background-color: red !important;
+    margin-top: -22px !important;
+   
+  }
+  .quick-order-mgs{
+    margin-top: -12px !important;
+  }
 }
