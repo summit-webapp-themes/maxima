@@ -61,6 +61,8 @@ const ProductDetail = ({
     setnewObjectState(newData);
   };
 
+  console.log("quantity", productQuantity, minQty);
+
   let isLoggedIn: any;
   let isDealer: any;
   if (typeof window !== "undefined") {
@@ -230,7 +232,7 @@ const ProductDetail = ({
         <b className="product_name products-name products-name-font">
           {productDetailData?.item_name}
         </b>
-        <p className=" text-dark  products-name ">
+        <p className=" text-dark  products-name mt-0">
           <span>
             {" "}
             {productDetailData?.short_description ===
@@ -246,36 +248,54 @@ const ProductDetail = ({
             className="product_brand_name"
           />
         </div>
-        <p className="mt-3 text-dark p-tagfont product_item_name products-name product-line-height">
-          {selectedMultiLangData?.item_code}: {productDetailData?.name}
+        <p className="mt-3 text-dark p-tagfont product_item_name products-name product-line-height d-inline-flex">
+          {selectedMultiLangData?.item_code}:
+          <span>&nbsp; {productDetailData?.name}</span>
         </p>
 
-        <h3 className="p_price m-0 price_font_family rating-container">
-          {productDetailData?.price !== 0 ? (
-            <>
-              <span className="products-name bold">
-                {" "}
-                {productDetailData?.currency_symbol} {productDetailData?.price}
-              </span>
-              {/* <IndianNumber value={productDetailData?.price} /> */}
-            </>
-          ) : (
-            <button className="button_color p-2 rounded-3 fs-4 mb-2 product-font-family">
-              {selectedMultiLangData?.price_on_request}
-            </button>
-          )}
+        {/* <div className=" d-flex justify-content-center product-price">
+          <ins className="d-flex new-price">
+            <span>{productDetailData?.currency_symbol}</span>
+            <span className="product-price-rtl">
+              {" "}
+              {productDetailData?.price}
+            </span>
+          </ins>
+          <del className="old-price">
+            <span>{productDetailData?.currency_symbol}</span>
+            <span> {productDetailData?.mrp_price}</span>
+          </del>
+        </div> */}
 
-          {productDetailData?.mrp_price !== 0 ? (
-            <>
-              <s className="old-price currency_symbol price_font_family product-font-family">
-                {productDetailData?.currency_symbol}{" "}
-                {productDetailData?.mrp_price}
-                {/* <IndianNumber value={productDetailData?.mrp_price} /> */}
-              </s>
-            </>
-          ) : (
-            ""
-          )}
+        <h3 className="d-flex justify-content-start p_price m-0 price_font_family rating-container">
+          <div>
+            {productDetailData?.price !== 0 ? (
+              <>
+                <span className="products-name bold ">
+                  {" "}
+                  {productDetailData?.currency_symbol}{" "}
+                  {productDetailData?.price}
+                </span>
+                {/* <IndianNumber value={productDetailData?.price} /> */}
+              </>
+            ) : (
+              <button className="button_color p-2 rounded-3 fs-4 mb-2 product-font-family">
+                {selectedMultiLangData?.price_on_request}
+              </button>
+            )}
+          </div>
+          <div>
+            {productDetailData?.mrp_price !== 0 ? (
+              <>
+                <del className="old-price fs-2 ms-4 price_font_family product-font-family mrp-price-color ">
+                  {productDetailData?.currency_symbol}{" "}
+                  {productDetailData?.mrp_price}
+                </del>
+              </>
+            ) : (
+              ""
+            )}
+          </div>
         </h3>
 
         {productDetailData?.price !== 0 ? (
@@ -323,33 +343,42 @@ const ProductDetail = ({
 
         {productDetailData?.brand !== null &&
         productDetailData?.brand !== "" ? (
-          <p className="mt-2 text-uppercase p-tagfont product_brand_name products-name product-line-height">
-            {selectedMultiLangData?.brand}: {productDetailData?.brand}
+          <p className="text-uppercase p-tagfont product_brand_name products-name product-line-height d-inline-flex my-3">
+            {selectedMultiLangData?.brand}:
+            <span>&nbsp; {productDetailData?.brand}</span>
           </p>
         ) : (
           ""
         )}
-        {productDetailData?.gst_hsn_code !== null &&
-        productDetailData?.gst_hsn_code !== "" ? (
-          <p className="text-uppercase p-tagfont  products-name product-line-height">
-            {selectedMultiLangData?.hsn_code}: {productDetailData?.gst_hsn_code}
-          </p>
-        ) : (
-          ""
-        )}
-        {productDetailData?.oem_part_number !== null &&
-        productDetailData?.oem_part_number !== "" ? (
-          <p className="mt-2 text-uppercase p-tagfont product_brand_name products-name">
-            {selectedMultiLangData?.oem_part_number}:{" "}
-            {productDetailData?.oem_part_number}
-          </p>
-        ) : (
-          ""
-        )}
+        <div className="py-0">
+          {productDetailData?.gst_hsn_code !== null &&
+          productDetailData?.gst_hsn_code !== "" ? (
+            <p className="text-uppercase p-tagfont  products-name product-line-height d-inline-flex my-3">
+              {selectedMultiLangData?.hsn_code}:
+              <span> &nbsp;{productDetailData?.gst_hsn_code}</span>
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div>
+          {productDetailData?.oem_part_number !== null &&
+          productDetailData?.oem_part_number !== "" ? (
+            <p className="mt-2 text-uppercase p-tagfont product_brand_name products-name d-inline-flex">
+              {selectedMultiLangData?.oem_part_number}:{" "}
+              <span>{productDetailData?.oem_part_number}</span>
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
         {productDetailData?.weight_per_unit !== 0 ? (
-          <p className="mt-2 text-uppercase p-tagfont product_brand_name products-name">
+          <p className="mt-2 text-uppercase p-tagfont product_brand_name products-name d-inline-flex">
             {selectedMultiLangData?.approx_weight}:{" "}
-            {productDetailData?.weight_per_unit} {productDetailData?.weight_uom}
+            <span className="d-inline-flex">
+              &nbsp; {productDetailData?.weight_per_unit}{" "}
+              <span>{productDetailData?.weight_uom}</span>
+            </span>
           </p>
         ) : (
           ""
@@ -369,6 +398,7 @@ const ProductDetail = ({
             stockDoesNotExistsForSelectedVariants
           }
           selectedMultiLangData={selectedMultiLangData}
+          minQty={minQty}
         />
       </div>
 
@@ -494,7 +524,7 @@ const ProductDetail = ({
                     <div className="mt-5">
                       <div className="row btn-wrapper">
                         <button
-                          className={`w-50 btn standard_button_filled cart_btn_gtag product-font-family`}
+                          className={`w-75 btn standard_button_filled cart_btn_gtag product-font-family`}
                           onClick={handleRedirect}
                           disabled={doesSelectedVariantDoesNotExists}
                         >

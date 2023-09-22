@@ -9,7 +9,6 @@
 .ledger-submit-button {
     border: 1px solid #3884f5 !important;
     color: $body-color !important;
-
 }
 
 .ledger-submit-button:hover {
@@ -21,19 +20,19 @@
     padding-left: 10px !important;
 }
 
-
 .dealer-ledger-td-r {
     padding-right: 10px !important;
 }
-.dealer-heading{
+.dealer-heading {
     font-size: 24px !important;
 }
 
 @media screen and (min-width: 580px) {
-.dealer-ledger-table {
-    overflow-x: hidden !important; 
+    .dealer-ledger-table {
+        overflow-x: hidden !important;
+    }
 }
-  }
 
-
-  
+.ledger-submit-button:hover {
+    color: white;
+}

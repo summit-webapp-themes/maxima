@@ -40,7 +40,7 @@ const QuickOrderCard = (props: any) => {
           .map((data: any, index: any) => (
             <>
               {/* <div className="col-lg-2 col-2"></div> */}
-              <div className="col-lg-2 col-12 text-start ps-lg-0 products-name cart-image ">
+              <div className="col-lg-2 col-12 text-inline-start ps-lg-0 products-name cart-image ">
                 {data.image_url !== null ? (
                   <Image
                     loader={myLoader}
@@ -69,12 +69,20 @@ const QuickOrderCard = (props: any) => {
                   {selectedMultiLangData?.item_name}
                   {data.item_name}
                 </p>
-                <p className="mb-0 bold">
-                  {selectedMultiLangData?.item_code}: {data.name}
+                <p className="mb-0 bold d-inline-flex">
+                  {selectedMultiLangData?.item_code}:
+                  <span>&nbsp;{data.name}</span>
                 </p>
-                <p className=" mb-0 quick-detail-lh">
-                  {selectedMultiLangData?.brand}: {data.brand}
-                </p>
+                <div>
+                  <p className=" mb-0 quick-detail-lh d-inline-flex">
+                    {selectedMultiLangData?.brand}:{" "}
+                    <span>
+                      {" "}
+                      &nbsp;
+                      {data.brand}
+                    </span>
+                  </p>
+                </div>
 
                 <Link href="" legacyBehavior>
                   <a
@@ -101,7 +109,7 @@ const QuickOrderCard = (props: any) => {
                   )}
                 </p>
               </div>
-              <div className="col-lg-1 col-6 mx-lg-0 ps-0 mx-4 products-name">
+              <div className="col-lg-1 col-6 mx-lg-0 ps-0 mx-4 products-name d-flex justify-content-center align-items-start mt-0">
                 {
                   <>
                     <input

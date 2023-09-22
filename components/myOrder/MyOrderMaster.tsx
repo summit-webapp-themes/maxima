@@ -22,17 +22,17 @@ const MyOrderMaster = () => {
     UseCartOrderHistory();
   return (
     <>
-      <div className="container margin_from_nav  " >
-        <div className="mt-0 row">
+      <div className="container margin_from_nav my-order-container-pd ">
+        <div className="mt-4 row">
           <div className="col-md-6">
             <div className="page_heading">
-              <h4 className=" ">
+              <h2 className=" bold text-captilize pb-3 order-heading products-name">
                 {selectedMultiLangData?.your_orders}
-              </h4>
+              </h2>
             </div>
           </div>
         </div>
-        <ul className="nav nav-tabs products-name" role="tablist" >
+        <ul className="nav nav-tabs products-name" role="tablist">
           <li className="nav-item">
             <a
               className="nav-link active"
@@ -49,8 +49,8 @@ const MyOrderMaster = () => {
           </li>
         </ul>
 
-        <div className="tab-content " >
-          <div id="placed_order" className="container tab-pane active show">
+        <div className="tab-content">
+          <div id="placed_order" className=" container tab-pane active show">
             <br />
             <PlaceOrder
               orderHistoryItems={orderHistoryItems}

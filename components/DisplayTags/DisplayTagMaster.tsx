@@ -20,7 +20,7 @@ const DisplayTagMaster = (props: any) => {
   //   useDisplayTagHooks();
   return (
     <div className="">
-      <div className="container" >
+      <div className="container">
         <div className="row banner-product-wrapper pb-1 products-name">
           <h3 className="text-center mb-0 mt-5">{data?.tag_name}</h3>
           <div className="banner-product col-lg-3 col-md-4 d-lg-block d-none mb-4 mb-md-0">
@@ -97,6 +97,18 @@ const DisplayTagMaster = (props: any) => {
                                   {list.item_name}
                                 </Link>
                               </h4>
+                              <div className=" d-flex justify-content-center product-price">
+                                <ins className="d-flex new-price">
+                                  <span>{list?.currency_symbol}</span>
+                                  <span className="product-price-rtl"> {list?.price}</span>
+                                </ins>
+                                <del className="old-price">
+                                  <span>{list?.currency_symbol}</span>
+                                  <span> {list?.mrp_price}</span>
+                                </del>
+                              </div>
+{/* 
+
                               <div className="product-price">
                                 <ins className="new-price">
                                   {list?.currency_symbol} {list?.price}
@@ -104,7 +116,7 @@ const DisplayTagMaster = (props: any) => {
                                 <del className="old-price">
                                   {list?.currency_symbol} {list?.mrp_price}
                                 </del>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>

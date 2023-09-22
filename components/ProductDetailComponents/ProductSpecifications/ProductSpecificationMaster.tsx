@@ -13,7 +13,7 @@ const ProductSpecificationMaster = ({
 
   return (
     <>
-      <div className="container mt-3">
+      <div className="container mt-3 specs-tabs-container-rtl">
         <Tabs
           id="controlled-tab-example"
           activeKey={key}

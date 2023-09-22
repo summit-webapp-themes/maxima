@@ -125,7 +125,7 @@ const QuickOrder = () => {
   };
 
   return (
-    <div className="container  margin_from_nav quickorder-main-conatainer-mob products-name">
+    <div className="container  margin_from_nav_quick_o quickorder-main-conatainer-mob products-name">
       <div className="row  mx-0 mt-5  ">
         <div className="col-lg-12  ">
           <div className="row">
@@ -182,7 +182,7 @@ const QuickOrder = () => {
 
       <div className="row  mt-5  table-heading-quick-order-mob products-name  ms-3 me-1 ">
         <div className="col-lg-12 text-center cart_heading_bg">
-          <div className="row products_title_quick py-3 ">
+          <div className="row justify-content-center products_title_quick py-3 ">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
             <div className="col-lg-2 ">
               <h5 className="mb-0 pt-2 text-start ps-lg-4 ">
@@ -194,13 +194,13 @@ const QuickOrder = () => {
                 {selectedMultiLangData?.details}
               </h6>
             </div>
-            <div className="col-lg-1  mx-lg-5 ms-5 ps-5 price-title-margin">
+            <div className="col-lg-1 price-title-margin d-inline-flex justify-content-center">
               <h6 className="mb-0 pt-2 text-end ps-lg-5 font-size-quick">
                 {selectedMultiLangData?.price}
               </h6>
             </div>
-            <div className="col-lg-1 col-1 text-start ms-1 ps-5 qty-title-margin">
-              <h6 className="mb-0 pt-2 ps-lg-2 font-size-quick">
+            <div className="col-lg-1 col-1 text-start d-flex justify-content-center m-auto mt-0">
+              <h6 className="mb-0 pt-2 font-size-quick d-flex ">
                 {selectedMultiLangData?.quantity_c}
               </h6>
             </div>

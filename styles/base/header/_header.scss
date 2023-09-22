@@ -29,7 +29,7 @@
           letter-spacing: -0.027em,
           text-transform: capitalize,
           _links-gap: false,
-          icon: (margin-#{$right}: 0.6rem, font-size: 1.5rem),
+          icon: (margin-#{$right}: 0.6rem, font-size: 1.5rem)
         ),
       // Header Middle
       middle:
@@ -41,10 +41,7 @@
           background: $primary-color,
           font-size: 1.2rem,
           border-bottom: 1px solid $border-color,
-          logo: (
-            margin-#{$right}: 4.1rem,
-            _mobile-margin-#{$right}: 2rem,
-          ),
+          logo: (margin-#{$right}: 4.1rem, _mobile-margin-#{$right}: 2rem)
         ),
       bottom: (
         padding-top: false,
@@ -57,14 +54,14 @@
         font-size: 1.4rem,
         font-weight: 600,
         letter-spacing: -0.025em,
-        text-transform: false,
+        text-transform: false
       ),
       // Main Nav
       main-nav:
         (
           margin: false,
           padding: false,
-          background: false,
+          background: false
         ),
       search: (
         _background-color: $primary-color,
@@ -74,28 +71,28 @@
         expanded:
           (
             // width: 55.6rem,
-            height: false,
+            height: false
           ),
         simple: (
           width: 35rem,
-          height: false,
+          height: false
         ),
         round: (
-          border-radius: 3rem,
+          border-radius: 3rem
         ),
         rounded: (
-          border-radius: 0.4rem,
+          border-radius: 0.4rem
         ),
         btn: (
-          width: 5.1rem,
+          width: 5.1rem
         ),
         toggle: (
-          width: 30rem,
-        ),
+          width: 30rem
+        )
       ),
       logo: (
         min-width: 14.4rem,
-        margin-#{$right}: 2rem,
+        margin-#{$right}: 2rem
       ),
       // Login
       compare:
@@ -107,26 +104,20 @@
             margin-top: 0.1rem,
             font-weight: inherit,
             text-transform: false,
-            color: inherit,
+            color: inherit
           ),
           icon: (
             font-size: 3.3rem,
-            color: inherit,
-          ),
+            color: inherit
+          )
         ),
       // Wishlist
       wishlist:
         (
           margin-#{$right}: 2.3rem,
           color: $dark-color,
-          label: (
-            _gap: false,
-            margin-top: 0.3rem,
-            font-weight: inherit,
-            text-transform: false,
-            color: inherit
-          ),
-          icon: (font-size: 2.7rem, color: #f15622),
+          label: (_gap: false, margin-top: 0.3rem, font-weight: inherit, text-transform: false, color: inherit),
+          icon: (font-size: 2.7rem, color: #f15622)
         ),
       // Minicart
       cart:
@@ -135,8 +126,8 @@
           color: $dark-color,
           icon: (
             font-size: 2.3rem,
-            color: inherit,
-          ),
+            color: inherit
+          )
         ),
       // Call
       call:
@@ -146,9 +137,9 @@
           icon: (margin: side-values(0 0.6rem 0.2rem 0), font-size: 3rem),
           info: (margin-top: 0.4rem),
           num: (font-size: 1.6rem, line-height: 1.7),
-          chat: (color: $dark-color),
-        ),
-    ),
+          chat: (color: $dark-color)
+        )
+    )
   )
 );
 
@@ -159,7 +150,6 @@
 .resp-dropdown-avator {
   display: none !important;
 }
-
 
 @media screen and (max-width: 1000px) {
   .resp-dropdown {
@@ -201,19 +191,18 @@
 
 .fixed-header {
   position: fixed;
-  top:0;
+  top: 0;
   background-color: $primary-color !important;
   z-index: 888;
   width: 100% !important;
 }
 
 .margin_from_nav_l {
-  margin-top: 107px !important;
+  margin-top: 120px !important;
 }
-// .margin_from_nav {
-//   margin-top: 150px !important;
-//   margin-bottom: 15px !important
-// }
+.margin_from_nav {
+  margin-top: 170px !important;
+}
 .margin_from_nav_cart {
   margin-top: 116px !important;
 }
@@ -222,17 +211,16 @@
   margin-top: 168px !important;
 }
 
-@media only screen and (max-width:560px){
-
-.margin_from_nav_l {
-  margin-top: 97px !important;
-}
-.margin_from_nav {
-  margin-top: 87px !important;
-}
-.margin_from_nav_quick_o {
-  margin-top: 107px !important;
-}
+@media only screen and (max-width: 560px) {
+  .margin_from_nav_l {
+    margin-top: 97px !important;
+  }
+  .margin_from_nav {
+    margin-top: 87px !important;
+  }
+  .margin_from_nav_quick_o {
+    margin-top: 107px !important;
+  }
 }
 
 .btn_close_btn {
@@ -303,7 +291,9 @@
       transform: translateX(if-ltr(-50%, 50%));
       border: 11px solid transparent;
       border-bottom: 11px solid $white-color;
-      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+      transition:
+        opacity 0.2s ease-out,
+        transform 0.2s ease-out;
       visibility: hidden;
 
       opacity: 0;
@@ -433,7 +423,9 @@
     height: 5.3rem;
     border: 1px solid $body-color;
     font-size: 2.6rem;
-    transition: border-color 0.3s, color 0.3s;
+    transition:
+      border-color 0.3s,
+      color 0.3s;
   }
 
   span {
@@ -546,7 +538,10 @@
       opacity: 0;
       transform: translate3d(0, 20px, 0);
       z-index: 100;
-      transition: transform 0.3s, visibility 0.3s, opacity 0.3s;
+      transition:
+        transform 0.3s,
+        visibility 0.3s,
+        opacity 0.3s;
     }
 
     .menu_titlee:hover {
@@ -629,7 +624,9 @@
       justify-content: center;
       background: $white-color;
       // border-radius: 0 3rem 3rem 0;
-      transition: opacity 0.4s, color 0.4s;
+      transition:
+        opacity 0.4s,
+        color 0.4s;
 
       i {
         margin: 0;
@@ -762,7 +759,6 @@
 
 .fa-user-o:before {
   font-size: 25px !important;
-
 }
 
 .compare {
@@ -947,7 +943,9 @@
 
   .welcome-msg {
     transform: translateX(0);
-    animation: 6s linear 2s 1 showMsgFirst, 12s linear 8s infinite showMsg;
+    animation:
+      6s linear 2s 1 showMsgFirst,
+      12s linear 8s infinite showMsg;
   }
 
   .header-middle {
@@ -1176,9 +1174,7 @@ header.header.fixed {
     background-color: $primary-color !important;
   }
 }
-.color-black{
-  color: black;
-}
+
 // navbar
 .navbar-left-icon1 {
   // border:2px solid red;
@@ -1192,25 +1188,24 @@ header.header.fixed {
 }
 .ternarytheme-middle-header {
   background-color: $white-color !important;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .Secondarytheme-mainMenu-color {
   color: $black-color !important;
 }
 .secondarytheme-select {
-  background-color:  $black-color !important;
+  background-color: $black-color !important;
   color: $white-color !important;
-  border:none;
+  border: none;
 }
 .secondarythemedropdown-login {
   color: $white-color;
-padding: 7px !important;
+  padding: 7px !important;
 }
 .secondarythemedropdown-login:hover {
   color: #fff !important;
 }
 @media (max-width: 576px) {
-
 }
 
 .cursor_pointer {
@@ -1225,10 +1220,10 @@ padding: 7px !important;
 }
 
 .dropdown-item:active {
-  background-color:#e9ecef !important;
+  background-color: #e9ecef !important;
 }
 
-.dropdown-toggle::after{
+.dropdown-toggle::after {
   display: none !important;
 }
 // .login-icon-margin{
@@ -1239,34 +1234,29 @@ padding: 7px !important;
 // }
 
 // Forget
-.padding-top-forget{
+.padding-top-forget {
   padding-top: 50px !important;
 }
-.btn-forget-mb{
+.btn-forget-mb {
   padding-bottom: 20px !important;
 }
 
-
-
-
-
-
 @media only screen and (max-width: 600px) {
- .login-mob-margin{
-  // border: 2px solid red;
-  margin-bottom: 7.1px !important
- }
- .heart-icon-mob{
-  margin-right: 10px !important;
- }
-  .mob-icon-wrapper{
-      display: flex !important;
-      justify-content: space-between !important;
-      // border: 2px solid red
+  .login-mob-margin {
+    // border: 2px solid red;
+    margin-bottom: 7.1px !important;
+  }
+  .heart-icon-mob {
+    margin-right: 10px !important;
+  }
+  .mob-icon-wrapper {
+    display: flex !important;
+    justify-content: space-between !important;
+    // border: 2px solid red
   }
   // .mob-logo-img1 {
   //   width: 500px !important;
   //   height: 30px !important;
-    
+
   // }
 }

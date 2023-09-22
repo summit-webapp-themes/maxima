@@ -159,7 +159,7 @@ const WebNavbar = ({
                   className="form-check-label text-white"
                   htmlFor="flexSwitchCheckDefault"
                 >
-                  Arabic
+                  Ar
                 </label>
               </div>
               <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
@@ -290,14 +290,14 @@ const WebNavbar = ({
                       {isLoading === "succeeded" &&
                         navbarData?.length > 0 &&
                         navbarData.map((items: any, index: number) => (
-                          <li key={index}>
+                          <li key={index} className="vertical-menu-li-rtl">
                             <a>
                               <i className="w-icon-tshirt2"></i>
                               <span className="browse-cat-list-span">
                               {items.label}
                               </span>
                             </a>
-                            <ul className="megamenu">
+                            <ul className="megamenu vertical-menubar-rtl">
                               {items?.values?.length > 0 &&
                                 items.values.map((items_val: any, i: any) => (
                                   <li key={i}>

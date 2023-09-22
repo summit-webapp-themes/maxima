@@ -16,11 +16,6 @@ import {
 import { Norecord } from "./NoRecord";
 import UseCheckoutPageHook from "../hooks/CheckoutHooks/checkout-page-hook";
 import getQuotationCart from "../services/api/cart-page-api/get-quotation-api";
-import {
-  failmsg,
-  hideToast,
-  successmsg,
-} from "../store/slices/general_slices/toast_notification_slice";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
 import DeleteProductFromCart from "../services/api/cart-page-api/delete-cart-product";
@@ -460,7 +455,7 @@ const CartListing = () => {
                                 }
                               </div>
                               :
-                              <div className="col-lg-3 col-6 text-end products-name bold">
+                              <div className="col-lg-3 col-6 text-end products-name bold d-inline-flex">
                                 {
                                   cartListingItems?.categories[0]?.orders[0]
                                     ?.currency_symbol

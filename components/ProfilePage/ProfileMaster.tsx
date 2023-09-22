@@ -496,7 +496,7 @@ const ProfileMaster = () => {
           <div className="col-lg-12">
             <div className="">
               <div className="profile">
-                <h4 className="text-start fw-bolder text-uppercase mb-0 pb-2 products-name">
+                <h4 className="text-inline-start fw-bolder text-uppercase mb-0 pb-2 products-name">
                   {selectedMultiLangData?.enquiry_history}
                 </h4>
               </div>
@@ -709,7 +709,7 @@ const ProfileMaster = () => {
                   </ul>
                 </div>
               </div>
-              <div className="col-lg-9">
+              <div className="col-lg-9 profile-tab-content-rtl">
                 <div className="tab-content" id="contact-tabContent">
                   <div
                     className={`tab-pane fade show  ${
