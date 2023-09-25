@@ -185,27 +185,27 @@ const QuickOrder = () => {
           <div className="row justify-content-center products_title_quick py-3 ">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
             <div className="col-lg-2 ">
-              <h5 className="mb-0 pt-2 text-start ps-lg-4 ">
+              <h5 className="mb-0 pt-2 text-start ">
                 {/* {selectedMultiLangData?.image} */}
               </h5>
             </div>
-            <div className="col-lg-6  products-name ">
-              <h6 className="mb-0 pt-2 text-start ps-lg-5 font-size-quick">
+            <div className="col-lg-7  products-name px-5 d-inline-flex justify-content-start">
+              <h6 className="mb-0 pt-2 text-start font-size-quick">
                 {selectedMultiLangData?.details}
               </h6>
             </div>
-            <div className="col-lg-1 price-title-margin d-inline-flex justify-content-center">
-              <h6 className="mb-0 pt-2 text-end ps-lg-5 font-size-quick">
+            <div className="col-lg-1 d-inline-flex ">
+              <h6 className="mb-0 pt-2 text-end  font-size-quick">
                 {selectedMultiLangData?.price}
               </h6>
             </div>
-            <div className="col-lg-1 col-1 text-start d-flex justify-content-center m-auto mt-0">
+            <div className="col-lg-1 col-1 text-start  m-auto mt-0 d-inline-flex justify-content-start">
               <h6 className="mb-0 pt-2 font-size-quick d-flex ">
                 {selectedMultiLangData?.quantity_c}
               </h6>
             </div>
-            <div className="col-lg-1 col-1 text-start ms-3 total-tiltle-margin">
-              <h6 className="mb-2 pt-2 ps-lg-3 font-size-quick">
+            <div className="col-lg-1 col-1 d-inline-flex justify-content-start">
+              <h6 className="mb-2 pt-2  font-size-quick">
                 {selectedMultiLangData?.total}
               </h6>
             </div>

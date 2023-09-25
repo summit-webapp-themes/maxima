@@ -109,7 +109,7 @@ const QuickOrderCard = (props: any) => {
                   )}
                 </p>
               </div>
-              <div className="col-lg-1 col-6 mx-lg-0 ps-0 mx-4 products-name d-flex justify-content-center align-items-start mt-0">
+              <div className="col-lg-1 col-6 products-name d-inline-flex justify-content-center align-items-start mt-0">
                 {
                   <>
                     <input
@@ -122,7 +122,7 @@ const QuickOrderCard = (props: any) => {
                   </>
                 }
               </div>
-              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name mb-3">
+              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name mb-3 d-inline-flex justify-content-center">
                 {data.currency_symbol}
                 <IndianNumber
                   value={(total = data.price * showValue(data?.min_order_qty))}
