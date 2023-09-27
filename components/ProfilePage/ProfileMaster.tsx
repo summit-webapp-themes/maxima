@@ -106,40 +106,40 @@ const ProfileMaster = () => {
 
   const personalDetails: any = () => {
     return (
-      <div className="ms-2 products-name">
+      <div className="ms-2 color-black" >
         <div className="mob-userdetail-containers">
-          <div className="col-lg-3 bold fs-3 products-name">
+          <div className="col-lg-3 bold fs-3 color-black">
             {selectedMultiLangData?.user_name}:
           </div>
-          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+          <div className="col-lg-9 fs-4 persons-data-mob color-black">
             {profileList && profileList?.profile_details?.customer_name}
           </div>
         </div>
 
         <div className="mob-userdetail-containers">
-          <div className="col-lg-3 bold fs-3 products-name">
+          <div className="col-lg-3 bold fs-3 color-black">
             {selectedMultiLangData?.company_name} :
           </div>
-          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+          <div className="col-lg-9 fs-4 persons-data-mob color-black">
             {profileList && profileList?.profile_details?.company_name}
           </div>
         </div>
 
         <div className="mob-userdetail-containers">
-          <div className="col-lg-3 bold fs-3 products-name">
+          <div className="col-lg-3 bold fs-3 color-black">
             {selectedMultiLangData?.mobile_number} :
           </div>
-          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+          <div className="col-lg-9 fs-4 persons-data-mob color-black">
             {profileList && profileList?.profile_details?.contact_no}
           </div>
         </div>
 
         <div className="mob-userdetail-containers">
-          <div className="col-lg-3 bold fs-3 products-name">
+          <div className="col-lg-3 bold fs-3 color-black">
             {" "}
             {selectedMultiLangData?.email} :
           </div>
-          <div className="col-lg-9 fs-4 persons-data-mob products-name">
+          <div className="col-lg-9 fs-4 persons-data-mob color-black">
             {profileList && profileList?.profile_details?.email}
           </div>
         </div>
@@ -150,7 +150,7 @@ const ProfileMaster = () => {
   const availableCoupons: any = () => {
     return (
       <>
-        <div className="mb-2 row products-name">
+        <div className="mb-2 row color-black">
           <div className="col-lg-2 fs-3 bold">
             {selectedMultiLangData?.coupons}:
           </div>
@@ -183,7 +183,7 @@ const ProfileMaster = () => {
     if (ageingReport.length > 0) {
       return (
         <>
-          <div className="row mt-5 products-name">
+          <div className="row mt-5 color-black">
             <div className="col-lg-12">
               <div className="">
                 <div className="profile">
@@ -233,11 +233,11 @@ const ProfileMaster = () => {
   const showBillingAddresses: any = () => {
     return (
       <>
-        <div className="shadow-sm card px-2 products-name">
+        <div className="shadow-sm card px-2 color-black">
           <div className="card-body">
             <div className="row align-items-center">
               <div className="col-lg-8">
-                <h5 className="fw-bolder pt-1 products-name">
+                <h5 className="fw-bolder pt-1 color-black">
                   {" "}
                   {selectedMultiLangData?.billing_addresses}
                 </h5>
@@ -336,11 +336,11 @@ const ProfileMaster = () => {
   const showShippigAddresses: any = () => {
     return (
       <>
-        <div className="shadow-sm card px-2 products-name">
+        <div className="shadow-sm card px-2 color-black">
           <div className="card-body">
             <div className="row align-items-center">
               <div className="col-lg-8">
-                <h5 className="fw-bolder pt-1 products-name">
+                <h5 className="fw-bolder pt-1 color-black">
                   {" "}
                   {selectedMultiLangData?.shipping_addresses}
                 </h5>
@@ -437,7 +437,7 @@ const ProfileMaster = () => {
 
   const paymentTerms: any = () => {
     return (
-      <div className="row m-0 products-name">
+      <div className="row m-0 color-black">
         <div className="shadow-sm card mt-0 ">
           <div className="card-body">
             <div className="mb-2 row ">
@@ -569,14 +569,17 @@ const ProfileMaster = () => {
 
   return (
     <>
-      <div className="container margin_from_nav">
-        <section className="profile_section ">
+      <div className="container margin_from_nav" >
+        <section className="profile_section pb-0 mb-0">
           <div className="container">
-            <h1 className="bold text-captilize mb-3 ms-1 text-center-mob profile_heading products-name mb-5">
-              {selectedMultiLangData?.my_account}
-            </h1>
-            <div className="row">
-              <div className="col-lg-3 mt-2">
+            <div className="page_heading">
+              <h4 className="p-0 m-0">
+                {selectedMultiLangData?.my_account}
+              </h4>
+            </div>
+
+            <div className="row" >
+              <div className="col-lg-3 mt-0">
                 <div className="contactus_tab">
                   <ul
                     id="faq-tab"
@@ -586,9 +589,8 @@ const ProfileMaster = () => {
                     <li className="nav-item">
                       <Link href="#contact_faq" legacyBehavior>
                         <a
-                          className={`nav-link profile_nav border tab_width ${
-                            !documentQueued?.setTrue ? "active" : ""
-                          }  nav_tabs_list `}
+                          className={`nav-link profile_nav border tab_width ${!documentQueued?.setTrue ? "active" : ""
+                            }  nav_tabs_list `}
                           id="personal_details_faq_tab"
                           data-bs-toggle="pill"
                           href="#personal_details_faq"
@@ -596,7 +598,7 @@ const ProfileMaster = () => {
                           aria-controls="personal_details_faq"
                           aria-selected="true"
                         >
-                          <h6 className="link-tabs my-3 products-name">
+                          <h6 className="link-tabs my-3 color-black">
                             <i
                               className="fa fa-user-circle profile_tab-icons"
                               aria-hidden="true"
@@ -619,7 +621,7 @@ const ProfileMaster = () => {
                           aria-controls="address_faq"
                           aria-selected="true"
                         >
-                          <h6 className="link-tabs my-3 products-name">
+                          <h6 className="link-tabs my-3 color-black">
                             <i
                               className="fa fa-map-marker profile_tab-icons"
                               aria-hidden="true"
@@ -643,7 +645,7 @@ const ProfileMaster = () => {
                           aria-controls="offers_faq"
                           aria-selected="true"
                         >
-                          <h6 className="link-tabs my-3 products-name">
+                          <h6 className="link-tabs my-3 color-black">
                             <i
                               className="fa fa-tags profile_tab-icons"
                               aria-hidden="true"
@@ -660,9 +662,8 @@ const ProfileMaster = () => {
                     <li className="nav-item col-lg-10 col-12">
                       <Link href="#pay_faq" legacyBehavior>
                         <a
-                          className={`nav-link profile_nav border tab_width ${
-                            documentQueued?.setTrue ? "active" : ""
-                          }  nav_tabs_list `}
+                          className={`nav-link profile_nav border tab_width ${documentQueued?.setTrue ? "active" : ""
+                            }  nav_tabs_list `}
                           id="pay_faq_tab"
                           data-bs-toggle="pill"
                           href="#pay_faq"
@@ -670,7 +671,7 @@ const ProfileMaster = () => {
                           aria-controls="pay_faq"
                           aria-selected="false"
                         >
-                          <h6 className="link-tabs my-3 products-name">
+                          <h6 className="link-tabs my-3 color-black">
                             <i
                               className="fa fa-credit-card profile_tab-icons"
                               aria-hidden="true"
@@ -694,7 +695,7 @@ const ProfileMaster = () => {
                           aria-controls="enqHist_faq_tab"
                           aria-selected="false"
                         >
-                          <h6 className="link-tabs my-3 products-name">
+                          <h6 className="link-tabs my-3 color-black">
                             <i
                               className="fa fa-calendar-check-o profile_tab-icons"
                               aria-hidden="true"
@@ -712,21 +713,20 @@ const ProfileMaster = () => {
               <div className="col-lg-9 profile-tab-content-rtl">
                 <div className="tab-content" id="contact-tabContent">
                   <div
-                    className={`tab-pane fade show  ${
-                      !documentQueued.setTrue ? "active" : ""
-                    }  `}
+                    className={`tab-pane fade show  ${!documentQueued.setTrue ? "active" : ""
+                      }  pt-0 mt-0`}
                     id="personal_details_faq"
                     role="tabpanel"
                     aria-labelledby="personal_details_faq_tab"
                   >
                     <div className="card">
-                      <div className="card-body row gy-3">
+                      <div className="card-body row gy-3 pt-0 mt-0" >
                         {personalDetails()}
                       </div>
                     </div>
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className="tab-pane fade pt-0 mt-0"
                     id="address_faq"
                     role="tabpanel"
                     aria-labelledby="address_faq_tab"
@@ -739,7 +739,7 @@ const ProfileMaster = () => {
                     </div>
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className="tab-pane fade pt-0 mt-0"
                     id="offers_faq"
                     role="tabpanel"
                     aria-labelledby="offers_faq_tab"
@@ -757,7 +757,7 @@ const ProfileMaster = () => {
                     </div>
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className="tab-pane fade "
                     id="password_faq"
                     role="tabpanel"
                     aria-labelledby="password_faq_tab"
@@ -768,9 +768,8 @@ const ProfileMaster = () => {
                   </div>
 
                   <div
-                    className={`tab-pane fade show  ${
-                      documentQueued.setTrue ? "active" : ""
-                    }  `}
+                    className={`tab-pane fade show  ${documentQueued.setTrue ? "active" : ""
+                      }  pt-0 mt-0`}
                     id="pay_faq"
                     role="tabpanel"
                     aria-labelledby="pay_faq_tab"
@@ -786,7 +785,7 @@ const ProfileMaster = () => {
                     </div>
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className="tab-pane fade pt-0 mt-0"
                     id="enquiries_faq"
                     role="tabpanel"
                     aria-labelledby="enquiries_faq_tab"
@@ -813,7 +812,7 @@ const ProfileMaster = () => {
                     </div>
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className="tab-pane fade pt-0 mt-0"
                     id="orders_faq"
                     role="tabpanel"
                     aria-labelledby="orders_faq_tab"
@@ -828,7 +827,7 @@ const ProfileMaster = () => {
                                   {selectedMultiLangData?.replenishment_orders}{" "}
                                   :
                                 </div>
-                                <div className="col-lg-9">
+                                <div className="col-lg-9" >
                                   <div className="row"></div>
                                 </div>
                               </div>
@@ -839,7 +838,7 @@ const ProfileMaster = () => {
                     </div>
                   </div>
                   <div
-                    className="tab-pane fade"
+                    className="tab-pane fade pt-0 mt-0"
                     id="enqHist_faq"
                     role="tabpanel"
                     aria-labelledby="enqHist_faq_tab"

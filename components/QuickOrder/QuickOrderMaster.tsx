@@ -130,22 +130,25 @@ const QuickOrder = () => {
         <div className="col-lg-12  ">
           <div className="row">
             {/* <div className="col-lg-2"></div> */}
-            <div className="col-lg-12 ">
-              <h3 className="products-name">
-                {selectedMultiLangData?.quick_order}
-              </h3>
-              <div className="row">
-                <div className="col-lg-7 my-lg-2 mt-3">
+            <div className="col-lg-12 " >
+              <div className="page_heading">
+                <h3 className="">
+                  {selectedMultiLangData?.quick_order}
+                </h3>
+              </div>
+
+              <div className="row or-margin-top">
+                <div className="col-lg-7 my-lg-2 mt-0 mb-0 pt-0 pb-0 " >
                   {
                     selectedMultiLangData?.you_can_add_upto_25_valid_item_code_oem_part_no_below
                   }
                 </div>
                 <div className="col-lg-5">
-                  <div className="row mt-lg-0 mt-4 btn-quick-margin">
+                  <div className="row mt-lg-0 mt-0 btn-quick-margin or-margin-top">
                     <div className="col-lg-7 col-6 text-end ">
                       <button
                         type="button"
-                        className=" mb-3 text-uppercase py-2 px-lg-4 px-5 mt-2 reset-btn-mob"
+                        className=" mb-0 text-uppercase py-2 px-lg-4 px-5 mt-0 reset-btn-mob reset-btn-mobs"
                         style={{
                           border: "1px solid #0071DC",
                           borderRadius: "7px",
@@ -157,10 +160,10 @@ const QuickOrder = () => {
                         {selectedMultiLangData?.reset_form}
                       </button>
                     </div>
-                    <div className="col-lg-5 col-6 text-end ">
+                    <div className="col-lg-5 mt-0  col-6 text-end ">
                       <button
                         type="button"
-                        className=" text-white mb-3 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn mt-2 reset-btn-mob "
+                        className=" text-white mb-0 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn mt-0 reset-btn-mob "
                         style={{
                           border: "1px solid #0071DC",
                           borderRadius: "7px",
@@ -180,7 +183,7 @@ const QuickOrder = () => {
         </div>
       </div>
 
-      <div className="row  mt-5  table-heading-quick-order-mob products-name  ms-3 me-1 ">
+      <div className="row  mt-5  table-heading-quick-order-mob color-black  ms-3 me-1 " >
         <div className="col-lg-12 text-center cart_heading_bg">
           <div className="row justify-content-center products_title_quick py-3 ">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
@@ -223,7 +226,7 @@ const QuickOrder = () => {
         />
       </div>
 
-      <div className="row justify-content-center my-5  py-lg-0 py-1">
+      <div className="row justify-content-center my-0 mt-5  py-lg-0 py-1">
         <div className="col-lg-2"></div>
         <div className="col-lg-10 col-12">
           {ifInputEmptyErr && (

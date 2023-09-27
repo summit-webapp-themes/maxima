@@ -63,7 +63,7 @@ const QuickOrderCard = (props: any) => {
                   />
                 )}
               </div>
-              <div className="col-lg-7 col-12 mb-5 products-name ">
+              <div className="col-lg-7 col-12 mb-5 color-black " >
                 <p className="mb-0 quick-detail-lh">
                   {" "}
                   {selectedMultiLangData?.item_name}
@@ -95,7 +95,7 @@ const QuickOrderCard = (props: any) => {
                   </a>
                 </Link>
               </div>
-              <div className="col-lg-1 col-12 mx-lg-0 mx-4 price_font_family products-name ">
+              <div className="col-lg-1 col-12 mx-lg-0 mx-0 price_font_family color-black quick-order-mg" >
                 <p>
                   {data.price !== 0 ? (
                     <>
@@ -114,7 +114,7 @@ const QuickOrderCard = (props: any) => {
                   <>
                     <input
                       type="number"
-                      className="w-50  text-center mb-3"
+                      className="w-50  text-center mb-3 qt-margins"
                       value={showValue(data?.min_order_qty)}
                       onChange={(e) => handleInputChange(e, index)}
                     />

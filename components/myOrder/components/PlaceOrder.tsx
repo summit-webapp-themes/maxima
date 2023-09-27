@@ -27,7 +27,7 @@ const PlaceOrder = ({
             <div className="row">
               <div className="col-lg-2 col-sm-4 col-6">
                 <select
-                  className="form-select placeorder_detail fs-5 w-75 products-name"
+                  className="form-select placeorder_detail fs-5 w-75 color-black"
                   onChange={handleHistoryDate}
                   value={history}
                 >
@@ -45,7 +45,7 @@ const PlaceOrder = ({
                   <option value="2020">2020</option>
                 </select>
               </div>
-              <div className="col text-end me-1">
+              <div className="col text-end me-2 order-myorder-margin">
                 <p className="mb-0 order-ptag">
                   <span className="bold">{placeorderCount?.length}</span>{" "}
                   {selectedMultiLangData?.orders}
@@ -74,9 +74,9 @@ const PlaceOrder = ({
                       (items: any) => items?.payment_status !== "Cancelled"
                     )
                     ?.map((data: any, i: any) => (
-                      <div className="row products-name" key={i} >
+                      <div className="row color-black" key={i} >
                         <div className="col-lg-12">
-                          <div className="order_card cart_table mb-3 card">
+                          <div className="order_card cart_table mb-2 card">
                             <MyOrderCard
                               data={data}
                               selectedMultiLangData={selectedMultiLangData}
