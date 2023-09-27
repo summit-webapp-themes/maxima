@@ -1,0 +1,90 @@
+html[dir="rtl"] {
+    .navbar-left-icon1 {
+        margin-left: 0px;
+    }
+    .rtl-toggle-section {
+        margin-left: 18px;
+    }
+    .menu > li:last-child {
+        margin-right: 3rem;
+    }
+    .category-menu > li:last-child {
+        margin-right: 0.6rem;
+    }
+    .category-menu > li:last-child > a i {
+        font-size: 1.7rem;
+        font-weight: 400;
+    }
+    .menu li {
+        position: unset;
+    }
+    .menu > li .megamenu {
+        left: 4.4rem;
+    }
+    .menu > li .vertical-menubar-rtl {
+        left: -82rem;
+    }
+    .vertical-menu > li:first-child:hover > ul {
+        top: 0;
+    }
+    .category-menu .megamenu > li:not(:last-child) {
+        padding: 0.8rem 2rem 0 0rem;
+    }
+    .vertical-menu-li-rtl {
+        position: relative;
+    }
+    .vertical-menubar-rtl:hover {
+        position: absolute;
+        top: 3rem;
+    }
+    .browse-cat-label {
+        padding-right: 10px;
+    }
+    .tab-content > .active {
+        visibility: hidden;
+    }
+    .browse-cat-list-span {
+        padding-right: 10px;
+    }
+    .corousel-captionn {
+        right: auto !important;
+    }
+    .product-price .new-price {
+        margin-left: 1rem !important;
+    }
+    .product-price-rtl {
+        padding-right: 4px;
+    }
+    // React Toastify
+    .Toastify__toast-container--top-right {
+        right: auto;
+        left: 1em;
+    }
+    .Toastify__toast {
+        direction: rtl;
+    }
+    // #listing page
+    .mob-breadcrum-icon i {
+        margin: 5px;
+    }
+    .product-listing-row {
+        margin-right: 10px;
+    }
+    .product-list-card-rtl {
+        margin-left: -26px;
+    }
+    .list-toggle-rtl {
+        margin-left: -15px;
+    }
+    .specs-tabs-container-rtl .tab-content > .active {
+        visibility: inherit;
+    }
+    // #profile page
+    .profile-tab-content-rtl .tab-content > .active {
+        visibility: inherit;
+    }
+    // #myorder
+    .my-order-container-pd .tab-content > .active {
+        visibility: inherit;
+    }
+}

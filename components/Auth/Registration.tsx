@@ -174,7 +174,7 @@ const Registration = () => {
                             <Form.Group controlId={details?.controlId}>
                               <div className="row">
                                 <div className="col-md-4">
-                                  <Form.Label className="registration_label color-black bold">
+                                  <Form.Label className="registration_label">
                                     {HandleRegistrationForm(details)}:
                                   </Form.Label>
                                 </div>

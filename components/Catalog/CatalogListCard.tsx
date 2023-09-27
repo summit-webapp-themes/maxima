@@ -32,7 +32,7 @@ const CatalogListCard = ({
                     <h5 className="text-uppercase catalog-heading">
                       {catalog?.name}
                     </h5>
-                    <p className="card-text">
+                    <p className="card-text d-inline-flex">
                       {selectedMultiLangData?.product_count} :
                       <span className="catalog-count ps-5">
                         {catalog?.product_counts > 10
@@ -42,32 +42,32 @@ const CatalogListCard = ({
                     </p>
                   </div>
                   <div className="row card-body ">
-                    <div className="col-lg-4 col-md-4">
+                    <div className="col-lg-5 col-md-4">
                       <Link
                         href={`/${catalog.url}?page=1&currency=${currency_state_from_redux?.selected_currency_value}`}
                         className="btn btn-catalogview btn-colors mr-2"
                       >
                         {selectedMultiLangData?.view_catalog_product}
-                        <i className="fa fa-eye ml-2" aria-hidden="true"></i>
+                        <i className="fa fa-eye px-3" aria-hidden="true"></i>
                       </Link>
                     </div>
-                    <div className="col-lg-4 col-md-4 pl-lg-5 my-lg-0 my-md-0 my-3">
+                    <div className="col-lg-3 col-md-4 my-lg-0 my-md-0 my-3 ">
                       <Link
                         href={`/product-category/?page=1&currency=${currency_state_from_redux?.selected_currency_value}`}
                         className="btn btn-catalogAddProduct mr-2 text-dark "
                       >
                         {selectedMultiLangData?.add_product}
-                        <i className="fa fa-plus ml-2" aria-hidden="true"></i>
+                        <i className="fa fa-plus px-3" aria-hidden="true"></i>
                       </Link>
                     </div>
-                    <div className="col-lg-4 col-md-4 pr-lg-5">
+                    <div className="col-lg-4 col-md-4">
                       <button
                         className="btn btn-catalogview btn-colors mr-lg-5"
                         onClick={() => handleDeleteCatalog(catalog?.name)}
                       >
                         {selectedMultiLangData?.delete_catalog}
                         <i
-                          className="fa fa-trash-o ml-2"
+                          className="fa fa-trash-o px-3"
                           aria-hidden="true"
                         ></i>
                       </button>

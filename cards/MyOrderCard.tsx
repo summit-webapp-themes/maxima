@@ -18,9 +18,9 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
   const currency_state_from_redux: any = useSelector(currency_selector_state);
   return (
     <>
-      <div key={data.id} >
-        <div className="card-header myorder-card-header " >
-          <div className="row pb-0" >
+      <div key={data.id}>
+        <div className="card-header pb-1 ">
+          <div className="row pb-0">
             <div className=" mb-sm-0 col-md-2 col-6 order-div">
               <p className="text-uppercase gray  myorder_p">
                 {selectedMultiLangData?.order_placed}
@@ -53,48 +53,49 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                 <div className="dropdown text-dark" key={index}>
                   {personAddress?.name === "Shipping Address"
                     ? personAddress?.values.map((addr: any) => (
-                      <div key={addr.address_id}>
-                        <a
-                          className="dropdown-toggle p-0 bold text-dark"
-                          role="button"
-                          id="ship_to"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          {personAddress?.name}
-                        </a>
-                        <ul
-                          className="dropdown-menu"
-                          aria-labelledby="ship_to"
-                        >
-                          <li className="ps-1 pe-1  ">
-                            {addr?.address_title}
-                          </li>
-                          <li className="ps-1 pe-1  ">
-                            {addr?.address_1}
-                          </li>
-                          <li className="ps-1 pe-1 ">
-                            {addr?.address_2}
-                          </li>
-                          <li className="ps-1 pe-1 ">
-                            {addr?.city} - {addr?.postal_code}
-                          </li>
-                          <li className="ps-1 pe-1 ">{addr?.country}</li>
-                          <li className="ps-1 pe-1 ">
-                            {selectedMultiLangData?.mobile_number}:{" "}
-                            {addr?.contact}
-                          </li>
-                        </ul>
-                      </div>
-                    ))
+                        <div key={addr.address_id}>
+                          <a
+                            className="dropdown-toggle p-0 bold text-dark"
+                            role="button"
+                            id="ship_to"
+                            data-bs-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false"
+                          >
+                            {personAddress?.name}
+                          </a>
+                          <ul
+                            className="dropdown-menu"
+                            aria-labelledby="ship_to"
+                          >
+                            <li className="ps-1 pe-1 mb-0 ">
+                              {addr?.address_title}
+                            </li>
+                            <li className="ps-1 pe-1 mb-0 ">
+                              {addr?.address_1}
+                            </li>
+                            <li className="ps-1 pe-1 mb-0">
+                              {addr?.address_2}
+                            </li>
+                            <li className="ps-1 pe-1 mb-0">
+                              {addr?.city} - {addr?.postal_code}
+                            </li>
+                            <li className="ps-1 pe-1 mb-0">{addr?.country}</li>
+                            <li className="ps-1 pe-1 mb-0">
+                              {selectedMultiLangData?.mobile_number}:{" "}
+                              {addr?.contact}
+                            </li>
+                          </ul>
+                        </div>
+                      ))
                     : null}
                 </div>
               ))}
             </div>
             <div className="text-end col-md-6 col-8 order-cards">
-              <p className=" myorder_p">
-                {selectedMultiLangData?.orders} # {data?.name}
+              <p className="mb-0 myorder_p d-inline-flex justify-content-end">
+                {selectedMultiLangData?.orders}
+                <span># {data?.name}</span>
               </p>
 
               <div className="d-flex justify-content-end align-items-center">
@@ -116,19 +117,21 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
           >
             <div className="d-flex  pb-0" >
               <div className="flex-fill">
-                <h6 className="green text-capitalize bold  mt-2 order-ptag ">
-                  {selectedMultiLangData?.status} : {data?.payment_status}
+                <h6 className="green text-capitalize bold mb-0 mt-2 order-ptag d-inline-flex">
+                  <div>{selectedMultiLangData?.status} </div>
+                  <div>&nbsp;: {data?.payment_status}</div>
                 </h6>
               </div>
               <div className="justify-content-end d-none d-sm-block align-items-end"></div>
             </div>
 
-            <div className="d-flex align-items-center row" >
-              <div className=" mb-sm-0 col-lg-2 col-md-2 col-4 mt-2">
-                <div className="product-img cart-image  mt-2 mb-4">
+            <div className="d-flex align-items-center row">
+              <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4 mt-2">
+                <div className="product-img">
                   <img
-                    src={`${CONSTANTS.API_BASE_URL}/${detail?.img !== null ? detail?.img : detail?.brand_img
-                      }`}
+                    src={`${CONSTANTS.API_BASE_URL}/${
+                      detail?.img !== null ? detail?.img : detail?.brand_img
+                    }`}
                     className="product_img img-fluid orderdetail_img"
                     alt="product-img"
                   />
@@ -219,15 +222,15 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
                     </p>
 
                     {data?.shipping_method.door_delivery === 0 &&
-                      data?.shipping_method?.godown_delivery === 0 ? (
-                      <p className="">
+                    data?.shipping_method?.godown_delivery === 0 ? (
+                      <p className="mb-0">
                         {selectedMultiLangData?.door_delivery_yes}
                       </p>
                     ) : (
                       ""
                     )}
                     {data?.shipping_method?.door_delivery === 0 &&
-                      data?.shipping_method?.godown_delivery !== 0 ? (
+                    data?.shipping_method?.godown_delivery !== 0 ? (
                       <>
                         <p className="">
                           {selectedMultiLangData?.godown_delivery_yes}

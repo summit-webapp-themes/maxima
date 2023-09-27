@@ -54,11 +54,11 @@ const Footer = () => {
               </div>
               <div className="col-xl-4 col-lg-5">
                 <div className="icon-box icon-box-side text-dark ">
-                  <div className="icon-box-icon d-inline-flex footer-icon">
+                  <div className="icon-box-icon d-inline-flex footer-icon mx-0">
                     <i className="w-icon-envelop3 text-white msg-icon footer-icon "></i>
                   </div>
                   <div className="icon-box-content">
-                    <h5 className="icon-box-title text-uppercase font-weight-bold text-white text-left pl-1">
+                    <h5 className="icon-box-title text-uppercase font-weight-bold text-white text-left">
                       {selectLangData?.subscribe_to_our_newsletter}
                     </h5>
                     <p className="text-light">
@@ -73,26 +73,27 @@ const Footer = () => {
                 <form
                   onSubmit={handleSubscription}
                   method="get"
-                  className="input-wrapper input-wrapper-inline input-wrapper-rounded"
+                  className="input-wrapper input-wrapper-inline input-wrapper-rounded row"
                 >
-                  <input
-                    type="email"
-                    className="form-control mr-2 bg-white text-default"
-                    // name="email"
-                    // id="email"
-                    value={subScription}
-                    onChange={handleSubscriptionInput}
-                    // onChange={(e: any) => setSubscriptions(e?.target?.value)}
-                    placeholder="Your E-mail Address"
-                    required
-                  />
-                  <button
-                    className="btn btn-primary btn-rounded btn-left  footer-button"
-                    type="submit"
-                  >
-                    {selectLangData?.subscribe}
-                    <i className="w-icon-long-arrow-right"></i>
-                  </button>
+                  <div className="col-8 my-auto">
+                    <input
+                      type="email"
+                      className="form-control mr-2 bg-white text-default subscribe_input"
+                      value={subScription}
+                      onChange={handleSubscriptionInput}
+                      placeholder="Your E-mail Address"
+                      required
+                    />
+                  </div>
+                  <div className="col-3">
+                    <button
+                      className="btn btn-primary btn-rounded btn-left  footer-button"
+                      type="submit"
+                    >
+                      {selectLangData?.subscribe}
+                      <i className="w-icon-long-arrow-right px-2"></i>
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -228,11 +229,11 @@ const Footer = () => {
             <div className="footer-left">
               <p className="copyright">{selectLangData?.copyright_text}</p>
             </div>
-            <div className="footer-right">
-              <span className="payment-label mr-lg-8">
+            <div className="footer-right ">
+              <span className="payment-label px-3">
                 {selectLangData?.using_safe_payment}
               </span>
-              <figure className="payment">
+              <figure className="payment ">
                 <Image
                   src="/assets/images/payment.png"
                   alt="payment"

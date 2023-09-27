@@ -17,6 +17,7 @@ import { login_state } from "../store/slices/auth/login_slice";
 import { Router, useRouter } from "next/router";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
 import CatalogModal from "../components/Catalog/CatalogModal";
+import { profileData_state } from "../store/slices/general_slices/profile-page-slice";
 
 const ProductListViewCard = (props: any) => {
   const {
@@ -38,10 +39,12 @@ const ProductListViewCard = (props: any) => {
   const router = useRouter();
 
   const TokenFromStore: any = useSelector(get_access_token);
+  const profileData: any = useSelector(profileData_state);
   const [showEditModal, setshowEditModal] = useState(false);
   const [show, setshow] = useState(false);
   const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
   let isLoggedIn: any;
+  let partyName: any;
   if (typeof window !== "undefined") {
     isLoggedIn = localStorage.getItem("isLoggedIn");
   }
@@ -60,10 +63,18 @@ const ProductListViewCard = (props: any) => {
       item_code: name,
       quantity: 1,
     });
+    if (profileData?.partyName !== "") {
+      if (Object?.keys(profileData?.partyName)?.length > 0) {
+        partyName = profileData?.partyName;
+      }
+    } else {
+      partyName = "Guest";
+    }
     let AddToCartProductRes: any = await AddToCartApi(
       addCartData,
       currency_state_from_redux?.selected_currency_value,
-      TokenFromStore?.token
+      TokenFromStore?.token,
+      partyName
     );
     if (AddToCartProductRes.msg === "success") {
       showToast("Item Added to cart", "success");
@@ -127,25 +138,33 @@ const ProductListViewCard = (props: any) => {
                           ? ""
                           : product_data?.short_description}
                       </div>
-                      <div className="product-desc text-gray products-name ">
-                        {selectedMultiLangData?.item_code}: {product_data?.name}
+                      <div className="product-desc text-gray products-name d-inline-flex">
+                        {selectedMultiLangData?.item_code}:
+                        <span>&nbsp;{product_data?.name}</span>
                       </div>
-
-                      {product_data?.weight_per_unit === 0 ||
-                      product_data?.weight_per_unit === null ? (
-                        ""
-                      ) : (
-                        <div className="product-desc text-gray">
-                          {selectedMultiLangData?.approx_weight}:{" "}
-                          {product_data?.weight_per_unit}
-                          {""} {product_data?.weight_uom}
-                        </div>
-                      )}
-                      {product_data?.brand !== null && (
-                        <div className="sold-by product-desc products-name">
-                          {selectedMultiLangData?.brand}: {product_data?.brand}
-                        </div>
-                      )}
+                      <div>
+                        {product_data?.weight_per_unit === 0 ||
+                        product_data?.weight_per_unit === null ? (
+                          ""
+                        ) : (
+                          <div className="product-desc text-gray d-inline-flex">
+                            {selectedMultiLangData?.approx_weight}:{" "}
+                            <span className="d-inline-flex">
+                              {" "}
+                              &nbsp;
+                              {product_data?.weight_per_unit}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        {product_data?.brand !== null && (
+                          <div className="sold-by product-desc products-name d-inline-flex">
+                            <span>{selectedMultiLangData?.brand}:&nbsp;</span>
+                            {product_data?.brand}
+                          </div>
+                        )}
+                      </div>
 
                       {product_data?.price === null ||
                       product_data?.price === 0 ? (
@@ -164,48 +183,52 @@ const ProductListViewCard = (props: any) => {
                           )}
                         </>
                       )}
-                      <div className="p-0 m-0 d-flex ">
-                        {isLoggedIn === "true" ? (
-                          <div className="text-center w-0">
-                            <button
-                              className={` ${
-                                addToCartButtonDisabled === true
-                                  ? "disabled"
-                                  : ""
-                              } btn standard_button add_cart_btn`}
-                              onClick={() =>
-                                AddToCartProduct(product_data.name)
-                              }
-                            >
-                              {selectedMultiLangData?.add_to_cart}
-                            </button>
-                          </div>
-                        ) : (
-                          <Link href="/login">
-                            <div className="text-center w-50">
-                              <button className="btn standard_button">
+                      <div className="p-0 m-0 row">
+                        <div className="col-lg-7">
+                          {isLoggedIn === "true" ? (
+                            <div className="text-center w-0">
+                              <button
+                                className={` ${
+                                  addToCartButtonDisabled === true
+                                    ? "disabled"
+                                    : ""
+                                } btn standard_button add_cart_btn`}
+                                onClick={() =>
+                                  AddToCartProduct(product_data.name)
+                                }
+                              >
                                 {selectedMultiLangData?.add_to_cart}
                               </button>
                             </div>
-                          </Link>
-                        )}
-                        {isLoggedIn === "true" && (
-                          <>
-                            {router.route !== "/catalog/[category]" ? (
-                              <button
-                                type="button"
-                                className={`btn btn-link catalog-btn-size pt-2 fs-5 products-name add-to-catlog-btn ms-5`}
-                                onClick={() => handleShow(product_data.name)}
-                              >
-                                <span className="bold">
-                                  {selectedMultiLangData?.add_to_catalog}
-                                </span>
-                              </button>
-                            ) : (
-                              ""
-                            )}
-                          </>
-                        )}
+                          ) : (
+                            <Link href="/login">
+                              <div className="text-center w-50">
+                                <button className="btn standard_button">
+                                  {selectedMultiLangData?.add_to_cart}
+                                </button>
+                              </div>
+                            </Link>
+                          )}
+                        </div>
+                        <div className="col-lg-5">
+                          {isLoggedIn === "true" && (
+                            <>
+                              {router.route !== "/catalog/[category]" ? (
+                                <button
+                                  type="button"
+                                  className={`btn btn-link catalog-btn-size pt-2 fs-5 products-name text-decoration-none`}
+                                  onClick={() => handleShow(product_data.name)}
+                                >
+                                  <span className="bold">
+                                    {selectedMultiLangData?.add_to_catalog}
+                                  </span>
+                                </button>
+                              ) : (
+                                ""
+                              )}
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                     <div className="row mt-lg-5 mt-2 ps-5">

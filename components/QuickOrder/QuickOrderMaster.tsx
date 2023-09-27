@@ -125,8 +125,8 @@ const QuickOrder = () => {
   };
 
   return (
-    <div className="container  margin_from_nav quickorder-main-conatainer-mob color-black" >
-      <div className="row  mx-0 mt-0 ">
+    <div className="container  margin_from_nav_quick_o quickorder-main-conatainer-mob products-name">
+      <div className="row  mx-0 mt-5  ">
         <div className="col-lg-12  ">
           <div className="row">
             {/* <div className="col-lg-2"></div> */}
@@ -185,30 +185,30 @@ const QuickOrder = () => {
 
       <div className="row  mt-5  table-heading-quick-order-mob color-black  ms-3 me-1 " >
         <div className="col-lg-12 text-center cart_heading_bg">
-          <div className="row products_title_quick py-3 ">
+          <div className="row justify-content-center products_title_quick py-3 ">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
             <div className="col-lg-2 ">
-              <h5 className="mb-0 pt-2 text-start ps-lg-4 ">
+              <h5 className="mb-0 pt-2 text-start ">
                 {/* {selectedMultiLangData?.image} */}
               </h5>
             </div>
-            <div className="col-lg-6  color-black ">
-              <h6 className="mb-0 pt-2 text-start ps-lg-5 font-size-quick">
+            <div className="col-lg-7  products-name px-5 d-inline-flex justify-content-start">
+              <h6 className="mb-0 pt-2 text-start font-size-quick">
                 {selectedMultiLangData?.details}
               </h6>
             </div>
-            <div className="col-lg-1  mx-lg-5 ms-5 ps-5 price-title-margin">
-              <h6 className="mb-0 pt-2 text-end ps-lg-5 font-size-quick">
+            <div className="col-lg-1 d-inline-flex ">
+              <h6 className="mb-0 pt-2 text-end  font-size-quick">
                 {selectedMultiLangData?.price}
               </h6>
             </div>
-            <div className="col-lg-1 col-1 text-start ms-0 ps-0 qty-title-margin" >
-              <h6 className="mb-0 pt-2 ps-lg-2 font-size-quick">
+            <div className="col-lg-1 col-1 text-start  m-auto mt-0 d-inline-flex justify-content-start">
+              <h6 className="mb-0 pt-2 font-size-quick d-flex ">
                 {selectedMultiLangData?.quantity_c}
               </h6>
             </div>
-            <div className="col-lg-1 col-1 text-start ms-3 total-tiltle-margin">
-              <h6 className="mb-2 pt-2 ps-lg-3 font-size-quick">
+            <div className="col-lg-1 col-1 d-inline-flex justify-content-start">
+              <h6 className="mb-2 pt-2  font-size-quick">
                 {selectedMultiLangData?.total}
               </h6>
             </div>

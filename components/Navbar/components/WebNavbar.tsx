@@ -90,6 +90,14 @@ const WebNavbar = ({
     const logoutAPI = await LogoutList();
   };
 
+  const HandleLangToggle = (event: any) => {
+    console.log("handletoggle", event?.target?.checked);
+    if (event?.target?.checked === true) {
+      document.documentElement.dir = "rtl";
+    } else {
+      document.documentElement.dir = "ltr";
+    }
+  };
   return (
     <div>
       <header className="header fixed-header">
@@ -139,6 +147,21 @@ const WebNavbar = ({
             </div>
 
             <div className="navbar-left-icon1 d-flex align-items-center text-center mob-icon-wrapper">
+              <div className="form-check form-switch pe-5 fs-3 rtl-toggle-section">
+                <input
+                  className="form-check-input cursor_pointer"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                  onChange={HandleLangToggle}
+                />
+                <label
+                  className="form-check-label text-white"
+                  htmlFor="flexSwitchCheckDefault"
+                >
+                  Ar
+                </label>
+              </div>
               <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">
@@ -258,7 +281,7 @@ const WebNavbar = ({
                       title="Browse Categories"
                     >
                       <i className="w-icon-category"></i>
-                      <span>{selectedMultiLangData?.browse_categories}</span>
+                      <span className="browse-cat-label">{selectedMultiLangData?.browse_categories}</span>
                     </a>
                   </Link>
 
@@ -267,12 +290,14 @@ const WebNavbar = ({
                       {isLoading === "succeeded" &&
                         navbarData?.length > 0 &&
                         navbarData.map((items: any, index: number) => (
-                          <li key={index}>
+                          <li key={index} className="vertical-menu-li-rtl">
                             <a>
                               <i className="w-icon-tshirt2"></i>
+                              <span className="browse-cat-list-span">
                               {items.label}
+                              </span>
                             </a>
-                            <ul className="megamenu">
+                            <ul className="megamenu vertical-menubar-rtl">
                               {items?.values?.length > 0 &&
                                 items.values.map((items_val: any, i: any) => (
                                   <li key={i}>
