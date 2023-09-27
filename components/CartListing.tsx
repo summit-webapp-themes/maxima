@@ -16,11 +16,6 @@ import {
 import { Norecord } from "./NoRecord";
 import UseCheckoutPageHook from "../hooks/CheckoutHooks/checkout-page-hook";
 import getQuotationCart from "../services/api/cart-page-api/get-quotation-api";
-import {
-  failmsg,
-  hideToast,
-  successmsg,
-} from "../store/slices/general_slices/toast_notification_slice";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
 import DeleteProductFromCart from "../services/api/cart-page-api/delete-cart-product";
@@ -42,6 +37,7 @@ const CartListing = () => {
   } = UseCartPageHook();
 
   const TokenFromStore: any = useSelector(get_access_token);
+  const [quatationPrint ,setQuatationPrint] =useState("")
   const cart_listing_data_store = useSelector(cart_listing_state);
   // const { orderSummary } = UseCheckoutPageHook();
   // const orderSummary:any = []
@@ -105,13 +101,11 @@ const CartListing = () => {
       quot_id,
       TokenFromStore?.token
     ).then((res: any) => {
-      if (res?.data?.message?.msg === "success") {
-        showToast(
-          "Quotation Request has been Created. Please check your Profile",
-          "success"
-        );
-      }
+    setQuatationPrint(res?.data?.message?.data?.print_url)
+    window.open (`${res?.data?.message?.data?.print_url}` , '_blank')
     });
+    console.log(getQuotationInCart,"getQuotationInCart")
+
     return getQuotationInCart;
   };
 
@@ -460,7 +454,7 @@ const CartListing = () => {
                                 }
                               </div>
                               :
-                              <div className="col-lg-3 col-6 text-end products-name bold">
+                              <div className="col-lg-3 col-6 text-end products-name bold d-inline-flex">
                                 {
                                   cartListingItems?.categories[0]?.orders[0]
                                     ?.currency_symbol

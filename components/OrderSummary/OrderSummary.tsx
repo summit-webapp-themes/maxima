@@ -56,7 +56,7 @@ const OrderSummary = ({
                             <div className="col-6">{data?.name}</div>
                             <div className="col-6 text-end">
                               <p className={`mb-0 summary_p`}>
-                                <div>
+                                <div className="d-inline-flex">
                                   {currencySymbolForSummary}
                                   <IndianNumber value={data?.value} />
                                 </div>
@@ -91,7 +91,7 @@ const OrderSummary = ({
                                     <IndianNumber value={data?.value} />
                                   </div>
                                 ) : (
-                                  <div>
+                                  <div className="d-inline-flex">
                                     {currencySymbolForSummary}
 
                                     <IndianNumber value={data?.value} />
@@ -210,20 +210,22 @@ const OrderSummary = ({
                                           className="px-0 py-0 pb-1"
                                         >
                                           <p
-                                            className={`text-capitalize mb-0 cart_p text-end`}
+                                            className={`text-capitalize mb-0 cart_p text-end d-inline-flex`}
                                           >
                                             {detail.name === "Price" ? (
                                               <>{currencySymbolForSummary}</>
                                             ) : (
                                               ""
                                             )}
-                                            {detail.name === "Model No" ? (
-                                              detail.value.split("-")[0]
-                                            ) : (
-                                              <IndianNumber
-                                                value={detail?.value}
-                                              />
-                                            )}
+                                            <div>
+                                              {detail.name === "Model No" ? (
+                                                detail.value.split("-")[0]
+                                              ) : (
+                                                <IndianNumber
+                                                  value={detail?.value}
+                                                />
+                                              )}
+                                            </div>
                                           </p>
                                         </td>
                                       </tr>
@@ -251,7 +253,9 @@ const OrderSummary = ({
                                       </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
-                                      <p className={`mb-0 cart_p text-end`}>
+                                      <p
+                                        className={`mb-0 cart_p text-end d-inline-flex`}
+                                      >
                                         {currencySymbolForSummary}
 
                                         <IndianNumber value={data?.amount} />
@@ -266,7 +270,9 @@ const OrderSummary = ({
                                       </p>
                                     </td>
                                     <td width="50%" className="px-0 py-0 ">
-                                      <p className={`mb-0 cart_p text-end`}>
+                                      <p
+                                        className={`mb-0 cart_p text-end d-inline-flex`}
+                                      >
                                         {currencySymbolForSummary}
 
                                         <IndianNumber value={data?.tax} />

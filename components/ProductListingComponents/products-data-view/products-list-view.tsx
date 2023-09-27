@@ -46,7 +46,7 @@ const ProductsListView = (props: ProductsProps) => {
           ))}
         </div>
       ) : (
-        <div className="row ">
+        <div className="row product-list-card-rtl">
           {product_data && product_data.length > 0 ? (
             product_data.map((product: any, index: number) => {
               return (

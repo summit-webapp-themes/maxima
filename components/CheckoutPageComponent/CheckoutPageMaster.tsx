@@ -102,7 +102,7 @@ const CheckoutPageMaster = () => {
 
   console.log("visitor state", currencySymbolForSummary);
   return (
-    <div className="container margin_from_nav mb-0">
+    <div className="container margin_from_nav_checkout mb-5">
       {isBreakpoint ? (
         <>
           <div className="ps-4 checkout_web_heading ">
