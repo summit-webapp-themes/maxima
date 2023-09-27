@@ -23,7 +23,7 @@ const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
                     ?.slice(3, 5)
                     ?.map((banner: any, index: any) => (
                       <div
-                        className="col-lg-6 col-12 text-center mb-lg-0 mb-2"
+                        className="col-lg-6 col-12 mb-lg-0 mb-2"
                         key={banner.name}
                       >
                         <>
@@ -33,7 +33,7 @@ const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
                             alt="banner of Topcategory"
                             width={600}
                             height={150}
-                            className="topcat_banner"
+                            className="topcat_banner banner-imageWidth"
                           />
                         </>
                       </div>
