@@ -570,10 +570,10 @@ const ProfileMaster = () => {
   return (
     <>
       <div className="container margin_from_nav" >
-        <section className="profile_section pb-0 mb-0">
+        <section className=" pb-0 mb-0">
           <div className="container">
             <div className="page_heading">
-              <h4 className="p-0 m-0">
+              <h4 className="p-0 m-0 ps-1">
                 {selectedMultiLangData?.my_account}
               </h4>
             </div>

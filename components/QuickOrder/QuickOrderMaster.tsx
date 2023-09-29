@@ -125,25 +125,25 @@ const QuickOrder = () => {
   };
 
   return (
-    <div className="container  margin_from_nav_quick_o quickorder-main-conatainer-mob products-name">
-      <div className="row  mx-0 mt-5  ">
+    <div className="container  margin_from_nav ">
+      <div className="row  ">
         <div className="col-lg-12  ">
           <div className="row">
             {/* <div className="col-lg-2"></div> */}
-            <div className="col-lg-12 " >
+            <div className="col-lg-12 ps-5" >
               <div className="page_heading">
-                <h3 className="">
+                <h4 className="mb-0">
                   {selectedMultiLangData?.quick_order}
-                </h3>
+                </h4>
               </div>
 
               <div className="row or-margin-top">
-                <div className="col-lg-7 my-lg-2 mt-0 mb-0 pt-0 pb-0 " >
+                <div className="col-lg-7 my-lg-2 mt-0 mb-0 pt-0 pb-0 color-black" >
                   {
                     selectedMultiLangData?.you_can_add_upto_25_valid_item_code_oem_part_no_below
                   }
                 </div>
-                <div className="col-lg-5">
+                <div className="col-lg-5 padding-qo-right" >
                   <div className="row mt-lg-0 mt-0 btn-quick-margin or-margin-top">
                     <div className="col-lg-7 col-6 text-end ">
                       <button
@@ -160,7 +160,7 @@ const QuickOrder = () => {
                         {selectedMultiLangData?.reset_form}
                       </button>
                     </div>
-                    <div className="col-lg-5 mt-0  col-6 text-end ">
+                    <div className="col-lg-5 mt-0  col-6 text-end " >
                       <button
                         type="button"
                         className=" text-white mb-0 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn mt-0 reset-btn-mob "
@@ -183,7 +183,7 @@ const QuickOrder = () => {
         </div>
       </div>
 
-      <div className="row  mt-5  table-heading-quick-order-mob color-black  ms-3 me-1 " >
+      <div className="row  mt-3  table-heading-quick-order-mob color-black  ms-4 me-1 "  >
         <div className="col-lg-12 text-center cart_heading_bg">
           <div className="row justify-content-center products_title_quick py-3 ">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
@@ -192,7 +192,7 @@ const QuickOrder = () => {
                 {/* {selectedMultiLangData?.image} */}
               </h5>
             </div>
-            <div className="col-lg-7  products-name px-5 d-inline-flex justify-content-start">
+            <div className="col-lg-7  color-black px-5 d-inline-flex justify-content-start">
               <h6 className="mb-0 pt-2 text-start font-size-quick">
                 {selectedMultiLangData?.details}
               </h6>

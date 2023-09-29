@@ -19,14 +19,17 @@ const CatalogListCard = ({
   console.log(catalogListItem, "catalogListItem");
   return (
     <>
-      <div className="row mb-5 d-flex justify-content-center ">
-        <div className="col-lg-7 catalog-wrapper text-center">
-          <h3 className="text-center text-captilize pb-2 products-name">
+      <div className="row mt-5 mb-0 d-flex justify-content-center mx-auto pb-0" >
+        <div className="col-lg-7 catalog-wrapper text-center  " >
+       
+          <h4 className="text-captilize pb-2 color-black fs-20" >
             {selectedMultiLangData?.catalog_list}
-          </h3>
+          </h4>
+          
+
           {catalogListItem?.length > 0 &&
             catalogListItem?.map((catalog: any, i: any) => (
-              <div className="col-md-12 col-lg-12 mt-4 " key={i}>
+              <div className="col-md-12 col-lg-12 mt-4 mb-0  " key={i}>
                 <div className="card catalogListing-card rounded-3 mb-5">
                   <div className="card-header catalogListing-cardHeader d-flex justify-content-between">
                     <h5 className="text-uppercase catalog-heading">

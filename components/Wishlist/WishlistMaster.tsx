@@ -286,13 +286,16 @@ const WishlistMaster = () => {
         </div>
       ) : (
         <>
-          <div className="container wishlist-container products-name">
+          <div className="container  color-black">
             {wishlistCount > 0 ? (
               <>
-                <h3 className="wishlist-title">
+              <div className="page_heading">
+              <h4 className="mb-0">
                   {" "}
                   {selectedMultiLangData?.my_wishlist}
-                </h3>
+                </h4>
+              </div>
+
                 <div className="row mt-2 mx-4 ">
                   <h5 className="col-lg-5 col-md-4 d-none d-md-block">
                     {selectedMultiLangData?.product}
@@ -308,9 +311,9 @@ const WishlistMaster = () => {
                   </h5>
                 </div>
 
-                <div className="row  mx-4">
+                <div className="row  mx-4 mb-0 pb-0">
                   {wishlistData?.map((item: any, index: any) => (
-                    <div className="row " key={index}>
+                    <div className="row mb-0 pb-0" key={index}>
                       <div className="col-lg-5 col-md-4 w-100">
                         <div className="row">
                           <div className="col-lg-4 col-12">

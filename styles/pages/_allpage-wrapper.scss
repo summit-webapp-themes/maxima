@@ -9,7 +9,9 @@
     font-weight: bold;
     color: black !important;
   }
-
+.color-black{
+  color:black !important;
+}
   
   .page_heading h4{
     font-size: 22px !important;
@@ -18,7 +20,9 @@
     color: black !important;
     padding-bottom: 18px !important;
   }
-
+.fs-20{
+  font-size: 20px;
+}
   .item_action_link{
     margin-left: -4px;
   }
@@ -31,7 +35,9 @@
     line-height: 1 !important;
   }
 
-
+.padding-qo-right{
+  padding-right: 23px;
+}
   .price_request{
     color: white !important;
     background-color: #0071dc !important;
@@ -40,11 +46,79 @@
     margin-left: 5px !important;
     width: 120px !important;
   }
+  
+    // my order
 
+  .view-product-link-b2c{
+    border: none !important;
+    color: #0071dc !important;
+    background-color: white !important;
+  }
+  
+  .view-product-link-b2c :hover{
+    border: none !important;
+    color: #0071dc !important;
+    background-color: white !important;
+    text-decoration: underline !important;
+    
+  }
+  
 
+  .color-blue{
+    color: #0071dc !important;
+  }
+
+  .cart-image {
+    width: 100px;
+}
+.b2c_btn{
+  border: 2px solid #2c4152 !important;
+  font-size: 13px !important;
+}
+.b2c_btn:hover{
+  border: 2px solid #2c4152 !important;
+  background-color: gainsboro !important;
+  color: black !important;
+}
+.fs-13{
+  font-size: 13px !important;
+  font-weight: bold;
+  text-transform: uppercase !important;
+}
+.btn_order_detail{
+  padding: 4px 10px;
+}
+
+.view-product-link-b2c {
+  border: none !important;
+  color: #0071dc !important;
+  background-color: white !important;
+}
+
+.view-product-link-b2c :hover{
+  border: none !important;
+  color: #0071dc !important;
+  background-color: white !important;
+  text-decoration: underline !important;
+  
+}
+.myorder-header-pt{
+  padding-top: 7.5px !important;
+}
   @media only screen and (max-width: 600px) {
     .margin_from_nav {
       margin-top: 90px !important;
       margin-bottom: 25px !important
+    }
+    .orderdetail-img{
+      width: 86px !important
+    }
+    .btn_order_detail{
+      padding: 0px;
+      margin-top: 20px;
+      
+    }
+    .btn-orderdetail-mob{
+      font-size: 12px !important;
     }
   }
