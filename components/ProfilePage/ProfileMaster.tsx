@@ -496,7 +496,7 @@ const ProfileMaster = () => {
           <div className="col-lg-12">
             <div className="">
               <div className="profile">
-                <h4 className="text-inline-start fw-bolder text-uppercase mb-0 pb-2 products-name">
+                <h4 className="text-inline-start fw-bolder text-uppercase mb-0 pb-2 color-black">
                   {selectedMultiLangData?.enquiry_history}
                 </h4>
               </div>
@@ -659,7 +659,7 @@ const ProfileMaster = () => {
                       </Link>
                     </li>
 
-                    <li className="nav-item col-lg-10 col-12">
+                    <li className="nav-item ">
                       <Link href="#pay_faq" legacyBehavior>
                         <a
                           className={`nav-link profile_nav border tab_width ${documentQueued?.setTrue ? "active" : ""
@@ -684,7 +684,7 @@ const ProfileMaster = () => {
                         </a>
                       </Link>
                     </li>
-                    <li className="nav-item col-lg-10 col-12">
+                    <li className="nav-item ">
                       <Link href="#enqHist_faq" legacyBehavior>
                         <a
                           className="nav-link profile_nav border nav_tabs_list tab_width"
