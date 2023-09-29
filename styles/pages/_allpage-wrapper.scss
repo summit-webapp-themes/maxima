@@ -72,13 +72,14 @@
     width: 100px;
 }
 .b2c_btn{
-  border: 2px solid #2c4152 !important;
+  border: 2px solid #0071dc !important;
   font-size: 13px !important;
+  // color: black !important;
 }
 .b2c_btn:hover{
-  border: 2px solid #2c4152 !important;
-  background-color: gainsboro !important;
-  color: black !important;
+  background-color: #0071dc!important;
+  
+  color: white !important;
 }
 .fs-13{
   font-size: 13px !important;
@@ -104,6 +105,12 @@
 }
 .myorder-header-pt{
   padding-top: 7.5px !important;
+}
+.color-detail{
+  color: black !important;
+}
+.color-detail:hover {
+  color: white !important;
 }
 
   @media only screen and (max-width: 600px) {

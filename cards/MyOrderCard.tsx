@@ -102,7 +102,7 @@ const MyOrderCard = ({ data, selectedMultiLangData }: any) => {
 <div className=" text-center " >
                 <div className="flex-fill detail_link text-capitalize  b2c_btn btn_order_detail fs-13" >
                   <Link href={`myOrder/${data?.name}`} legacyBehavior>
-                    <a href={`myOrder/${data?.name}`} className="color-black fs-13 btn-orderdetail-mob" >
+                    <a href={`myOrder/${data?.name}`} className=" color-detail fs-13 btn-orderdetail-mob" >
                       {selectedMultiLangData?.order_details}
                     </a>
                   </Link>
