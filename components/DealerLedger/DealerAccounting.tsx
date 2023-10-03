@@ -6,10 +6,10 @@ const DealerAccounting = ({
 }: any) => {
   return (
     <>
-      <div className="container mt-0 mb-0 delaer-leader-container" >
+      <div className="container mt-0 mb-0 delaer-leader-container "  >
         <div className="row justify-content-center">
         <div className="page_heading">
-          <h4 className="dealer-heading text-captilize color-black p-0 m-0" >Dealer Ledger</h4>
+          <h4 className="my-0" >Dealer Ledger</h4>
           </div>
           <div className="col-lg-3 card border-dark mx-2 mt-0 px-0 mb-2 color-black" >
             <div className="card-header  text-center fs-3 color-black">

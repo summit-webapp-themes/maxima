@@ -87,4 +87,12 @@ html[dir="rtl"] {
     .my-order-container-pd .tab-content > .active {
         visibility: inherit;
     }
+    // #homepage displaytag
+    .banner-imageWidth {
+        padding-left: 0;
+        padding-right: 2rem;
+    }
+    .product-row {
+        padding-left: 1rem;
+    }
 }
