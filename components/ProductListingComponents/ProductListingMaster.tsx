@@ -157,22 +157,73 @@ const ProductListingMaster = () => {
   return (
     <>
       <div className="margin_from_nav_cart">
-        <section className="listing-page ">
-          <div className="container">
+        <div className="container d-flex justify-content-between w-100  ">
+          <div className="w-50">
             <BreadCrumbs
               handleToggleProductsListingView={handleToggleProductsListingView}
             />
-            <div className="row mt-2 ms-3">
+          </div>
+          <div className="col-lg-3 ">
+            <div className="row list-toggle-rtl">
+              {CONSTANTS.ENABLE_TOGGLE_PRODUCT_LISTING_VIEW ? (
+                <>
+                  <div className="col-lg-6 col-8"></div>
+                  <div className="col-lg-6 col-4 d-flex justify-content-end">
+                    <div className="ms-3 mob-breadcrum-icon">
+                      <i
+                        className="fa fa-list fa-lg cursor_pointer"
+                        aria-hidden="true"
+                        onClick={() =>
+                          handleToggleProductsListingView("list-view")
+                        }
+                      ></i>
+                      <i
+                        className="fa fa-th fa-lg ms-3 cursor_pointer"
+                        aria-hidden="true"
+                        onClick={() =>
+                          handleToggleProductsListingView("grid-view")
+                        }
+                      ></i>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="col-lg-6"></div>
+                  <div className="col-lg-6 ">
+                    <div>
+                      {selectedMultiLangData?.price} :-{" "}
+                      <select
+                        className="form_select"
+                        aria-label="Default select example"
+                      >
+                        <option value="low_to_high" selected>
+                          {selectedMultiLangData?.low_to_high}
+                        </option>
+                        <option value="high_to_low">
+                          {selectedMultiLangData?.high_to_low}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+        <section className="listing-page ">
+          <div className="container">
+            <div className="row mt-2 ms-3 product-listing-row">
               <span className="col-lg-3 handle_display_web_filter">
-                <div className="">
-                  <Topbar
-                    listItems={productListingData}
-                    handleToggleProductsListingView={
-                      handleToggleProductsListingView
-                    }
-                    selectedMultiLangData={selectedMultiLangData}
-                  />
-                </div>
+                {/* <div className=""> */}
+                <Topbar
+                  listItems={productListingData}
+                  handleToggleProductsListingView={
+                    handleToggleProductsListingView
+                  }
+                  selectedMultiLangData={selectedMultiLangData}
+                />
+                {/* </div> */}
                 <WebFilters
                   filtersData={filtersData}
                   loading={filtersLoading}

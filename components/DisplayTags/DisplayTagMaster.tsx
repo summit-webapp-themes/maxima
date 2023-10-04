@@ -19,13 +19,13 @@ const DisplayTagMaster = (props: any) => {
   // const { bestSellerTagListingOfProducts } =
   //   useDisplayTagHooks();
   return (
-    <div className="">
-      <div className="container" >
+    <>
+      <div className="container">
         <div className="row banner-product-wrapper pb-1 products-name">
           <h3 className="text-center mb-0 mt-5">{data?.tag_name}</h3>
-          <div className="banner-product col-lg-3 col-md-4 d-lg-block d-none mb-4 mb-md-0">
-            <div className="banner banner-fixed overlay-zoom br-xs">
-              <figure className="banner-media h-100 displaytag-container">
+          <div className="banner-product col-lg-3 col-md-3 d-lg-block d-none mb-4 mb-md-0">
+            <div className="banner banner-fixed overlay-zoom br-xs banner-imageWidth">
+              <figure className="banner-media mt-4">
                 <Image
                   src={
                     data?.tag_name === "Special Offer"
@@ -37,21 +37,21 @@ const DisplayTagMaster = (props: any) => {
                       : ""
                   }
                   alt="Product Banner"
-                  width="431"
-                  height="800"
+                  width="331"
+                  height="600"
+                  className="bannerImage_height"
                 />
               </figure>
             </div>
           </div>
-          <div className="product-wrapper col-lg-9 col-md-12">
-            <div className="swiper-container swiper-theme" />
-            <div className="row justify-content-center">
+          <div className="col-lg-9 col-md-9">
+            <div className="row product-row">
               {data?.value?.length > 0 ? (
                 <>
                   {data?.value?.length > 0 &&
                     data?.value?.map((list: any, i: any) => (
-                      <div className="border mx-2 mt-5 displaytag-list" key={i}>
-                        <div className="product-wrap">
+                      <div className="col-md-3 mt-4" key={i}>
+                        <div className="product-wrap displaytag-product border">
                           <div className="product text-center">
                             <figure className="product-media">
                               {list?.image_url !== null &&
@@ -64,8 +64,8 @@ const DisplayTagMaster = (props: any) => {
                                       loader={imageLoader}
                                       src={list?.image_url}
                                       alt="Product"
-                                      width="300"
-                                      height="300"
+                                      width="270"
+                                      height="270"
                                     />
                                   </Link>
                                 </>
@@ -82,8 +82,8 @@ const DisplayTagMaster = (props: any) => {
                                           : "/assets/images/maximaCard.jpg"
                                       }
                                       alt="Product"
-                                      width="300"
-                                      height="300"
+                                      width="270"
+                                      height="270"
                                     />
                                   </Link>
                                 </>
@@ -97,6 +97,18 @@ const DisplayTagMaster = (props: any) => {
                                   {list.item_name}
                                 </Link>
                               </h4>
+                              <div className=" d-flex justify-content-center product-price">
+                                <ins className="d-flex new-price">
+                                  <span>{list?.currency_symbol}</span>
+                                  <span className="product-price-rtl"> {list?.price}</span>
+                                </ins>
+                                <del className="old-price">
+                                  <span>{list?.currency_symbol}</span>
+                                  <span> {list?.mrp_price}</span>
+                                </del>
+                              </div>
+{/* 
+
                               <div className="product-price">
                                 <ins className="new-price">
                                   {list?.currency_symbol} {list?.price}
@@ -104,7 +116,7 @@ const DisplayTagMaster = (props: any) => {
                                 <del className="old-price">
                                   {list?.currency_symbol} {list?.mrp_price}
                                 </del>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
@@ -126,7 +138,7 @@ const DisplayTagMaster = (props: any) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -49,14 +49,14 @@ const OrderSummary = ({
                     {data?.name === "Tax" && (
                       <>
                         <div
-                          className="order-summery px-2 px-sm-0 px-xm-0 mx-3 products-name"
-                          key={index}
+                          className="order-summery px-2 px-sm-0 px-xm-0 mx-3 color-black"
+                          key={index} 
                         >
                           <div className="row mb-1 ">
                             <div className="col-6">{data?.name}</div>
                             <div className="col-6 text-end">
-                              <p className={`mb-0 summary_p`}>
-                                <div>
+                              <p className={`mb-0 summary_p pt-1`}>
+                                <div >
                                   {currencySymbolForSummary}
                                   <IndianNumber value={data?.value} />
                                 </div>
@@ -69,10 +69,10 @@ const OrderSummary = ({
                     {data?.value !== 0 && data?.value !== null && (
                       <>
                         <div
-                          className="order-summery px-2 px-sm-0 px-xm-0 mx-3 products-name"
+                          className="order-summery px-2 px-sm-0 px-xm-0 mx-3 color-black my-0 py-0"
                           key={index}
                         >
-                          <div className="row mb-1 ">
+                          <div className="row mb-1 my-0 py-0">
                             <div className="col-6">
                               {data?.name === "Total" ? (
                                 <strong className="mb-0 p-0">
@@ -119,9 +119,9 @@ const OrderSummary = ({
                       key={index}
                     >
                       <div className="row mb-1 ">
-                        <div className="col-6 products-name">
+                        <div className="col-6 color-black">
                           {data.name === "Total" ? (
-                            <strong className="mb-0 p-0 products-name ">
+                            <strong className="mb-0 p-0 color-black ">
                               {data?.name}
                             </strong>
                           ) : (
@@ -154,16 +154,17 @@ const OrderSummary = ({
         )}
       </div>
 
-      <div className="checkout-item mt-5">
+      <div className="checkout-item mt-4 mx-2 mb-0 pb-0">
         {cartListingItems?.categories?.length > 0 &&
           cartListingItems?.categories.map((value: any, index: any) => {
             return (
               <>
-                <div key={index}>
+                <div key={index}  >
                   {value?.orders?.length > 0 &&
                     value?.orders?.slice(0, 4).map((data: any, i: any) => {
                       return (
-                        <div className="row border mx-2 my-1 " key={i}>
+                        <div className="row border mx-2 my-1 pb-1 " key={i} 
+                        >
                           <div className="col-4">
                             <div className="checkout-img mt-3">
                               <Image
@@ -176,8 +177,8 @@ const OrderSummary = ({
                               />
                             </div>
                           </div>
-                          <div className="col-8 products-name">
-                            <div className="checkout_item_details products-name">
+                          <div className="col-8 color-black">
+                            <div className="checkout_item_details color-black">
                               <h6 className="mb-0 product_item_name ">
                                 {data.item_name}
                               </h6>
@@ -185,16 +186,16 @@ const OrderSummary = ({
                                 width="100%"
                                 className="mb-1 mt-1 table table-borderless"
                               >
-                                <tbody className="checkout-cart-card-font products-name">
+                                <tbody className="checkout-cart-card-font color-black">
                                   {data.details.map(
                                     (detail: any, index: number) => (
                                       <tr
-                                        className="item_options   products-name"
+                                        className="item_options   color-black"
                                         key={index}
                                       >
                                         <td
                                           width="50%"
-                                          className="px-0 py-0 pb-0 products-name"
+                                          className="px-0 py-0 pb-0 color-black"
                                         >
                                           <p
                                             className={`text-capitalize mb-0 cart_p`}

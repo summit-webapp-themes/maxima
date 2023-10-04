@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 // import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { persistor, store } from "../store/store";
@@ -34,7 +34,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     const TRACKING_ID = "G-JEKLX6CZRT";
     ReactGA.initialize(TRACKING_ID);
   }, []);
-
+  useEffect(() => {
+    const isRTL: any = document.documentElement.dir === "rtl";
+    // Load the appropriate global CSS file based on text direction
+    if (isRTL) {
+      import("../styles/pages/CssLayout-rtl.scss");
+    }
+  }, []);
   return (
     <div>
       <Script

@@ -82,41 +82,48 @@ const DealerLedger = () => {
 
   return (
     <>
-      <div className="container margin_from_nav " >
+      <div className="container margin_from_nav ">
         <DealerAccounting
           dealerLedgerSummary={dealerLedgerSummary}
           selectedMultiLangData={selectedMultiLangData}
         />
-        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 color-black dealer-account-container dealer-account-container-mob "  >
-          <div className="col-lg-8 ml-3" >
-            <div className="row m-lg-5" >
+        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 color-black dealer-account-container">
+          <div className="col-lg-8">
+            <div className="row m-lg-5">
               <div className="col-lg-4 col-6 mt-0 pt-0 mb-0 pb-0">
                 <div className="fs-3 color-black ">
                   {selectedMultiLangData?.account_name} :
                 </div>
               </div>
-              <div className="col-lg-6 col-6" >
-                <div className="fs-3 bold color-black" >
+              <div className="col-lg-6 col-6">
+                <div className="fs-3 bold color-black">
                   {dealerLedgerSummary?.party_name}
                 </div>
               </div>
             </div>
-            <div className="row mx-lg-5 mt-0 color-black" >
-              <div className="col-lg-4 col-4 mb-0 pb-0 mt-0 pt-0" >
-                <input
-                  type="radio"
-                  className="form-check-input color-black"
-                  id="radio1"
-                  name="optradio"
-                  value="option1"
-                  onClick={() => setFieldDisable(false)}
-                  defaultChecked
-                />
-                <label className="form-check-label ms-4 color-black" htmlFor="radio1">
-                  {selectedMultiLangData?.month}
-                </label>
+            <div className="row mx-lg-5 mt-0 color-black">
+              <div className="col-lg-4 col-4 mb-0 pb-0 mt-0 pt-0 d-inline-flex justify-content-around">
+                <div className="w-25">
+                  <input
+                    type="radio"
+                    className="form-check-input color-black"
+                    id="radio1"
+                    name="optradio"
+                    value="option1"
+                    onClick={() => setFieldDisable(false)}
+                    defaultChecked
+                  />
+                </div>
+                <div className="w-75">
+                  <label
+                    className="form-check-label color-black"
+                    htmlFor="radio1"
+                  >
+                    {selectedMultiLangData?.month}
+                  </label>
+                </div>
               </div>
-              <div className="col-lg-4 col-6">
+              <div className="col-lg-4 col-6 ">
                 <select
                   className={`${
                     fieldDisable ? "" : "disabled"
@@ -137,22 +144,26 @@ const DealerLedger = () => {
                 </select>
               </div>
             </div>
-            <div className="row mx-lg-5 my-2 color-black"  >
-              <div className="col-lg-4 col-4 mt-lg-2">
-                <input
-                  type="radio"
-                  className="form-check-input color-black"
-                  id="radio2"
-                  name="optradio"
-                  value="option1"
-                  onClick={() => setFieldDisable(true)}
-                />
-                <label
-                  className="form-check-label ms-lg-4 ms-1 text-start color-black"
-                  htmlFor="radio1"
-                >
-                  {selectedMultiLangData?.date_range}
-                </label>
+            <div className="row mx-lg-5 my-2 color-black">
+              <div className="col-lg-4 col-4 mt-lg-2 d-inline-flex justify-content-around">
+                <div className="w-25">
+                  <input
+                    type="radio"
+                    className="form-check-input color-black"
+                    id="radio2"
+                    name="optradio"
+                    value="option1"
+                    onClick={() => setFieldDisable(true)}
+                  />
+                </div>
+                <div className="w-75">
+                  <label
+                    className="form-check-label text-start color-black"
+                    htmlFor="radio1"
+                  >
+                    {selectedMultiLangData?.date_range}
+                  </label>
+                </div>
               </div>
               <div className="col-lg-6 col-12 ">
                 <div className="row" >
@@ -191,7 +202,7 @@ const DealerLedger = () => {
                   className="btn btn-outline-primary ledger-submit-button rounded-3 mt-2 w-25 color-black"
                   onClick={HandleLedgerData}
                 >
-                  <span className="">{selectedMultiLangData?.submit}</span>
+                  {selectedMultiLangData?.submit}
                 </button>
               </div>
             </div>

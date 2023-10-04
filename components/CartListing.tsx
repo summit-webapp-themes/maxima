@@ -16,11 +16,6 @@ import {
 import { Norecord } from "./NoRecord";
 import UseCheckoutPageHook from "../hooks/CheckoutHooks/checkout-page-hook";
 import getQuotationCart from "../services/api/cart-page-api/get-quotation-api";
-import {
-  failmsg,
-  hideToast,
-  successmsg,
-} from "../store/slices/general_slices/toast_notification_slice";
 import { get_access_token } from "../store/slices/auth/token-login-slice";
 import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
 import DeleteProductFromCart from "../services/api/cart-page-api/delete-cart-product";
@@ -168,20 +163,21 @@ const CartListing = () => {
       ) : (
         <>
           {Object.keys(cartListingItems).length > 0 ? (
-            <div className="cart-ps-container">
+            <div className="cart-ps-container pb-0 mb-0">
               <div className="row">
                 <div className="col-9">
-                  <div className="cart_heading mb-3">
-                    <h2 className=" shopping-cart-heading products-name pb-4">
+                  <div className="page_heading">
+                    <h4 className=" mb-0" 
+>
                       {selectedMultiLangData?.shopping_cart}
-                    </h2>
+                    </h4>
                   </div>
                 </div>
 
                 <div className="col-3 d-flex justify-content-end">
-                  <p className="checkbox-cursor product-font-family">
+                  <p className="checkbox-cursor product-font-family mb-0 pb-0 mt-1">
                     <a
-                      className="clear_cart bold"
+                      className="clear_cart bold mb-0"
                       onClick={() => ClearCartHandle(cartListingItems.name)}
                     >
                       {selectedMultiLangData?.clear_cart}
@@ -293,7 +289,7 @@ const CartListing = () => {
                           <>
                             <div key={index} className="border ">
                               <div className="container">
-                                <h3 className="mt-2 text-decoration-underline products-name category-name-font">
+                                <h3 className="mt-2 text-decoration-underline products-name category-name-font" >
                                   {category.category}
                                 </h3>
 
@@ -401,7 +397,7 @@ const CartListing = () => {
 
                 <hr />
                 <div className="container mb-0 pb-0">
-                  <div className="col-12">
+                  <div className="col-12 pb-0 mb-0">
                     <div className="row justify-content-start product-font">
                       <div className="col-md-6 note-line-height">
                         <h5>{selectedMultiLangData?.note}:-</h5>
@@ -428,7 +424,7 @@ const CartListing = () => {
                                 {selectedMultiLangData?.sub_total}{" "}
                               </div>
                               :
-                              <div className="col-lg-3 col-6 text-end price_font_family products-name bold">
+                              <div className="col-lg-3 col-6  price_font_family products-name bold">
                                 {
                                   cartListingItems?.categories[0]?.orders[0]
                                     ?.currency_symbol
@@ -460,7 +456,7 @@ const CartListing = () => {
                                 }
                               </div>
                               :
-                              <div className="col-lg-3 col-6 text-end products-name bold">
+                              <div className="col-lg-3 col-6 text-end products-name bold d-inline-flex">
                                 {
                                   cartListingItems?.categories[0]?.orders[0]
                                     ?.currency_symbol
@@ -532,7 +528,7 @@ const CartListing = () => {
                   </div>
                 </div>
 
-                <hr />
+                {/* <hr /> */}
               </div>
             </div>
           ) : (
