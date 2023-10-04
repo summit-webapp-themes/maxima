@@ -47,10 +47,10 @@ const HandleOrderSection = (props: any) => {
             <div className="accordion" id="accordionExample">
               {CONSTANTS.ENABLE_APPLY_COUPON_CODE ? (
                 <>
-                  <div className="accordion-item border-0">
+                  <div className="accordion-item border-0" >
                     <h2 className="accordion-header" id="headingOne">
                       <button
-                        className="accordion-button collapsed pt-4 px-2 pb-2 fs-4 ms-1 accorder-btn-plus"
+                        className="accordion-button collapsed pt-3 px-2 pb-1  fs-4 ms-0 accorder-btn-plus"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseOne"
@@ -129,7 +129,7 @@ const HandleOrderSection = (props: any) => {
                   <div className="accordion-item border-0">
                     <h2 className="accordion-header" id="headingTwo">
                       <button
-                        className="accordion-button collapsed pt-4 fs-4 px-2 ms-1 accorder-btn-plus"
+                        className="accordion-button collapsed pt-3 fs-4 ms-0 ps-2  accorder-btn-plus"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo"
@@ -162,7 +162,7 @@ const HandleOrderSection = (props: any) => {
                         </form>
                         <button
                           type="button"
-                          className="btn btn-sm transparent custom-btn d-block w-100 standard-btn btn-fancy mt-2"
+                          className="btn btn-sm transparent custom-btn d-block w-100 standard-btn btn-fancy my-2"
                           onClick={(e: any) => handleStoreCredit(e)}
                         >
                           {selectedMultiLangData?.use_store_credit}

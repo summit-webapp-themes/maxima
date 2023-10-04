@@ -58,7 +58,7 @@ const CartCard = ({
 
   return (
     <>
-      <div className="d-lg-block d-none " >
+      <div className="d-lg-block d-none ">
         <div className="row text-center cart_wrapper-detail">
           <div className="col-lg-7 text-start">
             <Link
@@ -68,7 +68,9 @@ const CartCard = ({
               <a className="prod_name products-name">{orders.item_name}</a>
             </Link>
             <br />
-            <b className="products-name item-code-line-height ">Item code : {orders.item_code}</b>
+            <b className="products-name item-code-line-height d-inline-flex">
+              Item code :<span>{orders.item_code}</span>
+            </b>
             <p>
               <button
                 className="astext product-font-family line-height"
@@ -76,7 +78,10 @@ const CartCard = ({
                   HandleDeleteCart(orders.item_code, cartListingItems.name)
                 }
               >
-                <Link href="" className="text-primary product-font-family line-height-delete">
+                <Link
+                  href=""
+                  className="text-primary product-font-family line-height-delete"
+                >
                   {selectedMultiLangData?.delete}
                 </Link>
               </button>
@@ -86,14 +91,14 @@ const CartCard = ({
             {orders?.details.length > 0 &&
               orders?.details !== null &&
               (orders?.details[1]?.value !== 0 ? (
-                <p className="text-center price_font_family products-name">
+                <p className="text-center price_font_family products-name d-inline-flex">
                   {orders?.currency_symbol}
                   <span className="text-center products-name">
                     <IndianNumber value={orders.details[1]?.value} />
                   </span>
                 </p>
               ) : (
-                <p className="border button_color price_request products-name ">
+                <p className="border button_color price_request">
                   {selectedMultiLangData?.price_on_request}
                 </p>
               ))}
@@ -131,9 +136,9 @@ const CartCard = ({
             />
           </div> */}
           <div className="col-2 price_font_family">
-            <p className="products-name">
+            <p className="products-name d-inline-flex">
               {orders.currency_symbol}
-              {orders.amount}
+              <span>{orders.amount}</span>
             </p>
           </div>
         </div>
@@ -150,7 +155,8 @@ const CartCard = ({
           <div className="col-5">
             <Link href={`${orders.product_url}`} legacyBehavior>
               <a className="prod_name products-name">{orders.item_name}</a>
-            </Link><br/>
+            </Link>
+            <br />
             <b>{orders.item_code}</b>
             <p className="my-0">
               <button
@@ -158,7 +164,6 @@ const CartCard = ({
                 onClick={() =>
                   HandleDeleteCart(orders.item_code, cartListingItems.name)
                 }
-
               >
                 <Link href="" className="text-primary">
                   {selectedMultiLangData?.delete}
@@ -168,7 +173,11 @@ const CartCard = ({
           </div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4 products-name"> {selectedMultiLangData?.price}</div>:
+          <div className="col-6 fs-4 products-name">
+            {" "}
+            {selectedMultiLangData?.price}
+          </div>
+          :
           <div className="col-5 text-start">
             {orders?.details.length > 0 &&
               orders?.details !== null &&
@@ -188,25 +197,37 @@ const CartCard = ({
           </div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4 products-name">{selectedMultiLangData?.unit_weight}</div>
-          :<div className="col-5 text-start products-name">{orders.weight_per_unit}</div>
+          <div className="col-6 fs-4 products-name">
+            {selectedMultiLangData?.unit_weight}
+          </div>
+          :
+          <div className="col-5 text-start products-name">
+            {orders.weight_per_unit}
+          </div>
         </div>
         <div className="row">
           <div className="col-6 fs-4 products-name">
             {selectedMultiLangData?.total_weight}
           </div>
-          :<div className="col-5 text-start products-name">{orders.total_weight}</div>
+          :
+          <div className="col-5 text-start products-name">
+            {orders.total_weight}
+          </div>
         </div>
         <div className="row">
           <div className="col-6 fs-4 products-name">
-            {selectedMultiLangData?.tax} </div>:
-          <div className="col-5 text-start price_font_family" >
+            {selectedMultiLangData?.tax}{" "}
+          </div>
+          :
+          <div className="col-5 text-start price_font_family">
             {orders.currency_symbol}
             {orders.tax}
           </div>
         </div>
         <div className="row my-5">
-          <div className="col-6 fs-4 products-name">{selectedMultiLangData?.quantity_c} </div>
+          <div className="col-6 fs-4 products-name">
+            {selectedMultiLangData?.quantity_c}{" "}
+          </div>
           :
           <div className="col-5 ">
             <input
@@ -221,7 +242,7 @@ const CartCard = ({
             <button
               type="button"
               className="text-start astext"
-            // onClick={() => UpdateCart(orders.item_code)}
+              // onClick={() => UpdateCart(orders.item_code)}
             >
               <Link href="" legacyBehavior>
                 <a className="text-primary">{selectedMultiLangData?.update}</a>
@@ -230,7 +251,10 @@ const CartCard = ({
           </div>
         </div>
         <div className="row">
-          <div className="col-6 fs-4 products-name">{selectedMultiLangData?.total} </div>:
+          <div className="col-6 fs-4 products-name">
+            {selectedMultiLangData?.total}{" "}
+          </div>
+          :
           <div className="col-5 price_font_family products-name">
             {orders.currency_symbol}
             {orders.amount}

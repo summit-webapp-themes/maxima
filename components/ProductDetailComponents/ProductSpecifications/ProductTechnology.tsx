@@ -36,8 +36,12 @@ const ProductTechnology = ({ technologyData, selectedMultiLangData }: any) => {
                       />
                     </div>
                     <div className="card-body p-4">
-                      <h5 className="card-title products-name">{cardDetails.name}</h5>
-                      <p className="card-text products-name">{cardDetails.description}</p>
+                      <h5 className="card-title products-name">
+                        {cardDetails.name}
+                      </h5>
+                      <p className="card-text products-name">
+                        {cardDetails.description}
+                      </p>
                       {cardDetails.technology_details?.length > 0 && (
                         <button
                           type="button"

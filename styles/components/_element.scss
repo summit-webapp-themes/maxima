@@ -16,14 +16,18 @@
         display: block;
         padding: 3.1rem 0 3.6rem;
         background-color: $white-color;
-        box-shadow: 0 2rem 3rem rgba(0,0,0,0.05), 0 0 5px rgba(0,0,0,0.05);
+        box-shadow:
+            0 2rem 3rem rgba(0, 0, 0, 0.05),
+            0 0 5px rgba(0, 0, 0, 0.05);
         border-radius: 1rem;
         svg {
             fill: $body-color;
             stroke: $body-color;
             stroke-dashoffset: 1500;
             stroke-dasharray: 1500;
-            transition: transform .3s, fill .5s;
+            transition:
+                transform 0.3s,
+                fill 0.5s;
         }
         &:hover {
             svg {
@@ -31,7 +35,10 @@
                 stroke-dashoffset: 0;
                 stroke: $primary-color;
                 fill: transparent;
-                transition: transform .3s, fill .5s, stroke-dashoffset 6s;
+                transition:
+                    transform 0.3s,
+                    fill 0.5s,
+                    stroke-dashoffset 6s;
             }
             p {
                 color: $primary-color;
@@ -44,7 +51,7 @@
             text-transform: uppercase;
             line-height: 1.2;
             margin-bottom: 0;
-            transition: color .4s;
+            transition: color 0.4s;
         }
         &.element-vendor {
             padding: 2.5rem 0 3.6rem;
@@ -60,4 +67,8 @@
         max-width: 23.2rem;
         margin: 0 auto;
     }
+}
+
+.icon-box-icon {
+    padding: 0px 10px;
 }

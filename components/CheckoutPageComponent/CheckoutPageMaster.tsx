@@ -102,12 +102,12 @@ const CheckoutPageMaster = () => {
 
   console.log("visitor state", currencySymbolForSummary);
   return (
-    <div className="container margin_from_nav mb-0">
+    <div className="container  margin_from_nav">
       {isBreakpoint ? (
         <>
-          <div className="ps-4 checkout_web_heading ">
-            <h3 className="products-name">{selectedMultiLangData?.checkout_page}</h3>
-            <hr />
+          <div className="page_heading ps-4 ms-1" >
+            <h4 className="color-black mb-0">{selectedMultiLangData?.checkout_page}</h4>
+            {/* <hr /> */}
           </div>
           <WebCheckout
             shippingAddresses={shippingAddresses}

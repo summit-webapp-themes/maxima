@@ -96,7 +96,7 @@ const Index = ({ sales_order_id }: any) => {
           {detail?.length > 0 &&
             detail !== null &&
             detail?.map((data: any) => (
-              <div className="container color-black" key={data?.name}>
+              <div className="container color-black " key={data?.name}>
                 <div className="row"></div>
                 <div className="row color-black">
                   <div className="col-md-6 ">
@@ -379,7 +379,7 @@ const Index = ({ sales_order_id }: any) => {
                                     <tbody>
                                       <tr className="item_options myorder_tr">
                                         <td className="px-0 py-0 pb-0 myorder_td">
-                                          <p className="text-capitalize black mb-1 myorder_p">
+                                          <p className="text-capitalize black mb-0 myorder_p">
                                             {selectedMultiLangData?.item_code}
                                           </p>
                                         </td>
@@ -387,7 +387,7 @@ const Index = ({ sales_order_id }: any) => {
                                           width="85%"
                                           className="px-0 py-0 pb-0 myorder_width"
                                         >
-                                          <p className="text-capitalize black mb-1 myorder_p">
+                                          <p className="text-capitalize black mb-0 myorder_p">
                                             : {oDetail?.name}
                                           </p>
                                         </td>
@@ -395,7 +395,7 @@ const Index = ({ sales_order_id }: any) => {
 
                                       <tr className="item_options myorder_tr">
                                         <td className="px-0 py-0 pb-0 myorder_td">
-                                          <p className="text-capitalize black mb-1 myorder_p">
+                                          <p className="text-capitalize black mb-0 myorder_p">
                                             {selectedMultiLangData?.price}
                                           </p>
                                         </td>
@@ -403,7 +403,7 @@ const Index = ({ sales_order_id }: any) => {
                                           width="85%"
                                           className="px-0 py-0 pb-0 myorder_width"
                                         >
-                                          <p className="text-capitalize black mb-1 myorder_p">
+                                          <p className="text-capitalize black mb-0 myorder_p">
                                             {oDetail?.prod_info[1].value !==
                                             0 ? (
                                               <p className="mb-0 price_font_family">
@@ -424,7 +424,7 @@ const Index = ({ sales_order_id }: any) => {
 
                                       <tr className="item_options myorder_tr">
                                         <td className="px-0 py-0 pb-0 myorder_td">
-                                          <p className="text-capitalize black mb-1 myorder_p">
+                                          <p className="text-capitalize black mb-0 myorder_p">
                                             {selectedMultiLangData?.quantity}
                                           </p>
                                         </td>
@@ -432,7 +432,7 @@ const Index = ({ sales_order_id }: any) => {
                                           width="85%"
                                           className="px-0 py-0 pb-0 myorder_width"
                                         >
-                                          <p className="text-capitalize black mb-1 myorder_p">
+                                          <p className="text-capitalize black mb-0 myorder_p">
                                             : {oDetail?.prod_info[2].value}
                                           </p>
                                         </td>
