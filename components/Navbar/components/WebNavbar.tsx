@@ -147,7 +147,7 @@ const WebNavbar = ({
             </div>
 
             <div className="navbar-left-icon1 d-flex align-items-center text-center mob-icon-wrapper">
-              <div className="form-check form-switch pe-5 fs-3 rtl-toggle-section">
+              {/* <div className="form-check form-switch pe-5 fs-3 rtl-toggle-section">
                 <input
                   className="form-check-input cursor_pointer"
                   type="checkbox"
@@ -161,7 +161,7 @@ const WebNavbar = ({
                 >
                   Ar
                 </label>
-              </div>
+              </div> */}
               <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
                 <Link href="/wishlist" legacyBehavior>
                   <a className=" cart-toggle label-down link">
