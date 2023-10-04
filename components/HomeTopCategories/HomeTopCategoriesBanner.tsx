@@ -13,7 +13,7 @@ const HomeTopCategoriesBanner = ({ homeTopCategories }: any) => {
   };
   return (
     <>
-      <div className="container my-5">
+      <div className="container my-4">
         <div className="row">
           {homeTopCategories?.length > 0 && homeTopCategories !== null ? (
             <>

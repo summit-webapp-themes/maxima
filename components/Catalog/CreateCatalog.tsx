@@ -7,12 +7,15 @@ const CreateCatalog = ({
 }: any) => {
   return (
     <>
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center ms-5" >
         <div className="col-lg-7 text-center">
           <div className="row mx-auto">
-            <h3 className="text-center text-captilize pb-4">
+            <div className=" text-center page_heading">
+            <h4 className="  my-0" >
               {selectedMultiLangData?.create_catalog}
-            </h3>
+            </h4>
+            </div>
+
             <div className="col-lg-8 col-12 px-0  d-flex justify-content-center">
               <input
                 type="text"

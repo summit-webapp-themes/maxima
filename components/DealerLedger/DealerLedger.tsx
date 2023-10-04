@@ -87,7 +87,7 @@ const DealerLedger = () => {
           dealerLedgerSummary={dealerLedgerSummary}
           selectedMultiLangData={selectedMultiLangData}
         />
-        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 products-name dealer-account-container">
+        <div className="row justify-content-center dealer-ledger-container mt-0 pt-0 color-black dealer-account-container">
           <div className="col-lg-8">
             <div className="row m-lg-5">
               <div className="col-lg-4 col-6 mt-0 pt-0 mb-0 pb-0">
@@ -96,17 +96,17 @@ const DealerLedger = () => {
                 </div>
               </div>
               <div className="col-lg-6 col-6">
-                <div className="fs-3 bold products-name">
+                <div className="fs-3 bold color-black">
                   {dealerLedgerSummary?.party_name}
                 </div>
               </div>
             </div>
-            <div className="row mx-lg-5 mt-0 products-name">
+            <div className="row mx-lg-5 mt-0 color-black">
               <div className="col-lg-4 col-4 mb-0 pb-0 mt-0 pt-0 d-inline-flex justify-content-around">
                 <div className="w-25">
                   <input
                     type="radio"
-                    className="form-check-input products-name"
+                    className="form-check-input color-black"
                     id="radio1"
                     name="optradio"
                     value="option1"
@@ -116,7 +116,7 @@ const DealerLedger = () => {
                 </div>
                 <div className="w-75">
                   <label
-                    className="form-check-label products-name"
+                    className="form-check-label color-black"
                     htmlFor="radio1"
                   >
                     {selectedMultiLangData?.month}
@@ -144,12 +144,12 @@ const DealerLedger = () => {
                 </select>
               </div>
             </div>
-            <div className="row mx-lg-5 my-2 products-name">
+            <div className="row mx-lg-5 my-2 color-black">
               <div className="col-lg-4 col-4 mt-lg-2 d-inline-flex justify-content-around">
                 <div className="w-25">
                   <input
                     type="radio"
-                    className="form-check-input products-name"
+                    className="form-check-input color-black"
                     id="radio2"
                     name="optradio"
                     value="option1"
@@ -158,7 +158,7 @@ const DealerLedger = () => {
                 </div>
                 <div className="w-75">
                   <label
-                    className="form-check-label text-start products-name"
+                    className="form-check-label text-start color-black"
                     htmlFor="radio1"
                   >
                     {selectedMultiLangData?.date_range}
