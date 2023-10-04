@@ -138,7 +138,7 @@ const WebNavbar = ({
                 required
               />
               <button
-                className="btn btn-search search_button"
+                className="btn btn-search search_button border-0"
                 type="submit"
                 onClick={handleSearch}
               >
