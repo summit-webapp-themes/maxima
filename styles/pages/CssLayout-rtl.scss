@@ -95,4 +95,12 @@ html[dir="rtl"] {
     .product-row {
         padding-left: 1rem;
     }
+   
+
+.header-search .btn-search {
+    border-radius: 4px 0px 0px 4px !important;
+}
+.header-search input.form-control {
+    border-radius: 0px 4px 4px 0px !important;
+}
 }
