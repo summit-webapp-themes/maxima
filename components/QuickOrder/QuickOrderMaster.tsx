@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import QuickOrderCard from "./QuickOrderCard";
-import { useQuickOrder } from "../../hooks/GeneralHooks/QuickOrderHooks/quick-order-hook";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import QuickOrderCard from './QuickOrderCard';
+import { useQuickOrder } from '../../hooks/GeneralHooks/QuickOrderHooks/quick-order-hook';
 // import { dealerAddCartApi } from "../store/slices/cart_page_slice/dealer_addto_cart_slice";
-import { useRouter } from "next/router";
-import AddToCartApi from "../../services/api/cart-page-api/add-to-cart-api";
-import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
-import { currency_selector_state } from "../../store/slices/general_slices/multi-currency-slice";
-import { fetchCartListing } from "../../store/slices/cart-listing-page-slice/cart-listing-slice";
-import { get_access_token } from "../../store/slices/auth/token-login-slice";
+import { useRouter } from 'next/router';
+import AddToCartApi from '../../services/api/cart-page-api/add-to-cart-api';
+import { SelectedFilterLangDataFromStore } from '../../store/slices/general_slices/selected-multilanguage-slice';
+import { currency_selector_state } from '../../store/slices/general_slices/multi-currency-slice';
+import { fetchCartListing } from '../../store/slices/cart-listing-page-slice/cart-listing-slice';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
+import { showToast } from '../ToastNotificationNew';
 
 const QuickOrder = () => {
   const {
@@ -53,25 +54,25 @@ const QuickOrder = () => {
 
   const handleInputChange: any = (e: any, index: any) => {
     const { value } = e.target;
-    console.log("enter min val", value);
+    console.log('enter min val', value);
 
     setPartNumbersData((prevState: any) => {
       const updatedPartNumbersData = [...partNumbersData];
       updatedPartNumbersData[index] = {
         ...updatedPartNumbersData[index],
-        min_order_qty: value === "0" || value === "" ? "" : Number(value),
+        min_order_qty: value === '0' || value === '' ? '' : Number(value),
       };
-      console.log("enter index", updatedPartNumbersData[index], index);
+      console.log('enter index', updatedPartNumbersData[index], index);
       return updatedPartNumbersData;
     });
   };
 
   const handleAddToQuickOrder = () => {
-    console.log("click");
+    console.log('click');
   };
 
   let handleRemove: any = (item: any) => {
-    console.log("enter name", item);
+    console.log('enter name', item);
     const data = partNumbersData.filter(
       (element: any, i: any) => element.name !== item.name
     );
@@ -94,13 +95,19 @@ const QuickOrder = () => {
           quantity: val?.min_order_qty === 0 ? 1 : val?.min_order_qty,
         });
       });
-    console.log(ItemCodename, "mmmm");
-    await AddToCartApi(
+    console.log(ItemCodename, 'mmmm');
+    const add_cart_response = await AddToCartApi(
       addCartData,
       currency_state_from_redux?.selected_currency_value,
       token_value
     );
+    console.log(add_cart_response, 'add_cart_response');
     // dispatch(dealerAddCartApi(addCartData));
+    if (add_cart_response.msg === 'success') {
+      showToast('Item Added to cart', 'success');
+    } else {
+      showToast('Failed to Add to cart', 'error');
+    }
     handleClearReduxStore();
     dispatch(fetchCartListing(TokenFromStore?.token));
 
@@ -113,10 +120,10 @@ const QuickOrder = () => {
     return (
       <>
         {productData?.minQuantity === 0 ? (
-          ""
+          ''
         ) : (
           <p>
-            {selectedMultiLangData?.minimum_order_qty}:{" "}
+            {selectedMultiLangData?.minimum_order_qty}:{' '}
             {productData?.minQuantity}
           </p>
         )}
@@ -130,45 +137,43 @@ const QuickOrder = () => {
         <div className="col-lg-12  ">
           <div className="row">
             {/* <div className="col-lg-2"></div> */}
-            <div className="col-lg-12 ps-5" >
+            <div className="col-lg-12 ps-5">
               <div className="page_heading">
-                <h4 className="mb-0">
-                  {selectedMultiLangData?.quick_order}
-                </h4>
+                <h4 className="mb-0">{selectedMultiLangData?.quick_order}</h4>
               </div>
 
               <div className="row or-margin-top">
-                <div className="col-lg-7 my-lg-2 mt-0 mb-0 pt-0 pb-0 color-black" >
+                <div className="col-lg-7 my-lg-2 mt-0 mb-0 pt-0 pb-0 color-black">
                   {
                     selectedMultiLangData?.you_can_add_upto_25_valid_item_code_oem_part_no_below
                   }
                 </div>
-                <div className="col-lg-5 padding-qo-right" >
+                <div className="col-lg-5 padding-qo-right">
                   <div className="row mt-lg-0 mt-0 btn-quick-margin or-margin-top">
                     <div className="col-lg-7 col-6 text-end ">
                       <button
                         type="button"
                         className=" mb-0 text-uppercase py-2 px-lg-4 px-5 mt-0 reset-btn-mob reset-btn-mobs"
                         style={{
-                          border: "1px solid #0071DC",
-                          borderRadius: "7px",
-                          backgroundColor: "#0071DC",
-                          color: "#fff",
+                          border: '1px solid #0071DC',
+                          borderRadius: '7px',
+                          backgroundColor: '#0071DC',
+                          color: '#fff',
                         }}
                         onClick={handleClearReduxStore}
                       >
                         {selectedMultiLangData?.reset_form}
                       </button>
                     </div>
-                    <div className="col-lg-5 mt-0  col-6 text-end " >
+                    <div className="col-lg-5 mt-0  col-6 text-end ">
                       <button
                         type="button"
                         className=" text-white mb-0 text-uppercase py-2 px-lg-4 px-5 me-0 standard_btn addtoart-btn mt-0 reset-btn-mob "
                         style={{
-                          border: "1px solid #0071DC",
-                          borderRadius: "7px",
-                          backgroundColor: "#0071DC",
-                          color: "#fff",
+                          border: '1px solid #0071DC',
+                          borderRadius: '7px',
+                          backgroundColor: '#0071DC',
+                          color: '#fff',
                         }}
                         onClick={handleAddCart}
                       >
@@ -183,7 +188,7 @@ const QuickOrder = () => {
         </div>
       </div>
 
-      <div className="row  mt-3  table-heading-quick-order-mob color-black  ms-4 me-1 "  >
+      <div className="row  mt-3  table-heading-quick-order-mob color-black  ms-4 me-1 ">
         <div className="col-lg-12 text-center cart_heading_bg">
           <div className="row justify-content-center products_title_quick py-3 ">
             {/* <div className="col-lg-2 cart_heading_bg_none"></div> */}
@@ -232,7 +237,7 @@ const QuickOrder = () => {
           {ifInputEmptyErr && (
             <div className="mt-3">
               <span className="error-color">
-                {selectedMultiLangData?.please_add_part_number}{" "}
+                {selectedMultiLangData?.please_add_part_number}{' '}
               </span>
             </div>
           )}
@@ -241,18 +246,18 @@ const QuickOrder = () => {
               <span className="error-color">
                 {
                   selectedMultiLangData?.this_part_number_is_already_added_in_the_list
-                }{" "}
+                }{' '}
               </span>
             </div>
           )}
 
-          {inputFieldCount === 25 && (
+          {/* {inputFieldCount === 25 && (
             <div className="mt-3">
               <span className="error-color">
                 {selectedMultiLangData?.you_have_added_25_part_numbers}
               </span>
             </div>
-          )}
+          )} */}
           {itemNotFoundErr && (
             <div className="mt-3">
               <span className="error-color">
@@ -261,7 +266,7 @@ const QuickOrder = () => {
             </div>
           )}
 
-          {inputFieldCount === 25 ? (
+          {false ? (
             <>
               <input type="text" name="inputValue" value="" disabled />
             </>

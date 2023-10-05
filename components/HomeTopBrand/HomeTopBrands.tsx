@@ -26,8 +26,8 @@ const HomeTopBrands = ({brandListing}:any) => {
     return `${CONSTANTS.API_BASE_URL}${src}?w=${width}&q=${quality || 75}`;
   };
   return (
-    <div className="container">
-      <h3 className="text-center mt-5">
+    <div className="container brand">
+      <h3 className="text-center mb-4 top-categories">
         {selectedMultiLangData?.featured_brands}
       </h3>
       <div className="row text-center brand-container ">

@@ -109,9 +109,9 @@ const HomeTopCategories = ({
   };
 
   return (
-    <div className="top_categories_section mt-5">
+    <div className="top_categories_section">
       <div>
-        <h3 className="text-center">
+        <h3 className="text-center top-categories">
           {selectedMultiLangData?.our_handpicked_categories_for_you}
         </h3>
       </div>
