@@ -21,9 +21,9 @@ const DisplayTagMaster = (props: any) => {
   return (
     <>
       <div className="container">
-        <div className="row banner-product-wrapper pb-1 products-name">
-          <h3 className="text-center mb-0 mt-5">{data?.tag_name}</h3>
-          <div className="banner-product col-lg-3 col-md-3 d-lg-block d-none mb-4 mb-md-0">
+        <div className="row banner-product-wrapper products-name mb-3">
+          <h3 className="text-center mt-5 mb-0">{data?.tag_name}</h3>
+          <div className="banner-product col-lg-3 col-md-3 d-lg-block d-none mb-3 mb-md-0">
             <div className="banner banner-fixed overlay-zoom br-xs banner-imageWidth">
               <figure className="banner-media mt-4">
                 <Image

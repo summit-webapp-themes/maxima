@@ -16,10 +16,10 @@ html[dir="rtl"] {
         font-weight: 400;
     }
     .menu li {
-        position: unset;
+        position: relative;
     }
     .menu > li .megamenu {
-        left: 4.4rem;
+        left: -76.5rem;
     }
     .menu > li .vertical-menubar-rtl {
         left: -82rem;
@@ -95,4 +95,12 @@ html[dir="rtl"] {
     .product-row {
         padding-left: 1rem;
     }
+   
+
+.header-search .btn-search {
+    border-radius: 4px 0px 0px 4px !important;
+}
+.header-search input.form-control {
+    border-radius: 0px 4px 4px 0px !important;
+}
 }

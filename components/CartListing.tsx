@@ -37,6 +37,7 @@ const CartListing = () => {
   } = UseCartPageHook();
 
   const TokenFromStore: any = useSelector(get_access_token);
+  const [quatationPrint ,setQuatationPrint] =useState("")
   const cart_listing_data_store = useSelector(cart_listing_state);
   // const { orderSummary } = UseCheckoutPageHook();
   // const orderSummary:any = []
@@ -100,13 +101,11 @@ const CartListing = () => {
       quot_id,
       TokenFromStore?.token
     ).then((res: any) => {
-      if (res?.data?.message?.msg === "success") {
-        showToast(
-          "Quotation Request has been Created. Please check your Profile",
-          "success"
-        );
-      }
+    setQuatationPrint(res?.data?.message?.data?.print_url)
+    window.open (`${res?.data?.message?.data?.print_url}` , '_blank')
     });
+    console.log(getQuotationInCart,"getQuotationInCart")
+
     return getQuotationInCart;
   };
 

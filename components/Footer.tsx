@@ -61,7 +61,7 @@ const Footer = () => {
                     <h5 className="icon-box-title text-uppercase font-weight-bold text-white text-left">
                       {selectLangData?.subscribe_to_our_newsletter}
                     </h5>
-                    <p className="text-light">
+                    <p className="text-light ">
                       {
                         selectLangData?.get_all_the_latest_information_on_events_sales_offers
                       }
@@ -109,7 +109,7 @@ const Footer = () => {
                     <Link href="tel:18005707777 " legacyBehavior>
                       <a className="widget-about-call mb-4">1-800-570-7777</a>
                     </Link> */}
-                    <p className="widget-about-desc ls-normal mb-3">
+                    <p className="widget-about-desc ls-normal mb-3 footer-text">
                       {selectLangData?.welcome_to_ecommerce_site}
                     </p>
                   </div>
