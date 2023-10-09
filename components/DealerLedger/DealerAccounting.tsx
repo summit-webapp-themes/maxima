@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const DealerAccounting = ({
   dealerLedgerSummary,
@@ -6,45 +6,47 @@ const DealerAccounting = ({
 }: any) => {
   return (
     <>
-      <div className="container mt-0 mb-0 delaer-leader-container "  >
-        <div className="row justify-content-center">
-        <div className="page_heading">
-          <h4 className="my-0" >Dealer Ledger</h4>
-          </div>
-          <div className="col-lg-3 card border-dark mx-2 mt-0 px-0 mb-2 color-black" >
-            <div className="card-header  text-center fs-3 color-black">
+      <div className="col-lg-5 card border-dark border-end-0 rounded-0 color-black">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="text-center fs-3 color-black ledger-container mt-4">
+              <h3 className="text-center mt-2 mb-0 color-black">
+                {dealerLedgerSummary?.remaining_credit_balance}
+              </h3>
               {selectedMultiLangData?.remaining_credit_balance}
             </div>
-            <h3 className="text-center mt-2 mb-0 color-black">
-              {dealerLedgerSummary?.remaining_credit_balance}
-            </h3>
-
-            <div className="card-header px-3 fs-3 my-0 mt-2 text-center color-black">
+          </div>
+          <div className="col-md-6">
+            <div className=" px-3 fs-3 text-center color-black ledger-container mt-4">
+              <h3 className="text-center mt-2 mb-0 color-black">
+                {dealerLedgerSummary?.remaining_credit_balance}
+              </h3>
               {selectedMultiLangData?.total_credit_amount}
             </div>
-            <h3 className="text-center mt-2 color-black">
-              {dealerLedgerSummary?.remaining_credit_balance}
-            </h3>
           </div>
-          <div className="col-lg-1"></div>
-          <div className="col-lg-3 card border-info mx-2 px-0 mb-2 mt-0 color-black" >
-            <div className="card-header fs-3 text-center">
+          <div className="col-md-6">
+            <div className=" fs-3 text-center ledger-container mt-4">
+              <h3 className="text-center mt-2 mb-0 color-black">
+                {dealerLedgerSummary?.opening_balance}
+              </h3>
               {selectedMultiLangData?.payment_due}
             </div>
-            <h3 className="text-center mt-2 color-black">
-              {dealerLedgerSummary?.opening_balance}
-            </h3>
-            <div className="card-header fs-3 text-center color-black">
-              {selectedMultiLangData?.due_on}
-            </div>
-            <h3 className="text-center mt-2 color-black">
-              {dealerLedgerSummary?.payment_due_date
-                ?.split("-")
-                ?.reverse()
-                .join("-")}
-            </h3>
           </div>
-          {/* <div className="col-lg-3 card border-info mx-auto px-0">
+          <div className="col-md-6">
+            <div className=" fs-3 text-center color-black ledger-container mb-4 mt-4">
+            <h3 className="text-center mt-2 mb-0 color-black">
+                {dealerLedgerSummary?.payment_due_date
+                  ?.split('-')
+                  ?.reverse()
+                  .join('-')}
+              </h3>
+              {selectedMultiLangData?.due_on}   
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="col-lg-3 card border-info mx-auto px-0">
             <div className="card-header fs-3">Due on</div>
             <h3 className="text-center mt-2">
               {dealerLedgerSummary?.payment_due_date
@@ -53,8 +55,6 @@ const DealerAccounting = ({
                 .join("-")}
             </h3>
           </div> */}
-        </div>
-      </div>
     </>
   );
 };

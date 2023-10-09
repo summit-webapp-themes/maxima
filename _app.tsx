@@ -34,22 +34,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     const TRACKING_ID = "G-JEKLX6CZRT";
     ReactGA.initialize(TRACKING_ID);
   }, []);
-  // useEffect(() => {
-  //   const isRTL: any = document.documentElement.dir === "rtl";
-  //   // Load the appropriate global CSS file based on text direction
-  //   if (isRTL) {
-  //     import("../styles/pages/CssLayout-rtl.scss");
-  //   }
-  // }, []);
   useEffect(() => {
     const isRTL: any = document.documentElement.dir === "rtl";
     // Load the appropriate global CSS file based on text direction
     if (isRTL) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.type = "text/css";
-      link.href = "../styles/pages/CssLayout-rtl.scss"; // Replace with the actual path
-      document.head.appendChild(link);
+      import("../styles/pages/CssLayout-rtl.scss");
     }
   }, []);
   return (
