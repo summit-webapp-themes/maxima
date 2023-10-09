@@ -26,7 +26,18 @@
 .dealer-heading {
     font-size: 24px !important;
 }
-
+.ledger-container {
+    background-color: #d7e8f8;
+    padding: 14px;
+  
+}
+.ledger-padding {
+    padding-left: 2.8rem;
+    padding-right: 1.9rem;
+}
+.ledger-heading {
+    padding-left: 2.5rem;
+}
 @media screen and (min-width: 580px) {
     .dealer-ledger-table {
         overflow-x: hidden !important;

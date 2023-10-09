@@ -448,22 +448,20 @@ const CartListing = () => {
                               </div>
                             </div>
                             <div className="row justify-content-end ">
-                              <div className="col-lg-4 col-4 products-name bold">
+                              <div className="col-lg-4 col-4 bold products-name ">
                                 {" "}
-                                {
-                                  selectedMultiLangData?.order_total_including_tax
-                                }
+                                {selectedMultiLangData?.order_total_including_tax}{" "}
                               </div>
                               :
-                              <div className="col-lg-3 col-6 text-end products-name bold d-inline-flex">
+                          
+                              <div className="col-lg-3 col-6  price_font_family products-name bold">
                                 {
                                   cartListingItems?.categories[0]?.orders[0]
                                     ?.currency_symbol
-                                }
-                                <IndianNumber
-                                  value={orderSummaryForCart[10]?.value}
-                                />
+                                }{" "}
+                                {orderSummaryForCart[10]?.value}{" "}
                               </div>
+                              
                               <div className="col-6 ">
                                 <div className="row">
                                   <div className="col-12 mt-4">

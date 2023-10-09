@@ -47,7 +47,8 @@ const DealerLedgerTable = ({
   };
   return (
     <>
-      <div className="table-responsive dealer-ledger-table " >
+    <div className="container ledger-padding">
+      <div className="table-responsive dealer-ledger-table mt-5 " >
         <table className="table table-bordered ">
           <thead className="">
             <tr className="table-info">
@@ -188,6 +189,7 @@ const DealerLedgerTable = ({
             </div>
           </tbody>
         </table>
+      </div>
       </div>
     </>
     //   ) : (
