@@ -1159,3 +1159,21 @@
     font-weight: 500 !important;
     font-size: 22px !important;
 }
+
+
+
+@media only screen and (max-width: 600px) {
+    .product-img-mob{
+          width: 200px !important;
+        //   border: 2px solid red !important;
+    }
+    .product-row {
+        padding-right: 0rem !important;
+    }
+    .banner-imageWidth {
+        padding-left: 0rem !important;
+    }
+    .product_img_mob{
+        width: 200px;
+    }
+  }

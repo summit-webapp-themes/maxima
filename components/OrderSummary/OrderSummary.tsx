@@ -40,7 +40,7 @@ const OrderSummary = ({
   };
   return (
     <div>
-      <div>
+      <div >
         {!orderSummary ? null : (
           <div>
             {couponError === false
@@ -50,7 +50,7 @@ const OrderSummary = ({
                       <>
                         <div
                           className="order-summery px-2 px-sm-0 px-xm-0 mx-3 color-black"
-                          key={index} 
+                          key={index}  
                         >
                           <div className="row mb-1 ">
                             <div className="col-6">{data?.name}</div>
