@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import getSubscriber from "../services/api/general_apis/newsletter-subscription-api";
-import { useDispatch, useSelector } from "react-redux";
-import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
-import { showToast } from "./ToastNotificationNew";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import getSubscriber from '../services/api/general_apis/newsletter-subscription-api';
+import { useDispatch, useSelector } from 'react-redux';
+import { SelectedFilterLangDataFromStore } from '../store/slices/general_slices/selected-multilanguage-slice';
+import { showToast } from './ToastNotificationNew';
 
 const Footer = () => {
   const navbarData: any = [];
-  const [subScription, setSubscriptions] = useState<any>("");
+  const [subScription, setSubscriptions] = useState<any>('');
 
   const handleSubscriptionInput = (e: any) => {
     setSubscriptions(e?.target?.value);
@@ -17,9 +17,9 @@ const Footer = () => {
   const handleSubscription = async (event: any) => {
     event?.preventDefault();
     let subScriptionRes = await getSubscriber(subScription);
-    if (subScriptionRes?.data?.message?.msg === "success") {
-      showToast("subscribed successfully", "success");
-      setSubscriptions("");
+    if (subScriptionRes?.data?.message?.msg === 'success') {
+      showToast('subscribed successfully', 'success');
+      setSubscriptions('');
     }
   };
 
@@ -40,9 +40,12 @@ const Footer = () => {
     <>
       <footer className="footer footer-dark footer-section">
         <div className="container ">
-          <div className="footer-newsletter">
-            <div className="row justify-content-center align-items-center ">
-              <div className="col-xl-3 col-lg-2">
+          <div className="footer-newsletter footer-upper-wrapper-mob">
+            <div className="row justify-content-center align-items-center footer-upper-wrapper-mob">
+              <div 
+                className="col-xl-3 col-lg-2 log-img-mr-mob"
+                
+              >
                 <Link href="" legacyBehavior>
                   <Image
                     src="/assets/images/progearhub_logo.png"
@@ -54,14 +57,23 @@ const Footer = () => {
               </div>
               <div className="col-xl-4 col-lg-5">
                 <div className="icon-box icon-box-side text-dark ">
-                  <div className="icon-box-icon d-inline-flex footer-icon mx-0">
+                  <div 
+                    className="icon-box-icon d-inline-flex footer-icon mx-0"
+                    
+                  >
                     <i className="w-icon-envelop3 text-white msg-icon footer-icon "></i>
                   </div>
-                  <div className="icon-box-content">
-                    <h5 className="icon-box-title text-uppercase font-weight-bold text-white text-left">
+                  <div   
+                    className="icon-box-content icon-box-content-mob"
+                   
+                  >
+                    <h5 className="icon-box-title text-uppercase  font-weight-bold text-white text-left icon-box-content-box-mob">
                       {selectLangData?.subscribe_to_our_newsletter}
                     </h5>
-                    <p className="text-light ">
+                    <p
+                      className="text-light icon-box-content-box-mob"
+                      
+                    >
                       {
                         selectLangData?.get_all_the_latest_information_on_events_sales_offers
                       }
@@ -69,23 +81,29 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-xl-5 col-lg-5 col-md-9 mt-4 mt-lg-0 ">
+              <div  
+                className="col-xl-5 col-lg-5 col-md-9 mt-4 mt-lg-0 subscribe-wrapper-mob"
+               
+              >
                 <form
                   onSubmit={handleSubscription}
                   method="get"
                   className="input-wrapper input-wrapper-inline input-wrapper-rounded row"
                 >
-                  <div className="col-8 my-auto">
+                  <div className="col-md-7 col-lg-8 col-xl-8 my-auto">
                     <input
                       type="email"
-                      className="form-control mr-2 bg-white text-default subscribe_input"
+                      className="form-control input-ml-mob mr-2 bg-white text-default subscribe_input"
                       value={subScription}
                       onChange={handleSubscriptionInput}
                       placeholder="Your E-mail Address"
                       required
                     />
                   </div>
-                  <div className="col-3">
+                  <div 
+                    className="col-md-4 col-lg-3 col-xl-3 "
+                    
+                  >
                     <button
                       className="btn btn-primary btn-rounded btn-left  footer-button"
                       type="submit"
@@ -179,7 +197,7 @@ const Footer = () => {
               <div className="col-lg-2 col-sm-6">
                 <div className="widget">
                   <h4 className="widget-title">
-                    {" "}
+                    {' '}
                     {selectLangData?.customer_service}
                   </h4>
                   <ul className="widget-body">

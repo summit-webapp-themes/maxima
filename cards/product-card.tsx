@@ -129,7 +129,7 @@ const ProductCard = (props: ProductCardProps) => {
     }
   };
   return (
-    <div className="mt-0 pt-0">
+    <div className="mt-0 pt-0" >
       <div
         key={key}
         className="border  rounded-3 ps-0 ms-0 mt-2  product-border-pd"
@@ -229,7 +229,7 @@ const ProductCard = (props: ProductCardProps) => {
             )}
           </div>
         </div>
-        <div className="product-wrap ">
+        <div className="product-wrap " >
           <div className="product text-center ">
             <div className="product-media product_card_h pt-0 pb-0 mt-0 mb-0 d-flex justify-content-center product-main-container">
               {img_url !== "" ? (
@@ -243,6 +243,7 @@ const ProductCard = (props: ProductCardProps) => {
                       alt="product-detail"
                       width={200}
                       height={200}
+                      className="product_img_mob"
                     />
                   </Link>
                 </>
@@ -254,12 +255,13 @@ const ProductCard = (props: ProductCardProps) => {
                       alt="Product"
                       width="200"
                       height="200"
+                      className="product_img_mob"
                     />
                   </Link>
                 </>
               )}
             </div>
-            <div className="product-details pt-0">
+            <div className="product-details pt-0" >
               <h4 className="product-name truncate-overflow products-name products-name-font pt-0">
                 <Link
                   href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`}
@@ -268,8 +270,8 @@ const ProductCard = (props: ProductCardProps) => {
                   {item_name}
                 </Link>
               </h4>
-              <div className="product-price products-name pt-0 mt-0 product-grid-name pb-0 mb-0">
-                <ins className="new-price price_font_family pt-0">
+              <div className="product-price products-name pt-0 mt-0 product-grid-name pb-0 mb-0" >
+                <ins className="new-price price_font_family pt-0" >
                   {currency_symbol}
                   {price}
                 </ins>
@@ -285,8 +287,9 @@ const ProductCard = (props: ProductCardProps) => {
                       className={` ${
                         addToCartButtonDisabled === true ? "disabled" : ""
                       } btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
-                      onClick={handleAddCart}
+                   onClick={handleAddCart} 
                     >
+                      
                       <i
                         className="fa fa-shopping-cart d-flex justify-content-center"
                         aria-hidden="true"
@@ -300,11 +303,18 @@ const ProductCard = (props: ProductCardProps) => {
               </button> */}
                   </>
                 ) : (
-                  <button
-                    className="btn  standard_button py-3 add-cart-btns"
-                    onClick={handleAddCart}
+                  <button  
+                    className="btn btn-primary ml-3 cart_btn_gtag listing-cartbtn"
+                    // onClick={handleAddCart}
                   >
-                    {selectedMultiLangData?.add_to_cart}
+                     <Link href="/login" className="text-white ">
+                     <i
+                        className="fa fa-shopping-cart d-flex justify-content-center"
+                        aria-hidden="true"
+                      ></i>
+                        </Link>
+                    {/* {selectedMultiLangData?.add_to_cart} */}
+
                   </button>
                 )}
               </div>

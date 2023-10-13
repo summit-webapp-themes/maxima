@@ -22,10 +22,10 @@ const DisplayTagMaster = (props: any) => {
     <>
       <div className="container">
         <div className="row banner-product-wrapper products-name mb-3">
-          <h3 className="text-center mt-5 mb-0">{data?.tag_name}</h3>
+          <h3 className="text-center mt-5 mb-0" >{data?.tag_name}</h3>
           <div className="banner-product col-lg-3 col-md-3 d-lg-block d-none mb-3 mb-md-0">
             <div className="banner banner-fixed overlay-zoom br-xs banner-imageWidth">
-              <figure className="banner-media mt-4">
+              <figure className="banner-media mt-4 d-flex justify-content-center">
                 <Image
                   src={
                     data?.tag_name === "Special Offer"
@@ -39,7 +39,7 @@ const DisplayTagMaster = (props: any) => {
                   alt="Product Banner"
                   width="331"
                   height="600"
-                  className="bannerImage_height"
+                  className="bannerImage_height  product-img-mob"
                 />
               </figure>
             </div>
@@ -52,8 +52,8 @@ const DisplayTagMaster = (props: any) => {
                     data?.value?.map((list: any, i: any) => (
                       <div className="col-md-3 mt-4" key={i}>
                         <div className="product-wrap displaytag-product border">
-                          <div className="product text-center">
-                            <figure className="product-media">
+                          <div className="product text-center py-2 px-2">
+                            <figure className="product-media d-flex justify-content-center">
                               {list?.image_url !== null &&
                               list?.image_url?.length > 0 ? (
                                 <>
@@ -66,6 +66,7 @@ const DisplayTagMaster = (props: any) => {
                                       alt="Product"
                                       width="270"
                                       height="270"
+                                      className="product-img-mob"
                                     />
                                   </Link>
                                 </>
@@ -84,6 +85,7 @@ const DisplayTagMaster = (props: any) => {
                                       alt="Product"
                                       width="270"
                                       height="270"
+                                      className="product-img-mob"
                                     />
                                   </Link>
                                 </>
