@@ -25,7 +25,7 @@ const HandleOrderSection = (props: any) => {
   const { profileList }: any = useProfilePage();
 
   return (
-    <div>
+    <div >
       {/* {(!isDealer ||
         (isDealer === true && !CONSTANTS.SHOW_TRANSPORTERS_LIST_TO_DEALER)) && (
         <div>
@@ -41,7 +41,7 @@ const HandleOrderSection = (props: any) => {
         </div>
       )} */}
 
-      <div className="shadow-sm card">
+      <div className="shadow-sm card" >
         <div className="card-body py-0 px-1">
           {isDealer ? null : (
             <div className="accordion" id="accordionExample">
