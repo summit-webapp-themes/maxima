@@ -1,16 +1,16 @@
-import { useSelector } from "react-redux";
-import useProductDetail from "../../hooks/ProductDetailHook/product-detail-hook";
-import { Norecord } from "../NoRecord";
-import ProductDetailLoadingLayout from "./ProductDetailLoadingLayout";
-import BreadCrumbs from "./ProductDetails/BreadCrumbs";
-import CheckStockAvailability from "./ProductDetails/CheckStockAvailabilty";
-import ProductDetail from "./ProductDetails/ProductDetail";
-import ProductItemsOptions from "./ProductDetails/ProductItemsOptions";
-import ProductEnlargeImage from "./ProductEnlargeImage";
-import ProductSpecificationMaster from "./ProductSpecifications/ProductSpecificationMaster";
-import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
-import { useEffect, useState } from "react";
-import ReactGA from "react-ga";
+import { useSelector } from 'react-redux';
+import useProductDetail from '../../hooks/ProductDetailHook/product-detail-hook';
+import { Norecord } from '../NoRecord';
+import ProductDetailLoadingLayout from './ProductDetailLoadingLayout';
+import BreadCrumbs from './ProductDetails/BreadCrumbs';
+import CheckStockAvailability from './ProductDetails/CheckStockAvailabilty';
+import ProductDetail from './ProductDetails/ProductDetail';
+import ProductItemsOptions from './ProductDetails/ProductItemsOptions';
+import ProductEnlargeImage from './ProductEnlargeImage';
+import ProductSpecificationMaster from './ProductSpecifications/ProductSpecificationMaster';
+import { SelectedFilterLangDataFromStore } from '../../store/slices/general_slices/selected-multilanguage-slice';
+import { useEffect, useState } from 'react';
+import ReactGA from 'react-ga';
 const ProductDetailMaster = () => {
   const {
     productDetailData,
@@ -37,7 +37,7 @@ const ProductDetailMaster = () => {
     newobjectState,
     setnewObjectState,
   } = useProductDetail();
-  console.log(productDetailLoading, "productDetailData");
+  console.log(productDetailLoading, 'productDetailData');
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );

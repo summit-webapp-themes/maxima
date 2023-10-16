@@ -1,19 +1,20 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useState, useEffect, use } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState, useEffect, use } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchLoginUser,
   login_state,
-} from "../../../store/slices/auth/login_slice";
-import { Dropdown, FormControl } from "react-bootstrap";
-import { useRouter } from "next/router";
-import useSearchHook from "../../../hooks/GeneralHooks/SearchHooks/search-hook";
-import { cart_listing_state } from "../../../store/slices/cart-listing-page-slice/cart-listing-slice";
-import useWishlist from "../../../hooks/WishListHooks/WishListHooks";
-import LogoutList from "../../../services/api/auth/logout_api";
-import LinguisticsAndForex from "./LinguisticsAndForex";
-import { currency_selector_state } from "../../../store/slices/general_slices/multi-currency-slice";
+} from '../../../store/slices/auth/login_slice';
+import { Dropdown, FormControl } from 'react-bootstrap';
+import { useRouter } from 'next/router';
+import useSearchHook from '../../../hooks/GeneralHooks/SearchHooks/search-hook';
+import { cart_listing_state } from '../../../store/slices/cart-listing-page-slice/cart-listing-slice';
+import useWishlist from '../../../hooks/WishListHooks/WishListHooks';
+import LogoutList from '../../../services/api/auth/logout_api';
+import LinguisticsAndForex from './LinguisticsAndForex';
+import { currency_selector_state } from '../../../store/slices/general_slices/multi-currency-slice';
+import { CONSTANTS } from '../../../services/config/app-config';
 const WebNavbar = ({
   navbarData,
   isLoading,
@@ -31,7 +32,7 @@ const WebNavbar = ({
   handleSearchIputValue,
 }: any) => {
   const { wishlistCount } = useWishlist();
-  console.log("navmenu click", navMenuclick);
+  console.log('navmenu click', navMenuclick);
   const cartlisting_data: any = useSelector(cart_listing_state);
   // const currency_state_from_redux: any = useSelector(currency_selector_state);
   // const [selectedCurrencyValue, setSelectedCurrencyValue] = useState("");
@@ -55,12 +56,12 @@ const WebNavbar = ({
   }, [cartlisting_data]);
 
   let isLoggedIn: any;
-  if (typeof window !== "undefined") {
-    isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (typeof window !== 'undefined') {
+    isLoggedIn = localStorage.getItem('isLoggedIn');
   }
 
   const router = useRouter();
-  console.log("isLoggedIn12", LoggedIn);
+  console.log('isLoggedIn12', LoggedIn);
   const handleLeave: any = (id: any) => {
     setId(id);
     setIsShown(false);
@@ -72,16 +73,16 @@ const WebNavbar = ({
     };
 
     dispatch(fetchLoginUser(obj));
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("isDealer");
-    localStorage.removeItem("isSuperAdmin");
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('isDealer');
+    localStorage.removeItem('isSuperAdmin');
     setLoggedIn(false);
-    router.push("/login");
+    router.push('/login');
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   };
 
@@ -91,11 +92,11 @@ const WebNavbar = ({
   };
 
   const HandleLangToggle = (event: any) => {
-    console.log("handletoggle", event?.target?.checked);
+    console.log('handletoggle', event?.target?.checked);
     if (event?.target?.checked === true) {
-      document.documentElement.dir = "rtl";
+      document.documentElement.dir = 'rtl';
     } else {
-      document.documentElement.dir = "ltr";
+      document.documentElement.dir = 'ltr';
     }
   };
   return (
@@ -162,20 +163,23 @@ const WebNavbar = ({
                   Ar
                 </label>
               </div> */}
-              <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
-                <Link href="/wishlist" legacyBehavior>
-                  <a className=" cart-toggle label-down link">
-                    <i className="w-icon-heart wish_iconn ">
-                      <span className="cart-count wishlist_count text-white">
-                        {wishlistCount || 0}
-                      </span>
-                    </i>
-                    {/* <span className="wishlist-label d-lg-show">
-                      {selectedMultiLangData?.wishlist}
-                    </span> */}
-                  </a>
-                </Link>
-              </div>
+              {CONSTANTS.DISPLAY_WISHLIST_ICON_ON_WEBNAVBAR && (
+                <div className=" dropdown cart-dropdown cart-offcanvas text-white mx-lg-3 d-flex align-items-center heart-icon-margin heart-icon-mob">
+                  <Link href="/wishlist" legacyBehavior>
+                    <a className=" cart-toggle label-down link">
+                      <i className="w-icon-heart wish_iconn ">
+                        <span className="cart-count wishlist_count text-white">
+                          {wishlistCount || 0}
+                        </span>
+                      </i>
+                      {/* <span className="wishlist-label d-lg-show">
+                    {selectedMultiLangData?.wishlist}
+                  </span> */}
+                    </a>
+                  </Link>
+                </div>
+              )}
+
               <div className="dropdown cart-dropdown cart-offcanvas text-white mx-lg-4 ml-3  d-flex align-items-center">
                 <Link href="/cart" legacyBehavior>
                   <a className="cart-toggle label-down link">
@@ -192,7 +196,7 @@ const WebNavbar = ({
               </div>
               <div className="nav_custom_dropdown  d-flex align-items-center login-mob-margin">
                 <Dropdown>
-                  {isLoggedIn === "true" ? (
+                  {isLoggedIn === 'true' ? (
                     <Dropdown.Toggle
                       id="dropdown-basic"
                       className="dropdown-icon dropdown_active_icon"
@@ -214,7 +218,7 @@ const WebNavbar = ({
                     </Dropdown.Toggle>
                   )}
 
-                  {isLoggedIn === "true" ? (
+                  {isLoggedIn === 'true' ? (
                     <Dropdown.Menu className="fs-4">
                       <Dropdown.Item className="nav_dropdown">
                         <Link href="/quick-order" className="text-dark">
@@ -252,7 +256,7 @@ const WebNavbar = ({
                   ) : (
                     <Dropdown.Menu className="fs-3">
                       <Dropdown.Item className="nav_dropdown">
-                        {" "}
+                        {' '}
                         <Link href="/login" className="text-dark ">
                           {selectedMultiLangData?.login}
                         </Link>
@@ -281,20 +285,22 @@ const WebNavbar = ({
                       title="Browse Categories"
                     >
                       <i className="w-icon-category"></i>
-                      <span className="browse-cat-label">{selectedMultiLangData?.browse_categories}</span>
+                      <span className="browse-cat-label">
+                        {selectedMultiLangData?.browse_categories}
+                      </span>
                     </a>
                   </Link>
 
                   <div className="dropdown-box text-default">
                     <ul className="menu vertical-menu category-menu">
-                      {isLoading === "succeeded" &&
+                      {isLoading === 'succeeded' &&
                         navbarData?.length > 0 &&
                         navbarData.map((items: any, index: number) => (
                           <li key={index} className="vertical-menu-li-rtl">
                             <a>
                               <i className="w-icon-tshirt2"></i>
                               <span className="browse-cat-list-span">
-                              {items.label}
+                                {items.label}
                               </span>
                             </a>
                             <ul className="megamenu vertical-menubar-rtl">
@@ -339,7 +345,7 @@ const WebNavbar = ({
                     {navbarData?.length > 0 &&
                       navbarData.map((items: any, i: any) => (
                         <li
-                          className={`${isId === i && isShown ? "active" : ""}`}
+                          className={`${isId === i && isShown ? 'active' : ''}`}
                           onMouseEnter={(i) => handleHover(i)}
                           onMouseLeave={(i) => handleLeave(i)}
                           key={i}

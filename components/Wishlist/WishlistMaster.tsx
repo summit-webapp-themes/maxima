@@ -289,185 +289,186 @@ const WishlistMaster = () => {
           <div className="row color-black">
             <div className="col-md-12 mx-2">
               <div className="container">
-              {wishlistCount > 0 ? (
-                <>
-                  <div className="page_heading">
-                    <h4 className="mb-0">
-                      {' '}
-                      {selectedMultiLangData?.my_wishlist}
-                    </h4>
-                  </div>
-                  <div className="container border">
-                    <div className="row mt-2 cart_heading_bg mb-4">
-                      <h5 className="col-lg-5 col-md-4 d-none d-md-block mt-4">
-                        {selectedMultiLangData?.product}
-                      </h5>
-                      <h5 className="col-lg-2 col-md-2 col-3 d-none d-md-block mt-4">
-                        {selectedMultiLangData?.price}
-                      </h5>
-                      <h5 className="col-lg-2 col-md-2 col-3 d-none d-md-block mt-4 ">
-                        {selectedMultiLangData?.quantity}
-                      </h5>
-                      <h5 className="col-lg-3 col-md-2 col-3 d-none d-md-block mt-4">
-                        {selectedMultiLangData?.actions}
-                      </h5>
+                {wishlistCount > 0 ? (
+                  <>
+                    <div className="page_heading">
+                      <h4 className="mb-0">
+                        {' '}
+                        {selectedMultiLangData?.my_wishlist}
+                      </h4>
                     </div>
+                    <div className="container border">
+                      <div className="row mt-2 cart_heading_bg mb-4">
+                        <h5 className="col-lg-5 col-md-4 d-none d-md-block mt-4">
+                          {selectedMultiLangData?.product}
+                        </h5>
+                        <h5 className="col-lg-2 col-md-2 col-3 d-none d-md-block mt-4">
+                          {selectedMultiLangData?.price}
+                        </h5>
+                        <h5 className="col-lg-2 col-md-2 col-3 d-none d-md-block mt-4 ">
+                          {selectedMultiLangData?.quantity}
+                        </h5>
+                        <h5 className="col-lg-3 col-md-2 col-3 d-none d-md-block mt-4">
+                          {selectedMultiLangData?.actions}
+                        </h5>
+                      </div>
 
-                    <div className="row  mx-4 mb-0 pb-0">
-                      {wishlistData?.map((item: any, index: any) => (
-                        <div className="row mb-0 pb-2" key={index}>
-                          <div className="col-lg-5 col-md-4 w-100">
-                            <div className="row">
-                              <div className="col-lg-4 col-12">
-                                <div className="p-relative d-flex justify-content-center">
-                                  <div className="">
-                                    <a href={item.url}>
-                                      {handleRenderingOfImages(item)}
-                                    </a>
+                      <div className="row  mx-4 mb-0 pb-0">
+                        {wishlistData?.map((item: any, index: any) => (
+                          <div className="row mb-0 pb-2" key={index}>
+                            <div className="col-lg-5 col-md-4 w-100">
+                              <div className="row">
+                                <div className="col-lg-4 col-12">
+                                  <div className="p-relative d-flex justify-content-center">
+                                    <div className="">
+                                      <a href={item.url}>
+                                        {handleRenderingOfImages(item)}
+                                      </a>
+                                    </div>
+                                    <button
+                                      type="submit"
+                                      className=" btn btn-close fs-6 p-2 mx-2 rounded-circle"
+                                      onClick={() => {
+                                        requestNew = {
+                                          prod_id: item?.name,
+                                          getWishlist: false,
+                                          deleteWishlist: true,
+                                          addTowishlist: false,
+                                          token: TokenFromStore?.token,
+                                        };
+                                        requestList = {
+                                          getWishlist: true,
+                                          deleteWishlist: false,
+                                          addTowishlist: false,
+                                          token: TokenFromStore?.token,
+                                        };
+                                        dispatch(fetchWishlistUser(requestNew));
+                                        setTimeout(() => {
+                                          dispatch(
+                                            fetchWishlistUser(requestList)
+                                          );
+                                        }, 100);
+                                      }}
+                                    ></button>
                                   </div>
-                                  <button
-                                    type="submit"
-                                    className=" btn btn-close fs-6 p-2 mx-2 rounded-circle"
-                                    onClick={() => {
-                                      requestNew = {
-                                        prod_id: item?.name,
-                                        getWishlist: false,
-                                        deleteWishlist: true,
-                                        addTowishlist: false,
-                                        token: TokenFromStore?.token,
-                                      };
-                                      requestList = {
-                                        getWishlist: true,
-                                        deleteWishlist: false,
-                                        addTowishlist: false,
-                                        token: TokenFromStore?.token,
-                                      };
-                                      dispatch(fetchWishlistUser(requestNew));
-                                      setTimeout(() => {
-                                        dispatch(
-                                          fetchWishlistUser(requestList)
-                                        );
-                                      }, 100);
-                                    }}
-                                  ></button>
+                                </div>
+                                <div className="col-lg-7 col-12 py-2">
+                                  <p className="mb-0 fs-5 d-inline-flex">
+                                    <span className="bold">
+                                      {selectedMultiLangData?.item_code}:
+                                    </span>{' '}
+                                    &nbsp;
+                                    {item?.name}
+                                  </p>
+                                  <a
+                                    className="text-dark fs-5 bold"
+                                    href={`${item?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                                  >
+                                    {item?.item_name}
+                                  </a>
+                                  <p className="mb-0 fs-6 mb-0 pb-0">
+                                    {item?.short_description}
+                                  </p>
+                                  <p className="mb-0 fs-5 mb-0 pb-0 mt-0 pt-0 d-inline-flex">
+                                    <span className="bold">
+                                      {selectedMultiLangData?.brand}:{' '}
+                                    </span>{' '}
+                                    &nbsp;
+                                    {item?.brand}
+                                  </p>
                                 </div>
                               </div>
-                              <div className="col-lg-7 col-12 py-2">
-                                <p className="mb-0 fs-5 d-inline-flex">
-                                  <span className="bold">
-                                    {selectedMultiLangData?.item_code}:
-                                  </span>{' '}
-                                  &nbsp;
-                                  {item?.name}
-                                </p>
-                                <a
-                                  className="text-dark fs-5 bold"
-                                  href={`${item?.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
-                                >
-                                  {item?.item_name}
-                                </a>
-                                <p className="mb-0 fs-6 mb-0 pb-0">
-                                  {item?.short_description}
-                                </p>
-                                <p className="mb-0 fs-5 mb-0 pb-0 mt-0 pt-0 d-inline-flex">
-                                  <span className="bold">
-                                    {selectedMultiLangData?.brand}:{' '}
-                                  </span>{' '}
-                                  &nbsp;
-                                  {item?.brand}
-                                </p>
-                              </div>
                             </div>
-                          </div>
-                          <div className="col-lg-2 col-md-2 product-price">
-                            {item?.price !== 0 ? (
-                              <ins className="new-price fs-3 price_font_family ">
-                                {item?.currency_symbol}
-                                {item?.price?.toLocaleString('en-IN')}
-                              </ins>
-                            ) : (
-                              <p className="border price_request button_color ">
-                                {selectedMultiLangData?.price_on_request}
-                              </p>
-                            )}
-                            {item?.mrp_price !== 0 ? (
-                              <s className="old-price fs-3 pl-1 price_font_family ">
-                                {item?.currency_symbol}
-                                {item?.mrp_price?.toLocaleString('en-IN')}
-                              </s>
-                            ) : (
-                              ''
-                            )}
-                          </div>
-                          <div className="col-lg-2 col-md-3">
-                            <div className="d-inline-flex  align-items-center">
-                              <div>
-                                <span
-                                  className="fs-2 icon-cursor"
-                                  onClick={() =>
-                                    decrementCount(index, item?.min_order_qty)
-                                  }
-                                >
-                                  -
-                                </span>
+                            <div className="col-lg-2 col-md-2 product-price">
+                              {item?.price !== 0 ? (
+                                <ins className="new-price fs-3 price_font_family ">
+                                  {item?.currency_symbol}
+                                  {item?.price?.toLocaleString('en-IN')}
+                                </ins>
+                              ) : (
+                                <p className="border price_request button_color ">
+                                  {selectedMultiLangData?.price_on_request}
+                                </p>
+                              )}
+                              {item?.mrp_price !== 0 ? (
+                                <s className="old-price fs-3 pl-1 price_font_family ">
+                                  {item?.currency_symbol}
+                                  {item?.mrp_price?.toLocaleString('en-IN')}
+                                </s>
+                              ) : (
+                                ''
+                              )}
+                            </div>
+                            <div className="col-lg-2 col-md-3">
+                              <div className="d-inline-flex  align-items-center">
+                                <div>
+                                  <span
+                                    className="fs-2 icon-cursor"
+                                    onClick={() =>
+                                      decrementCount(index, item?.min_order_qty)
+                                    }
+                                  >
+                                    -
+                                  </span>
+                                </div>
+                                <div className="w-25 mx-3">
+                                  <input
+                                    type="text"
+                                    defaultValue={
+                                      item?.min_order_qty === 0
+                                        ? '1'
+                                        : item?.min_order_qty
+                                    }
+                                    value={productCounts[index]}
+                                    className={`${
+                                      alertMinQty === true &&
+                                      productCounts[index] ===
+                                        item?.min_order_qty
+                                        ? 'text-danger'
+                                        : ''
+                                    } w-100 pb-lg-0 pb-1 text-center`}
+                                    onChange={(e: any) =>
+                                      handleQuantityChange(
+                                        +e?.target?.value,
+                                        index,
+                                        item?.min_order_qty
+                                      )
+                                    }
+                                    min="0"
+                                    max="99999"
+                                  />
+                                </div>
+                                <div>
+                                  {' '}
+                                  <span
+                                    className="fs-2  icon-cursor"
+                                    onClick={() =>
+                                      incrementCount(index, item?.min_order_qty)
+                                    }
+                                  >
+                                    +
+                                  </span>
+                                </div>
                               </div>
-                              <div className="w-25 mx-3">
-                                <input
-                                  type="text"
-                                  defaultValue={
-                                    item?.min_order_qty === 0
-                                      ? '1'
-                                      : item?.min_order_qty
-                                  }
-                                  value={productCounts[index]}
+                              {item?.min_order_qty !== 0 ? (
+                                <div
                                   className={`${
                                     alertMinQty === true &&
                                     productCounts[index] === item?.min_order_qty
                                       ? 'text-danger'
-                                      : ''
-                                  } w-100 pb-lg-0 pb-1 text-center`}
-                                  onChange={(e: any) =>
-                                    handleQuantityChange(
-                                      +e?.target?.value,
-                                      index,
-                                      item?.min_order_qty
-                                    )
-                                  }
-                                  min="0"
-                                  max="99999"
-                                />
-                              </div>
-                              <div>
-                                {' '}
-                                <span
-                                  className="fs-2  icon-cursor"
-                                  onClick={() =>
-                                    incrementCount(index, item?.min_order_qty)
-                                  }
+                                      : 'text-dark'
+                                  } fs-6 mt-1 text-uppercase bold`}
                                 >
-                                  +
-                                </span>
-                              </div>
+                                  {selectedMultiLangData?.minimum_order_qty}:{' '}
+                                  {item?.min_order_qty}
+                                </div>
+                              ) : (
+                                ''
+                              )}
                             </div>
-                            {item?.min_order_qty !== 0 ? (
-                              <div
-                                className={`${
-                                  alertMinQty === true &&
-                                  productCounts[index] === item?.min_order_qty
-                                    ? 'text-danger'
-                                    : 'text-dark'
-                                } fs-6 mt-1 text-uppercase bold`}
-                              >
-                                {selectedMultiLangData?.minimum_order_qty}:{' '}
-                                {item?.min_order_qty}
-                              </div>
-                            ) : (
-                              ''
-                            )}
-                          </div>
-                          <div className="col-lg-3 col-md-3 ">
-                            <div className="">
-                              {/* <button
+                            <div className="col-lg-3 col-md-3 ">
+                              <div className="">
+                                {/* <button
                             type="button"
                             data-bs-toggle="modal"
                             data-bs-target="#stockModal "
@@ -488,52 +489,52 @@ const WishlistMaster = () => {
                             Check Availability
                           </button> */}
 
-                              <button
-                                className="ml-1 text-dark btn px-3 mt-lg-0 mt-5 mb-lg-0 mb-2"
-                                style={{
-                                  border: '1px solid #0071DC',
-                                  borderRadius: '7px',
-                                  backgroundColor: '#fff',
-                                }}
-                                onClick={() =>
-                                  handleAddCart(
-                                    item?.name,
-                                    item?.in_stock_status,
-                                    productCounts[index],
-                                    item?.min_order_qty
-                                  )
-                                }
-                              >
-                                {selectedMultiLangData?.add_to_cart}
-                              </button>
-                            </div>
-                            {productCounts[index] < item?.min_order_qty ? (
-                              <div className="text-danger fs-5">
-                                {selectedMultiLangData?.minimum_order_qty}:{' '}
-                                {item?.min_order_qty}
+                                <button
+                                  className="ml-1 text-dark btn px-3 mt-lg-0 mt-5 mb-lg-0 mb-2"
+                                  style={{
+                                    border: '1px solid #0071DC',
+                                    borderRadius: '7px',
+                                    backgroundColor: '#fff',
+                                  }}
+                                  onClick={() =>
+                                    handleAddCart(
+                                      item?.name,
+                                      item?.in_stock_status,
+                                      productCounts[index],
+                                      item?.min_order_qty
+                                    )
+                                  }
+                                >
+                                  {selectedMultiLangData?.add_to_cart}
+                                </button>
                               </div>
-                            ) : (
-                              ''
-                            )}
+                              {productCounts[index] < item?.min_order_qty ? (
+                                <div className="text-danger fs-5">
+                                  {selectedMultiLangData?.minimum_order_qty}:{' '}
+                                  {item?.min_order_qty}
+                                </div>
+                              ) : (
+                                ''
+                              )}
+                            </div>
+                            {/* <hr className="horizantal-line" /> */}
                           </div>
-                          {/* <hr className="horizantal-line" /> */}
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Norecord
-                    heading={selectedMultiLangData?.your_wishlist_is_empty}
-                    content={
-                      selectedMultiLangData?.items_added_to_your_wishlist_will_show_up_here
-                    }
-                    selectedMultiLangData={selectedMultiLangData}
-                  />
-                </>
-              )}
-            </div>
+                  </>
+                ) : (
+                  <>
+                    <Norecord
+                      heading={selectedMultiLangData?.your_wishlist_is_empty}
+                      content={
+                        selectedMultiLangData?.items_added_to_your_wishlist_will_show_up_here
+                      }
+                      selectedMultiLangData={selectedMultiLangData}
+                    />
+                  </>
+                )}
+              </div>
             </div>
           </div>
           <div className="container ">
