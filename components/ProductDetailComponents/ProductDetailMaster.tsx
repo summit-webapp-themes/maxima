@@ -11,6 +11,7 @@ import ProductSpecificationMaster from './ProductSpecifications/ProductSpecifica
 import { SelectedFilterLangDataFromStore } from '../../store/slices/general_slices/selected-multilanguage-slice';
 import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga';
+import ReviewsMaster from '../Review/ReviewsMaster';
 const ProductDetailMaster = () => {
   const {
     productDetailData,
@@ -126,6 +127,7 @@ const ProductDetailMaster = () => {
           </div>
         )}
       </div>
+     
       <div className="mb-2">
         {productDetailData?.prod_specifications?.length > 0 && (
           <ProductSpecificationMaster
@@ -134,6 +136,10 @@ const ProductDetailMaster = () => {
           />
         )}
       </div>
+      <div className="mb-2">
+        <ReviewsMaster />
+      </div>
+      
       {productItemOptions?.length > 0 &&
         productItemOptions !== null &&
         productItemOptions.map((items: any, index: any) => {
