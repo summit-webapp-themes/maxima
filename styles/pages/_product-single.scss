@@ -664,3 +664,49 @@ aside {
     }
     
 }
+
+// -------------- REVIEWS ---------------------
+.star-rating {
+    button {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: 3rem;
+        
+      }
+      
+    .on{
+        color: #000;
+    }
+    .off {
+        color: #ccc;
+      }
+}
+
+// --------review listing -----------------
+
+.review-list{
+   .listing-card{
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    margin-block: 2rem;
+    border-radius: 1rem;
+   }    
+
+   .rating-image {
+    .image-cont {
+        width: 10rem;
+        height: 10rem;
+        overflow: hidden;
+
+        img{
+            object-fit: contain;
+        }
+    }
+   }
+}
+
+// -----------------------REVIEW FORM -----------
+.review-form{
+    background-color: #f0efef;
+}
