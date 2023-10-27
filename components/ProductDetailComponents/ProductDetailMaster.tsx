@@ -136,9 +136,9 @@ const ProductDetailMaster = () => {
           />
         )}
       </div>
-      <div className="mb-2">
+      {/* <div className="mb-2">
         <ReviewsMaster />
-      </div>
+      </div> */}
       
       {productItemOptions?.length > 0 &&
         productItemOptions !== null &&
