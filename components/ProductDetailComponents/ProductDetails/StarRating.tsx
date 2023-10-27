@@ -1,9 +1,11 @@
 import React from "react";
 
 const StarRating = (props: any) => {
+  console.log("@star rating " , props)
   const { rating }: any = props;
   const fullStars: any = (rating * 10) / 2;
   const emptyStars: any = 5 - fullStars;
+
 
   const renderStar: any = (type: string) => {
     console.log("star rating", rating);
@@ -13,7 +15,7 @@ const StarRating = (props: any) => {
           className="fa fa-star fa-lg"
           aria-hidden="true"
           style={{ color: "#666" }}
-        ></i>
+        ></i> 
       );
     } else if (type === "half") {
       return (

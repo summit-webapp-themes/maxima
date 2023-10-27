@@ -1,44 +1,55 @@
-import { Provider, useSelector } from "react-redux";
+import { Provider, useSelector } from 'react-redux';
 // import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { persistor, store } from "../store/store";
-import { PersistGate } from "redux-persist/integration/react";
-import Layout from "../components/Layout";
-import "../styles/globals.scss";
-import { ToastContainer } from "react-toastify";
-import { initializeFirebase } from "../push-notifications";
-import { useEffect, useRef } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import Scrolltop from "../components/ScrollTop";
-import Script from "next/script";
-import ReactGA from "react-ga";
+import type { AppProps } from 'next/app';
+import { persistor, store } from '../store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import Layout from '../components/Layout';
+import '../styles/globals.scss';
+import { ToastContainer } from 'react-toastify';
+import { initializeFirebase } from '../push-notifications';
+import { useEffect, useRef } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import Scrolltop from '../components/ScrollTop';
+import Script from 'next/script';
+import ReactGA from 'react-ga';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const articleRef = useRef<null | HTMLParagraphElement>(null);
   initializeFirebase();
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
+    if ('serviceWorker' in navigator) {
       navigator.serviceWorker
-        .register("/service-worker.js")
+        .register('/service-worker.js')
         .then((registration) => {
-          console.log("Service Worker registered: ", registration);
+          console.log('Service Worker registered: ', registration);
           // registration.pushManager.subscribe({
           //   userVisibleOnly: true,
           //   // applicationServerKey,
           // })
         })
         .catch((error) => {
-          console.error("Service Worker registration failed: ", error);
+          console.error('Service Worker registration failed: ', error);
         });
     }
-    const TRACKING_ID = "G-JEKLX6CZRT";
+    const TRACKING_ID = 'G-JEKLX6CZRT';
     ReactGA.initialize(TRACKING_ID);
   }, []);
+  // useEffect(() => {
+  //   const isRTL: any = document.documentElement.dir === 'rtl';
+  //   // Load the appropriate global CSS file based on text direction
+  //   if (isRTL) {
+  //     import('../styles/pages/CssLayout-rtl.scss');
+  //   }
+  // }, []);
   useEffect(() => {
-    const isRTL: any = document.documentElement.dir === "rtl";
-    // Load the appropriate global CSS file based on text direction
+    const isRTL = document.documentElement.dir === 'rtl';
     if (isRTL) {
-      import("../styles/pages/CssLayout-rtl.scss");
+      const link = document.createElement('link');
+      link.href = '../styles/pages/CssLayout-rtl.scss'; // Replace with the correct path
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      // Append the link element to the document's head
+      document.head.appendChild(link);
     }
   }, []);
   return (
