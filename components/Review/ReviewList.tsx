@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { CONSTANTS } from '../../services/config/app-config';
 import ReactPaginate from 'react-paginate';
+import useProductReview from '../../hooks/ProductDetailHook/ProductReviewHook/product-review-hook';
+import StarRating from './StarRating';
 
 const ReviewList = ({ reviews }: any) => {
-  console.log('@REVIEW ', reviews);
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
+  console.log('product review in props', reviews);
+  const { reviewData, loading } = useProductReview();
+  console.log('product review', reviewData);
+
   const [itemOffset, setItemOffset] = useState(0);
   const [currentItems, setCurrentItems] = useState<any>([]);
   const [pageCount, setPageCount] = useState(0);
 
-  const itemsPerPage = 7;
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
+  const itemsPerPage = 5;
+
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(reviews.slice(itemOffset, endOffset));
@@ -22,7 +23,7 @@ const ReviewList = ({ reviews }: any) => {
   }, [itemOffset, itemsPerPage, reviews]);
   console.log('@Loading items data', currentItems);
 
-  // Invoke when user click to request another page.
+  // // Invoke when user click to request another page.
   const handlePageClick = (event: any) => {
     const newOffset = (event.selected * itemsPerPage) % reviews.length;
     console.log(
@@ -33,19 +34,19 @@ const ReviewList = ({ reviews }: any) => {
 
   return (
     <div className="container review-list">
-      {reviews.length > 0 && (
+      {reviews && reviews.length > 0 ? (
         <>
           {currentItems.map((e: any, index: number) => {
             return (
               <div className="row listing-card py-4">
-                <div className="col-lg-3 pl-5">
+                <div className="col-lg-3 px-5">
                   <p className=" my-1">{e.date}</p>
-                  <p>{e.name}</p>
+                  <p className="fs-2 my-3 ">{e.name}</p>
                   <div>
-                    <p>
+                    <p className="m-0">
                       Verified
                       <span className="ml-2">
-                        {e.verified && (
+                        {e.verified === 1 && (
                           <i
                             className="fa fa-check-circle"
                             aria-hidden="true"
@@ -55,23 +56,13 @@ const ReviewList = ({ reviews }: any) => {
                     </p>
                   </div>
                   <div className="star-rating">
-                    {[...Array(5)].map((star: any, index: number) => {
-                      index += 1;
-                      return (
-                        <button
-                          name="star"
-                          type="button"
-                          key={index}
-                          className={index <= e.star ? 'on p-0' : 'off p-0'}
-                        >
-                          <span className="star">&#9733;</span>
-                        </button>
-                      );
-                    })}
+                    <div>
+                      <StarRating rating={e?.rating} />
+                    </div>
                   </div>
                 </div>
-                <div className="col-lg-9 border-start">
-                  <p>{e.description}</p>
+                <div className="col-lg-9 px-5 border-start">
+                  <p>{e.comment}</p>
                   <div className="rating-image d-flex flex-wrap">
                     {e.images.length > 0 && (
                       <>
@@ -79,7 +70,7 @@ const ReviewList = ({ reviews }: any) => {
                           return (
                             <div className="image-cont">
                               <img
-                                src={`http://localhost:3000${element}`}
+                                src={`${CONSTANTS.API_BASE_URL}${element?.image}`}
                                 alt={e.name}
                                 className="w-100 h-100 "
                               />
@@ -94,9 +85,13 @@ const ReviewList = ({ reviews }: any) => {
             );
           })}
         </>
+      ) : (
+        <>
+          <p>Be the first to add Review</p>
+        </>
       )}
 
-      <div className='col-lg-12'>
+      <div className="col-lg-12">
         <ReactPaginate
           breakLabel="..."
           nextLabel="next"
