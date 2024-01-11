@@ -131,9 +131,9 @@ const ProductDetailMaster = () => {
           </div>
         )}
       </div>
-      <div className="mb-2">
+      {/* <div className="mb-2">
         <ProductFeature productDetails={productDetailData} />
-      </div>
+      </div> */}
       <div className="mb-2">
         {productDetailData?.prod_specifications?.length > 0 && (
           <ProductSpecificationMaster
