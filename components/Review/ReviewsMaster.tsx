@@ -4,6 +4,7 @@ import ReviewForm from './ReviewForm';
 // import { reviewProducts } from '../../components/dataSets/reviewProduct';
 import ReviewList from './ReviewList';
 import useProductReview from '../../hooks/ProductDetailHook/ProductReviewHook/product-review-hook';
+import { useRouter } from 'next/router';
 
 const ReviewsMaster = ({ reviewData }: any) => {
   const [writeReview, setWritereview] = useState<boolean>(false);
@@ -13,7 +14,11 @@ const ReviewsMaster = ({ reviewData }: any) => {
   // reviewData.forEach((product:any) => starCounts[product.rating]++);
   // const average5Star = (starCounts[1] / reviewData.length) * 5;
   // console.log('Average from 5-Star Ratings:', average5Star,starCounts);
-
+  let isLoggedIn: any;
+  if (typeof window !== 'undefined') {
+    isLoggedIn = localStorage.getItem('isLoggedIn');
+  }
+  const router = useRouter();
   const starCounts: any = {
     0: 0,
     0.1: 0,
@@ -75,12 +80,20 @@ const ReviewsMaster = ({ reviewData }: any) => {
           </div>
         </div>
         <div className="col-lg-6  text-sm-end ">
+        {
+          isLoggedIn === 'true' ? 
           <button
             className="btn btn-sm"
             onClick={() => setWritereview(!writeReview)}
           >
             Write a Review
+          </button>: <button
+            className="btn btn-sm"
+            onClick={() => router.push('/login')}
+          >
+            Write a Review
           </button>
+        }
         </div>
         {reviewData.length > 0 && <ReviewRatingBar reviewData={reviewData} />}
         <div className="col-lg-12">
