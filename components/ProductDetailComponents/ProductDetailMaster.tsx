@@ -12,6 +12,9 @@ import { SelectedFilterLangDataFromStore } from '../../store/slices/general_slic
 import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga';
 import ReviewsMaster from '../Review/ReviewsMaster';
+import useProductReview from '../../hooks/ProductReviewHook/product-review-hook';
+import ProductFeature from './ProductFeature/ProductFeature';
+import usePincodeValidation from '../../hooks/ProductDetailHook/validate-pincode-hook';
 const ProductDetailMaster = () => {
   const {
     productDetailData,
@@ -43,6 +46,8 @@ const ProductDetailMaster = () => {
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+  const { reviewData, loading } = useProductReview();
+  console.log(reviewData, 'reviewww');
 
   useEffect(() => {
     if (
@@ -55,6 +60,7 @@ const ProductDetailMaster = () => {
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
+  const {pincodeRes,setPincode,Loadings} = usePincodeValidation();
   return (
     <div className="margin_from_nav_lp">
       <div className="container product_detail_container">
@@ -91,6 +97,9 @@ const ProductDetailMaster = () => {
                       handleQuantityDecrement={handleQuantityDecrement}
                       productQuantity={productQuantity}
                       minQty={minQty}
+                      pincodeRes={pincodeRes}
+                      setPincode={setPincode}
+                      Loadings={Loadings}
                       stockAvailabilityTextChanges={
                         stockAvailabilityTextChanges
                       }
@@ -127,7 +136,9 @@ const ProductDetailMaster = () => {
           </div>
         )}
       </div>
-     
+      {/* <div className="mb-2">
+        <ProductFeature productDetails={productDetailData} />
+      </div> */}
       <div className="mb-2">
         {productDetailData?.prod_specifications?.length > 0 && (
           <ProductSpecificationMaster
@@ -136,10 +147,11 @@ const ProductDetailMaster = () => {
           />
         )}
       </div>
-      {/* <div className="mb-2">
-        <ReviewsMaster />
-      </div> */}
-      
+      {reviewData !== null && (
+        <div className="mb-2">
+          <ReviewsMaster reviewData={reviewData} />
+        </div>
+      )}
       {productItemOptions?.length > 0 &&
         productItemOptions !== null &&
         productItemOptions.map((items: any, index: any) => {
