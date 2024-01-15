@@ -31,6 +31,7 @@ import {
 import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 import { showToast } from "../../ToastNotificationNew";
 import ReactGA from "react-ga";
+import ValidatePincode from "./ValidatePincode";
 const ProductDetail = ({
   productDetailData,
   productVariants,
@@ -49,6 +50,9 @@ const ProductDetail = ({
   selectedMultiLangData,
   newobjectState,
   setnewObjectState,
+  pincodeRes,
+  setPincode,
+  Loadings
 }: any) => {
   const dispatch = useDispatch();
   const TokenFromStore: any = useSelector(get_access_token);
@@ -569,6 +573,9 @@ const ProductDetail = ({
                     <TwitterIcon size={32} round={true} />
                   </TwitterShareButton>
                 </div>
+              </div>
+              <div className="mt-5">
+                <ValidatePincode pincodeRes={pincodeRes} setPincode={setPincode} Loadings={Loadings}/>
               </div>
             </td>
           </tr>
