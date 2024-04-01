@@ -15,6 +15,7 @@ import LogoutList from '../../../services/api/auth/logout_api';
 import LinguisticsAndForex from './LinguisticsAndForex';
 import { currency_selector_state } from '../../../store/slices/general_slices/multi-currency-slice';
 import { CONSTANTS } from '../../../services/config/app-config';
+import { ClearToken } from '../../../store/slices/auth/token-login-slice';
 const WebNavbar = ({
   navbarData,
   isLoading,
@@ -66,16 +67,20 @@ const WebNavbar = ({
     setId(id);
     setIsShown(false);
   };
-
-  const handleClick: any = async () => {
+  
+  const handleClick = async () => {
     let obj = {
       Logouts: true,
     };
-
+    const LOGOUT_SUCCESS = 'LogoutSuccess'; // Define the action type constant
     dispatch(fetchLoginUser(obj));
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('isDealer');
     localStorage.removeItem('isSuperAdmin');
+    localStorage.removeItem("token");
+    localStorage.removeItem("guest");
+    dispatch(ClearToken());
+    dispatch({ type: LOGOUT_SUCCESS }); // Dispatch the action using the correct constant
     setLoggedIn(false);
     router.push('/login');
 
@@ -84,7 +89,7 @@ const WebNavbar = ({
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  };
+};
 
   const handleBeforeUnload = async () => {
     localStorage.clear();
