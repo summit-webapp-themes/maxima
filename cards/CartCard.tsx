@@ -242,7 +242,7 @@ const CartCard = ({
             <button
               type="button"
               className="text-start astext"
-              // onClick={() => UpdateCart(orders.item_code)}
+              onClick={() => updateCart(orders.item_code)}
             >
               <Link href="" legacyBehavior>
                 <a className="text-primary">{selectedMultiLangData?.update}</a>
