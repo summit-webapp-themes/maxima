@@ -22,6 +22,8 @@ import getOtpFetchApi from '../../services/api/auth/get-otp-api';
 import useMultilangHook from '../../hooks/LanguageHook/Multilanguages-hook';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import WebNavbar from '../Navbar/components/WebNavbar';
+import Footer from '../Footer';
 
 const Loginpage = () => {
   const dispatch = useDispatch();
@@ -38,13 +40,6 @@ const Loginpage = () => {
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
   const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
   const [passwordHidden, setPasswordHidden] = useState(true);
-  useEffect(() => {
-    if (
-      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
-    ) {
-      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
-    }
-  }, [SelectedLangDataFromStore]);
 
   let isLoggedIn: any;
   let guestLogin: any;
@@ -135,8 +130,18 @@ const Loginpage = () => {
     setPasswordHidden(!passwordHidden);
   };
 
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore?.selectedLanguageData]);
+
+  console.log('selectedMultiLangData', selectedMultiLangData);
   return (
     <>
+      {/* <WebNavbar /> */}
       <div className="container">
         <div className="logo mt-3">
           <Link href="/" className="navbar-brand">
@@ -257,7 +262,7 @@ const Loginpage = () => {
                                       <ErrorMessage name="password" />
                                     </div>
                                   </div>
-                                  <div className="col-6 text-end">
+                                  <div className="col-6  login_forget_password_rtl">
                                     <Link
                                       className={`linkss`}
                                       href="/forgot-password"
@@ -289,7 +294,7 @@ const Loginpage = () => {
                             </div>
 
                             <div
-                              className={`col-12 text-lg-start register_account`}
+                              className={`col-12 text-lg-start-login register_account`}
                             >
                               <div className="register ms-2 account-margin not-acc-margin">
                                 <span className="not_an_account">
@@ -315,6 +320,7 @@ const Loginpage = () => {
         </div>
         <hr></hr>
       </div>
+      {/* <Footer /> */}
     </>
   );
 };
