@@ -48,6 +48,7 @@ const Registration = () => {
   const [err, setErr] = useState<boolean>(false);
   let [state, setState] = useState<any>([]);
   const [passwordHidden, setPasswordHidden] = useState(true);
+  const [confrimPasswordHidden, setconfrimPasswordHidden] = useState(true);
 
   useEffect(() => {
     const getStateData: any = async () => {
@@ -125,6 +126,10 @@ const Registration = () => {
     e.preventDefault();
     setPasswordHidden(!passwordHidden);
   };
+  const handleConfirmPassword = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setconfrimPasswordHidden(!confrimPasswordHidden);
+  };
 
   return (
     <div className="container">
@@ -192,11 +197,26 @@ const Registration = () => {
                                       onChange={handleChange}
                                       onBlur={handleBlur}
                                       // type={details?.type === "password" ? passwordHidden ? 'password' : 'text'}
+
+                                      // type={
+                                      //   (details?.name === 'password' &&
+                                      //   passwordHidden
+                                      //     ? 'password'
+                                      //     : 'text') ||
+                                      //   (confrimPasswordHidden
+                                      //     ? 'password'
+                                      //     : 'text')
+                                      // }
                                       type={
-                                        details?.type === 'password' &&
-                                        passwordHidden
-                                          ? 'password'
-                                          : 'text'
+                                        details?.name === 'password'
+                                          ? passwordHidden
+                                            ? 'password'
+                                            : 'text'
+                                          : details?.name === 'confirm_password'
+                                            ? confrimPasswordHidden
+                                              ? 'password'
+                                              : 'text'
+                                            : 'text'
                                       }
                                       name={details?.name}
                                       placeholder={`Enter ${details?.label}`}
@@ -206,7 +226,7 @@ const Registration = () => {
                                           : ''
                                       } form-control rounded-0`}
                                     />
-                                    {details?.type === 'password' && (
+                                    {details?.name === 'password' && (
                                       <button
                                         className="register_password_icon"
                                         onClick={(e: React.MouseEvent) => {
@@ -216,6 +236,24 @@ const Registration = () => {
                                         type="button"
                                       >
                                         {passwordHidden ? (
+                                          <VisibilityOffIcon />
+                                        ) : (
+                                          <VisibilityIcon />
+                                        )}
+                                      </button>
+                                    )}
+                                    {details?.name === 'confirm_password' && (
+                                      <button
+                                        className="register_password_icon"
+                                        onClick={(e: React.MouseEvent) => {
+                                          e.preventDefault();
+                                          setconfrimPasswordHidden(
+                                            !confrimPasswordHidden
+                                          );
+                                        }}
+                                        type="button"
+                                      >
+                                        {confrimPasswordHidden ? (
                                           <VisibilityOffIcon />
                                         ) : (
                                           <VisibilityIcon />
