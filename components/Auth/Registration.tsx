@@ -197,15 +197,26 @@ const Registration = () => {
                                       onChange={handleChange}
                                       onBlur={handleBlur}
                                       // type={details?.type === "password" ? passwordHidden ? 'password' : 'text'}
+
+                                      // type={
+                                      //   (details?.name === 'password' &&
+                                      //   passwordHidden
+                                      //     ? 'password'
+                                      //     : 'text') ||
+                                      //   (confrimPasswordHidden
+                                      //     ? 'password'
+                                      //     : 'text')
+                                      // }
                                       type={
-                                        (details?.type === 'password' &&
-                                        passwordHidden
-                                          ? 'password'
-                                          : 'text') ||
-                                        (details?.type === 'confirm_password' &&
-                                        confrimPasswordHidden
-                                          ? 'password'
-                                          : 'text')
+                                        details?.name === 'password'
+                                          ? passwordHidden
+                                            ? 'password'
+                                            : 'text'
+                                          : details?.name === 'confirm_password'
+                                            ? confrimPasswordHidden
+                                              ? 'password'
+                                              : 'text'
+                                            : 'text'
                                       }
                                       name={details?.name}
                                       placeholder={`Enter ${details?.label}`}
@@ -215,7 +226,7 @@ const Registration = () => {
                                           : ''
                                       } form-control rounded-0`}
                                     />
-                                    {details?.type === 'password' && (
+                                    {details?.name === 'password' && (
                                       <button
                                         className="register_password_icon"
                                         onClick={(e: React.MouseEvent) => {
@@ -231,7 +242,7 @@ const Registration = () => {
                                         )}
                                       </button>
                                     )}
-                                    {details?.type === 'confirm_password' && (
+                                    {details?.name === 'confirm_password' && (
                                       <button
                                         className="register_password_icon"
                                         onClick={(e: React.MouseEvent) => {
@@ -242,7 +253,7 @@ const Registration = () => {
                                         }}
                                         type="button"
                                       >
-                                        {passwordHidden ? (
+                                        {confrimPasswordHidden ? (
                                           <VisibilityOffIcon />
                                         ) : (
                                           <VisibilityIcon />

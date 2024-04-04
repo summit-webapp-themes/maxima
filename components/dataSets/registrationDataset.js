@@ -63,7 +63,7 @@ export const register_details = [
   {
     label: 'Confirm Password',
     name: 'confirm_password',
-    type: 'confirm_password',
+    type: 'password',
     controlId: 'formPassword',
   },
 ];
