@@ -106,6 +106,50 @@
   right: 20px;
   margin-top: -32.5px;
 }
+.submit_btn_ms {
+  margin-left: 3rem !important;
+}
+.login_forget_password_rtl {
+  text-align: end;
+}
+// RTL CSS
+[dir='rtl'] .reset_password_icon {
+  // left: 12px;
+  // right: 279px;
+  right: 515px;
+}
+[dir='rtl'] .submit_btn_ms {
+  margin-right: 3rem !important;
+}
+[dir='rtl'] .register_account {
+  text-align: right;
+}
+
+[dir='rtl'] .password_icon {
+  // left: 16px;
+  right: 364px;
+}
+
+[dir='rtl'] .register_password_icon {
+  // left: 14px;
+  right: 301px;
+}
+[dir='rtl'].login_forget_password_rtl {
+  text-align: start;
+}
+@media (max-width: 1024px) {
+  [dir='rtl'] .password_icon {
+    right: 281px;
+  }
+}
+@media (min-width: 992px) {
+  .text-lg-start-login {
+    text-align: left !important;
+  }
+  [dir='rtl'] .text-lg-start-login {
+    text-align: right !important;
+  }
+}
 @media (min-width: 768px) {
   .login_btn {
     margin-left: 112px;
@@ -133,11 +177,42 @@
     right: 60px;
     margin-top: 2.5px;
   }
+  [dir='rtl'] .password_icon {
+    right: 430px;
+  }
 }
 
 @media (max-width: 600px) {
   .reset-label-wrapper-mob {
     display: flex;
     justify-content: start !important;
+  }
+  // [dir='rtl'].reset_password_icon {
+  //   left: 65px;
+  // }
+  [dir='rtl'] .reset_password_icon {
+    // left: 12px;
+    // right: 279px;
+    right: 250px;
+  }
+
+  [dir='rtl'] .password_icon {
+    right: 334px;
+  }
+  [dir='rtl'] .register_password_icon {
+    right: 296px;
+  }
+}
+@media (max-width: 400px) {
+  [dir='rtl'] .register_password_icon {
+    right: 265px;
+  }
+  [dir='rtl'] .password_icon {
+    right: 296px;
+  }
+  [dir='rtl'] .reset_password_icon {
+    // left: 12px;
+    // right: 279px;
+    right: 279px;
   }
 }

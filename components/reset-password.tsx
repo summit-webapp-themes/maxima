@@ -189,7 +189,7 @@ const ResetPassword: any = () => {
                     </Link>
                     <button
                       type="submit"
-                      className="btn standard_button text-uppercase bold ms-5"
+                      className="btn standard_button text-uppercase bold submit_btn_ms"
                     >
                       {selectLangData?.reset}
                     </button>
