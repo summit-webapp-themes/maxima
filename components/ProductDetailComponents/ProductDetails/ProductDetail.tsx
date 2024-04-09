@@ -218,7 +218,7 @@ const ProductDetail = ({
   //   }
   // };
   const [fullUrl, setFullUrl] = useState<any>("");
-  const shareUrl = fullUrl !== "" ? fullUrl : "http://3.13.55.94:3004/";
+  const shareUrl = fullUrl !== "" ? fullUrl : "https://summit-b2b-demo.8848digital.com/";
   const shareMessage = `Check out this product: ${shareUrl}`;
   useEffect(() => {
     if (router.asPath) {
@@ -504,13 +504,15 @@ const ProductDetail = ({
                             addToCartButtonDisabled === true ? "disabled" : ""
                           } w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
                           onClick={handleAddCart}
-                          disabled={doesSelectedVariantDoesNotExists}
+                          disabled={doesSelectedVariantDoesNotExists
+                            
+                          }
                         >
                           {selectedMultiLangData?.add_to_cart}
                         </button>
                       </div>
                       <div className="col-12">
-                        <div className="ms-5">
+                        <div className="">
                           {productQuantity < minQty ? (
                             <p className="text-danger">
                               {selectedMultiLangData?.minimum_order_qty}:

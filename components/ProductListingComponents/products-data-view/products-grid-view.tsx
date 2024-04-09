@@ -62,6 +62,7 @@ const ProductsGridView = (props: ProductsViewProps) => {
                 brand_img={items?.brand_img}
                 display_tag={items?.display_tag}
                 star_rating={items?.rating}
+                min_order_qty={items?.min_order_qty}
                 wishlistData={wishlistData}
                 currency_state_from_redux={currency_state_from_redux}
                 selectedMultiLangData={selectedMultiLangData}
