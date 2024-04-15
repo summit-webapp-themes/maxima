@@ -20,6 +20,7 @@ import { ProductListingThunk } from '../store/slices/product-listing-page-slices
 import { filters_selector_state } from '../store/slices/product-listing-page-slices/filters-slice';
 import CatalogModal from '../components/Catalog/CatalogModal';
 import { showToast } from '../components/ToastNotificationNew';
+import AddtoCartModal from '../components/ProductListingComponents/products-data-view/AddtoCartModal';
 
 const ProductCard = (props: ProductCardProps) => {
   const {
@@ -42,6 +43,7 @@ const ProductCard = (props: ProductCardProps) => {
     handleAddProduct,
     handleSubmitCatalogName,
     handleChange,
+    min_order_qty
   } = props;
 
   let wishproducts: any;
@@ -55,7 +57,8 @@ const ProductCard = (props: ProductCardProps) => {
   const filters_state_from_redux: any = useSelector(filters_selector_state);
   const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
   const [show, setshow] = useState(false);
-
+  const [show1, setshow1] = useState(false);
+  const [qty , setQty] = useState<any>(1)
   const { query }: any = useRouter();
   console.log('delete que', query);
   const newSlug = query?.category?.replace(/-/g, ' ');
@@ -89,6 +92,13 @@ const ProductCard = (props: ProductCardProps) => {
   };
   const handleClose = () => {
     setshow(false);
+  };
+
+  const handleShowModalCart = (val: any) => {
+    setshow1(true);
+  };
+  const handleCloseModalCart = () => {
+    setshow1(false);
   };
 
   const handleDeleteCatalogProduct = async () => {
@@ -127,7 +137,9 @@ const ProductCard = (props: ProductCardProps) => {
       showToast(deleteProductFromCatalog?.message?.error, 'error');
     }
   };
+ 
   return (
+    <>
     <div className="mt-0 pt-0">
       <div
         key={key}
@@ -388,6 +400,18 @@ const ProductCard = (props: ProductCardProps) => {
         />
       </div>
     </div>
+    <AddtoCartModal
+          show={show1}
+          toHide={()=>setshow1(false)}
+          name={name}
+          item_name={item_name}
+          handleClose={handleCloseModalCart}
+          handleAddCart={handleAddCart}
+          // min_order_qty={min_order_qty}
+          qty={qty}
+          setQty={setQty}
+        />  
+    </>
   );
 };
 
