@@ -1,26 +1,27 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form as FormikForm, Field, ErrorMessage } from "formik";
-import { Form, FormLabel } from "react-bootstrap";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { RegistrationValidation } from "../../validation/registrationValidation";
-import Image from "next/image";
-import { register_details } from "../dataSets/registrationDataset";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
+import { Form, FormLabel } from 'react-bootstrap';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { RegistrationValidation } from '../../validation/registrationValidation';
+import Image from 'next/image';
+import { register_details } from '../dataSets/registrationDataset';
 import {
   getRegistrationData,
   registration_state,
-} from "../../store/slices/auth/registration_slice";
+} from '../../store/slices/auth/registration_slice';
 import {
   FetchCitiesForAddressForm,
   FetchStateForAddressForm,
-} from "../../services/api/general_apis/customer-form-data-api";
-import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
-import { get_access_token } from "../../store/slices/auth/token-login-slice";
-import RegistrationApi from "../../services/api/auth/registration_api";
-import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
-import { showToast } from "../ToastNotificationNew";
-
+} from '../../services/api/general_apis/customer-form-data-api';
+import { SelectedFilterLangDataFromStore } from '../../store/slices/general_slices/selected-multilanguage-slice';
+import { get_access_token } from '../../store/slices/auth/token-login-slice';
+import RegistrationApi from '../../services/api/auth/registration_api';
+import useMultilangHook from '../../hooks/LanguageHook/Multilanguages-hook';
+import { showToast } from '../ToastNotificationNew';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const Registration = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -39,13 +40,15 @@ const Registration = () => {
       setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
     }
   }, [SelectedLangDataFromStore]);
-  console.log("register details", RegistrationDataFromStore);
-  let [selectedCity, setSelectedCity] = useState<any>("");
-  let [selectedStates, setSelectedStates] = useState<any>("");
+  console.log('register details', RegistrationDataFromStore);
+  let [selectedCity, setSelectedCity] = useState<any>('');
+  let [selectedStates, setSelectedStates] = useState<any>('');
 
   let [city, setCity] = useState<any>([]);
   const [err, setErr] = useState<boolean>(false);
   let [state, setState] = useState<any>([]);
+  const [passwordHidden, setPasswordHidden] = useState(true);
+  const [confrimPasswordHidden, setconfrimPasswordHidden] = useState(true);
 
   useEffect(() => {
     const getStateData: any = async () => {
@@ -64,19 +67,19 @@ const Registration = () => {
     getStateData();
   }, []);
   const handleSelectedState: any = async (stateValue: string) => {
-    setSelectedCity("");
+    setSelectedCity('');
     setCity([]);
     const getCitiesFromState: any = await FetchCitiesForAddressForm(
       stateValue,
       TokenFromStore?.token
     );
-    console.log("cities values", getCitiesFromState);
+    console.log('cities values', getCitiesFromState);
     if (getCitiesFromState?.length > 0) {
       let citiesValues: any = getCitiesFromState
         .map((item: any) => item.name)
         .filter((item: any) => item !== null);
 
-      console.log("cities values new", citiesValues);
+      console.log('cities values new', citiesValues);
       setCity(citiesValues);
     }
   };
@@ -84,240 +87,299 @@ const Registration = () => {
   const handlesubmit: any = async (values: any, action: any) => {
     let RegistrationApiRes: any = await RegistrationApi(values);
 
-    if (RegistrationApiRes?.data?.message?.msg === "success") {
-      showToast("Registerd sucessfully", "success");
-      router.push("/login");
+    if (RegistrationApiRes?.data?.message?.msg === 'success') {
+      showToast('Registerd sucessfully', 'success');
+      router.push('/login');
     } else {
-      showToast(RegistrationApiRes?.data?.message?.error, "error");
+      showToast(RegistrationApiRes?.data?.message?.error, 'error');
     }
     action.resetForm();
   };
 
   const HandleRegistrationForm: any = (details: any) => {
-    if (details.label === "Name") {
+    if (details.label === 'Name') {
       return selectedMultiLangData?.name;
-    } else if (details.label === "Email") {
+    } else if (details.label === 'Email') {
       return selectedMultiLangData?.email;
-    } else if (details.label === "Mobile No") {
+    } else if (details.label === 'Mobile No') {
       return selectedMultiLangData?.mobile_number;
-    } else if (details.label === "Flat No") {
+    } else if (details.label === 'Flat No') {
       return selectedMultiLangData?.address_1;
-    } else if (details.label === "Street / Road Name") {
+    } else if (details.label === 'Street / Road Name') {
       return selectedMultiLangData?.address_2;
-    } else if (details.label === "GST Number") {
+    } else if (details.label === 'GST Number') {
       return selectedMultiLangData?.gst;
-    } else if (details.label === "State") {
+    } else if (details.label === 'State') {
       return selectedMultiLangData?.state;
-    } else if (details.label === "City") {
+    } else if (details.label === 'City') {
       return selectedMultiLangData?.city;
-    } else if (details.label === "Pincode") {
+    } else if (details.label === 'Pincode') {
       return selectedMultiLangData?.postal_code;
-    } else if (details.label === "Password") {
+    } else if (details.label === 'Password') {
       return selectedMultiLangData?.password;
-    } else if (details.label === "Confirm Password") {
+    } else if (details.label === 'Confirm Password') {
       return selectedMultiLangData?.confirm_password;
     }
   };
 
+  const handlePassword = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setPasswordHidden(!passwordHidden);
+  };
+  const handleConfirmPassword = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setconfrimPasswordHidden(!confrimPasswordHidden);
+  };
+
   return (
-    <>
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="logo mt-3">
-              <Link href="/" legacyBehavior>
-                <a>
-                  <Image
-                    src="/assets/images/progearhub.png"
-                    width={180}
-                    height={40}
-                    alt="logo"
-                  />
-                </a>
-              </Link>
-            </div>
+    <div className="container">
+      <div className="row">
+        <div className="col-12">
+          <div className="logo mt-3">
+            <Link href="/" legacyBehavior>
+              <a>
+                <Image
+                  src="/assets/images/progearhub.png"
+                  width={180}
+                  height={40}
+                  alt="logo"
+                />
+              </a>
+            </Link>
           </div>
         </div>
-        <div className="registration_form">
-          <div className="registr-heading text-center mb-2">
-            <h1 className="text-uppercase registration_title">
-              {selectedMultiLangData?.register}
-            </h1>
-          </div>
-          <Formik
-            initialValues={{
-              name: "",
-              email: "",
-              contact: "",
-              address_1: "",
-              address_2: "",
-              gst_number: "",
-              city: "",
-              state: "",
-              postal_code: "",
-              confirm_password: "",
-            }}
-            validationSchema={RegistrationValidation}
-            onSubmit={(values, action) => {
-              handlesubmit(values, action);
-              action.resetForm();
-            }}
-          >
-            {({ handleChange, handleBlur }) => (
-              <FormikForm>
-                <div className="form-wrapper registration">
-                  <div className="mainfields-wrapper">
-                    <div className="row justify-content-center">
-                      <div className="col-10 main-column">
-                        {register_details.map((details: any, i) => (
-                          <div className="row mt-3" key={i}>
-                            <Form.Group controlId={details?.controlId}>
-                              <div className="row">
-                                <div className="col-md-4">
-                                  <Form.Label className="registration_label">
-                                    {HandleRegistrationForm(details)}:
-                                  </Form.Label>
-                                </div>
-                                {details?.name !== "state" &&
-                                details?.name !== "city" ? (
-                                  <div className="col-md-8">
+      </div>
+      <div className="registration_form">
+        <div className="registr-heading text-center mb-2">
+          <h1 className="text-uppercase registration_title">
+            {selectedMultiLangData?.register}
+          </h1>
+        </div>
+        <Formik
+          initialValues={{
+            name: '',
+            email: '',
+            contact: '',
+            address_1: '',
+            address_2: '',
+            gst_number: '',
+            city: '',
+            state: '',
+            postal_code: '',
+            confirm_password: '',
+          }}
+          validationSchema={RegistrationValidation}
+          onSubmit={(values, action) => {
+            handlesubmit(values, action);
+            action.resetForm();
+          }}
+        >
+          {({ handleChange, handleBlur }) => (
+            <FormikForm>
+              <div className="form-wrapper registration">
+                <div className="mainfields-wrapper">
+                  <div className="row justify-content-center">
+                    <div className="col-10 main-column">
+                      {register_details.map((details: any, i) => (
+                        <div className="row mt-3" key={i}>
+                          <Form.Group controlId={details?.controlId}>
+                            <div className="row">
+                              <div className="col-md-4">
+                                <Form.Label className="registration_label">
+                                  {HandleRegistrationForm(details)}:
+                                </Form.Label>
+                              </div>
+                              {details?.name !== 'state' &&
+                              details?.name !== 'city' ? (
+                                <div className="col-md-8">
+                                  <div className="password-input-wrapper">
                                     <Field
                                       onChange={handleChange}
                                       onBlur={handleBlur}
-                                      type={details?.type}
+                                      // type={details?.type === "password" ? passwordHidden ? 'password' : 'text'}
+
+                                      // type={
+                                      //   (details?.name === 'password' &&
+                                      //   passwordHidden
+                                      //     ? 'password'
+                                      //     : 'text') ||
+                                      //   (confrimPasswordHidden
+                                      //     ? 'password'
+                                      //     : 'text')
+                                      // }
+                                      type={
+                                        details?.name === 'password'
+                                          ? passwordHidden
+                                            ? 'password'
+                                            : 'text'
+                                          : details?.name === 'confirm_password'
+                                            ? confrimPasswordHidden
+                                              ? 'password'
+                                              : 'text'
+                                            : 'text'
+                                      }
                                       name={details?.name}
                                       placeholder={`Enter ${details?.label}`}
                                       className={`${
-                                        details?.name === "address"
-                                          ? "address_textarea"
-                                          : ""
+                                        details?.name === 'address'
+                                          ? 'address_textarea'
+                                          : ''
                                       } form-control rounded-0`}
                                     />
-                                    <div className="error_message">
-                                      <ErrorMessage
-                                        className="error_message"
-                                        name={details?.name}
-                                      />
-                                    </div>
+                                    {details?.name === 'password' && (
+                                      <button
+                                        className="register_password_icon"
+                                        onClick={(e: React.MouseEvent) => {
+                                          e.preventDefault();
+                                          setPasswordHidden(!passwordHidden);
+                                        }}
+                                        type="button"
+                                      >
+                                        {passwordHidden ? (
+                                          <VisibilityOffIcon />
+                                        ) : (
+                                          <VisibilityIcon />
+                                        )}
+                                      </button>
+                                    )}
+                                    {details?.name === 'confirm_password' && (
+                                      <button
+                                        className="register_password_icon"
+                                        onClick={(e: React.MouseEvent) => {
+                                          e.preventDefault();
+                                          setconfrimPasswordHidden(
+                                            !confrimPasswordHidden
+                                          );
+                                        }}
+                                        type="button"
+                                      >
+                                        {confrimPasswordHidden ? (
+                                          <VisibilityOffIcon />
+                                        ) : (
+                                          <VisibilityIcon />
+                                        )}
+                                      </button>
+                                    )}
                                   </div>
-                                ) : (
-                                  ""
-                                )}
+                                  <div className="error_message">
+                                    <ErrorMessage
+                                      className="error_message"
+                                      name={details?.name}
+                                    />
+                                  </div>
+                                </div>
+                              ) : (
+                                ''
+                              )}
 
-                                {details?.name === "state" && (
-                                  <div className="col-md-8">
-                                    <Field
-                                      component="select"
-                                      className="form-control rounded-0"
-                                      id="state"
-                                      name="state"
-                                      value={selectedStates}
-                                      onBlur={handleBlur}
-                                      onChange={(e: any) => {
-                                        console.log(
-                                          "selected state",
-                                          e?.target?.value
-                                        );
-                                        setSelectedStates(e?.target?.value);
-                                        handleSelectedState(e?.target?.value);
-                                      }}
-                                      onClick={handleChange}
-                                    >
-                                      <option>
-                                        {
-                                          selectedMultiLangData?.please_select_a_state
-                                        }
-                                      </option>
-                                      {state?.length > 0 && (
-                                        <>
-                                          {state?.map(
-                                            (data: any, index: any) => {
-                                              return (
-                                                <>
-                                                  <option
-                                                    value={data}
-                                                    key={index}
-                                                  >
-                                                    {data}
-                                                  </option>
-                                                </>
-                                              );
-                                            }
-                                          )}
-                                        </>
-                                      )}
-                                    </Field>
-                                  </div>
-                                )}
+                              {details?.name === 'state' && (
+                                <div className="col-md-8">
+                                  <Field
+                                    component="select"
+                                    className="form-control rounded-0"
+                                    id="state"
+                                    name="state"
+                                    value={selectedStates}
+                                    onBlur={handleBlur}
+                                    onChange={(e: any) => {
+                                      console.log(
+                                        'selected state',
+                                        e?.target?.value
+                                      );
+                                      setSelectedStates(e?.target?.value);
+                                      handleSelectedState(e?.target?.value);
+                                    }}
+                                    onClick={handleChange}
+                                  >
+                                    <option>
+                                      {
+                                        selectedMultiLangData?.please_select_a_state
+                                      }
+                                    </option>
+                                    {state?.length > 0 && (
+                                      <>
+                                        {state?.map((data: any, index: any) => {
+                                          return (
+                                            <>
+                                              <option value={data} key={index}>
+                                                {data}
+                                              </option>
+                                            </>
+                                          );
+                                        })}
+                                      </>
+                                    )}
+                                  </Field>
+                                </div>
+                              )}
 
-                                {details?.name === "city" && (
-                                  <div className="col-md-8">
-                                    <Field
-                                      component="select"
-                                      className="form-control rounded-0"
-                                      id="city"
-                                      name="city"
-                                      value={selectedCity}
-                                      defaultValue=""
-                                      onChange={(e: any) => {
-                                        setSelectedCity(e.target.value);
-                                        handleChange;
-                                      }}
-                                      onClick={handleChange}
-                                      onBlur={handleBlur}
-                                    >
-                                      <option>
-                                        {
-                                          selectedMultiLangData?.please_select_a_city
-                                        }
-                                      </option>
-                                      {city?.length > 0 && (
-                                        <>
-                                          {city.map((data: any, index: any) => (
-                                            <option value={data} key={index}>
-                                              {data}
-                                            </option>
-                                          ))}
-                                        </>
-                                      )}
-                                    </Field>
-                                  </div>
-                                )}
-                              </div>
-                            </Form.Group>
-                          </div>
-                        ))}
-                        <div className="row mt-2  d-flex justify-content-center text-center">
-                          <div className="d-flex justify-content-center">
-                            <div className="m-2">
-                              <Link href="/login">
-                                <button
-                                  className={`btn bold text-uppercase border_btn text-dark`}
-                                >
-                                  {selectedMultiLangData?.back}
-                                </button>
-                              </Link>
+                              {details?.name === 'city' && (
+                                <div className="col-md-8">
+                                  <Field
+                                    component="select"
+                                    className="form-control rounded-0"
+                                    id="city"
+                                    name="city"
+                                    value={selectedCity}
+                                    defaultValue=""
+                                    onChange={(e: any) => {
+                                      setSelectedCity(e.target.value);
+                                      handleChange;
+                                    }}
+                                    onClick={handleChange}
+                                    onBlur={handleBlur}
+                                  >
+                                    <option>
+                                      {
+                                        selectedMultiLangData?.please_select_a_city
+                                      }
+                                    </option>
+                                    {city?.length > 0 && (
+                                      <>
+                                        {city.map((data: any, index: any) => (
+                                          <option value={data} key={index}>
+                                            {data}
+                                          </option>
+                                        ))}
+                                      </>
+                                    )}
+                                  </Field>
+                                </div>
+                              )}
                             </div>
-                            <div className="m-2">
+                          </Form.Group>
+                        </div>
+                      ))}
+                      <div className="row mt-2  d-flex justify-content-center text-center">
+                        <div className="d-flex justify-content-center">
+                          <div className="m-2">
+                            <Link href="/login">
                               <button
-                                type="submit"
-                                className="btn btn-warning text-uppercase bold button_color"
+                                className={`btn bold text-uppercase border_btn text-dark`}
                               >
-                                {selectedMultiLangData?.submit}
+                                {selectedMultiLangData?.back}
                               </button>
-                            </div>
+                            </Link>
+                          </div>
+                          <div className="m-2">
+                            <button
+                              type="submit"
+                              className="btn btn-warning text-uppercase bold button_color"
+                            >
+                              {selectedMultiLangData?.submit}
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </FormikForm>
-            )}
-          </Formik>
-        </div>
+              </div>
+            </FormikForm>
+          )}
+        </Formik>
       </div>
-    </>
+    </div>
   );
 };
 

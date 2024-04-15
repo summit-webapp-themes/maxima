@@ -18,6 +18,7 @@ import { Router, useRouter } from 'next/router';
 import { get_access_token } from '../store/slices/auth/token-login-slice';
 import CatalogModal from '../components/Catalog/CatalogModal';
 import { profileData_state } from '../store/slices/general_slices/profile-page-slice';
+import AddtoCartModal from '../components/ProductListingComponents/products-data-view/AddtoCartModal';
 
 const ProductListViewCard = (props: any) => {
   const {
@@ -42,7 +43,10 @@ const ProductListViewCard = (props: any) => {
   const profileData: any = useSelector(profileData_state);
   const [showEditModal, setshowEditModal] = useState(false);
   const [show, setshow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
+  const [qty , setQty] = useState<any>(1)
+
   let isLoggedIn: any;
   let partyName: any;
   if (typeof window !== 'undefined') {
@@ -55,13 +59,18 @@ const ProductListViewCard = (props: any) => {
   const handleClose = () => {
     setshow(false);
   };
-
+  const handleShowModalCart = (val: any) => {
+    setShowModal(true);
+  };
+  const handleCloseModalCart = () => {
+    setShowModal(false);
+  };
   const AddToCartProduct = async (name: any) => {
     setAddToCartButtonDisabled(true);
     const addCartData = [];
     addCartData.push({
       item_code: name,
-      quantity: 1,
+      quantity: qty,
     });
     if (profileData?.partyName !== '') {
       if (Object?.keys(profileData?.partyName)?.length > 0) {
@@ -194,9 +203,7 @@ const ProductListViewCard = (props: any) => {
                                       ? 'disabled'
                                       : ''
                                   } btn standard_button add_cart_btn`}
-                                  onClick={() =>
-                                    AddToCartProduct(product_data.name)
-                                  }
+                                  onClick={handleShowModalCart}
                                 >
                                   {selectedMultiLangData?.add_to_cart}
                                 </button>
@@ -358,6 +365,17 @@ const ProductListViewCard = (props: any) => {
           handleChange={handleChange}
           selectedMultiLangData={selectedMultiLangData}
         />
+        <AddtoCartModal
+          show={showModal}
+          toHide={()=>setShowModal(false)}
+          name={product_data?.name}
+          item_name={product_data?.item_name}
+          handleClose={handleCloseModalCart}
+          handleAddCart={AddToCartProduct}
+          min_order_qty={product_data?.min_order_qty}
+          qty={qty}
+          setQty={setQty}
+        />  
       </div>
     </>
   );

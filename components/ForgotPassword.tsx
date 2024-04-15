@@ -1,11 +1,11 @@
-import { ErrorMessage, Form as FormikForm, Field, Formik } from "formik";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { ForgotValidation } from "../validation/forgotValidation";
-import ResetPasswordLink from "../services/api/auth/reset-password-link-api";
-import { useDispatch, useSelector } from "react-redux";
-import { SelectedFilterLangDataFromStore } from "../store/slices/general_slices/selected-multilanguage-slice";
-import { showToast } from "./ToastNotificationNew";
+import { ErrorMessage, Form as FormikForm, Field, Formik } from 'formik';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { ForgotValidation } from '../validation/forgotValidation';
+import ResetPasswordLink from '../services/api/auth/reset-password-link-api';
+import { useDispatch, useSelector } from 'react-redux';
+import { SelectedFilterLangDataFromStore } from '../store/slices/general_slices/selected-multilanguage-slice';
+import { showToast } from './ToastNotificationNew';
 
 interface FormValues {
   email: any;
@@ -26,26 +26,26 @@ const ForgotPassword = () => {
     }
   }, [SelectedLangDataFromStore]);
   const initialValues: FormValues = {
-    email: "",
+    email: '',
   };
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [isAlertVisible, setIsAlertVisible] = useState(false);
   useEffect(() => {
-    if (message === "success" || message === "error") {
+    if (message === 'success' || message === 'error') {
       setIsAlertVisible(true);
     }
   }, [message]);
 
   const HandleSubmit = async (values: any) => {
     const hostName = window?.location?.host;
-    console.log("hostname in tsx", hostName);
+    console.log('hostname in tsx', hostName);
 
     let resetApi = await ResetPasswordLink(values, hostName);
-    console.log("forgot pswd api res", resetApi);
-    if (resetApi?.data?.message?.msg === "success") {
-      showToast("Reset link send", "success");
+    console.log('forgot pswd api res', resetApi);
+    if (resetApi?.data?.message?.msg === 'success') {
+      showToast('Reset link send', 'success');
     } else {
-      showToast("User With this email Does Not Exists", "error");
+      showToast('User With this email Does Not Exists', 'error');
     }
   };
 
@@ -65,7 +65,7 @@ const ForgotPassword = () => {
             initialValues={initialValues}
             validationSchema={ForgotValidation}
             onSubmit={(values: any, action: any) => {
-              console.log("forgot pswd values", values);
+              console.log('forgot pswd values', values);
               HandleSubmit(values);
             }}
           >
@@ -126,7 +126,7 @@ const ForgotPassword = () => {
                       </Link>
                       <button
                         type="submit"
-                        className={`btn button_color btn_forgotpassword ms-3`}
+                        className={`btn button_color btn_forgotpassword submit_btn_ms`}
                       >
                         {selectedMultiLangData?.submit}
                       </button>

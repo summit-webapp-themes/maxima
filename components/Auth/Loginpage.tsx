@@ -1,47 +1,45 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { LoginValidation } from "../../validation/loginValidation";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import { LoginValidation } from '../../validation/loginValidation';
 import {
   Formik,
   Form as FormikForm,
   ErrorMessage,
   useFormikContext,
-} from "formik";
-import { Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/router";
+} from 'formik';
+import { Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import {
   fetchLoginUser,
   login_state,
-} from "../../store/slices/auth/login_slice";
-import { getAccessToken } from "../../store/slices/auth/token-login-slice";
-import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slices/selected-multilanguage-slice";
-import getOtpFetchApi from "../../services/api/auth/get-otp-api";
-import useMultilangHook from "../../hooks/LanguageHook/Multilanguages-hook";
+} from '../../store/slices/auth/login_slice';
+import { getAccessToken } from '../../store/slices/auth/token-login-slice';
+import { SelectedFilterLangDataFromStore } from '../../store/slices/general_slices/selected-multilanguage-slice';
+import getOtpFetchApi from '../../services/api/auth/get-otp-api';
+import useMultilangHook from '../../hooks/LanguageHook/Multilanguages-hook';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import WebNavbar from '../Navbar/components/WebNavbar';
+import Footer from '../Footer';
 
 const Loginpage = () => {
   const dispatch = useDispatch();
   const loginSucess: any = useSelector(login_state);
   const [newState, setNewState] = useState<any>([]);
-  const [loginStatus, setLoginStatus] = useState<any>("");
-  const [newValues, setnewValue] = useState<any>("");
+  const [loginStatus, setLoginStatus] = useState<any>('');
+  const [newValues, setnewValue] = useState<any>('');
   const [ShowAlertMsg, setShowAlertMsg] = useState<boolean>(false);
-  const [messageState, setMessageState] = useState<any>("");
+  const [messageState, setMessageState] = useState<any>('');
   const [isOtpLoginState, setIsOtpLoginState] = useState<boolean>(false);
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
   const { handleLanguageChange, multiLanguagesData }: any = useMultilangHook();
-  useEffect(() => {
-    if (
-      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
-    ) {
-      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
-    }
-  }, [SelectedLangDataFromStore]);
+  const [passwordHidden, setPasswordHidden] = useState(true);
 
   let isLoggedIn: any;
   let guestLogin: any;
@@ -51,9 +49,9 @@ const Loginpage = () => {
     visitor: false,
     isOtpLogin: false,
   };
-  if (typeof window !== "undefined") {
-    guestLogin = localStorage.getItem("guest");
-    isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (typeof window !== 'undefined') {
+    guestLogin = localStorage.getItem('guest');
+    isLoggedIn = localStorage.getItem('isLoggedIn');
   }
 
   const handlesubmit = (values: any) => {
@@ -64,25 +62,25 @@ const Loginpage = () => {
       guest: guestLogin,
       isOtpLogin: isOtpLoginState === true ? true : false,
     };
-    console.log("userparams", user_params);
+    console.log('userparams', user_params);
 
     dispatch(getAccessToken(user_params));
 
     setTimeout(() => {
-      const loginStatusFromStorage: any = localStorage.getItem("isLoggedIn");
+      const loginStatusFromStorage: any = localStorage.getItem('isLoggedIn');
       setLoginStatus(loginStatusFromStorage);
       setIsOtpLoginState(false);
     }, 2000);
   };
   useEffect(() => {
-    if (loginStatus === "true") {
+    if (loginStatus === 'true') {
       // dispatch(successmsg("logged in sucessfully"));
       // setTimeout(() => {
       //   dispatch(hideToast());
       // }, 800);
-      router.push("/");
-      localStorage.removeItem("guest");
-      localStorage.removeItem("guestToken");
+      router.push('/');
+      localStorage.removeItem('guest');
+      localStorage.removeItem('guestToken');
     }
     // else if (loginStatus === null) {
     //   dispatch(failmsg("Invalid Credential"));
@@ -91,9 +89,9 @@ const Loginpage = () => {
     //   }, 800);
     // }
   }, [handlesubmit]);
-  console.log(loginSucess, "loginSucess");
+  console.log(loginSucess, 'loginSucess');
 
-  console.log(isLoggedIn, "newState");
+  console.log(isLoggedIn, 'newState');
   const FormObserver: React.FC = () => {
     const { values }: any = useFormikContext();
     useEffect(() => {
@@ -109,25 +107,41 @@ const Loginpage = () => {
     e.preventDefault();
     let GetOtpApiRes: any = await getOtpFetchApi(newObj);
 
-    if (GetOtpApiRes?.data?.message?.msg === "success") {
+    if (GetOtpApiRes?.data?.message?.msg === 'success') {
       setShowAlertMsg(true);
       setMessageState(GetOtpApiRes?.data?.message?.msg);
       setIsOtpLoginState(true);
       setTimeout(() => {
         setShowAlertMsg(false);
-        setMessageState("");
+        setMessageState('');
       }, 1000);
     } else {
       setShowAlertMsg(true);
       setMessageState(GetOtpApiRes?.data?.message?.msg);
       setTimeout(() => {
         setShowAlertMsg(false);
-        setMessageState("");
+        setMessageState('');
       }, 1500);
     }
   };
+
+  const handlePassword = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setPasswordHidden(!passwordHidden);
+  };
+
+  useEffect(() => {
+    if (
+      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+    ) {
+      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+    }
+  }, [SelectedLangDataFromStore?.selectedLanguageData]);
+
+  console.log('selectedMultiLangData', selectedMultiLangData);
   return (
     <>
+      {/* <WebNavbar /> */}
       <div className="container">
         <div className="logo mt-3">
           <Link href="/" className="navbar-brand">
@@ -142,8 +156,8 @@ const Loginpage = () => {
         <div>
           <Formik
             initialValues={{
-              email: "",
-              password: "",
+              email: '',
+              password: '',
             }}
             validationSchema={LoginValidation}
             onSubmit={(values) => {
@@ -164,7 +178,7 @@ const Loginpage = () => {
                             <div className="row mt-3">
                               <div className="col-md-4">
                                 <Form.Label className="login-label color-black ">
-                                  {selectedMultiLangData?.mobile_number} /{" "}
+                                  {selectedMultiLangData?.mobile_number} /{' '}
                                   {selectedMultiLangData?.email}:
                                 </Form.Label>
                               </div>
@@ -195,15 +209,15 @@ const Loginpage = () => {
                                   {ShowAlertMsg && (
                                     <div
                                       className={`alert ${
-                                        messageState === "success"
-                                          ? "alert-success"
-                                          : "alert-danger"
+                                        messageState === 'success'
+                                          ? 'alert-success'
+                                          : 'alert-danger'
                                       } otp_alertbox`}
                                       role="alert"
                                     >
-                                      {messageState === "success"
-                                        ? "OTP send sucessfully on registered email"
-                                        : "Please enter valid mobile number or registered email"}
+                                      {messageState === 'success'
+                                        ? 'OTP send sucessfully on registered email'
+                                        : 'Please enter valid mobile number or registered email'}
                                     </div>
                                   )}
                                 </div>
@@ -223,17 +237,32 @@ const Loginpage = () => {
                                 <Form.Control
                                   onChange={handleChange}
                                   onBlur={handleBlur}
-                                  type="password"
+                                  // type="password"
+                                  type={passwordHidden ? 'password' : 'text'}
                                   name="password"
-                                  className="login_inputs"
+                                  className="login_inputs  position-relative"
                                 />
+                                <button
+                                  className="password_icon"
+                                  onClick={(e: React.MouseEvent) =>
+                                    handlePassword(e)
+                                  }
+                                >
+                                  {passwordHidden ? (
+                                    // <i className="fas fa-eye"></i>
+                                    <VisibilityOffIcon />
+                                  ) : (
+                                    // <i className="fas fa-eye-slash"></i>
+                                    <VisibilityIcon />
+                                  )}
+                                </button>
                                 <div className="row">
                                   <div className="col-6">
                                     <div className="error_message">
                                       <ErrorMessage name="password" />
                                     </div>
                                   </div>
-                                  <div className="col-6 text-end">
+                                  <div className="col-6  login_forget_password_rtl">
                                     <Link
                                       className={`linkss`}
                                       href="/forgot-password"
@@ -265,11 +294,13 @@ const Loginpage = () => {
                             </div>
 
                             <div
-                              className={`col-12 text-lg-start register_account`}
+                              className={`col-12 text-lg-start-login register_account`}
                             >
                               <div className="register ms-2 account-margin not-acc-margin">
                                 <span className="not_an_account">
-                                 <span className="color-black">{selectedMultiLangData?.not_an_account}?{" "}</span> 
+                                  <span className="color-black">
+                                    {selectedMultiLangData?.not_an_account}?{' '}
+                                  </span>
                                   <Link className={`linkss`} href="/register">
                                     {selectedMultiLangData?.register}
                                   </Link>
@@ -289,6 +320,7 @@ const Loginpage = () => {
         </div>
         <hr></hr>
       </div>
+      {/* <Footer /> */}
     </>
   );
 };
