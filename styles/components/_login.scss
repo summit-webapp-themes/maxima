@@ -1,101 +1,218 @@
-.btn_white
-{
-    border: 1px solid blue !important;
-    box-shadow: none !important;
+.btn_white {
+  border: 1px solid blue !important;
+  box-shadow: none !important;
 }
 
 .login_heading {
-    font-weight: 800;
-    font-size: 19px;
-    text-transform: uppercase;
-    color:$black-color;
+  font-weight: 800;
+  font-size: 19px;
+  text-transform: uppercase;
+  color: $black-color;
 }
 
 .not_an_account {
-color:$body-color !important;
-font-size: 14px !important; 
-margin-bottom: 0;
-
+  color: $body-color !important;
+  font-size: 14px !important;
+  margin-bottom: 0;
 }
-.no-hover:hover{
-    color: $primary-color !important;
+.no-hover:hover {
+  color: $primary-color !important;
 }
 
-.get-otp a,.mainFields-wrapper .forgot-pwd a,.text-underline {
-    text-decoration: underline !important;
+.get-otp a,
+.mainFields-wrapper .forgot-pwd a,
+.text-underline {
+  text-decoration: underline !important;
 }
 
 .google_button {
   background-color: $white-color !important;
-  width:200px !important;
-  font-size:15px !important;
-  line-height:18px !important;
-  font-weight:500 !important;
-  box-shadow:none !important;
+  width: 200px !important;
+  font-size: 15px !important;
+  line-height: 18px !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
   border: 1px solid $border-color !important;
 }
 .google_button:focus {
-    outline: none !important;
+  outline: none !important;
 }
 .google_button:hover {
-    background-color: $white-color !important;
-    border: 1px solid $border-color !important;
+  background-color: $white-color !important;
+  border: 1px solid $border-color !important;
 }
 /* .google_logins {
     margin-top: 4.8rem;
 } */
 .error_message {
-    color: $error-color;
+  color: $error-color;
 }
+
 .otp_alertbox {
-    padding: 0px 5px;
-    margin-left: 10px;
-    margin-bottom: 4px;
-    width: 54%;
-    font-size: 12px;
+  padding: 0px 5px;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  width: 54%;
+  font-size: 12px;
 }
 .login_btn {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 .login_submitbtn {
-text-align: center;
+  text-align: center;
 }
 .register_account {
-    text-align: center;
+  text-align: center;
 }
 .login_inputs {
- height: calc(2.25rem + -2px);
- border-radius: 0 !important;
+  height: calc(2.25rem + -2px);
+  border-radius: 0 !important;
 }
 .loginsubmit_btn {
-    border-radius: 0;
-    font-weight: 600;
-    color: $black-color;
-    text-transform: uppercase;
-    font-size: 14px;
+  border-radius: 0;
+  font-weight: 600;
+  color: $black-color;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 .google_btn {
-    margin-top: 4.8rem;
+  margin-top: 4.8rem;
+}
+// Password icon css
+.password_icon {
+  position: absolute;
+  background-color: transparent !important;
+  border: none;
+  right: 11px;
+  margin-top: -31px;
+}
+.reset_password_icon {
+  position: absolute;
+  background-color: transparent !important;
+  border: none;
+  right: 173px;
+  margin-top: 2.5px;
+}
+.reset-label-wrapper-mob {
+  display: flex;
+  justify-content: end !important;
+}
+.register_password_icon {
+  position: absolute;
+  background-color: transparent !important;
+  border: none;
+  right: 20px;
+  margin-top: -32.5px;
+}
+.submit_btn_ms {
+  margin-left: 3rem !important;
+}
+.login_forget_password_rtl {
+  text-align: end;
+}
+// RTL CSS
+[dir='rtl'] .reset_password_icon {
+  // left: 12px;
+  // right: 279px;
+  right: 515px;
+}
+[dir='rtl'] .submit_btn_ms {
+  margin-right: 3rem !important;
+}
+[dir='rtl'] .register_account {
+  text-align: right;
+}
+
+[dir='rtl'] .password_icon {
+  // left: 16px;
+  right: 364px;
+}
+
+[dir='rtl'] .register_password_icon {
+  // left: 14px;
+  right: 301px;
+}
+[dir='rtl'].login_forget_password_rtl {
+  text-align: start;
+}
+@media (max-width: 1024px) {
+  [dir='rtl'] .password_icon {
+    right: 281px;
+  }
+}
+@media (min-width: 992px) {
+  .text-lg-start-login {
+    text-align: left !important;
+  }
+  [dir='rtl'] .text-lg-start-login {
+    text-align: right !important;
+  }
 }
 @media (min-width: 768px) {
-    .login_btn {
-        margin-left: 112px;
-    }
+  .login_btn {
+    margin-left: 112px;
   }
-  @media (max-width: 767px) {
-    .login_btn {
-        margin-left: -144px;
-    }
-    .login_submitbtn {
-        text-align: left;
-        }
-    .register_account {
-        text-align: left;
-        margin-top: -25px !important;
-    }
-    .google_button {
-        margin-top: -26px !important;
-      }
+}
+@media (max-width: 767px) {
+  .login_btn {
+    margin-left: -144px;
   }
+  .login_submitbtn {
+    text-align: left;
+  }
+  .register_account {
+    text-align: left;
+    margin-top: -25px !important;
+  }
+  .google_button {
+    margin-top: -26px !important;
+  }
+  // Password icon css
+  .reset_password_icon {
+    position: absolute;
+    background-color: transparent !important;
+    border: none;
+    right: 60px;
+    margin-top: 2.5px;
+  }
+  [dir='rtl'] .password_icon {
+    right: 430px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reset-label-wrapper-mob {
+    display: flex;
+    justify-content: start !important;
+  }
+  // [dir='rtl'].reset_password_icon {
+  //   left: 65px;
+  // }
+  [dir='rtl'] .reset_password_icon {
+    // left: 12px;
+    // right: 279px;
+    right: 250px;
+  }
+
+  [dir='rtl'] .password_icon {
+    right: 334px;
+  }
+  [dir='rtl'] .register_password_icon {
+    right: 296px;
+  }
+}
+@media (max-width: 400px) {
+  [dir='rtl'] .register_password_icon {
+    right: 265px;
+  }
+  [dir='rtl'] .password_icon {
+    right: 296px;
+  }
+  [dir='rtl'] .reset_password_icon {
+    // left: 12px;
+    // right: 279px;
+    right: 279px;
+  }
+}

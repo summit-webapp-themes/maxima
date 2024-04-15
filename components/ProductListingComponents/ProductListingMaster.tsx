@@ -13,6 +13,7 @@ import { SelectedFilterLangDataFromStore } from "../../store/slices/general_slic
 import { useSelector } from "react-redux";
 import useCatalogHook from "../../hooks/CatalogHooks/catalogHook";
 import ReactGA from "react-ga";
+import { useRouter } from "next/router";
 
 const ProductListingMaster = () => {
   const {
@@ -36,7 +37,10 @@ const ProductListingMaster = () => {
     handleSubmitCatalogName,
     handleChange,
   }: any = useCatalogHook();
+
   const [pageOffset, setpageOffset] = useState(0);
+  const router = useRouter();
+  const pathname = router.asPath
   const handlePageClick = (event: any) => {
     console.log("page number", event?.selected);
     handlePaginationBtn(event?.selected);
@@ -159,9 +163,12 @@ const ProductListingMaster = () => {
       <div className="margin_from_nav_cart">
         <div className="container d-flex justify-content-between w-100  ">
           <div className="w-50">
-            <BreadCrumbs
-              handleToggleProductsListingView={handleToggleProductsListingView}
-            />
+            
+            {
+                pathname.includes('search') ? '' : <BreadCrumbs
+                handleToggleProductsListingView={handleToggleProductsListingView}
+              />
+              }
           </div>
           <div className="col-lg-3 ">
             <div className="row list-toggle-rtl">
