@@ -305,7 +305,7 @@ const ProductCard = (props: ProductCardProps) => {
                           className={` ${
                             addToCartButtonDisabled === true ? 'disabled' : ''
                           } btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
-                          onClick={handleAddCart}
+                          onClick={handleShowModalCart}
                         >
                           <i
                             className="fa fa-shopping-cart d-flex justify-content-center"
@@ -407,7 +407,7 @@ const ProductCard = (props: ProductCardProps) => {
           item_name={item_name}
           handleClose={handleCloseModalCart}
           handleAddCart={handleAddCart}
-          // min_order_qty={min_order_qty}
+          min_order_qty={min_order_qty}
           qty={qty}
           setQty={setQty}
         />  

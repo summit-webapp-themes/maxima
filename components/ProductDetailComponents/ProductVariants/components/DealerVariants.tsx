@@ -15,30 +15,30 @@ const DealerVariants = ({
   console.log("dealer variant", variants, minQty, newobject);
 
   useEffect(() => {
-    if (variants?.variants?.length > 0) {
-    } else {
-      if (minQty === 0) {
-        let objs: any = {
-          item_code: variants.item_code,
-          quantity: 1,
-        };
-        let newarrys = newobject?.filter(
-          (item: any) => item?.item_code !== objs?.item_code
-        );
-        console.log("new object1", newarrys);
-        setnewObject([...newarrys, objs]);
-      } else {
-        let objs: any = {
-          item_code: variants.item_code,
-          quantity: minQty,
-        };
-        let newarrys = newobject?.filter(
-          (item: any) => item?.item_code !== objs?.item_code
-        );
-        console.log("new object1", newarrys);
-        setnewObject([...newarrys, objs]);
-      }
-    }
+    // if (variants?.variants?.length > 0) {
+    // } else {
+    //   if (minQty === 0) {
+    //     let objs: any = {
+    //       item_code: variants.item_code,
+    //       quantity: 1,
+    //     };
+    //     let newarrys = newobject?.filter(
+    //       (item: any) => item?.item_code !== objs?.item_code
+    //     );
+    //     console.log("new object1", newarrys);
+    //     setnewObject([...newarrys, objs]);
+    //   } else {
+    //     let objs: any = {
+    //       item_code: variants.item_code,
+    //       quantity: minQty,
+    //     };
+    //     let newarrys = newobject?.filter(
+    //       (item: any) => item?.item_code !== objs?.item_code
+    //     );
+    //     console.log("new object1", newarrys);
+    //     setnewObject([...newarrys, objs]);
+    //   }
+    // }
     // if (
     //   variants?.variants?.length > 0 &&
     //   variants?.variants.map((variant: any, index: any) => {
@@ -110,7 +110,8 @@ const DealerVariants = ({
   };
   variantsData(newobject);
 
-  console.log("input qty", newobject);
+  console.log("input qty", newobject , variantsData);
+  console.log("detail payload qty", minQty);
 
   return (
     <div>
