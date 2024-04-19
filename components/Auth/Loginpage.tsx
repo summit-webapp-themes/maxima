@@ -72,6 +72,13 @@ const Loginpage = () => {
       setIsOtpLoginState(false);
     }, 2000);
   };
+  const onKeydown= (keyEvent:any)=> {
+    if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+      keyEvent.preventDefault();
+      handlesubmit(newValues);
+    }
+  }
+
   useEffect(() => {
     if (loginStatus === 'true') {
       // dispatch(successmsg("logged in sucessfully"));
@@ -241,6 +248,7 @@ const Loginpage = () => {
                                   type={passwordHidden ? 'password' : 'text'}
                                   name="password"
                                   className="login_inputs  position-relative"
+                                  onKeyDown={onKeydown}
                                 />
                                 <button
                                   className="password_icon"
