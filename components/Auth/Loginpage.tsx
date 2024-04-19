@@ -24,7 +24,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import WebNavbar from '../Navbar/components/WebNavbar';
 import Footer from '../Footer';
-
+import dynamic from 'next/dynamic';
+// import Googlelogin from './Googlelogin';
+const Googlelogin = dynamic(() => import("./Googlelogin"), {
+  ssr: false,
+});
 const Loginpage = () => {
   const dispatch = useDispatch();
   const loginSucess: any = useSelector(login_state);
@@ -58,9 +62,11 @@ const Loginpage = () => {
     const val = Object.assign(obj, values);
 
     const user_params = {
+
       values: values,
       guest: guestLogin,
       isOtpLogin: isOtpLoginState === true ? true : false,
+      isGoogleLogin: false,
     };
     console.log('userparams', user_params);
 
@@ -72,7 +78,7 @@ const Loginpage = () => {
       setIsOtpLoginState(false);
     }, 2000);
   };
-  const onKeydown= (keyEvent:any)=> {
+  const onKeydown = (keyEvent: any) => {
     if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
       keyEvent.preventDefault();
       handlesubmit(newValues);
@@ -215,11 +221,10 @@ const Loginpage = () => {
                                   </div>
                                   {ShowAlertMsg && (
                                     <div
-                                      className={`alert ${
-                                        messageState === 'success'
+                                      className={`alert ${messageState === 'success'
                                           ? 'alert-success'
                                           : 'alert-danger'
-                                      } otp_alertbox`}
+                                        } otp_alertbox`}
                                       role="alert"
                                     >
                                       {messageState === 'success'
@@ -296,8 +301,9 @@ const Loginpage = () => {
                           <div className="row">
                             <div className="col-12 text-lg-start text-center">
                               <div className="login-with-google mt-2">
-                                {/* <Googlelogin />  */}
-                                {/* </button> */}
+                                {/* {typeof window !== 'undefined' && (
+                                  <Googlelogin />
+                                )} */}
                               </div>
                             </div>
 

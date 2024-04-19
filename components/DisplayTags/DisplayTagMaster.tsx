@@ -31,10 +31,10 @@ const DisplayTagMaster = (props: any) => {
                     data?.tag_name === "Special Offer"
                       ? "/assets/images/specialOffer.png"
                       : data?.tag_name === "Best Seller"
-                      ? "/assets/images/bestseller.png"
-                      : data?.tag_name === "New Arrival"
-                      ? "/assets/images/newarrival.png"
-                      : ""
+                        ? "/assets/images/bestseller.png"
+                        : data?.tag_name === "New Arrival"
+                          ? "/assets/images/newarrival.png"
+                          : ""
                   }
                   alt="Product Banner"
                   width="331"
@@ -55,7 +55,7 @@ const DisplayTagMaster = (props: any) => {
                           <div className="product text-center py-2 px-2">
                             <figure className="product-media d-flex justify-content-center">
                               {list?.image_url !== null &&
-                              list?.image_url?.length > 0 ? (
+                                list?.image_url?.length > 0 ? (
                                 <>
                                   <Link
                                     href={`${list.url}?currency=${currency_state_from_redux?.selected_currency_value}`}
@@ -109,16 +109,6 @@ const DisplayTagMaster = (props: any) => {
                                   <span> {list?.mrp_price}</span>
                                 </del>
                               </div>
-{/* 
-
-                              <div className="product-price">
-                                <ins className="new-price">
-                                  {list?.currency_symbol} {list?.price}
-                                </ins>
-                                <del className="old-price">
-                                  {list?.currency_symbol} {list?.mrp_price}
-                                </del>
-                              </div> */}
                             </div>
                           </div>
                         </div>
