@@ -881,7 +881,7 @@
         @include print_css(category-menu, megamenu);
 
         >li:not(:last-child) {
-            padding: side-values(2.8rem 2rem 0 0rem);
+            // padding: side-values(2.8rem 2rem 0 0rem);
         }
 
         .menu-title {

@@ -55,7 +55,7 @@ const AddtoCartModal = ({
         onHide={toHide}
       >
         <Modal.Header>
-          <Modal.Title className="bold text-center catalog-title">
+          <Modal.Title className="text-center">
             {item_name}
           </Modal.Title>
           <button className="btn btn-primary" onClick={handleClose}>

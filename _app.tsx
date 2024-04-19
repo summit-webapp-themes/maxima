@@ -1,5 +1,4 @@
-import { Provider, useSelector } from 'react-redux';
-// import "../styles/globals.css";
+import { Provider } from 'react-redux';
 import type { AppProps } from 'next/app';
 import { persistor, store } from '../store/store';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -12,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Scrolltop from '../components/ScrollTop';
 import Script from 'next/script';
 import ReactGA from 'react-ga';
+import { GoogleOAuthProvider } from '@react-oauth/google'; // Import the GoogleOAuthProvider
 
 function MyApp({ Component, pageProps }: AppProps) {
   const articleRef = useRef<null | HTMLParagraphElement>(null);
@@ -34,13 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const TRACKING_ID = 'G-JEKLX6CZRT';
     ReactGA.initialize(TRACKING_ID);
   }, []);
-  // useEffect(() => {
-  //   const isRTL: any = document.documentElement.dir === 'rtl';
-  //   // Load the appropriate global CSS file based on text direction
-  //   if (isRTL) {
-  //     import('../styles/pages/CssLayout-rtl.scss');
-  //   }
-  // }, []);
+
   useEffect(() => {
     const isRTL = document.documentElement.dir === 'rtl';
     if (isRTL) {
@@ -48,10 +42,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       link.href = '../styles/pages/CssLayout-rtl.scss'; // Replace with the correct path
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      // Append the link element to the document's head
       document.head.appendChild(link);
     }
   }, []);
+
   return (
     <div>
       <Script
@@ -67,17 +61,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Script>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          {() => (
+          <GoogleOAuthProvider clientId="167615153572-iv0g38n21f9in6js7mjec0jql03coicm.apps.googleusercontent.com"> {/* Add your Google OAuth Client ID */}
             <div ref={articleRef}>
               <Layout>
-                {/* <ToastNotification /> */}
                 <ToastContainer
                   position="top-right"
                   autoClose={8000}
                   hideProgressBar={false}
                   newestOnTop={false}
                   draggable={false}
-                  // pauseOnVisibilityChange
                   closeOnClick
                   pauseOnHover
                 />
@@ -85,7 +77,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <Scrolltop articleRef={articleRef} />
               </Layout>
             </div>
-          )}
+          </GoogleOAuthProvider>
         </PersistGate>
       </Provider>
     </div>

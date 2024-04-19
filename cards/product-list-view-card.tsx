@@ -19,6 +19,9 @@ import { get_access_token } from '../store/slices/auth/token-login-slice';
 import CatalogModal from '../components/Catalog/CatalogModal';
 import { profileData_state } from '../store/slices/general_slices/profile-page-slice';
 import AddtoCartModal from '../components/ProductListingComponents/products-data-view/AddtoCartModal';
+import { ProductListingThunk } from '../store/slices/product-listing-page-slices/product-listing-slice';
+import deleteItemFromCatalog from '../services/api/product-catalog-api/delete-item-from-catalog-api';
+import { filters_selector_state } from '../store/slices/product-listing-page-slices/filters-slice';
 
 const ProductListViewCard = (props: any) => {
   const {
@@ -45,7 +48,7 @@ const ProductListViewCard = (props: any) => {
   const [show, setshow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
-  const [qty , setQty] = useState<any>(1)
+  const [qty, setQty] = useState<any>(1)
 
   let isLoggedIn: any;
   let partyName: any;
@@ -96,7 +99,47 @@ const ProductListViewCard = (props: any) => {
   };
 
   console.log(' selectedMultiLangData', selectedMultiLangData);
+  const { query }: any = useRouter();
 
+  const newSlug = query?.category?.replace(/-/g, ' ');
+  const filters_state_from_redux: any = useSelector(filters_selector_state);
+
+  const handleDeleteCatalogProduct = async () => {
+    const deleteApiParams = {
+      token: TokenFromStore?.token,
+      catalog_name: newSlug,
+      item_name: product_data?.name,
+    };
+    const deleteProductFromCatalog =
+      await deleteItemFromCatalog(deleteApiParams);
+    console.log(deleteProductFromCatalog, 'deleteProductFromCatalog');
+    if (deleteProductFromCatalog.message.msg === 'success') {
+      // dispatch(successmsg(deleteProductFromCatalog?.message?.data));
+      showToast(deleteProductFromCatalog?.message?.data, 'success');
+
+      setTimeout(() => {
+        const storeUsefulParamsForFurtherProductListingApi = {
+          router_origin: router.route.split('/')[1],
+          url_params: query,
+          filterDoctype: filters_state_from_redux?.doctype,
+          filterDocname: filters_state_from_redux?.docname.toLowerCase(),
+          token: TokenFromStore.token,
+        };
+        console.log(
+          storeUsefulParamsForFurtherProductListingApi,
+          'storeUsefulParamsForFurtherProductListingApi'
+        );
+
+        dispatch(
+          ProductListingThunk({
+            storeUsefulParamsForFurtherProductListingApi,
+          }) as any
+        );
+      }, 1000);
+    } else {
+      showToast(deleteProductFromCatalog?.message?.error, 'error');
+    }
+  };
   return (
     <>
       <div className="container-fuild px-3">
@@ -143,7 +186,7 @@ const ProductListViewCard = (props: any) => {
                     <div>
                       <div className="fs-5 products-name">
                         {product_data?.short_description ===
-                        product_data?.item_name
+                          product_data?.item_name
                           ? ''
                           : product_data?.short_description}
                       </div>
@@ -153,7 +196,7 @@ const ProductListViewCard = (props: any) => {
                       </div>
                       <div>
                         {product_data?.weight_per_unit === 0 ||
-                        product_data?.weight_per_unit === null ? (
+                          product_data?.weight_per_unit === null ? (
                           ''
                         ) : (
                           <div className="product-desc text-gray d-inline-flex">
@@ -176,7 +219,7 @@ const ProductListViewCard = (props: any) => {
                       </div>
 
                       {product_data?.price === null ||
-                      product_data?.price === 0 ? (
+                        product_data?.price === 0 ? (
                         ''
                       ) : (
                         <>
@@ -198,11 +241,10 @@ const ProductListViewCard = (props: any) => {
                             {isLoggedIn === 'true' ? (
                               <div className="text-center w-0">
                                 <button
-                                  className={` ${
-                                    addToCartButtonDisabled === true
-                                      ? 'disabled'
-                                      : ''
-                                  } btn standard_button add_cart_btn`}
+                                  className={` ${addToCartButtonDisabled === true
+                                    ? 'disabled'
+                                    : ''
+                                    } btn standard_button add_cart_btn`}
                                   onClick={handleShowModalCart}
                                 >
                                   {selectedMultiLangData?.add_to_cart}
@@ -219,6 +261,19 @@ const ProductListViewCard = (props: any) => {
                             )}
                           </div>
                         )}
+                        {router.route === '/catalog/[category]' ? (
+                          <div className="col-lg-5">
+                          <button
+                            type="button"
+                            className={` btn btn-primary ml-5 cart_btn_gtag listing-cartbtn`}
+                            onClick={handleDeleteCatalogProduct}
+                          >
+                            <i className="fa fa-trash-o" aria-hidden="true"></i>
+                          </button>
+                          </div>
+                        ) : (
+                          ''
+                        )}
                         {CONSTANTS.DISPLAY_ADD_CATALOG_BUTTON_ON_PRODUCT_LISTING_CARD && (
                           <div className="col-lg-5">
                             {isLoggedIn === 'true' && (
@@ -226,7 +281,7 @@ const ProductListViewCard = (props: any) => {
                                 {router.route !== '/catalog/[category]' ? (
                                   <button
                                     type="button"
-                                    className={`btn btn-link catalog-btn-size pt-2 fs-5 products-name text-decoration-none`}
+                                    className={`btn btn-link catalog-btn-size pt-2 fs-5 products-name`}
                                     onClick={() =>
                                       handleShow(product_data.name)
                                     }
@@ -351,6 +406,8 @@ const ProductListViewCard = (props: any) => {
                   )}
                 </div>
               )}
+
+
             </div>
           </div>
         </div>
@@ -367,7 +424,7 @@ const ProductListViewCard = (props: any) => {
         />
         <AddtoCartModal
           show={showModal}
-          toHide={()=>setShowModal(false)}
+          toHide={() => setShowModal(false)}
           name={product_data?.name}
           item_name={product_data?.item_name}
           handleClose={handleCloseModalCart}
@@ -375,7 +432,7 @@ const ProductListViewCard = (props: any) => {
           min_order_qty={product_data?.min_order_qty}
           qty={qty}
           setQty={setQty}
-        />  
+        />
       </div>
     </>
   );
