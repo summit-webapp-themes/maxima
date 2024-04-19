@@ -4,6 +4,7 @@ export const showToast = (message: any, type = "default") => {
   const toastConfig = {
     autoClose: 3000, // Adjust this value to control how long the toast is displayed
     hideProgressBar: false,
+    className: "custom-toast",
   };
 
   switch (type) {

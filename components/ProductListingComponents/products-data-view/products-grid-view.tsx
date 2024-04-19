@@ -33,7 +33,7 @@ const ProductsGridView = (props: ProductsViewProps) => {
         filtersData && filtersData?.length > 0 ? "col-lg-9 px-0" : "col-lg-12"
       }`}
     >
-      <div className="row product-mg-r ">
+      <div className="row">
         {loading ? (
           <div className="row justify-content-center">
             {[...Array(10)].map(() => (
@@ -46,7 +46,7 @@ const ProductsGridView = (props: ProductsViewProps) => {
           </div>
         ) : listItems.length > 0 ? (
           listItems?.map((items: any, index: number) => (
-            <div className="col-md-3 mt-0 product-grid-view" key={index}>
+            <div className="col-md-3 mt-0 mb-4 product-grid-view" key={index}>
               <ProductCard
                 key={index}
                 name={items?.name}
