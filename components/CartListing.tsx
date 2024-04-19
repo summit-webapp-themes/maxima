@@ -404,12 +404,12 @@ const CartListing = () => {
                           {selectedMultiLangData?.note_1}
                         </p>
                         <p className="note-line-height">
-                          {selectedMultiLangData?.note_2}{" "}
+                          {selectedMultiLangData?.note_2}
                           <button
                             onClick={handlemodalOpen}
-                            className="missing_parts_btn ps-0"
+                            className="missing_parts_btn"
                           >
-                            {selectedMultiLangData?.let_us_now}
+                            {selectedMultiLangData?.let_us_know}
                           </button>{" "}
                           {selectedMultiLangData?.to_mail_us}{" "}
                         </p>
@@ -542,6 +542,7 @@ const CartListing = () => {
         show={show}
         handlemodalclose={handlemodalclose}
         setShow={setShow}
+        selectedMultiLangData={selectedMultiLangData}
       />
     </div>
   );

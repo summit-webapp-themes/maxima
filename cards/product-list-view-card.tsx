@@ -65,11 +65,11 @@ const ProductListViewCard = (props: any) => {
   const handleCloseModalCart = () => {
     setShowModal(false);
   };
-  const AddToCartProduct = async (name: any) => {
+  const AddToCartProduct = async () => {
     setAddToCartButtonDisabled(true);
     const addCartData = [];
     addCartData.push({
-      item_code: name,
+      item_code: product_data?.name,
       quantity: qty,
     });
     if (profileData?.partyName !== '') {

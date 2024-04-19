@@ -91,19 +91,24 @@ const ReviewList = ({ reviews }: any) => {
         </>
       )}
 
-      <div className="col-lg-12">
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="next"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={1}
-          pageCount={pageCount}
-          previousLabel="previous"
-          containerClassName={'paginationBttns'}
-          previousLinkClassName={'previousBttn'}
-          activeClassName={'paginationActive'}
-        />
-      </div>
+      {
+        reviews && reviews.length > 0 && (
+
+          <div className="col-lg-12">
+            <ReactPaginate
+              breakLabel="..."
+              nextLabel="next"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={1}
+              pageCount={pageCount}
+              previousLabel="previous"
+              containerClassName={'paginationBttns'}
+              previousLinkClassName={'previousBttn'}
+              activeClassName={'paginationActive'}
+            />
+          </div>
+        )
+      }
     </div>
   );
 };

@@ -25,8 +25,9 @@ import {
   WhatsappShareButton,
   WhatsappIcon,
   FacebookIcon,
-  TwitterIcon,
   WorkplaceShareButton,
+  TwitterIcon,
+  XIcon
 } from "react-share";
 import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 import { showToast } from "../../ToastNotificationNew";
@@ -73,13 +74,14 @@ const ProductDetail = ({
     isLoggedIn = localStorage.getItem("isLoggedIn");
     isDealer = localStorage.getItem("isDealer");
   }
+  console.log("detail payload qty", minQty , newobjectState);
 
   const handleAddCart: any = async () => {
     setAddToCartButtonDisabled(true);
     let DealerCartNewObjects: any =
       newobjectState &&
       newobjectState?.filter((newitems: any) => newitems.quantity !== "");
-
+      console.log('qty',DealerCartNewObjects)
     const addCartData: any = [];
     addCartData.push({
       item_code: productDetailData?.name,
@@ -500,12 +502,12 @@ const ProductDetail = ({
                       <div className="row btn-wrapper">
                         <button
                           type="button"
-                          className={`${
-                            addToCartButtonDisabled === true ? "disabled" : ""
-                          } w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
+                          className={`
+                          ${ addToCartButtonDisabled === true ? "disabled" : ""} 
+                          w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
                           onClick={handleAddCart}
-                          disabled={doesSelectedVariantDoesNotExists
-                            
+                          disabled={doesSelectedVariantDoesNotExists 
+                            || newobjectState[0]?.quantity < minQty     
                           }
                         >
                           {selectedMultiLangData?.add_to_cart}
@@ -513,7 +515,7 @@ const ProductDetail = ({
                       </div>
                       <div className="col-12">
                         <div className="">
-                          {productQuantity < minQty ? (
+                          {newobjectState[0]?.quantity  < minQty ? (
                             <p className="text-danger">
                               {selectedMultiLangData?.minimum_order_qty}:
                               {minQty}
@@ -571,8 +573,8 @@ const ProductDetail = ({
                 </div>
 
                 <div>
-                  <TwitterShareButton url={shareUrl}>
-                    <TwitterIcon size={32} round={true} />
+                  <TwitterShareButton  url={shareUrl}>
+                    <XIcon size={32} round={true} />
                   </TwitterShareButton>
                 </div>
               </div>
