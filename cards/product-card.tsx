@@ -58,7 +58,7 @@ const ProductCard = (props: ProductCardProps) => {
   const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
   const [show, setshow] = useState(false);
   const [show1, setshow1] = useState(false);
-  const [qty , setQty] = useState<any>(1)
+  const [qty, setQty] = useState<any>(1)
   const { query }: any = useRouter();
   console.log('delete que', query);
   const newSlug = query?.category?.replace(/-/g, ' ');
@@ -137,19 +137,18 @@ const ProductCard = (props: ProductCardProps) => {
       showToast(deleteProductFromCatalog?.message?.error, 'error');
     }
   };
- 
+
   return (
     <>
-    <div className="mt-0 pt-0">
+
       <div
         key={key}
-        className="border  rounded-3 ps-0 ms-0 mt-2  product-border-pd"
+        className="border p-3 h-100"
       >
         <div className="d-flex justify-content-between icon-container-ps ">
           <div
-            className={`badge text-bg-primary fs-5 display_tag_badge ms-0 ${
-              display_tag.length > 0 && display_tag[0] ? 'visible' : 'invisible'
-            }`}
+            className={`badge text-bg-primary fs-5 display_tag_badge ms-0 ${display_tag.length > 0 && display_tag[0] ? 'visible' : 'invisible'
+              }`}
           >
             {display_tag.length > 0 && display_tag[0]}
           </div>
@@ -242,149 +241,133 @@ const ProductCard = (props: ProductCardProps) => {
             </div>
           )}
         </div>
-        <div className="product-wrap ">
-          <div className="product text-center ">
-            <div className="product-media product_card_h pt-0 pb-0 mt-0 mb-0 d-flex justify-content-center product-main-container">
-              {img_url !== '' ? (
-                <>
-                  <Link
-                    href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`}
-                  >
-                    <Image
-                      loader={() => `${CONSTANTS.API_BASE_URL}${img_url}`}
-                      src={`${CONSTANTS.API_BASE_URL}${img_url}`}
-                      alt="product-detail"
-                      width={200}
-                      height={200}
-                      className="product_img_mob"
-                    />
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link href={url}>
-                    <Image
-                      src={'/assets/images/maximaCard.jpg'}
-                      alt="Product"
-                      width="200"
-                      height="200"
-                      className="product_img_mob"
-                    />
-                  </Link>
-                </>
-              )}
-            </div>
-            <div className="product-details pt-0">
-              <h4 className="product-name truncate-overflow products-name products-name-font pt-0">
+        <div className="product">
+          <div className="product_img product-media mt-2">
+            {img_url !== '' ? (
+              <>
                 <Link
                   href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`}
-                  className="products-name products-name-font"
                 >
-                  {item_name}
+                  <Image
+                    loader={() => `${CONSTANTS.API_BASE_URL}${img_url}`}
+                    src={`${CONSTANTS.API_BASE_URL}${img_url}`}
+                    alt="product-detail"
+                    width={200}
+                    height={200}
+                    className="product_img_mob img-fluid"
+                  />
                 </Link>
-              </h4>
-              <div className="product-price products-name pt-0 mt-0 product-grid-name pb-0 mb-0">
-                {CONSTANTS.DISPLAY_PRODUCT_PRICE_ON_PRODUCT_LISTING_CARD && (
-                  <>
-                    <ins className="new-price price_font_family pt-0">
-                      {currency_symbol}
-                      {price}
-                    </ins>
-                    <del className="old-price price_font_family product-font-family">
-                      {currency_symbol}
-                      {mrp_price}
-                    </del>
-                  </>
-                )}
-                {CONSTANTS.DISPLAY_ADD_CART_BUTTON_ON_PRODUCT_LISTING_CARD && (
-                  <>
-                    {isLoggedIn === 'true' ? (
-                      <>
-                        <button
-                          type="button"
-                          className={` ${
-                            addToCartButtonDisabled === true ? 'disabled' : ''
+              </>
+            ) : (
+              <div>
+                <Link href={url}>
+                  <Image
+                    src={'/assets/images/maximaCard.jpg'}
+                    alt="Product"
+                    width="200"
+                    height="200"
+                    className="product_img_mob"
+                  />
+                </Link>
+              </div>
+            )}
+          </div>
+          <div className="product-content  pt-0">
+            <h4 className="product-name truncate-overflow products-name products-name-font pt-0">
+              <Link
+                href={`${url}?currency=${currency_state_from_redux?.selected_currency_value}`}
+                className="products-name products-name-font"
+              >
+                {item_name}
+              </Link>
+            </h4>
+            <div className="product-price products-name pt-0 mt-0 product-grid-name pb-0 mb-0">
+              {CONSTANTS.DISPLAY_PRODUCT_PRICE_ON_PRODUCT_LISTING_CARD && (
+                <>
+                  <ins className="new-price price_font_family pt-0">
+                    {currency_symbol}
+                    {price}
+                  </ins>
+                  <del className="old-price price_font_family product-font-family">
+                    {currency_symbol}
+                    {mrp_price}
+                  </del>
+                </>
+              )}
+              {CONSTANTS.DISPLAY_ADD_CART_BUTTON_ON_PRODUCT_LISTING_CARD && (
+                <>
+                  {isLoggedIn === 'true' ? (
+                    <>
+                      <button
+                        type="button"
+                        className={` ${addToCartButtonDisabled === true ? 'disabled' : ''
                           } btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
-                          onClick={handleShowModalCart}
-                        >
-                          <i
-                            className="fa fa-shopping-cart d-flex justify-content-center"
-                            aria-hidden="true"
-                          ></i>
-                        </button>
-                        {/* <button
+                        onClick={handleShowModalCart}
+                      >
+                        <i
+                          className="fa fa-shopping-cart d-flex justify-content-center"
+                          aria-hidden="true"
+                        ></i>
+                      </button>
+                      {/* <button
                 className="btn  standard_button py-3 add-cart-btns"
                 onClick={handleAddCart} style={{border:"2px solid red"}}
                 >
                 {selectedMultiLangData?.add_to_cart}
               </button> */}
-                      </>
-                    ) : (
+                    </>
+                  ) : (
+                    <button
+                      className="btn btn-primary ml-3 cart_btn_gtag listing-cartbtn"
+                    // onClick={handleAddCart}
+                    >
+                      <Link href="/login" className="text-white ">
+                        <i
+                          className="fa fa-shopping-cart d-flex justify-content-center"
+                          aria-hidden="true"
+                        ></i>
+                      </Link>
+                      {/* {selectedMultiLangData?.add_to_cart} */}
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+            {CONSTANTS.DISPLAY_ADD_CATALOG_BUTTON_ON_PRODUCT_LISTING_CARD && (
+              <>
+                {isLoggedIn === 'true' && (
+                  <>
+                    {router.route !== '/catalog/[category]' ? (
                       <button
-                        className="btn btn-primary ml-3 cart_btn_gtag listing-cartbtn"
-                        // onClick={handleAddCart}
+                        type="button"
+                        className={`btn btn-link catalog-btn-size pt-5 fs-5 products-name `}
+                        onClick={() =>
+                          handleShow(name)
+                        }
                       >
-                        <Link href="/login" className="text-white ">
-                          <i
-                            className="fa fa-shopping-cart d-flex justify-content-center"
-                            aria-hidden="true"
-                          ></i>
-                        </Link>
-                        {/* {selectedMultiLangData?.add_to_cart} */}
+                        <span className="bold">
+                          {selectedMultiLangData?.add_to_catalog}
+                        </span>
                       </button>
+                    ) : (
+                      ''
                     )}
                   </>
                 )}
-              </div>
-
-              {/* {isLoggedIn === "true" && (
-                <>
-                {router.route !== "/catalog/[category]" ? (
-                  <button
-                    type="button"
-                    className={`btn btn-link catalog-btn-size products-name add-to-catlog-btn`}
-                    onClick={handleShow}
-                  >
-                    {selectedMultiLangData?.add_to_catalog}
-                  </button>
-                ) : (
-                  ""
-                )}
               </>
-            )} */}
+            )}
 
-              {/* {isLoggedIn === "true" ? (
-              <>
-                <button
-                  type="button"
-                  className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
-                  onClick={handleAddCart}
-                >
-                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                </button>
-             
-              </>
-            ) : (
+            {router.route === '/catalog/[category]' ? (
               <button
-                className="btn  standard_button py-3"
-                onClick={handleAddCart}
+                type="button"
+                className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
+                onClick={handleDeleteCatalogProduct}
               >
-                {selectedMultiLangData?.add_to_cart}
+                <i className="fa fa-trash-o" aria-hidden="true"></i>
               </button>
-            )} */}
-
-              {router.route === '/catalog/[category]' ? (
-                <button
-                  type="button"
-                  className={` btn btn-primary ml-3 cart_btn_gtag listing-cartbtn`}
-                  onClick={handleDeleteCatalogProduct}
-                >
-                  <i className="fa fa-trash-o" aria-hidden="true"></i>
-                </button>
-              ) : (
-                ''
-              )}
-            </div>
+            ) : (
+              ''
+            )}
           </div>
         </div>
         <CatalogModal
@@ -399,18 +382,18 @@ const ProductCard = (props: ProductCardProps) => {
           selectedMultiLangData={selectedMultiLangData}
         />
       </div>
-    </div>
-    <AddtoCartModal
-          show={show1}
-          toHide={()=>setshow1(false)}
-          name={name}
-          item_name={item_name}
-          handleClose={handleCloseModalCart}
-          handleAddCart={handleAddCart}
-          min_order_qty={min_order_qty}
-          qty={qty}
-          setQty={setQty}
-        />  
+
+      <AddtoCartModal
+        show={show1}
+        toHide={() => setshow1(false)}
+        name={name}
+        item_name={item_name}
+        handleClose={handleCloseModalCart}
+        handleAddCart={handleAddCart}
+        min_order_qty={min_order_qty}
+        qty={qty}
+        setQty={setQty}
+      />
     </>
   );
 };

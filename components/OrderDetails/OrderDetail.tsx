@@ -75,9 +75,8 @@ const Index = ({ sales_order_id }: any) => {
   return (
     // <div className="margin_from_nav_l">
     <div
-      className={`${
-        router?.pathname?.includes("/myOrder") ? "margin_from_nav" : ""
-      } container`}
+      className={`${router?.pathname?.includes("/myOrder") ? "margin_from_nav" : ""
+        } container`}
     >
       {detail?.length === 0 ? (
         <>
@@ -115,14 +114,14 @@ const Index = ({ sales_order_id }: any) => {
                       </div>
                       <div className="item_action_link order-pipe color-black">
                         <span>
-                           {selectedMultiLangData?.orders} # {data?.name}
+                          {selectedMultiLangData?.orders} # {data?.name}
                         </span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                
+
                 <div id="printableArea" className="row color-black" >
                   <div className="col-lg-12">
                     <div className="order_card mb-3 card">
@@ -159,17 +158,33 @@ const Index = ({ sales_order_id }: any) => {
                           ))}
 
                           <div className="col-md-2">
-                            <h5 className="data_heading mb-1">
-                              {selectedMultiLangData?.shipping_method}
-                            </h5>
+                            {
+                              data.shipping_method.transporter === null || 
+                              data?.shipping_method?.door_delivery === null ||
+                              data?.shipping_method?.godown_delivery === null || 
+                              data?.shipping_method?.location === null || 
+                              data?.shipping_method?.remarks === null || 
+                              data?.shipping_method?.transport_charges === null  ? (''): (
+                                <h5 className="data_heading mb-1">
+                                {selectedMultiLangData?.shipping_method}
+                              </h5>
+                              )
+                            }
+                           
                             <div>
-                              <p className="mb-0">
-                                {selectedMultiLangData?.transporter} :{" "}
-                                {data.shipping_method.transporter}
-                              </p>
+                              {
+                                data.shipping_method.transporter === null ? (" "): (
+                                  <p className="mb-0">
+                                  {selectedMultiLangData?.transporter} :{" "}
+                                  {data.shipping_method.transporter}
+                                </p>
+                                )
+                                 
+                              }
+
 
                               {data?.shipping_method?.door_delivery === 0 &&
-                              data?.shipping_method?.godown_delivery === 0 ? (
+                                data?.shipping_method?.godown_delivery === 0 ? (
                                 <p className="mb-0">
                                   {" "}
                                   {selectedMultiLangData?.door_delivery_yes}
@@ -178,7 +193,7 @@ const Index = ({ sales_order_id }: any) => {
                                 ""
                               )}
                               {data?.shipping_method?.door_delivery === 0 &&
-                              data?.shipping_method?.godown_delivery !== 0 ? (
+                                data?.shipping_method?.godown_delivery !== 0 ? (
                                 <>
                                   <p className="mb-0">
                                     {" "}
@@ -339,7 +354,7 @@ const Index = ({ sales_order_id }: any) => {
                             <div className="mb-3 mb-sm-0 col-lg-2 col-md-2 col-4" >
                               <div className="product-image cart-image ">
                                 {oDetail?.img === null ||
-                                oDetail?.img?.length === 0 ? (
+                                  oDetail?.img?.length === 0 ? (
                                   <Image
                                     src={`${oDetail?.brand_img}`}
                                     className="product_item_img img-fluid"
@@ -375,7 +390,7 @@ const Index = ({ sales_order_id }: any) => {
                                   <table
                                     width="100%"
                                     className="mt-0 table table-borderless"
-                                     >
+                                  >
                                     <tbody>
                                       <tr className="item_options myorder_tr">
                                         <td className="px-0 py-0 pb-0 myorder_td">
@@ -405,7 +420,7 @@ const Index = ({ sales_order_id }: any) => {
                                         >
                                           <p className="text-capitalize black mb-0 myorder_p">
                                             {oDetail?.prod_info[1].value !==
-                                            0 ? (
+                                              0 ? (
                                               <p className="mb-0 price_font_family">
                                                 {" "}
                                                 : {data?.currency_symbol}{" "}

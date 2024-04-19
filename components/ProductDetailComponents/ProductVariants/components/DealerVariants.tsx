@@ -15,30 +15,30 @@ const DealerVariants = ({
   console.log("dealer variant", variants, minQty, newobject);
 
   useEffect(() => {
-    // if (variants?.variants?.length > 0) {
-    // } else {
-    //   if (minQty === 0) {
-    //     let objs: any = {
-    //       item_code: variants.item_code,
-    //       quantity: 1,
-    //     };
-    //     let newarrys = newobject?.filter(
-    //       (item: any) => item?.item_code !== objs?.item_code
-    //     );
-    //     console.log("new object1", newarrys);
-    //     setnewObject([...newarrys, objs]);
-    //   } else {
-    //     let objs: any = {
-    //       item_code: variants.item_code,
-    //       quantity: minQty,
-    //     };
-    //     let newarrys = newobject?.filter(
-    //       (item: any) => item?.item_code !== objs?.item_code
-    //     );
-    //     console.log("new object1", newarrys);
-    //     setnewObject([...newarrys, objs]);
-    //   }
-    // }
+    if (variants?.variants?.length > 0) {
+    } else {
+      if (minQty === 0) {
+        let objs: any = {
+          item_code: variants.item_code,
+          quantity: 1,
+        };
+        let newarrys = newobject?.filter(
+          (item: any) => item?.item_code !== objs?.item_code
+        );
+        console.log("new object1", newarrys);
+        setnewObject([...newarrys, objs]);
+      } else {
+        let objs: any = {
+          item_code: variants.item_code,
+          quantity: minQty,
+        };
+        let newarrys = newobject?.filter(
+          (item: any) => item?.item_code !== objs?.item_code
+        );
+        console.log("new object1", newarrys);
+        setnewObject([...newarrys, objs]);
+      }
+    }
     // if (
     //   variants?.variants?.length > 0 &&
     //   variants?.variants.map((variant: any, index: any) => {
@@ -71,6 +71,11 @@ const DealerVariants = ({
     // }
   }, []);
 
+  // if (minQty === 0 && newobject.length === 0) {
+  //   const defaultObject = { item_code: variants.item_code, quantity: 1 };
+  //   setnewObject([defaultObject]);
+  // }
+
   const InputvalchangeHandler: any = (e: any, variant_code: any) => {
     console.log("inputtt", variant_code, e.target.value, newobject);
     if (e?.target?.value === "" && minQty === 0) {
@@ -101,7 +106,7 @@ const DealerVariants = ({
         setnewObject([...newobject, obj]);
       }
     } else {
-      let objs: any = { item_code: variant_code, quantity: e?.target?.value };
+      let objs: any = { item_code: variant_code, quantity: e?.target?.value};
       let newarrys = newobject?.filter(
         (item: any) => item?.item_code !== objs?.item_code
       );
@@ -206,8 +211,8 @@ const DealerVariants = ({
                           type="number"
                           className="form-control varient_input"
                           min="0"
-                          // value={Quanties}
-                          defaultValue={`${minQty === 0 ? "1" : minQty}`}
+                          value={minQty === 0 ? "1" : minQty}
+                          // defaultValue={`${minQty === 0 ? "1" : minQty}`}
                           name={variants.item_code}
                           onChange={(e) => {
                             InputvalchangeHandler(e, variants.item_code);
