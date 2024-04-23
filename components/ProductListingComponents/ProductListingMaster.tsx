@@ -29,7 +29,10 @@ const ProductListingMaster = () => {
     handleLoadMore,
     currency_state_from_redux,
     handlePaginationBtn,
+    handlePrice,
+    price
   } = useProductListing();
+
   const { wishlistData }: any = useWishlist();
   const {
     catalogListItem,
@@ -48,11 +51,15 @@ const ProductListingMaster = () => {
   };
 
   const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
-
+  // const [price, setPrice] = useState<string>("low_to_high");
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
 
+  // const handlePrice = (e: any) => {
+  //   setPrice(e.target.value);
+  //   console.log('selected@',price)
+  // };
   useEffect(() => {
     if (
       Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
@@ -163,55 +170,88 @@ const ProductListingMaster = () => {
       <div className="margin_from_nav_cart">
         <div className="container d-flex justify-content-between w-100  ">
           <div className="w-50">
-            
+
             {
-                pathname.includes('search') ? '' : <BreadCrumbs
+              pathname.includes('search') ? '' : <BreadCrumbs
                 handleToggleProductsListingView={handleToggleProductsListingView}
               />
-              }
+            }
           </div>
-          <div className="col-lg-3 ">
+          <div>
             <div className="row list-toggle-rtl">
               {CONSTANTS.ENABLE_TOGGLE_PRODUCT_LISTING_VIEW ? (
                 <>
-                  <div className="col-lg-6 col-8"></div>
-                  <div className="col-lg-6 col-4 d-flex justify-content-end">
-                    <div className="ms-3 mob-breadcrum-icon">
-                      <i
-                        className="fa fa-list fa-lg cursor_pointer"
-                        aria-hidden="true"
-                        onClick={() =>
-                          handleToggleProductsListingView("list-view")
-                        }
-                      ></i>
-                      <i
-                        className="fa fa-th fa-lg ms-3 cursor_pointer"
-                        aria-hidden="true"
-                        onClick={() =>
-                          handleToggleProductsListingView("grid-view")
-                        }
-                      ></i>
+                  <div className="col-lg-4 col-4 d-flex justify-content-end">
+                    <div className="ms-3 mob-breadcrum-icon d-flex">
+                      <div>
+                        <i
+                          className="fa fa-list fa-lg cursor_pointer"
+                          aria-hidden="true"
+                          onClick={() =>
+                            handleToggleProductsListingView("list-view")
+                          }
+                        ></i>
+                      </div>
+                      <div>
+                        <i
+                          className="fa fa-th fa-lg ms-3 cursor_pointer"
+                          aria-hidden="true"
+                          onClick={() =>
+                            handleToggleProductsListingView("grid-view")
+                          }
+                        ></i>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div className="col-lg-8 col-8">
+                    <div className="d-flex">
+                      <div className="d-flex pe-1 ">
+                        <p className="mb-0 mt-1">
+                          {selectedMultiLangData?.price} 
+                        </p>
+                        <p className="mt-1">:-</p> 
+                      </div>
+                      <div>
+                        <select
+                          className="form_select"
+                          aria-label="Default select example"
+                          onChange={handlePrice} // Event that updates the state
+                          value={price} // Reflects the current selected value
+                        >
+                          <option value="low_to_high">
+                            {selectedMultiLangData?.low_to_high}
+                          </option>
+                          <option value="high_to_low">
+                            {selectedMultiLangData?.high_to_low}
+                          </option>
+                        </select>
+                      </div>
                     </div>
                   </div>
+
                 </>
               ) : (
                 <>
                   <div className="col-lg-6"></div>
                   <div className="col-lg-6 ">
-                    <div>
+                    {/* <div>
                       {selectedMultiLangData?.price} :-{" "}
                       <select
                         className="form_select"
                         aria-label="Default select example"
+                        onChange={handlePrice}
+                        value={price} // Use state to keep track of the current value
                       >
-                        <option value="low_to_high" selected>
-                          {selectedMultiLangData?.low_to_high}
-                        </option>
                         <option value="high_to_low">
                           {selectedMultiLangData?.high_to_low}
                         </option>
+                        <option value="low_to_high">
+                          {selectedMultiLangData?.low_to_high}
+                        </option>
+
                       </select>
-                    </div>
+                    </div> */}
                   </div>
                 </>
               )}

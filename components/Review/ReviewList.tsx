@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import useProductReview from '../../hooks/ProductDetailHook/ProductReviewHook/product-review-hook';
 import StarRating from './StarRating';
 
-const ReviewList = ({ reviews }: any) => {
+const ReviewList = ({ reviews , selectedMultiLangData }: any) => {
   console.log('product review in props', reviews);
   const { reviewData, loading } = useProductReview();
   console.log('product review', reviewData);
@@ -44,7 +44,7 @@ const ReviewList = ({ reviews }: any) => {
                   <p className="fs-2 my-3 ">{e.name}</p>
                   <div>
                     <p className="m-0">
-                      Verified
+                      {selectedMultiLangData?.verified}
                       <span className="ml-2">
                         {e.verified === 1 && (
                           <i
@@ -87,7 +87,7 @@ const ReviewList = ({ reviews }: any) => {
         </>
       ) : (
         <>
-          <p>Be the first to add Review</p>
+          <p>{selectedMultiLangData?.Be_the_first_to_add_Review}</p>
         </>
       )}
 
