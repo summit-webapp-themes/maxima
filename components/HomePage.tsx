@@ -8,7 +8,6 @@ import SpecialOffer from "./DisplayTags/SpecialOffer";
 import HomeBanner from "./HomeBanners/HomeBanners";
 import HomeTopBrands from "./HomeTopBrand/HomeTopBrands";
 import HomeTopCategories from "./HomeTopCategories/HomeTopCategories";
-import HomeTopCategoriesBanner from "./HomeTopCategories/HomeTopCategoriesBanner";
 import DisplayTagMaster from "./DisplayTags/DisplayTagMaster";
 import { askForPermissionToReceiveNotifications } from "../push-notifications";
 import useHomeTopBrand from "../hooks/HomePageHooks/HomeTopBrandHook";
@@ -41,13 +40,6 @@ const HomePage = ({ default_currency_value, multi_lingual_values }: any) => {
   const renderSectionComponent: any = (index: number) => {
     switch (index) {
       case 0:
-        return (
-          <HomeTopCategoriesBanner
-            homeTopCategories={homeTopCategories}
-            selectedCurrencyVal={selectedCurrencyVal}
-          />
-        );
-      case 1:
         return <HomeTopBrands brandListing={brandListing} />;
       // Add more cases as needed for other section components
       default:

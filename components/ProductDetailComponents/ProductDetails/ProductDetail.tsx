@@ -74,14 +74,14 @@ const ProductDetail = ({
     isLoggedIn = localStorage.getItem("isLoggedIn");
     isDealer = localStorage.getItem("isDealer");
   }
-  console.log("detail payload qty", minQty , newobjectState);
+  console.log("detail payload qty", minQty, newobjectState);
 
   const handleAddCart: any = async () => {
     setAddToCartButtonDisabled(true);
     let DealerCartNewObjects: any =
       newobjectState &&
       newobjectState?.filter((newitems: any) => newitems.quantity !== "");
-      console.log('qty',DealerCartNewObjects)
+    console.log('input qty', DealerCartNewObjects)
     const addCartData: any = [];
     addCartData.push({
       item_code: productDetailData?.name,
@@ -106,8 +106,15 @@ const ProductDetail = ({
         });
         dispatch(fetchCartListing(TokenFromStore?.token));
       } else {
-        showToast(AddToCartRes?.error, "error");
-        setAddToCartButtonDisabled(false);
+        if (AddToCartRes?.error) {
+          if (AddToCartRes.error === 'Please Specify item list') {
+            showToast('Please enter the quantity', 'error');
+            setAddToCartButtonDisabled(false);
+          } else {
+            showToast(`Error: ${AddToCartRes.error}`, 'error');
+            setAddToCartButtonDisabled(false);
+          }
+        }
       }
     } else {
       let AddToCartRes: any = await AddToCartApi(
@@ -125,100 +132,16 @@ const ProductDetail = ({
         });
         dispatch(fetchCartListing(TokenFromStore?.token));
       } else {
-        showToast(AddToCartRes?.error, "error");
+        if (AddToCartRes?.error) {
+          if (AddToCartRes.error === 'Please Specify item list') {
+            showToast('Please enter the quantity', 'error');
+          } else {
+            showToast(`Error: ${AddToCartRes.error}`, 'error');
+          }
+        }
       }
     }
-
-    // if (isDealer === "true") {
-    //   let newObjects: any =
-    //     newobjectState &&
-    //     newobjectState?.filter((newitems: any) => newitems.quantity !== "");
-    //   console.log("dealer cart", newObjects);
-    //   let dealerApi = await DealerAddToCartApi(newObjects);
-    //   console.log("dealer api res", dealerApi);
-    //   if (dealerApi.msg === "success") {
-    //     dispatch(successmsg("Item Added to cart"));
-    //     dispatch(fetchCartListing(TokenFromStore?.token));
-    //     setTimeout(() => {
-    //       dispatch(hideToast());
-    //     }, 1200);
-    //   } else {
-    //     dispatch(failmsg("Failed to Add to cart"));
-    //     setTimeout(() => {
-    //       dispatch(hideToast());
-    //     }, 1500);
-    //   }
-    // } else {
-    //   const addCartData: any = [];
-    //   addCartData.push({
-    //     item_code: productDetailData?.name,
-    //     quantity: productQuantity,
-    //   });
-    //   let AddToCartRes: any = await AddToCartApi(
-    //     addCartData,
-    //     currency_state_from_redux?.selected_currency_value,
-    //     TokenFromStore?.token
-    //   );
-    //   if (AddToCartRes?.data?.message?.msg === "success") {
-    //     dispatch(successmsg("Item Added to cart"));
-    //     dispatch(fetchCartListing(TokenFromStore?.token));
-    //     setTimeout(() => {
-    //       dispatch(hideToast());
-    //     }, 1200);
-    //   } else {
-    //     dispatch(failmsg("Failed to Add to cart"));
-    //     setTimeout(() => {
-    //       dispatch(hideToast());
-    //     }, 1500);
-    //   }
-    // }
   };
-
-  // const handleAddCart: any = async () => {
-  //   if (isDealer === "true") {
-  //     let newObjects: any =
-  //       newobjectState &&
-  //       newobjectState?.filter((newitems: any) => newitems.quantity !== "");
-  //     console.log("dealer cart", newObjects);
-  //     let dealerApi = await DealerAddToCartApi(newObjects);
-  //     console.log("dealer api res", dealerApi);
-  //     if (dealerApi.msg === "success") {
-  //       dispatch(successmsg("Item Added to cart"));
-  //       dispatch(fetchCartListing(TokenFromStore?.token));
-  //       setTimeout(() => {
-  //         dispatch(hideToast());
-  //       }, 1200);
-  //     } else {
-  //       dispatch(failmsg("Failed to Add to cart"));
-  //       setTimeout(() => {
-  //         dispatch(hideToast());
-  //       }, 1500);
-  //     }
-  //   } else {
-  //     const addCartData: any = [];
-  //     addCartData.push({
-  //       item_code: productDetailData?.name,
-  //       quantity: productQuantity,
-  //     });
-  //     let AddToCartRes: any = await AddToCartApi(
-  //       addCartData,
-  //       currency_state_from_redux?.selected_currency_value,
-  //       TokenFromStore?.token
-  //     );
-  //     if (AddToCartRes?.data?.message?.msg === "success") {
-  //       dispatch(successmsg("Item Added to cart"));
-  //       dispatch(fetchCartListing(TokenFromStore?.token));
-  //       setTimeout(() => {
-  //         dispatch(hideToast());
-  //       }, 1200);
-  //     } else {
-  //       dispatch(failmsg("Failed to Add to cart"));
-  //       setTimeout(() => {
-  //         dispatch(hideToast());
-  //       }, 1500);
-  //     }
-  //   }
-  // };
   const [fullUrl, setFullUrl] = useState<any>("");
   const shareUrl = fullUrl !== "" ? fullUrl : "https://summit-b2b-demo.8848digital.com/";
   const shareMessage = `Check out this product: ${shareUrl}`;
@@ -232,6 +155,7 @@ const ProductDetail = ({
   const handleRedirect: any = () => {
     router.push("/login");
   };
+  console.log('details@', productDetailData.min_order_qty)
   return (
     <div>
       <div className="product-info mt-2">
@@ -243,7 +167,7 @@ const ProductDetail = ({
             {" "}
             {productDetailData?.short_description ===
               productDetailData.productDetailData_name ||
-            productDetailData?.short_description === ""
+              productDetailData?.short_description === ""
               ? ""
               : productDetailData?.short_description}
           </span>
@@ -348,7 +272,7 @@ const ProductDetail = ({
         </div>
 
         {productDetailData?.brand !== null &&
-        productDetailData?.brand !== "" ? (
+          productDetailData?.brand !== "" ? (
           <p className="text-uppercase p-tagfont product_brand_name products-name product-line-height d-inline-flex my-3">
             {selectedMultiLangData?.brand}:
             <span>&nbsp; {productDetailData?.brand}</span>
@@ -358,7 +282,7 @@ const ProductDetail = ({
         )}
         <div className="py-0">
           {productDetailData?.gst_hsn_code !== null &&
-          productDetailData?.gst_hsn_code !== "" ? (
+            productDetailData?.gst_hsn_code !== "" ? (
             <p className="text-uppercase p-tagfont  products-name product-line-height d-inline-flex my-3">
               {selectedMultiLangData?.hsn_code}:
               <span> &nbsp;{productDetailData?.gst_hsn_code}</span>
@@ -369,7 +293,7 @@ const ProductDetail = ({
         </div>
         <div>
           {productDetailData?.oem_part_number !== null &&
-          productDetailData?.oem_part_number !== "" ? (
+            productDetailData?.oem_part_number !== "" ? (
             <p className="mt-2 text-uppercase p-tagfont product_brand_name products-name d-inline-flex">
               {selectedMultiLangData?.oem_part_number}:{" "}
               <span>{productDetailData?.oem_part_number}</span>
@@ -404,7 +328,8 @@ const ProductDetail = ({
             stockDoesNotExistsForSelectedVariants
           }
           selectedMultiLangData={selectedMultiLangData}
-          minQty={minQty}
+          // minQty={minQty}
+          minOrderQty={productDetailData.min_order_qty}
         />
       </div>
 
@@ -431,9 +356,8 @@ const ProductDetail = ({
                         <input
                           type="text"
                           value={productQuantity}
-                          className={`${
-                            productQuantity < minQty ? "disabled" : "enabled"
-                          } varient_input mx-2 text-center products-name`}
+                          className={`${productQuantity < minQty ? "disabled" : "enabled"
+                            } varient_input mx-2 text-center products-name`}
                           onChange={(e: any) => handleQuantity(e.target.value)}
                         />
 
@@ -458,11 +382,10 @@ const ProductDetail = ({
                     </div>
 
                     <div
-                      className={`${
-                        stockAvailabilityTextChanges === true
-                          ? "text-success bold"
-                          : ""
-                      } fs-4 mt-2 products-name`}
+                      className={`${stockAvailabilityTextChanges === true
+                        ? "text-success bold"
+                        : ""
+                        } fs-4 mt-2 products-name`}
                     >
                       {selectedMultiLangData?.check_availability_message}
                     </div>
@@ -470,76 +393,65 @@ const ProductDetail = ({
                 )}
               </div>
 
-              <div className="row button_sec">
-                {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
-                  <div className="col-lg-4 col-6 align-self-lg-start products-name btn-wrapper">
+              <div className="row">
+                <div className="col-md-4">
+                  {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
+
                     <div className="mt-5">
                       <button
                         type="button"
                         id=""
-                        className={`btn standard_button_filled cart_btn_gtag  product-font-family`}
+                        className={`w-100 btn standard_button_filled`}
                         onClick={() => handleStockAvail(productDetailData.name)}
                       >
                         {selectedMultiLangData?.check_availability_btn_label}
                       </button>
                     </div>
-                  </div>
-                ) : (
-                  <div className="col-lg-4 col-6 btn-wrapper">
+
+                  ) : (
+
                     <div className="mt-5">
                       <Link
                         href="/login"
-                        className="btn standard_button_filled cart_btn_gtag products-name"
+                        className="w-100 btn standard_button_filled cart_btn_gtag products-name"
                       >
                         {selectedMultiLangData?.check_availability_btn_label}
                       </Link>
                     </div>
-                  </div>
-                )}
-                {isLoggedIn === "true" ? (
-                  <div className="col-lg-4 col-5 ml-lg-0 ml-3 align-self-lg-start">
+
+                  )}
+                </div>
+                <div className="col-md-4">
+
+                  {isLoggedIn === "true" ? (
+
                     <div className="mt-5">
-                      <div className="row btn-wrapper">
-                        <button
-                          type="button"
-                          className={`
-                          ${ addToCartButtonDisabled === true ? "disabled" : ""} 
-                          w-75  btn standard_button_filled cart_btn_gtag product-font-family product-font-family`}
-                          onClick={handleAddCart}
-                          disabled={doesSelectedVariantDoesNotExists 
-                            || newobjectState[0]?.quantity < minQty     
-                          }
-                        >
-                          {selectedMultiLangData?.add_to_cart}
-                        </button>
-                      </div>
-                      <div className="col-12">
-                        <div className="">
-                          {newobjectState[0]?.quantity  < minQty ? (
-                            <p className="text-danger">
-                              {selectedMultiLangData?.minimum_order_qty}:
-                              {minQty}
-                            </p>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </div>
+                      <button
+                        type="button"
+                        className={`
+                          ${addToCartButtonDisabled === true ? "disabled" : ""} 
+                           w-100 btn standard_button_filled`}
+                        onClick={handleAddCart}
+                        disabled={doesSelectedVariantDoesNotExists
+                          || newobjectState[0]?.quantity < minQty
+                        }
+                      >
+                        {selectedMultiLangData?.add_to_cart}
+                      </button>
                     </div>
-                  </div>
-                ) : (
-                  <div className="col-lg-4 col-4 text-start ">
+
+                  ) : (
+
                     <div className="mt-5">
-                      <div className="row btn-wrapper">
-                        <button
-                          className={`w-75 btn standard_button_filled cart_btn_gtag product-font-family`}
-                          onClick={handleRedirect}
-                          disabled={doesSelectedVariantDoesNotExists}
-                        >
-                          {selectedMultiLangData?.add_to_cart}
-                        </button>
-                      </div>
-                      <div className="col-12">
+                      <button
+                        className={`w-100 btn standard_button_filled`}
+                        onClick={handleRedirect}
+                        disabled={doesSelectedVariantDoesNotExists}
+                      >
+                        {selectedMultiLangData?.add_to_cart}
+                      </button>
+
+                      <div className="">
                         {productQuantity < minQty ? (
                           <p className="text-danger product-font-family">
                             {selectedMultiLangData?.minimum_order_qty}: :
@@ -550,8 +462,22 @@ const ProductDetail = ({
                         )}
                       </div>
                     </div>
+
+                  )}
+                  <div className="">
+                    <div className="">
+                      {newobjectState[0]?.quantity < minQty ? (
+                        <p className="text-danger">
+                          {selectedMultiLangData?.minimum_order_qty}:
+                          {minQty}
+                        </p>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
-                )}
+                </div>
+                <div className="col-md-4"></div>
               </div>
               {/* WhatsApp share button */}
               <div className="mt-5 d-flex align-items-center">
@@ -573,13 +499,13 @@ const ProductDetail = ({
                 </div>
 
                 <div>
-                  <TwitterShareButton  url={shareUrl}>
+                  <TwitterShareButton url={shareUrl}>
                     <XIcon size={32} round={true} />
                   </TwitterShareButton>
                 </div>
               </div>
               <div className="mt-5">
-                <ValidatePincode pincodeRes={pincodeRes} setPincode={setPincode} Loadings={Loadings}/>
+                <ValidatePincode pincodeRes={pincodeRes} setPincode={setPincode} Loadings={Loadings} />
               </div>
             </td>
           </tr>

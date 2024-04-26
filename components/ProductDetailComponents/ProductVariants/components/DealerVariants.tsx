@@ -5,40 +5,41 @@ const DealerVariants = ({
   variantsData,
   selectedMultiLangData,
   minQty,
+  minOrderQty
 }: any) => {
   const [Quanties, setQuanties] = useState<any>();
   const [newobject, setnewObject] = useState<any>([]);
   const [quantity, setQuantity] = useState<any>();
 
   let newarry: any;
-
-  console.log("dealer variant", variants, minQty, newobject);
+   
+  console.log("dealer variant", variants,minOrderQty, newobject);
 
   useEffect(() => {
-    if (variants?.variants?.length > 0) {
-    } else {
-      if (minQty === 0) {
-        let objs: any = {
-          item_code: variants.item_code,
-          quantity: 1,
-        };
-        let newarrys = newobject?.filter(
-          (item: any) => item?.item_code !== objs?.item_code
-        );
-        console.log("new object1", newarrys);
-        setnewObject([...newarrys, objs]);
-      } else {
-        let objs: any = {
-          item_code: variants.item_code,
-          quantity: minQty,
-        };
-        let newarrys = newobject?.filter(
-          (item: any) => item?.item_code !== objs?.item_code
-        );
-        console.log("new object1", newarrys);
-        setnewObject([...newarrys, objs]);
-      }
-    }
+    // if (variants?.variants?.length > 0) {
+    // } else {
+    //   if (minQty === 0) {
+    //     let objs: any = {
+    //       item_code: variants.item_code,
+    //       quantity: 1,
+    //     };
+    //     let newarrys = newobject?.filter(
+    //       (item: any) => item?.item_code !== objs?.item_code
+    //     );
+    //     console.log("new object1", newarrys);
+    //     setnewObject([...newarrys, objs]);
+    //   } else {
+    //     let objs: any = {
+    //       item_code: variants.item_code,
+    //       quantity: minQty,
+    //     };
+    //     let newarrys = newobject?.filter(
+    //       (item: any) => item?.item_code !== objs?.item_code
+    //     );
+    //     console.log("new object1", newarrys);
+    //     setnewObject([...newarrys, objs]);
+    //   }
+    // }
     // if (
     //   variants?.variants?.length > 0 &&
     //   variants?.variants.map((variant: any, index: any) => {
@@ -171,7 +172,7 @@ const DealerVariants = ({
                                 min="0"
                                 value={Quanties}
                                 name={item?.variant_code}
-                                defaultValue={1}
+                                defaultValue={0}
                                 onChange={(e) => {
                                   InputvalchangeHandler(e, item?.variant_code);
                                 }}
@@ -211,8 +212,8 @@ const DealerVariants = ({
                           type="number"
                           className="form-control varient_input"
                           min="0"
-                          value={minQty === 0 ? "1" : minQty}
-                          // defaultValue={`${minQty === 0 ? "1" : minQty}`}
+                          // value={minQty === 0 ? "1" : minQty}
+                          defaultValue={`${minOrderQty === 0 ? "0" : minOrderQty}`}
                           name={variants.item_code}
                           onChange={(e) => {
                             InputvalchangeHandler(e, variants.item_code);
