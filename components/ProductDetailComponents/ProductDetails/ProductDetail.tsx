@@ -33,6 +33,7 @@ import { get_access_token } from "../../../store/slices/auth/token-login-slice";
 import { showToast } from "../../ToastNotificationNew";
 import ReactGA from "react-ga";
 import ValidatePincode from "./ValidatePincode";
+import DealerVariants from "../ProductVariants/components/DealerVariants";
 const ProductDetail = ({
   productDetailData,
   productVariants,
@@ -53,58 +54,60 @@ const ProductDetail = ({
   setnewObjectState,
   pincodeRes,
   setPincode,
-  Loadings
+  Loadings,
+  currency_state_from_redux,
+  token,
+  isDealer,
+  singleProductForAddToCart, 
+  setSingleProductForAddToCart,
+  quantityOfSingleProduct,
+  isLoggedIn
 }: any) => {
   const dispatch = useDispatch();
-  const TokenFromStore: any = useSelector(get_access_token);
-  const currency_state_from_redux: any = useSelector(currency_selector_state);
   const [addToCartButtonDisabled, setAddToCartButtonDisabled] = useState(false);
   const router = useRouter();
-
   const handleVariantsData: any = (newData: any) => {
     console.log("input qty new", newData);
     setnewObjectState(newData);
   };
-
   console.log("quantity", productQuantity, minQty);
-
-  let isLoggedIn: any;
-  let isDealer: any;
-  if (typeof window !== "undefined") {
-    isLoggedIn = localStorage.getItem("isLoggedIn");
-    isDealer = localStorage.getItem("isDealer");
-  }
-  console.log("detail payload qty", minQty, newobjectState);
-
+  console.log("input detail payload qty", minQty, newobjectState);
   const handleAddCart: any = async () => {
-    setAddToCartButtonDisabled(true);
+    // setAddToCartButtonDisabled(true);
+    // add to cart object for variant
     let DealerCartNewObjects: any =
       newobjectState &&
       newobjectState?.filter((newitems: any) => newitems.quantity !== "");
-    console.log('input qty', DealerCartNewObjects)
-    const addCartData: any = [];
-    addCartData.push({
-      item_code: productDetailData?.name,
-      quantity: productQuantity,
-    });
-
+    // end add to cart object for variant
+    // add to cart object for single product
+    let DealerCartObejectForSingleProduct: any = singleProductForAddToCart && singleProductForAddToCart?.filter((items: any) => items.quantity !== '')
+    //end  add to cart object for single product
     if (isDealer === "true") {
-      let AddToCartRes: any = await AddToCartApi(
-        DealerCartNewObjects,
-        currency_state_from_redux?.selected_currency_value,
-        TokenFromStore?.token
-      );
+      let AddToCartRes: any
+      if (productDetailData && productDetailData?.variants.length > 0) {
+        AddToCartRes = await AddToCartApi(
+          DealerCartNewObjects,
+          currency_state_from_redux?.selected_currency_value,
+          token
+        );
+      } else {
+        AddToCartRes = await AddToCartApi(
+          DealerCartObejectForSingleProduct,
+          currency_state_from_redux?.selected_currency_value,
+          token
+        );
+      }
       console.log("dealer AddToCartRes", AddToCartRes);
       if (AddToCartRes?.msg === "success") {
         showToast("Item Added to cart", "success");
-        setAddToCartButtonDisabled(false);
+        // setAddToCartButtonDisabled(false);
         ReactGA.event({
           category: productDetailData?.item_name,
           action: "Add Cart",
           label: `${productDetailData?.item_name} is added to cart`,
           value: productDetailData.price,
         });
-        dispatch(fetchCartListing(TokenFromStore?.token));
+        dispatch(fetchCartListing(token));
       } else {
         if (AddToCartRes?.error) {
           if (AddToCartRes.error === 'Please Specify item list') {
@@ -117,29 +120,7 @@ const ProductDetail = ({
         }
       }
     } else {
-      let AddToCartRes: any = await AddToCartApi(
-        addCartData,
-        currency_state_from_redux?.selected_currency_value,
-        TokenFromStore?.token
-      );
-      if (AddToCartRes?.msg === "success") {
-        showToast("Item Added to cart", "success");
-        ReactGA.event({
-          category: productDetailData?.item_name,
-          action: "Add Cart",
-          label: `${productDetailData?.item_name} is added to cart`,
-          value: productDetailData.price,
-        });
-        dispatch(fetchCartListing(TokenFromStore?.token));
-      } else {
-        if (AddToCartRes?.error) {
-          if (AddToCartRes.error === 'Please Specify item list') {
-            showToast('Please enter the quantity', 'error');
-          } else {
-            showToast(`Error: ${AddToCartRes.error}`, 'error');
-          }
-        }
-      }
+      console.log('add to cart else hit')
     }
   };
   const [fullUrl, setFullUrl] = useState<any>("");
@@ -182,21 +163,6 @@ const ProductDetail = ({
           {selectedMultiLangData?.item_code}:
           <span>&nbsp; {productDetailData?.name}</span>
         </p>
-
-        {/* <div className=" d-flex justify-content-center product-price">
-          <ins className="d-flex new-price">
-            <span>{productDetailData?.currency_symbol}</span>
-            <span className="product-price-rtl">
-              {" "}
-              {productDetailData?.price}
-            </span>
-          </ins>
-          <del className="old-price">
-            <span>{productDetailData?.currency_symbol}</span>
-            <span> {productDetailData?.mrp_price}</span>
-          </del>
-        </div> */}
-
         <h3 className="d-flex justify-content-start p_price m-0 price_font_family rating-container">
           <div>
             {productDetailData?.price !== 0 ? (
@@ -314,9 +280,9 @@ const ProductDetail = ({
           ""
         )}
       </div>
-
       <div>
-        <VariantsMaster
+        <DealerVariants
+          productDetailData={productDetailData}
           productVariants={productVariants}
           selectedVariant={selectedVariant}
           thumbnailOfVariants={thumbnailOfVariants}
@@ -328,16 +294,16 @@ const ProductDetail = ({
             stockDoesNotExistsForSelectedVariants
           }
           selectedMultiLangData={selectedMultiLangData}
-          // minQty={minQty}
           minOrderQty={productDetailData.min_order_qty}
+          setSingleProductForAddToCart={setSingleProductForAddToCart}
+          singleProductForAddToCart={singleProductForAddToCart}
         />
       </div>
-
       <table className="mx-auto mb-0 inventory_table table table-sm product_qty_sec products-name">
         <tbody>
           <tr>
             <td className="qty_sec_table_data">
-              <div>
+              {/* <div>
                 {isDealer === "true" ? null : (
                   <>
                     <div className="d-flex align-items-center">
@@ -391,92 +357,148 @@ const ProductDetail = ({
                     </div>
                   </>
                 )}
-              </div>
+              </div> */}
 
               <div className="row">
-                <div className="col-md-4">
-                  {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
+                {
+                  CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY && (
+                    <div className="col-md-4">
+                      {CONSTANTS.SHOW_FUTURE_STOCK_AVAILABILITY_TO_GUEST === true ? (
 
-                    <div className="mt-5">
-                      <button
-                        type="button"
-                        id=""
-                        className={`w-100 btn standard_button_filled`}
-                        onClick={() => handleStockAvail(productDetailData.name)}
-                      >
-                        {selectedMultiLangData?.check_availability_btn_label}
-                      </button>
-                    </div>
+                        <div className="mt-5">
+                          <button
+                            type="button"
+                            id=""
+                            className={`w-100 btn standard_button_filled`}
+                            onClick={() => handleStockAvail(productDetailData.name)}
+                          >
+                            {selectedMultiLangData?.check_availability_btn_label}
+                          </button>
+                        </div>
 
-                  ) : (
-
-                    <div className="mt-5">
-                      <Link
-                        href="/login"
-                        className="w-100 btn standard_button_filled cart_btn_gtag products-name"
-                      >
-                        {selectedMultiLangData?.check_availability_btn_label}
-                      </Link>
-                    </div>
-
-                  )}
-                </div>
-                <div className="col-md-4">
-
-                  {isLoggedIn === "true" ? (
-
-                    <div className="mt-5">
-                      <button
-                        type="button"
-                        className={`
-                          ${addToCartButtonDisabled === true ? "disabled" : ""} 
-                           w-100 btn standard_button_filled`}
-                        onClick={handleAddCart}
-                        disabled={doesSelectedVariantDoesNotExists
-                          || newobjectState[0]?.quantity < minQty
-                        }
-                      >
-                        {selectedMultiLangData?.add_to_cart}
-                      </button>
-                    </div>
-
-                  ) : (
-
-                    <div className="mt-5">
-                      <button
-                        className={`w-100 btn standard_button_filled`}
-                        onClick={handleRedirect}
-                        disabled={doesSelectedVariantDoesNotExists}
-                      >
-                        {selectedMultiLangData?.add_to_cart}
-                      </button>
-
-                      <div className="">
-                        {productQuantity < minQty ? (
-                          <p className="text-danger product-font-family">
-                            {selectedMultiLangData?.minimum_order_qty}: :
-                            {minQty}
-                          </p>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    </div>
-
-                  )}
-                  <div className="">
-                    <div className="">
-                      {newobjectState[0]?.quantity < minQty ? (
-                        <p className="text-danger">
-                          {selectedMultiLangData?.minimum_order_qty}:
-                          {minQty}
-                        </p>
                       ) : (
-                        ""
+
+                        <div className="mt-5">
+                          <Link
+                            href="/login"
+                            className="w-100 btn standard_button_filled cart_btn_gtag products-name text-white"
+                          >
+                            {selectedMultiLangData?.check_availability_btn_label}
+                          </Link>
+                        </div>
+
                       )}
                     </div>
-                  </div>
-                </div>
+                  )
+                }
+                {
+                  productDetailData && productDetailData?.variants.length > 0 ? (
+                    <div className="col-md-4">
+                      {isLoggedIn === "true" ? (
+                        <div className="mt-5">
+                          <button
+                            type="button"
+                            className={`
+                         
+                           w-100 btn standard_button_filled`}
+                            onClick={handleAddCart}
+
+                          >
+                            {selectedMultiLangData?.add_to_cart}
+                          </button>
+                        </div>
+
+                      ) : (
+
+                        <div className="mt-5">
+                          <button
+                            className={`w-100 btn standard_button_filled`}
+                            onClick={handleRedirect}
+                            disabled={doesSelectedVariantDoesNotExists}
+                          >
+                            {selectedMultiLangData?.add_to_cart}
+                          </button>
+
+                          <div className="">
+                            {productQuantity < productDetailData?.min_order_qty ? (
+                              <p className="text-danger product-font-family">
+                                {selectedMultiLangData?.minimum_order_qty}: :
+                                {productDetailData?.min_order_qty}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </div>
+
+                      )}
+                      <div className="">
+                        <div className="">
+                          {quantityOfSingleProduct[0] < productDetailData?.min_order_qty ? (
+                            <p className="text-danger">
+                              {selectedMultiLangData?.minimum_order_qty}:
+                              {productDetailData?.min_order_qty}
+                            </p>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="col-md-4">
+                      {isLoggedIn === "true" ? (
+                        <div className="mt-5">
+                          <button
+                            type="button"
+                            className={`
+                           w-100 btn standard_button_filled`}
+                            onClick={handleAddCart}
+                            disabled={quantityOfSingleProduct[0] < productDetailData?.min_order_qty ||
+                              !productDetailData?.in_stock_status
+                            }
+                          >
+                            {selectedMultiLangData?.add_to_cart}
+                          </button>
+                        </div>
+
+                      ) : (
+                        <div className="mt-5">
+                          <button
+                            className={`w-100 btn standard_button_filled`}
+                            onClick={handleRedirect}
+                          >
+                            {selectedMultiLangData?.add_to_cart}
+                          </button>
+
+                          <div className="">
+                            {quantityOfSingleProduct[0] < productDetailData?.min_order_qty ? (
+                              <p className="text-danger product-font-family">
+                                {selectedMultiLangData?.minimum_order_qty}: :
+                                {productDetailData?.min_order_qty}
+                              </p>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </div>
+
+                      )}
+                      <div className="">
+                        <div className="">
+                          {quantityOfSingleProduct[0] < productDetailData?.min_order_qty ? (
+                            <p className="text-danger">
+                              {selectedMultiLangData?.minimum_order_qty}:
+                              {productDetailData?.min_order_qty}
+                            </p>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
                 <div className="col-md-4"></div>
               </div>
               {/* WhatsApp share button */}

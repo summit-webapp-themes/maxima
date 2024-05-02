@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import useProductDetail from '../../hooks/ProductDetailHook/product-detail-hook';
 import { Norecord } from '../NoRecord';
 import ProductDetailLoadingLayout from './ProductDetailLoadingLayout';
 import BreadCrumbs from './ProductDetails/BreadCrumbs';
@@ -15,47 +14,49 @@ import ReviewsMaster from '../Review/ReviewsMaster';
 import useProductReview from '../../hooks/ProductReviewHook/product-review-hook';
 import ProductFeature from './ProductFeature/ProductFeature';
 import usePincodeValidation from '../../hooks/ProductDetailHook/validate-pincode-hook';
+import useProductDetails from '../../hooks/ProductDetailHook/ProductDetailHookNew/product-details-hook';
+import useMatchingItemOptions from '../../hooks/ProductDetailHook/matching-item-option-hook';
 const ProductDetailMaster = () => {
   const {
+    productImageLoading,
+    productDetailLoading,
     productDetailData,
-    productVariants,
-    selectedVariant,
-    thumbnailOfVariants,
-    handleVariantSelect,
     productImages,
+    handleStockAvail,
     handleQuantity,
     handleQuantityIncrement,
     handleQuantityDecrement,
     productQuantity,
-    minQty,
+    handleAddCartB2c,
     stockAvailabilityTextChanges,
+    isDealer,
+    isLoggedIn,
     checkStock,
-    handleStockAvail,
-    stockAvailability,
-    testBtn,
-    doesSelectedVariantDoesNotExists,
-    stockDoesNotExistsForSelectedVariants,
-    productItemOptions,
-    productDetailLoading,
     currency_state_from_redux,
     newobjectState,
     setnewObjectState,
-  } = useProductDetail();
+    doesSelectedVariantDoesNotExists,
+    stockDoesNotExistsForSelectedVariants,
+    stockAvailability,
+    handleVariantSelect,
+    selectedVariant,
+    isLoading,
+    thumbnailOfVariants,
+    selectedMultiLangData,
+    token,
+    singleProductForAddToCart, 
+    setSingleProductForAddToCart,
+    quantityOfSingleProduct
+  } = useProductDetails();
+  const {productItemOptions , matchingItemLoading} = useMatchingItemOptions();
+
   console.log(productDetailLoading, 'productDetailData');
   const SelectedLangDataFromStore: any = useSelector(
     SelectedFilterLangDataFromStore
   );
-  const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
   const { reviewData, loading } = useProductReview();
   console.log(reviewData, 'reviewww');
 
-  useEffect(() => {
-    if (
-      Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
-    ) {
-      setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
-    }
-  }, [SelectedLangDataFromStore]);
 
   useEffect(() => {
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -88,7 +89,7 @@ const ProductDetailMaster = () => {
                   <div className="col-lg-6">
                     <ProductDetail
                       productDetailData={productDetailData}
-                      productVariants={productVariants}
+                      // productVariants={productVariants}
                       selectedVariant={selectedVariant}
                       thumbnailOfVariants={thumbnailOfVariants}
                       handleVariantSelect={handleVariantSelect}
@@ -96,7 +97,9 @@ const ProductDetailMaster = () => {
                       handleQuantityIncrement={handleQuantityIncrement}
                       handleQuantityDecrement={handleQuantityDecrement}
                       productQuantity={productQuantity}
-                      minQty={minQty}
+                      currency_state_from_redux={currency_state_from_redux}
+
+                      // minQty={minQty}
                       pincodeRes={pincodeRes}
                       setPincode={setPincode}
                       Loadings={Loadings}
@@ -104,7 +107,7 @@ const ProductDetailMaster = () => {
                         stockAvailabilityTextChanges
                       }
                       handleStockAvail={handleStockAvail}
-                      testBtn={testBtn}
+                      // testBtn={testBtn}
                       productDetailLoading={productDetailLoading}
                       doesSelectedVariantDoesNotExists={
                         doesSelectedVariantDoesNotExists
@@ -115,6 +118,12 @@ const ProductDetailMaster = () => {
                       selectedMultiLangData={selectedMultiLangData}
                       newobjectState={newobjectState}
                       setnewObjectState={setnewObjectState}
+                      token={token}
+                      isDealer={isDealer}
+                      isLoggedIn={isLoggedIn}
+                      singleProductForAddToCart={singleProductForAddToCart}
+                      setSingleProductForAddToCart = {setSingleProductForAddToCart}
+                      quantityOfSingleProduct={quantityOfSingleProduct}
                     />
                   </div>
                 </>
