@@ -10,7 +10,8 @@ const VariantsMaster = ({
   stockDoesNotExistsForSelectedVariants,
   variantsData,
   selectedMultiLangData,
-  minQty,
+  // minQty,
+  minOrderQty
 }: any) => {
   let isDealer: any;
   if (typeof window !== "undefined") {
@@ -24,7 +25,8 @@ const VariantsMaster = ({
           variants={productVariants}
           variantsData={variantsData}
           selectedMultiLangData={selectedMultiLangData}
-          minQty={minQty}
+          // minQty={minQty}
+          minOrderQty={minOrderQty}
         />
       ) : (
         <CustomerVariants
