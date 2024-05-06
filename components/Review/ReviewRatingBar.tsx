@@ -1,6 +1,6 @@
 import { ProgressBar } from 'react-bootstrap';
 
-const ReviewRatingBar = ({ reviewData }: any) => {
+const ReviewRatingBar = ({ reviewData , selectedMultiLangData }: any) => {
   const starCounts: any = {}; // Object to store the count of each star rating
   console.log(reviewData, 'ratinnng');
   console.log(starCounts, 'ratinnng');
@@ -67,7 +67,7 @@ const ReviewRatingBar = ({ reviewData }: any) => {
             return (
               <div key={ind} className="row my-2 py-2">
                 <div className="col-6 ">
-                  <p className="fw-semibold m-0">{e.star} Star</p>
+                  <p className="fw-semibold m-0">{e.star} {selectedMultiLangData?.star}</p>
                 </div>
                 <div className="col-6 text-end">
                   <p>{e.total}</p>

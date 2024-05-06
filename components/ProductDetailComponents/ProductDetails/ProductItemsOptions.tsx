@@ -20,14 +20,14 @@ const ProductItemsOptions: any = ({
       setLoaded(true);
     },
     loop: true,
-    mode: "free",
+    // mode: "free",
     slides: {
       perView: 5,
     },
     breakpoints: {
       "(max-width: 480px)": {
         slides: {
-          perView: 2,
+          perView: 1,
         },
       },
     },
@@ -36,7 +36,7 @@ const ProductItemsOptions: any = ({
   return (
     <>
       <>
-        <div className="navigation-wrapper" >
+        <div className="container navigation-wrapper" >
           <div className="recommended_title mb-4">
             <h2
               className="title justify-content-center pt-2 pb-2 ls-normal mb-5"
@@ -46,14 +46,14 @@ const ProductItemsOptions: any = ({
               {selectedMultiLangData?.products}
             </h2>
           </div>
-          <div ref={sliderRef} className=" keen-slider mx-5">
+          <div ref={sliderRef} className=" keen-slider">
             {items?.values?.length > 0 &&
               items?.values?.map((newdata: any, i: any) => (
                 <div
-                  className="keen-slider__slide number-slide1 product ml-2 "
+                  className="keen-slider__slide product ms-1  d-flex "
                   key={i}
                 >
-                  <div className=" col-lg-11 p-3 mb-2 mx-0">
+                  <div className=" col-lg-12 p-2 mb-2 mx-0">
                     <ProductCard
                       key={i}
                       name={newdata?.name}

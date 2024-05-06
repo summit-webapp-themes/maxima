@@ -165,6 +165,8 @@
     position: relative;
     margin-bottom: 0;
     transition: box-shadow 0.35s;
+    display: flex;
+    justify-content: center;
     img {
         display: block;
         width: 100%;
