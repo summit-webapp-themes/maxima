@@ -1,95 +1,79 @@
 import React, { useEffect, useState } from "react";
 
 const DealerVariants = ({
+  productDetailData,
   variants,
   variantsData,
   selectedMultiLangData,
-  minQty,
+  minOrderQty,
+  setSingleProductForAddToCart,
+  singleProductForAddToCart
 }: any) => {
-  const [Quanties, setQuanties] = useState<any>();
+
   const [newobject, setnewObject] = useState<any>([]);
-  const [quantity, setQuantity] = useState<any>();
-
   let newarry: any;
-
-  console.log("dealer variant", variants, minQty, newobject);
 
   useEffect(() => {
     if (variants?.variants?.length > 0) {
     } else {
-      if (minQty === 0) {
+      if (minOrderQty === 0) {
         let objs: any = {
-          item_code: variants.item_code,
+          item_code: productDetailData?.name,
           quantity: 1,
         };
-        let newarrys = newobject?.filter(
+        let newarrys = singleProductForAddToCart?.filter(
           (item: any) => item?.item_code !== objs?.item_code
         );
         console.log("new object1", newarrys);
-        setnewObject([...newarrys, objs]);
+        setSingleProductForAddToCart([...newarrys, objs]);
       } else {
         let objs: any = {
-          item_code: variants.item_code,
-          quantity: minQty,
+          item_code: productDetailData?.name,
+          quantity: minOrderQty,
         };
-        let newarrys = newobject?.filter(
+        let newarrys = singleProductForAddToCart?.filter(
           (item: any) => item?.item_code !== objs?.item_code
         );
         console.log("new object1", newarrys);
-        setnewObject([...newarrys, objs]);
+        setSingleProductForAddToCart([...newarrys, objs]);
       }
     }
-    // if (
-    //   variants?.variants?.length > 0 &&
-    //   variants?.variants.map((variant: any, index: any) => {
-    //     if (minQty === 0) {
-    //       let objs: any = {
-    //         item_code: variant.variant_code,
-    //         quantity: 1,
-    //       };
-    //       let newarrys = newobject?.filter(
-    //         (item: any) => item?.item_code !== objs?.item_code
-    //       );
-    //       console.log("new object1", newarrys);
-    //       setnewObject([...newarrys, objs]);
-    //       variantsData(newobject);
-    //     } else if (minQty > 0) {
-    //       let objs: any = {
-    //         item_code: variant.variant_code,
-    //         quantity: minQty,
-    //       };
-    //       let newarrys = newobject?.filter(
-    //         (item: any) => item?.item_code !== objs?.item_code
-    //       );
-    //       console.log("new object1", newarrys);
-    //       setnewObject([...newarrys, objs]);
-    //     }
-    //     variantsData(newobject);
-    //   })
-    // ) {
-    // } else {
-    // }
   }, []);
 
-  // if (minQty === 0 && newobject.length === 0) {
-  //   const defaultObject = { item_code: variants.item_code, quantity: 1 };
-  //   setnewObject([defaultObject]);
-  // }
-
-  const InputvalchangeHandler: any = (e: any, variant_code: any) => {
-    console.log("inputtt", variant_code, e.target.value, newobject);
-    if (e?.target?.value === "" && minQty === 0) {
-      console.log("cart", 1);
-    } else if (minQty > 0) {
-      console.log("cart", minQty);
-    } else {
-      console.log("cart", e.target.value);
-    }
+  const InputvalchangeHandlerSingleProduct: any = (e: any, variant_code: any) => {
+    console.log("input", variant_code, e.target.value, newobject);
+    newarry = singleProductForAddToCart?.find((item: any) => {
+      return item?.item_code === variant_code;
+    });
     if (e?.target?.value !== "") {
-      newarry = newobject?.find((item: any) => {
-        return item?.item_code === variant_code;
-      });
-      console.log("updated new", newarry);
+
+      console.log("input updated new array", newarry);
+      if (newarry) {
+        setSingleProductForAddToCart(
+          singleProductForAddToCart?.map((item: any) => {
+            if (item?.item_code === variant_code) {
+              return { item_code: variant_code, quantity: e?.target?.value };
+            } else {
+              return item;
+            }
+          })
+        );
+      } else {
+        let obj: any = { item_code: variant_code, quantity: e?.target?.value };
+
+        setSingleProductForAddToCart([...singleProductForAddToCart, obj]);
+      }
+
+    }
+  };
+  const InputvalchangeHandlerForVariants: any = (e: any, variant_code: any) => {
+    console.log("input", variant_code, e.target.value, newobject);
+    newarry = newobject?.find((item: any) => {
+      return item?.item_code === variant_code;
+    });
+    if (e?.target?.value !== "") {
+
+      console.log("input updated new array", newarry);
       if (newarry) {
         setnewObject(
           newobject?.map((item: any) => {
@@ -105,8 +89,9 @@ const DealerVariants = ({
 
         setnewObject([...newobject, obj]);
       }
+
     } else {
-      let objs: any = { item_code: variant_code, quantity: e?.target?.value};
+      let objs: any = { item_code: variant_code, quantity: e?.target?.value };
       let newarrys = newobject?.filter(
         (item: any) => item?.item_code !== objs?.item_code
       );
@@ -115,8 +100,10 @@ const DealerVariants = ({
   };
   variantsData(newobject);
 
-  console.log("input qty", newobject , variantsData);
-  console.log("detail payload qty", minQty);
+  console.log("input qty", newobject, variantsData, singleProductForAddToCart);
+  console.log("input qty single", singleProductForAddToCart);
+  console.log("detail payload qty", minOrderQty);
+  console.log('variant', productDetailData)
 
   return (
     <div>
@@ -127,39 +114,38 @@ const DealerVariants = ({
               <i className="fa fa-check-circle green my-auto">&nbsp;</i>
               <span className="bold">{selectedMultiLangData?.available}</span>
             </div>
-            <div className="pe-lg-3 pe-0 inventory_font">
+            {/* <div className="pe-lg-3 pe-0 inventory_font">
               <i className="fa fa-clock-o yellow">&nbsp;</i>
               <span className="bold">
                 {selectedMultiLangData?.future_availability}
               </span>
-            </div>
+            </div> */}
             <div className="pe-lg-3 pe-0 inventory_font">
               <i className="fa fa-times-circle red">&nbsp;</i>
               <span className="bold">{selectedMultiLangData?.sold_out}</span>
             </div>
           </div>
 
-          {Object.keys(variants)?.length > 0 &&
-          variants?.variants.length > 0 ? (
-            variants?.variants.map((item: any, index: any) => {
+          {productDetailData && productDetailData?.variants.length > 0 ? (
+            productDetailData?.variants.map((item: any, index: any) => {
               return (
                 <tr key={index}>
                   <td className="b2bborder_bottom">
                     <div>
                       <div className="d-flex mb-1">
                         <div className="pe-3 col-lg-5 col-md-4 col-sm-6 sku_code sku_code_qty">
-                          {selectedMultiLangData?.sku_code}: :{" "}
-                          <span className="bold">{item?.variant_code}</span>
+                          {selectedMultiLangData?.sku_code}:{" "}
+                          <span className="bold">{item.variant_code}</span>
                         </div>
                         <div className="pe-3 col-md-6 col-sm-6 variation_code sku_code_qty">
                           {selectedMultiLangData?.variation}:{" "}
                           <span className="bold">
-                            {item?.size}-{item?.colour}
+                            {item?.Size}-{item?.Colour}
                           </span>
                         </div>
                       </div>
-                      <div className="d-flex mb-1 align-items-center">
-                        <div className="d-flex align-items-center product_quantity">
+                      <div className="d-flex mb-1 align-items-center row">
+                        <div className="d-flex align-items-center product_quantity col-lg-5 col-md-4 col-sm-6">
                           <div className="pe-3 sku_code_qty">
                             {selectedMultiLangData?.quantity}:
                           </div>
@@ -169,22 +155,31 @@ const DealerVariants = ({
                                 type="number"
                                 className="form-control varient_input"
                                 min="0"
-                                value={Quanties}
                                 name={item?.variant_code}
-                                defaultValue={1}
+                                defaultValue={0}
                                 onChange={(e) => {
-                                  InputvalchangeHandler(e, item?.variant_code);
+                                  InputvalchangeHandlerForVariants(e, item?.variant_code);
                                 }}
+                                disabled={!item?.stock}
                               />
                             </div>
                           </div>
                         </div>
 
-                        <div className="pe-3 quantity_avail">
-                          {item.stock ? (
-                            <i className="fa fa-check-circle green stock_circle"></i>
+                        <div className="pe-3 col-md-6 col-sm-6">
+                          {item?.stock ? (
+                            <>
+                              <i className="fa fa-check-circle green stock_circle"></i>
+                              <span className="bold ps-2">{selectedMultiLangData?.available}</span>
+
+                            </>
+
                           ) : (
-                            <i className="fa fa-times-circle red stock_circle"></i>
+                            <>
+                              <i className="fa fa-times-circle red stock_circle"></i>
+                              <span className="bold ps-2">{selectedMultiLangData?.sold_out}</span>
+                            </>
+
                           )}
                         </div>
                       </div>
@@ -196,7 +191,7 @@ const DealerVariants = ({
           ) : (
             <>
               <div className="b2bborder_bottom mt-3">
-                {selectedMultiLangData?.sku_code} : {variants.item_code}
+                {selectedMultiLangData?.sku_code} : {productDetailData.name}
               </div>
               <div>
                 <div className="d-flex mb-1 align-items-center">
@@ -211,20 +206,48 @@ const DealerVariants = ({
                           type="number"
                           className="form-control varient_input"
                           min="0"
-                          value={minQty === 0 ? "1" : minQty}
-                          // defaultValue={`${minQty === 0 ? "1" : minQty}`}
-                          name={variants.item_code}
+                          defaultValue={`${minOrderQty === 0 ? "1" : minOrderQty}`}
+                          name={productDetailData.name}
                           onChange={(e) => {
-                            InputvalchangeHandler(e, variants.item_code);
+                            InputvalchangeHandlerSingleProduct(e, productDetailData.name);
                           }}
                         />
                       </div>
+                     
+                    </div>
+                  
+                    <div className="pe-3 quantity_avail">
+                      {productDetailData.in_stock_status ? (
+                        <>
+                          <i className="fa fa-check-circle green stock_circle"></i>
+                          <span className="bold ps-3">{selectedMultiLangData?.available}</span>
+
+                        </>
+
+                      ) : (
+                        <>
+                          <i className="fa fa-times-circle red stock_circle"></i>
+                          <span className="bold ps-3">{selectedMultiLangData?.sold_out}</span>
+                        </>
+
+                      )}
                     </div>
                   </div>
                 </div>
+                <>
+                     {productDetailData?.min_order_qty !== 0 ? (
+                            <p className="">
+                              {selectedMultiLangData?.minimum_order_qty}:
+                              {productDetailData?.min_order_qty}
+                            </p>
+                          ) : (
+                            ""
+                          )}
+                    </>
               </div>
             </>
-          )}
+          )
+          }
         </tbody>
       </table>
     </div>

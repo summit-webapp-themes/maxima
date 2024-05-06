@@ -220,9 +220,11 @@
     justify-content: end !important;
     padding-right: 2rem !important;
     font-size: 24px !important;
+    position: absolute;
+    top: 0;
 }
 .mob-breadcrum-icon{
     // border: 2px solid red !important;
     margin-right: 7px !important;
 }
-  }
+}

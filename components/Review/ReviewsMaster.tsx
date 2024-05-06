@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReviewRatingBar from './ReviewRatingBar';
 import ReviewForm from './ReviewForm';
 // import { reviewProducts } from '../../components/dataSets/reviewProduct';
 import ReviewList from './ReviewList';
 import useProductReview from '../../hooks/ProductDetailHook/ProductReviewHook/product-review-hook';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { SelectedFilterLangDataFromStore } from '../../store/slices/general_slices/selected-multilanguage-slice';
 
 const ReviewsMaster = ({ reviewData }: any) => {
   const [writeReview, setWritereview] = useState<boolean>(false);
@@ -48,11 +50,23 @@ const ReviewsMaster = ({ reviewData }: any) => {
 
   const average5Star = (totalStars / totalReviews) * 5;
   console.log('Average from 5-Star Ratings:', average5Star);
+  const SelectedLangDataFromStore: any = useSelector(
+    SelectedFilterLangDataFromStore
+  );
+const [selectedMultiLangData, setSelectedMultiLangData] = useState<any>();
+
+useEffect(() => {
+  if (
+    Object.keys(SelectedLangDataFromStore?.selectedLanguageData)?.length > 0
+  ) {
+    setSelectedMultiLangData(SelectedLangDataFromStore?.selectedLanguageData);
+  }
+}, [SelectedLangDataFromStore]);
   return (
     <div className="container">
       <div className="row ">
         <div className="col-lg-12">
-          <h2 className="fs-1">CUSTOMER REVIEWS</h2>
+          <h2 className="fs-1">{selectedMultiLangData?.customer_reviews}</h2>
         </div>
         <div className="col-lg-6">
           <div className="star-rating d-flex align-items-center">
@@ -75,7 +89,7 @@ const ReviewsMaster = ({ reviewData }: any) => {
               );
             })}
             {reviewData !== null && (
-              <div className="ml-2">({reviewData.length} Reviews)</div>
+              <div className="ml-2">({reviewData.length} {selectedMultiLangData?.reviews})</div>
             )}
           </div>
         </div>
@@ -86,18 +100,18 @@ const ReviewsMaster = ({ reviewData }: any) => {
             className="btn btn-sm"
             onClick={() => setWritereview(!writeReview)}
           >
-            Write a Review
+            {selectedMultiLangData?.write_a_review}
           </button>: <button
             className="btn btn-sm"
             onClick={() => router.push('/login')}
           >
-            Write a Review
+            {selectedMultiLangData?.write_a_review}
           </button>
         }
         </div>
-        {reviewData.length > 0 && <ReviewRatingBar reviewData={reviewData} />}
+        {reviewData.length > 0 && <ReviewRatingBar reviewData={reviewData}  selectedMultiLangData={selectedMultiLangData}/>}
         <div className="col-lg-12">
-          <h2 className="fs-1 ">Reviews ({reviewData.length})</h2>
+          <h2 className="fs-1 ">{selectedMultiLangData?.reviews} ({reviewData.length})</h2>
         </div>
         {writeReview && (
           <div>
@@ -105,7 +119,7 @@ const ReviewsMaster = ({ reviewData }: any) => {
           </div>
         )}
         <div className="p-0">
-          <ReviewList reviews={reviewData} />
+          <ReviewList reviews={reviewData} selectedMultiLangData={selectedMultiLangData} />
         </div>
       </div>
     </div>
